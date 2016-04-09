@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ControlTests.cs" />
+    <Compile Include="Doubles\MockBehavior.cs" />
     <Compile Include="Doubles\MockControl.cs" />
     <Compile Include="GameObjectComponentTests.cs" />
     <Compile Include="Doubles\DummyGameTime.cs" />

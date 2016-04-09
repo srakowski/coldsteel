@@ -200,7 +200,7 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
-        public void UpdatesGameComponents()
+        public void InvokesUpdateOnGameObjectComponentsWhenUpdateIsInvoked()
         {
             var gameObject = new GameObject();
             var mockComponent = new MockGameObjectComponent();
@@ -208,8 +208,8 @@ namespace Coldsteel.Tests
             var mockComponent2 = new MockGameObjectComponent();
             gameObject.AddComponent(mockComponent2);
             gameObject.Update(new DummyGameTime());
-            Assert.IsTrue(mockComponent.WasUpdated);
-            Assert.IsTrue(mockComponent2.WasUpdated);
+            Assert.IsTrue(mockComponent.UpdateWasInvoked);
+            Assert.IsTrue(mockComponent2.UpdateWasInvoked);
         }
 
         [TestMethod]
@@ -250,13 +250,28 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
-        public void CallsRenderWhenRenderIsCalled()
+        public void InvokesRenderOnRendererWhenRenderIsInvoked()
         {
             var gameObject = new GameObject();
             var mockRenderer = new MockRenderer();
             gameObject.AddComponent(mockRenderer);
             gameObject.Render(new DummyGameTime());
-            Assert.IsTrue(mockRenderer.RenderWasCalled);
+            Assert.IsTrue(mockRenderer.RenderWasInvoked);
+        }
+
+        [TestMethod]
+        public void InvokesHandleInputOnBehaviorsWhenHandleInputIsInvoked()
+        {
+            var gameObject = new GameObject();
+            var mockBehavior = new MockBehavior();
+            gameObject.AddComponent(mockBehavior);
+            gameObject.HandleInput(new DummyGameTime(), new Input());
+            Assert.IsTrue(mockBehavior.HandleInputWasInvoked);
+            var mockBehavior2 = new MockBehavior();
+            gameObject.AddComponent(mockBehavior2);
+            gameObject.HandleInput(new DummyGameTime(), new Input());
+            Assert.IsTrue(mockBehavior.HandleInputWasInvoked);
+            Assert.IsTrue(mockBehavior2.HandleInputWasInvoked);
         }
 
         #endregion

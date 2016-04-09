@@ -8,13 +8,13 @@ namespace Coldsteel.Tests.Doubles
 {
     class MockGameObjectComponent : GameObjectComponent
     {        
-        public bool WasUpdated { get; set; } = false;
+        public bool UpdateWasInvoked { get; set; } = false;
 
         public bool RemoveFromGameObjectDuringUpdate { get; set; } = false;
 
         public override void Update(IGameTime gameTime)
         {
-            WasUpdated = true;
+            UpdateWasInvoked = true;
             if (RemoveFromGameObjectDuringUpdate)
                 this.GameObject.RemoveComponent(this);
         }

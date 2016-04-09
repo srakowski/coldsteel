@@ -181,6 +181,8 @@ namespace Coldsteel
 
         #endregion
 
+        #region Game Loop Methods
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -190,7 +192,19 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Update this GameObject.
+        /// Invoked when Input should be handled.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="input"></param>
+        public void HandleInput(IGameTime gameTime, Input input)
+        {
+            var behaviors = GetComponents<Behavior>();
+            foreach (var behavior in behaviors)
+                behavior.HandleInput(gameTime, input);
+        }
+
+        /// <summary>
+        /// Invoked when this GameObject should be updated.
         /// </summary>
         public void Update(IGameTime gameTime)
         {
@@ -199,7 +213,7 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Render this GameObject
+        /// Invoked when this GameObject should be rendered.
         /// </summary>
         /// <param name="gameTime"></param>
         public void Render(IGameTime gameTime)
@@ -207,5 +221,7 @@ namespace Coldsteel
             var renderer = GetComponent<Renderer>();
             renderer?.Render(gameTime);
         }
+
+        #endregion
     }
 }

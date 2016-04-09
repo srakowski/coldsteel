@@ -8,11 +8,11 @@ namespace Coldsteel.Tests.Doubles
 {
     class MockRenderer : Renderer
     {
-        public bool RenderWasCalled { get; set; } = false;
+        public bool RenderWasInvoked { get; set; } = false;
 
         public override void Render(IGameTime gameTime)
         {
-            RenderWasCalled = true;
+            RenderWasInvoked = true;
         }
     }
 }
