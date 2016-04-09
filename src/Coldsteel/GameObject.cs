@@ -122,13 +122,27 @@ namespace Coldsteel
         /// <param name="component"></param>
         public GameObject AddComponent(GameObjectComponent component)
         {
-            if (component is Transform)
-                if (this.GetComponent<Transform>() != null)
-                    throw new InvalidOperationException("GameObject my only have 1 Transform component");
-
+            EnforceSingleComponent<Transform>(component);
+            EnforceSingleComponent<Renderer>(component);
             component.AttachGameObject(this);
             _components.Add(component);
             return this;
+        }
+
+        /// <summary>
+        /// Checks for more than one of the provided component type and throws and exception if one already exists on this GameObject.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="component"></param>
+        private void EnforceSingleComponent<T>(GameObjectComponent component) where T : GameObjectComponent
+        {
+            if (!(component is T))
+                return;
+
+            if (this.GetComponent<T>() == null)
+                return;
+
+            throw new InvalidOperationException(String.Format("GameObject my only have 1 {0} component", typeof(T).Name));
         }
 
         /// <summary>
@@ -182,6 +196,16 @@ namespace Coldsteel
         {
             var componentsToUpdate = _components.ToList();
             componentsToUpdate.ForEach((c) => c.Update(gameTime));
+        }
+
+        /// <summary>
+        /// Render this GameObject
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public void Render(IGameTime gameTime)
+        {
+            var renderer = GetComponent<Renderer>();
+            renderer?.Render(gameTime);
         }
     }
 }

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Doubles\DummyGameTime.cs" />
     <Compile Include="Doubles\MockGameObjectComponent.cs" />
+    <Compile Include="Doubles\MockRenderer.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -240,6 +240,25 @@ namespace Coldsteel.Tests
             gameObject.AddComponent(new Transform());
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GameObjectMayNotHaveMoreThanOneRenderer()
+        {
+            var gameObject = new GameObject();
+            gameObject.AddComponent(new MockRenderer());
+            gameObject.AddComponent(new MockRenderer());
+        }
+
+        [TestMethod]
+        public void CallsRenderWhenRenderIsCalled()
+        {
+            var gameObject = new GameObject();
+            var mockRenderer = new MockRenderer();
+            gameObject.AddComponent(mockRenderer);
+            gameObject.Render(new DummyGameTime());
+            Assert.IsTrue(mockRenderer.RenderWasCalled);
+        }
+
         #endregion
     }
 }
