@@ -9,9 +9,11 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
   </ItemGroup>

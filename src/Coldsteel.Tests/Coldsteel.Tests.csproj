@@ -52,11 +52,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ControlTests.cs" />
+    <Compile Include="Doubles\MockControl.cs" />
     <Compile Include="GameObjectComponentTests.cs" />
     <Compile Include="Doubles\DummyGameTime.cs" />
     <Compile Include="Doubles\MockGameObjectComponent.cs" />
     <Compile Include="Doubles\MockRenderer.cs" />
     <Compile Include="GameObjectTests.cs" />
+    <Compile Include="InputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
