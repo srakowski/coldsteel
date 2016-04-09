@@ -122,6 +122,10 @@ namespace Coldsteel
         /// <param name="component"></param>
         public GameObject AddComponent(GameObjectComponent component)
         {
+            if (component is Transform)
+                if (this.GetComponent<Transform>() != null)
+                    throw new InvalidOperationException("GameObject my only have 1 Transform component");
+
             component.AttachGameObject(this);
             _components.Add(component);
             return this;
@@ -162,6 +166,14 @@ namespace Coldsteel
         }
 
         #endregion
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public GameObject()
+        {
+            AddComponent(new Transform());
+        }
 
         /// <summary>
         /// Update this GameObject.

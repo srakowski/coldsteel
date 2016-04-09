@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
   </ItemGroup>
 </Project>

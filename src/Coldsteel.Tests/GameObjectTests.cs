@@ -225,6 +225,21 @@ namespace Coldsteel.Tests
             // must not throw exception
         }
 
+        [TestMethod]
+        public void GameObjectHasTransformByDefault()
+        {
+            var gameObject = new GameObject();
+            Assert.IsNotNull(gameObject.GetComponent<Transform>());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GameObjectMayNotHaveMoreThanOneTransform()
+        {
+            var gameObject = new GameObject();
+            gameObject.AddComponent(new Transform());
+        }
+
         #endregion
     }
 }
