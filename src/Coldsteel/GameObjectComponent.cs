@@ -36,6 +36,11 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Gets the Transform of the GameObject this Behavior is applied to.
+        /// </summary>
+        protected Transform Transform { get { return GameObject?.GetComponent<Transform>(); } }
+
+        /// <summary>
         /// Update the Component.
         /// </summary>
         public virtual void Update(IGameTime gameTime) { }

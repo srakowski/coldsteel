@@ -18,5 +18,10 @@ namespace Coldsteel.Tests.Doubles
             if (RemoveFromGameObjectDuringUpdate)
                 this.GameObject.RemoveComponent(this);
         }
+
+        public bool HasAccessToTransform(Transform transform)
+        {
+            return this.Transform == transform;
+        }
     }
 }

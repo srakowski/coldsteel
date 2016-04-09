@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GameObjectComponentTests.cs" />
     <Compile Include="Doubles\DummyGameTime.cs" />
     <Compile Include="Doubles\MockGameObjectComponent.cs" />
     <Compile Include="Doubles\MockRenderer.cs" />
