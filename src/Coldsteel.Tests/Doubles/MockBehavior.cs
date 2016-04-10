@@ -19,5 +19,10 @@ namespace Coldsteel.Tests.Doubles
         {
             return GetContent<T>(path);
         }
+
+        internal Layer MockGetDefaultLayer()
+        {
+            return DefaultLayer;
+        }
     }
 }

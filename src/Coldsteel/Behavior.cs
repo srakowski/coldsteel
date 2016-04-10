@@ -6,6 +6,23 @@ namespace Coldsteel
 {
     public abstract class Behavior : GameObjectComponent
     {
+        /// <summary>
+        /// Get the DefaultLayer for the Stage this behavior is part of.
+        /// </summary>
+        public Layer DefaultLayer
+        {
+            get
+            {
+                var gameStage = this.GameObject.GameStage;
+                return gameStage.DefaultLayer;
+            }
+        }
+
+        /// <summary>
+        /// Override to handle input.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="input"></param>
         public virtual void HandleInput(IGameTime gameTime, Input input) { }
 
         /// <summary>
