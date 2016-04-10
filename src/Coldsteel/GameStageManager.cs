@@ -12,14 +12,11 @@ namespace Coldsteel
     public class GameStageManager
     {
         /// <summary>
-        /// Access the component for MonoGame resources.
-        /// </summary>
-        public ColdsteelComponent ColdsteelComponent { get; internal set; }
-
-        /// <summary>
         /// Gets the GameStage currently loaded (i.e. what the user is seeing).
         /// </summary>
         public GameStage CurrentGameStage { get; private set; }
+
+        private IGameResourceFactory _resourceFactory;
 
         private Input _input;
 
@@ -39,11 +36,12 @@ namespace Coldsteel
         /// <summary>
         /// Invoke when the initial Stage should be loaded.
         /// </summary>
-        public void Initialize(IContentManager contentManager)
+        public void Initialize(IGameResourceFactory resourceFactory)
         {
+            _resourceFactory = resourceFactory;
             this.CurrentGameStage = Activator.CreateInstance(_stages.Default) as GameStage;
             this.CurrentGameStage.GameStageManager = this;
-            this.CurrentGameStage.ContentManager = contentManager;
+            this.CurrentGameStage.GameResourceFactory = resourceFactory;
             this.CurrentGameStage.LoadContent();
             this.CurrentGameStage.Initialize();
         }

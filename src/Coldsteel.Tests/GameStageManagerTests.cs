@@ -15,7 +15,7 @@ namespace Coldsteel.Tests
             stageCollection.RegisterStage<MockGameStage>();
             stageCollection.RegisterStage<DummyGameStage>();
             var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new DummyContentManager());
+            gameStageMgr.Initialize(new MockGameResourceFactory());
             Assert.IsInstanceOfType(gameStageMgr.CurrentGameStage, typeof(MockGameStage));
         }
 
@@ -26,7 +26,7 @@ namespace Coldsteel.Tests
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>();
             var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new DummyContentManager());
+            gameStageMgr.Initialize(new MockGameResourceFactory());
             var stage = gameStageMgr.CurrentGameStage as MockGameStage;
             Assert.IsTrue(stage.LoadContentWasInvoked);
         }
@@ -38,7 +38,7 @@ namespace Coldsteel.Tests
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>();
             var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new DummyContentManager());
+            gameStageMgr.Initialize(new MockGameResourceFactory());
             var stage = gameStageMgr.CurrentGameStage as MockGameStage;
             Assert.IsTrue(stage.InitializeWasInvoked);
         }
@@ -50,20 +50,20 @@ namespace Coldsteel.Tests
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>();
             var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new DummyContentManager());
+            gameStageMgr.Initialize(new MockGameResourceFactory());
             Assert.AreSame(gameStageMgr.CurrentGameStage.GameStageManager, gameStageMgr);
         }
 
         [TestMethod]
-        public void ContentManagerIsAssignedToGameStageDuringInitialize()
+        public void GameResourceFactoryIsAssignedToGameStageDuringInitialize()
         {
             var dummyInput = new Input();
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>();
             var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new DummyContentManager());
+            gameStageMgr.Initialize(new MockGameResourceFactory());
             var stage = gameStageMgr.CurrentGameStage as MockGameStage;
-            Assert.IsNotNull(stage.ContentManager);
+            Assert.IsNotNull(stage.GameResourceFactory);
         }
     }
 }

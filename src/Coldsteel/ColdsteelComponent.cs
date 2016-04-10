@@ -39,9 +39,7 @@ namespace Coldsteel
             _initializer.RegisterStages(stages);
             base.Initialize();
             _gameStageManager = new GameStageManager(input, stages);
-            _gameStageManager.ColdsteelComponent = this;
-            _gameStageManager.Initialize(new ContentManagerWrapper(
-                new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory)));
+            _gameStageManager.Initialize(new MonoGameResourceFactory(this.Game));
         }
 
         /// <summary>

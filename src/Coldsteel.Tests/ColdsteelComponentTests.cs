@@ -44,15 +44,5 @@ namespace Coldsteel.Tests
             var mgr = coldsteelComponent.GameStageManager;
             Assert.IsNotNull(mgr.CurrentGameStage);
         }
-
-        [TestMethod]
-        public void GameStageManagerHasAccessToColdsteelComponentAfterInitialization()
-        {
-            var initializer = new MockColdsteelInitializer();
-            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
-            coldsteelComponent.Initialize();
-            var mgr = coldsteelComponent.GameStageManager;
-            Assert.AreSame(mgr.ColdsteelComponent, coldsteelComponent);
-        }
     }
 }

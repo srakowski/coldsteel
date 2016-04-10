@@ -66,6 +66,7 @@
     <Compile Include="Doubles\MockColdsteelInitializer.cs" />
     <Compile Include="Doubles\MockContentManager.cs" />
     <Compile Include="Doubles\MockControl.cs" />
+    <Compile Include="Doubles\MockGameResourceFactory.cs" />
     <Compile Include="Doubles\MockGameStage.cs" />
     <Compile Include="GameObjectComponentTests.cs" />
     <Compile Include="Doubles\DummyGameTime.cs" />

@@ -31,7 +31,7 @@ namespace Coldsteel.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void CannotLoadContentIfNoContentManagerIsAssigned()
+        public void LoadingContentDependsOnGameResourceFactoryBeingAssigned()
         {
             var gameStage = new MockGameStage();
             gameStage.LoadContent<DummyContent>("dumypath");
@@ -41,11 +41,12 @@ namespace Coldsteel.Tests
         public void CanLoadContent()
         {
             var gameStage = new MockGameStage();
-            var mockContentManager = new MockContentManager();
-            gameStage.ContentManager = mockContentManager;
+            var mockResourceFactory = new MockGameResourceFactory();
+            mockResourceFactory.MockContentManager = new MockContentManager();
+            gameStage.GameResourceFactory = mockResourceFactory;
             gameStage.LoadContent<DummyContent>("dummypath");
             var result = gameStage.GetContent<DummyContent>("dummypath");
-            Assert.AreSame(mockContentManager.DummyContentLoaded, result);
+            Assert.AreSame(mockResourceFactory.MockContentManager.DummyContentLoaded, result);
         }
 
         [TestMethod]
@@ -54,8 +55,24 @@ namespace Coldsteel.Tests
         {
             var gameStage = new MockGameStage();
             var mockContentManager = new MockContentManager();
-            gameStage.ContentManager = mockContentManager;
+            gameStage.GameResourceFactory = new MockGameResourceFactory();
             var result = gameStage.GetContent<DummyContent>("noresult");
+        }
+
+        [TestMethod]
+        public void ADefaultLayerIsAvailable()
+        {
+            var gameStage = new MockGameStage();
+            gameStage.GameResourceFactory = new MockGameResourceFactory();
+            Assert.IsNotNull(gameStage.DefaultLayer);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DefaultLayerDependsOnGameResourceFactoryBeingAssigned()
+        {
+            var gameStage = new MockGameStage();
+            var defaultLayer = gameStage.DefaultLayer;
         }
     }
 }
