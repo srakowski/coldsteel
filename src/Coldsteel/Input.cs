@@ -48,5 +48,13 @@ namespace Coldsteel
         {
             return GetControl(key) as T;
         }
+
+        /// <summary>
+        /// Update input state here;
+        /// </summary>
+        /// <param name="gameTime"></param>
+        internal void Update(IGameTime gameTime)
+        {
+        }
     }
 }

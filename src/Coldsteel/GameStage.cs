@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -63,5 +64,56 @@ namespace Coldsteel
         /// Set the initial state of the GameStage. Create and initialize GameObjects.
         /// </summary>
         public virtual void Initialize() { }
+
+        /// <summary>
+        /// HandleInput on GameObjects.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="_input"></param>
+        internal void HandleInput(IGameTime gameTime, Input _input)
+        {
+            DoToAllGameObjects((go) => go.HandleInput(gameTime, _input));
+        }
+
+        /// <summary>
+        /// Update GmeObjects.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        internal void Update(IGameTime gameTime)
+        {
+            DoToAllGameObjects((go) => go.Update(gameTime));
+        }
+
+        /// <summary>
+        /// Render GameObjects.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        internal void Render(IGameTime gameTime)
+        {
+            DoToAllGameObjects((go) => go.Render(gameTime));
+        }
+
+        /// <summary>
+        /// Passes every GameObject to the provided action recursively.
+        /// </summary>
+        /// <param name="action"></param>
+        private void DoToAllGameObjects(Action<GameObject> action)
+        {
+            DoToGamObjects(this.GameObjects.ToArray(), action);
+        }
+
+        /// <summary>
+        /// The Recursive portion of DoToAllGameObjects.
+        /// </summary>
+        /// <param name="gameObjects"></param>
+        /// <param name="action"></param>
+        private static void DoToGamObjects(IEnumerable<GameObject> gameObjects, Action<GameObject> action)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                action.Invoke(gameObject);
+                DoToGamObjects(gameObject.Children.ToArray(), action);
+            }
+        }
     }
 }

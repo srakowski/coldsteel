@@ -9,7 +9,12 @@ namespace Coldsteel
     {
         private IColdsteelInitializer _initializer;
 
-        private Input _input;
+        private GameStageManager _gameStageManager;
+
+        /// <summary>
+        /// Gets the GameStageManager instance used for this Game.
+        /// </summary>
+        public GameStageManager GameStageManager { get { return _gameStageManager; } }
 
         /// <summary>
         /// Construct a new ColdsteelComponent with the provided game and IColdsteelInitializer.
@@ -19,8 +24,7 @@ namespace Coldsteel
         public ColdsteelComponent(Game game, IColdsteelInitializer initializer) 
             : base(game)
         {
-            _initializer = initializer;
-            _input = new Input();
+            _initializer = initializer;            
         }
 
         /// <summary>
@@ -28,9 +32,13 @@ namespace Coldsteel
         /// </summary>
         public override void Initialize()
         {
-            _initializer.InitializeControls(_input);
-            _initializer.RegisterStages(new GameStageCollection());
+            var input = new Input();            
+            _initializer.InitializeControls(input);
+            var stages = new GameStageCollection();
+            _initializer.RegisterStages(stages);
             base.Initialize();
+            _gameStageManager = new GameStageManager(input, stages);
+            _gameStageManager.Initialize();
         }
 
         /// <summary>
@@ -39,6 +47,7 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            _gameStageManager.Update(new GameTimeWrapper(gameTime));
         }
 
         /// <summary>
@@ -47,6 +56,7 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            _gameStageManager.Render(new GameTimeWrapper(gameTime));
         }
     }
 }

@@ -33,5 +33,15 @@ namespace Coldsteel.Tests
             coldsteelComponent.Initialize();
             Assert.IsTrue(initializer.RegisterStagesWasInvoked);
         }
+
+        [TestMethod]
+        public void AStageIsLoadedWhenInitializeIsComplete()
+        {
+            var initializer = new MockColdsteelInitializer();
+            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            coldsteelComponent.Initialize();
+            var mgr = coldsteelComponent.GameStageManager;
+            Assert.IsNotNull(mgr.CurrentGameStage);
+        }
     }
 }
