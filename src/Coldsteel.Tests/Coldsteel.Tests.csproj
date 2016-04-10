@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -52,8 +56,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ColdsteelComponentTests.cs" />
     <Compile Include="ControlTests.cs" />
     <Compile Include="Doubles\MockBehavior.cs" />
+    <Compile Include="Doubles\MockColdsteelInitializer.cs" />
     <Compile Include="Doubles\MockControl.cs" />
     <Compile Include="Doubles\MockGameStage.cs" />
     <Compile Include="GameObjectComponentTests.cs" />
@@ -70,6 +76,9 @@
       <Project>{a3224cbb-4cf3-499d-8493-c103653f5bbb}</Project>
       <Name>Coldsteel.WindowsDX</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
