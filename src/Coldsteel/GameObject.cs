@@ -233,7 +233,10 @@ namespace Coldsteel
         public void Update(IGameTime gameTime)
         {
             var componentsToUpdate = _components.ToList();
-            componentsToUpdate.ForEach((c) => c.Update(gameTime));
+            componentsToUpdate.ForEach((c) => {
+                c.Update(gameTime);
+                (c as Behavior)?.UpdateCoroutines(gameTime);
+            });
         }
 
         /// <summary>
