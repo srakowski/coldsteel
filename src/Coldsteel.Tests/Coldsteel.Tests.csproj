@@ -59,7 +59,7 @@
     <Compile Include="BehaviorTests.cs" />
     <Compile Include="ColdsteelComponentTests.cs" />
     <Compile Include="ControlTests.cs" />
-    <Compile Include="Doubles\DummyStage.cs" />
+    <Compile Include="Doubles\DummyGameStage.cs" />
     <Compile Include="Doubles\MockBehavior.cs" />
     <Compile Include="Doubles\MockColdsteelInitializer.cs" />
     <Compile Include="Doubles\MockControl.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Doubles\MockRenderer.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="GameStageCollectionTests.cs" />
+    <Compile Include="GameStageManagerTests.cs" />
     <Compile Include="GameStageTests.cs" />
     <Compile Include="InputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

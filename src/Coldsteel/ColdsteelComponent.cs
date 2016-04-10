@@ -32,5 +32,21 @@ namespace Coldsteel
             _initializer.RegisterStages(new GameStageCollection());
             base.Initialize();
         }
+
+        /// <summary>
+        /// Should be invoked by MonoGame during its intialization/gameloop.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+        }
+
+        /// <summary>
+        /// Should be invoked by MonoGame during its intialization/gameloop.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Draw(GameTime gameTime)
+        {
+        }
     }
 }

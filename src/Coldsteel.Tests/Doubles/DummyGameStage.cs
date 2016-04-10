@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coldsteel.Tests.Doubles
 {
-    class DummyStage : GameStage
+    class DummyGameStage : GameStage
     {
     }
 }

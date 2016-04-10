@@ -6,12 +6,17 @@ namespace Coldsteel
 {
     public class GameStageCollection
     {
-        private Dictionary<string, Type> _stages = new Dictionary<string, Type>();
+        public Type Default { get; private set; }
+
+        private Dictionary<string, Type> _stages = new Dictionary<string, Type>();        
 
         public Type this[string key] { get { return _stages[key]; } }
 
         public void RegisterStage<T>(string key) where T : GameStage
         {
+            if (this.Default == null)
+                this.Default = typeof(T);
+
             _stages[key] = typeof(T);
         }
 

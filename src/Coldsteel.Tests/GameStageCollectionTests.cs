@@ -13,8 +13,8 @@ namespace Coldsteel.Tests
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>("stage1");
             Assert.AreEqual(typeof(MockGameStage), stageCollection["stage1"]);
-            stageCollection.RegisterStage<DummyStage>("stage2");
-            Assert.AreEqual(typeof(DummyStage), stageCollection["stage2"]);
+            stageCollection.RegisterStage<DummyGameStage>("stage2");
+            Assert.AreEqual(typeof(DummyGameStage), stageCollection["stage2"]);
         }
 
         [TestMethod]
@@ -23,6 +23,15 @@ namespace Coldsteel.Tests
             var stageCollection = new GameStageCollection();
             stageCollection.RegisterStage<MockGameStage>();
             Assert.AreEqual(typeof(MockGameStage), stageCollection["MockGameStage"]);
+        }
+
+        [TestMethod]
+        public void FirstAddedIsSetAsDefault()
+        {
+            var stageCollection = new GameStageCollection();
+            stageCollection.RegisterStage<MockGameStage>();
+            stageCollection.RegisterStage<DummyGameStage>();
+            Assert.AreEqual(stageCollection.Default, typeof(MockGameStage));
         }
     }
 }
