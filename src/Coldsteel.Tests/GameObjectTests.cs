@@ -321,7 +321,7 @@ namespace Coldsteel.Tests
         {
             var gameObject = new GameObject();
             var result = gameObject.SetRotation(1f);
-            Assert.AreSame(gameObject, result);
+            Assert.AreSame(gameObject, result);            
         }
 
         #endregion

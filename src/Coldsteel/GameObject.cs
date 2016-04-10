@@ -226,15 +226,16 @@ namespace Coldsteel
 
         /// <summary>
         /// Construction/initialization helper to set the initial rotation of the object.
+        /// Rotation is in Radians.
         /// </summary>
         /// <param name="rotation"></param>
         /// <returns></returns>
-        public object SetRotation(float rotation)
+        public GameObject SetRotation(float rotation)
         {
             var transform = GetComponent<Transform>();
             transform.Rotation = rotation;
             return this;
-        }
+        }       
 
         /// <summary>
         /// Invoked when Input should be handled.
