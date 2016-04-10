@@ -31,11 +31,31 @@ namespace Coldsteel.Tests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void CannotLoadAPieceOfContentIfContentManagerHasBeenSet()
+        public void CannotLoadContentIfNoContentManagerIsAssigned()
         {
             var gameStage = new MockGameStage();
-            gameStage.AttemptToLoadContent = true;
-            gameStage.LoadContent();
+            gameStage.LoadContent<DummyContent>("dumypath");
+        }
+
+        [TestMethod]
+        public void CanLoadContent()
+        {
+            var gameStage = new MockGameStage();
+            var mockContentManager = new MockContentManager();
+            gameStage.ContentManager = mockContentManager;
+            gameStage.LoadContent<DummyContent>("dummypath");
+            var result = gameStage.GetContent<DummyContent>("dummypath");
+            Assert.AreSame(mockContentManager.DummyContentLoaded, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CannotAccessContentIfNotLoaded()
+        {
+            var gameStage = new MockGameStage();
+            var mockContentManager = new MockContentManager();
+            gameStage.ContentManager = mockContentManager;
+            var result = gameStage.GetContent<DummyContent>("noresult");
         }
     }
 }

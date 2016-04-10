@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Coldsteel.Tests.Doubles;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Tests
 {
@@ -11,7 +12,7 @@ namespace Coldsteel.Tests
         public void InitializeControlsOnColdsteelInitializerIsInvokedWhenComponentIsInitialized()
         {
             var initializer = new MockColdsteelInitializer();
-            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
             coldsteelComponent.Initialize();
             Assert.IsTrue(initializer.InitializeControlsWasInvoked);
         }
@@ -20,7 +21,7 @@ namespace Coldsteel.Tests
         public void InitializeControlsOnColdsteelInitializerIsProvidedWithInputObject()
         {
             var initializer = new MockColdsteelInitializer();
-            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
             coldsteelComponent.Initialize();
             Assert.IsNotNull(initializer.ProvidedInputObject);
         }
@@ -29,7 +30,7 @@ namespace Coldsteel.Tests
         public void RegisterStagesOnColdsteelInitializerIsInvokedWhenComponentIsInitialized()
         {
             var initializer = new MockColdsteelInitializer();
-            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
             coldsteelComponent.Initialize();
             Assert.IsTrue(initializer.RegisterStagesWasInvoked);
         }
@@ -38,10 +39,20 @@ namespace Coldsteel.Tests
         public void AStageIsLoadedWhenInitializeIsComplete()
         {
             var initializer = new MockColdsteelInitializer();
-            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
             coldsteelComponent.Initialize();
             var mgr = coldsteelComponent.GameStageManager;
             Assert.IsNotNull(mgr.CurrentGameStage);
+        }
+
+        [TestMethod]
+        public void GameStageManagerHasAccessToColdsteelComponentAfterInitialization()
+        {
+            var initializer = new MockColdsteelInitializer();
+            var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
+            coldsteelComponent.Initialize();
+            var mgr = coldsteelComponent.GameStageManager;
+            Assert.AreSame(mgr.ColdsteelComponent, coldsteelComponent);
         }
     }
 }

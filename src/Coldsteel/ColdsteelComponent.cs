@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,7 +39,9 @@ namespace Coldsteel
             _initializer.RegisterStages(stages);
             base.Initialize();
             _gameStageManager = new GameStageManager(input, stages);
-            _gameStageManager.Initialize();
+            _gameStageManager.ColdsteelComponent = this;
+            _gameStageManager.Initialize(new ContentManagerWrapper(
+                new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory)));
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel
 {
@@ -11,6 +12,11 @@ namespace Coldsteel
     public class GameStageManager
     {
         /// <summary>
+        /// Access the component for MonoGame resources.
+        /// </summary>
+        public ColdsteelComponent ColdsteelComponent { get; internal set; }
+
+        /// <summary>
         /// Gets the GameStage currently loaded (i.e. what the user is seeing).
         /// </summary>
         public GameStage CurrentGameStage { get; private set; }
@@ -19,6 +25,11 @@ namespace Coldsteel
 
         private GameStageCollection _stages;
 
+        /// <summary>
+        /// Construct a new GameStageManager
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="stages"></param>
         public GameStageManager(Input input, GameStageCollection stages)
         {
             _input = input;
@@ -28,10 +39,11 @@ namespace Coldsteel
         /// <summary>
         /// Invoke when the initial Stage should be loaded.
         /// </summary>
-        public void Initialize()
+        public void Initialize(IContentManager contentManager)
         {
             this.CurrentGameStage = Activator.CreateInstance(_stages.Default) as GameStage;
             this.CurrentGameStage.GameStageManager = this;
+            this.CurrentGameStage.ContentManager = contentManager;
             this.CurrentGameStage.LoadContent();
             this.CurrentGameStage.Initialize();
         }

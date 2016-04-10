@@ -33,16 +33,12 @@ namespace Coldsteel
             gameObject.GameStage = this;
         }
 
-        /// <summary>
-        /// Gets or sets the ContentManager for this instance.
-        /// </summary>
-        internal ContentManager Content { get; set; }
+        private Dictionary<string, object> _content = new Dictionary<string, object>();
 
         /// <summary>
-        /// Called when Content should be loaded. This is called before Initialize.
+        /// Gets the ContentManager used to load and store content.
         /// </summary>
-        /// <param name="contentManager"></param>
-        public virtual void LoadContent() { }
+        public IContentManager ContentManager { get; set; }
 
         /// <summary>
         /// Loads and stores content uses for this stage.
@@ -50,12 +46,13 @@ namespace Coldsteel
         /// <typeparam name="T"></typeparam>
         /// <param name="path"></param>
         /// <returns></returns>
-        protected T LoadContent<T>(string path)
+        public T LoadContent<T>(string path) where T : class
         {
-            if (Content == null)
+            if (ContentManager == null)
                 throw new InvalidOperationException("ContentManager is not set");
 
-            return default(T);
+            _content[path] = ContentManager.Load<T>(path);
+            return _content[path] as T;
         }
 
         /// <summary>
@@ -64,10 +61,19 @@ namespace Coldsteel
         /// <typeparam name="T"></typeparam>
         /// <param name="path"></param>
         /// <returns></returns>
-        protected T GetContent<T>(string path)
+        public T GetContent<T>(string path) where T : class
         {
-            throw new NotImplementedException();
+            if (!_content.ContainsKey(path))
+                throw new ArgumentException(String.Format("content with path {0} has not been loaded", path));
+
+            return _content[path] as T;
         }
+
+        /// <summary>
+        /// Called when Content should be loaded. This is called before Initialize.
+        /// </summary>
+        /// <param name="contentManager"></param>
+        public virtual void LoadContent() { }
 
         /// <summary>
         /// The Default rendering layer for this Stage.
