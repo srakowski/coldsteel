@@ -12,6 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColdsteelComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
