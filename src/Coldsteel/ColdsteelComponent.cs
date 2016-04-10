@@ -29,6 +29,7 @@ namespace Coldsteel
         public override void Initialize()
         {
             _initializer.InitializeControls(_input);
+            _initializer.RegisterStages(new GameStageCollection());
             base.Initialize();
         }
     }

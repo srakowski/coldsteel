@@ -7,5 +7,6 @@ namespace Coldsteel
     public interface IColdsteelInitializer
     {
         void InitializeControls(Input input);
+        void RegisterStages(GameStageCollection stages);
     }
 }

@@ -8,13 +8,30 @@ namespace Coldsteel.Tests
     public class ColdsteelComponentTests
     {
         [TestMethod]
-        public void InitializeControlsIsInvoked()
+        public void InitializeControlsOnColdsteelInitializerIsInvokedWhenComponentIsInitialized()
         {
             var initializer = new MockColdsteelInitializer();
             var coldsteelComponent = new ColdsteelComponent(null, initializer);
             coldsteelComponent.Initialize();
             Assert.IsTrue(initializer.InitializeControlsWasInvoked);
+        }
+
+        [TestMethod]
+        public void InitializeControlsOnColdsteelInitializerIsProvidedWithInputObject()
+        {
+            var initializer = new MockColdsteelInitializer();
+            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            coldsteelComponent.Initialize();
             Assert.IsNotNull(initializer.ProvidedInputObject);
+        }
+
+        [TestMethod]
+        public void RegisterStagesOnColdsteelInitializerIsInvokedWhenComponentIsInitialized()
+        {
+            var initializer = new MockColdsteelInitializer();
+            var coldsteelComponent = new ColdsteelComponent(null, initializer);
+            coldsteelComponent.Initialize();
+            Assert.IsTrue(initializer.RegisterStagesWasInvoked);
         }
     }
 }

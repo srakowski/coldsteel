@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameStageCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IColdsteelInitializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
