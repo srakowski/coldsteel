@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IColdsteelInitializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
   </ItemGroup>

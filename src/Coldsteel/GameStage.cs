@@ -33,6 +33,33 @@ namespace Coldsteel
         public virtual void LoadContent() { }
 
         /// <summary>
+        /// Loads and stores content uses for this stage.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        protected T LoadContent<T>(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Retrieves an already stored peices of content that was loaded with LoadContent<T>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        protected T GetContent<T>(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The Default rendering layer for this Stage.
+        /// </summary>
+        public Layer DefaultLayer { get { throw new NotImplementedException(); } }
+
+        /// <summary>
         /// Set the initial state of the GameStage. Create and initialize GameObjects.
         /// </summary>
         public virtual void Initialize() { }
