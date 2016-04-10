@@ -10,5 +10,13 @@ namespace Coldsteel.Controls
         public KeyboardButtonControl(string controlKey, Keys keyboardKey) : base(controlKey)
         {
         }
+
+        public override bool IsDown
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
