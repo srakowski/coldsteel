@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -55,6 +56,7 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
         {
+            InputDevices.Update();
         }
     }
 }

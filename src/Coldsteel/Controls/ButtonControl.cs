@@ -6,7 +6,7 @@ namespace Coldsteel.Controls
 {
     public abstract class ButtonControl : Control
     {
-        public abstract bool IsDown { get; }
+        public abstract bool IsDown();
 
         public ButtonControl(string key) : base(key)
         {

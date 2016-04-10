@@ -7,16 +7,16 @@ namespace Coldsteel.Controls
 {
     public class KeyboardButtonControl : ButtonControl
     {
-        public KeyboardButtonControl(string controlKey, Keys keyboardKey) : base(controlKey)
+        public Keys KeyboardKey { get; set; }
+
+        public override bool IsDown()
         {
+            return InputDevices.CurrentKeyboardState.IsKeyDown(this.KeyboardKey);
         }
 
-        public override bool IsDown
+        public KeyboardButtonControl(string controlKey, Keys keyboardKey) : base(controlKey)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            this.KeyboardKey = keyboardKey;
         }
     }
 }

@@ -143,7 +143,7 @@ namespace Coldsteel
         /// </summary>
         /// <param name="gameTime"></param>
         internal void Render(IGameTime gameTime)
-        {
+        {            
             BeginLayerRender();
             DoToAllGameObjects((go) => go.Render(gameTime));
             EndLayerRender();

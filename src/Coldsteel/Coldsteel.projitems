@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)InputDevices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameResourceFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStageCollection.cs" />
