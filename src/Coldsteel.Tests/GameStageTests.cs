@@ -21,6 +21,16 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
+        public void CanRemoveGameObjectsFromStage()
+        {
+            var gameStage = new MockGameStage();
+            var gameObject = new GameObject();
+            gameStage.AddGameObject(gameObject);
+            gameStage.RemoveGameObject(gameObject);
+            Assert.IsFalse(gameStage.GameObjects.Contains(gameObject));
+        }
+
+        [TestMethod]
         public void GameStageIsAssignedToTheGameObjectWhenAddedToTheStage()
         {
             var gameStage = new MockGameStage();

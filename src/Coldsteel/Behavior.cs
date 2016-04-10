@@ -81,5 +81,13 @@ namespace Coldsteel
         {
             return CoroutineWait.WaitMilleseconds(amount);
         }
+
+        /// <summary>
+        /// Completely removes the GameObject this Behavior belongs to from the Stage, including all Children.
+        /// </summary>
+        protected void Destroy()
+        {
+            this.GameObject.Destroy();
+        }
     }
 }

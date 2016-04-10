@@ -33,6 +33,15 @@ namespace Coldsteel
             gameObject.GameStage = this;
         }
 
+        /// <summary>
+        /// Removes a GameObject from the Stage.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void RemoveGameObject(GameObject gameObject)
+        {
+            _gameObjects.Remove(gameObject);
+        }
+
         private Dictionary<string, object> _content = new Dictionary<string, object>();
 
         /// <summary>

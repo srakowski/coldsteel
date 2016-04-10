@@ -306,6 +306,47 @@ namespace Coldsteel.Tests
             Assert.AreSame(gameObject, result);
         }
 
+        [TestMethod]
+        public void SeRotationHelperInitializesTheRotationOfTheTransform()
+        {
+            var gameObject = new GameObject();
+            var rotation = 1f;
+            gameObject.SetRotation(rotation);
+            var transform = gameObject.GetComponent<Transform>();
+            Assert.AreEqual(rotation, transform.Rotation);
+        }
+
+        [TestMethod]
+        public void SetRotationCanBeChained()
+        {
+            var gameObject = new GameObject();
+            var result = gameObject.SetRotation(1f);
+            Assert.AreSame(gameObject, result);
+        }
+
         #endregion
+
+        [TestMethod]
+        public void DestroyRemovesGameObjectFromStage()
+        {
+            var gameStage = new MockGameStage();
+            var gameObject = new GameObject();
+            gameStage.AddGameObject(gameObject);
+            gameObject.Destroy();
+            Assert.IsFalse(gameStage.GameObjects.Contains(gameObject));
+        }
+
+        [TestMethod]
+        public void DestroyRemovesGameObjectFromParent()
+        {
+            var gameStage = new MockGameStage();
+            var parent = new GameObject();
+            gameStage.AddGameObject(parent);
+            var child = new GameObject();
+            parent.AddChild(child);            
+            child.Destroy();
+            Assert.IsFalse(parent.Children.Contains(child));
+            Assert.IsFalse(gameStage.GameObjects.Contains(child));
+        }
     }
 }

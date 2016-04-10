@@ -54,5 +54,17 @@ namespace Coldsteel.Tests
             gameStage.AddGameObject(gameObject);
             Assert.IsNotNull(behavior.MockGetDefaultLayer());
         }
+
+        [TestMethod]
+        public void CanRemoveObjectFromStageUsingDestroy()
+        {
+            var gameStage = new MockGameStage();
+            var gameObject = new GameObject();
+            var behavior = new MockBehavior();
+            gameObject.AddComponent(behavior);
+            gameStage.AddGameObject(gameObject);
+            behavior.MockDestroy();
+            Assert.IsFalse(gameStage.GameObjects.Contains(gameObject));
+        }
     }
 }

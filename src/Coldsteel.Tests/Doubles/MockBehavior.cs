@@ -24,5 +24,10 @@ namespace Coldsteel.Tests.Doubles
         {
             return DefaultLayer;
         }
+
+        internal void MockDestroy()
+        {
+            this.Destroy();
+        }
     }
 }

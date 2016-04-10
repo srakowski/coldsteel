@@ -196,6 +196,15 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Removes GameObject from game.
+        /// </summary>
+        public void Destroy()
+        {
+            Parent?.RemoveChild(this);
+            GameStage?.RemoveGameObject(this);
+        }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         public GameObject()
@@ -212,6 +221,18 @@ namespace Coldsteel
         {
             var transform = GetComponent<Transform>();
             transform.Position = position;
+            return this;
+        }
+
+        /// <summary>
+        /// Construction/initialization helper to set the initial rotation of the object.
+        /// </summary>
+        /// <param name="rotation"></param>
+        /// <returns></returns>
+        public object SetRotation(float rotation)
+        {
+            var transform = GetComponent<Transform>();
+            transform.Rotation = rotation;
             return this;
         }
 
