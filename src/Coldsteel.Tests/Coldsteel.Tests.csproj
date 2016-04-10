@@ -55,11 +55,13 @@
     <Compile Include="ControlTests.cs" />
     <Compile Include="Doubles\MockBehavior.cs" />
     <Compile Include="Doubles\MockControl.cs" />
+    <Compile Include="Doubles\MockGameStage.cs" />
     <Compile Include="GameObjectComponentTests.cs" />
     <Compile Include="Doubles\DummyGameTime.cs" />
     <Compile Include="Doubles\MockGameObjectComponent.cs" />
     <Compile Include="Doubles\MockRenderer.cs" />
     <Compile Include="GameObjectTests.cs" />
+    <Compile Include="GameStageTests.cs" />
     <Compile Include="InputTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

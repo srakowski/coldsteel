@@ -101,7 +101,7 @@ namespace Coldsteel
 
         #endregion
 
-        #region Component Management
+        #region Component Functionality
 
         private List<GameObjectComponent> _components = new List<GameObjectComponent>();
 
@@ -181,7 +181,12 @@ namespace Coldsteel
 
         #endregion
 
-        #region Game Loop Methods
+        #region Game Loop Functionality
+
+        /// <summary>
+        /// Gets the Stage this GameObject belongs to.
+        /// </summary>
+        public GameStage GameStage { get; internal set; }
 
         /// <summary>
         /// Constructor

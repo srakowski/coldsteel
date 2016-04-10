@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
