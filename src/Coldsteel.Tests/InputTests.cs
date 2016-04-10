@@ -50,5 +50,15 @@ namespace Coldsteel.Tests
             input.AddControl(control);
             input.GetControl("notcontrol");
         }
+
+        [TestMethod]
+        public void CanGetControlAsType()
+        {
+            var input = new Input();
+            var control = new MockControl("control");
+            input.AddControl(control);
+            var result = input.GetControl<MockControl>("control");
+            Assert.AreSame(control, result);
+        }
     }
 }

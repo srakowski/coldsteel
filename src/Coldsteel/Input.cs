@@ -37,5 +37,16 @@ namespace Coldsteel
 
             return _controls[key];
         }
+
+        /// <summary>
+        /// Same as GetControl but handles casting.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public T GetControl<T>(string key) where T : Control
+        {
+            return GetControl(key) as T;
+        }
     }
 }
