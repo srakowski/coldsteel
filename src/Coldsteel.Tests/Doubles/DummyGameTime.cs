@@ -8,5 +8,12 @@ namespace Coldsteel.Tests.Doubles
 {
     class DummyGameTime : IGameTime
     {
+        public float Delta
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
