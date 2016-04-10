@@ -57,6 +57,7 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            this.Game.GraphicsDevice.Clear(Color.Black);
             _gameStageManager.Render(new GameTimeWrapper(gameTime));
         }
     }
