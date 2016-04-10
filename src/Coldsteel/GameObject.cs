@@ -184,10 +184,16 @@ namespace Coldsteel
 
         #region Game Loop Functionality
 
+        private GameStage _gameStage;
+
         /// <summary>
         /// Gets the Stage this GameObject belongs to.
         /// </summary>
-        public GameStage GameStage { get; internal set; }
+        public GameStage GameStage
+        {
+            get { return _gameStage ?? Parent?.GameStage; }
+            internal set { _gameStage = value; }
+        }
 
         /// <summary>
         /// Constructor

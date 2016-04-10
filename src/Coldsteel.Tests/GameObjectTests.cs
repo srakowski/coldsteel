@@ -126,6 +126,19 @@ namespace Coldsteel.Tests
             child.SetParent(parent);
         }
 
+        [TestMethod]
+        public void ChildrenGameObjectsHaveAccessToGameStage()
+        {
+            var parent = new GameObject();
+            var child = new GameObject();
+            parent.AddChild(child);
+
+            var gameStage = new MockGameStage();
+            gameStage.AddGameObject(parent);
+
+            Assert.AreSame(gameStage, child.GameStage);
+        }
+
         #endregion
 
         #region Component Management Tests
