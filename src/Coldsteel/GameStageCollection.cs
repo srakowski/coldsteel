@@ -14,5 +14,10 @@ namespace Coldsteel
         {
             _stages[key] = typeof(T);
         }
+
+        public void RegisterStage<T>() where T : GameStage
+        {
+            this.RegisterStage<T>(typeof(T).Name);
+        }
     }
 }

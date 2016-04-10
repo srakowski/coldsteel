@@ -16,5 +16,13 @@ namespace Coldsteel.Tests
             stageCollection.RegisterStage<DummyStage>("stage2");
             Assert.AreEqual(typeof(DummyStage), stageCollection["stage2"]);
         }
+
+        [TestMethod]
+        public void UsesTypeNameAsKeyIfNoKeyIsProvided()
+        {
+            var stageCollection = new GameStageCollection();
+            stageCollection.RegisterStage<MockGameStage>();
+            Assert.AreEqual(typeof(MockGameStage), stageCollection["MockGameStage"]);
+        }
     }
 }
