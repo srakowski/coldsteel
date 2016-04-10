@@ -31,6 +31,7 @@ namespace Coldsteel
         public void Initialize()
         {
             this.CurrentGameStage = Activator.CreateInstance(_stages.Default) as GameStage;
+            this.CurrentGameStage.GameStageManager = this;
             this.CurrentGameStage.LoadContent();
             this.CurrentGameStage.Initialize();
         }

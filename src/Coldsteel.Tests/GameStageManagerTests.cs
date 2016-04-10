@@ -42,5 +42,16 @@ namespace Coldsteel.Tests
             var stage = gameStageMgr.CurrentGameStage as MockGameStage;
             Assert.IsTrue(stage.InitializeWasInvoked);
         }
+
+        [TestMethod]
+        public void GameStateManagerIsAssignedTOGameStageWhenLoadedDuringInitialize()
+        {
+            var dummyInput = new Input();
+            var stageCollection = new GameStageCollection();
+            stageCollection.RegisterStage<MockGameStage>();
+            var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
+            gameStageMgr.Initialize();
+            Assert.AreSame(gameStageMgr.CurrentGameStage.GameStageManager, gameStageMgr);
+        }
     }
 }

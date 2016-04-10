@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel
 {
@@ -10,6 +11,11 @@ namespace Coldsteel
     /// </summary>
     public abstract class GameStage
     {
+        /// <summary>
+        /// Gets the GameStageManager that created this GameStage.
+        /// </summary>
+        public GameStageManager GameStageManager { get; internal set; }
+
         private List<GameObject> _gameObjects = new List<GameObject>();
 
         /// <summary>
@@ -28,6 +34,11 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Gets or sets the ContentManager for this instance.
+        /// </summary>
+        internal ContentManager Content { get; set; }
+
+        /// <summary>
         /// Called when Content should be loaded. This is called before Initialize.
         /// </summary>
         /// <param name="contentManager"></param>
@@ -41,7 +52,10 @@ namespace Coldsteel
         /// <returns></returns>
         protected T LoadContent<T>(string path)
         {
-            throw new NotImplementedException();
+            if (Content == null)
+                throw new InvalidOperationException("ContentManager is not set");
+
+            return default(T);
         }
 
         /// <summary>
@@ -58,7 +72,7 @@ namespace Coldsteel
         /// <summary>
         /// The Default rendering layer for this Stage.
         /// </summary>
-        public Layer DefaultLayer { get { throw new NotImplementedException(); } }
+        public Layer DefaultLayer { get { throw new NotImplementedException(); } }        
 
         /// <summary>
         /// Set the initial state of the GameStage. Create and initialize GameObjects.

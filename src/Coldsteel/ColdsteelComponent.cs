@@ -24,7 +24,7 @@ namespace Coldsteel
         public ColdsteelComponent(Game game, IColdsteelInitializer initializer) 
             : base(game)
         {
-            _initializer = initializer;            
+            _initializer = initializer;
         }
 
         /// <summary>
