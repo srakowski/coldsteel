@@ -36,9 +36,26 @@ namespace Coldsteel
         /// <param name="texture"></param>
         /// <param name="position"></param>
         /// <param name="color"></param>
-        public void Render(Texture2D texture, Vector2 position, Color color)
+        public void Render(
+            Texture2D texture, 
+            Vector2 position,
+            Rectangle? destinationRectangle,
+            Color color,
+            float rotation,            
+            Vector2 origin,
+            float scale,
+            SpriteEffects spriteEffects,
+            float layerDepth)
         {
-            _spriteBatch.Draw(texture, position, color);
+            _spriteBatch.Draw(texture, 
+                position, 
+                destinationRectangle, 
+                color, 
+                rotation, 
+                origin, 
+                scale, 
+                spriteEffects,
+                layerDepth);
         }
 
         /// <summary>

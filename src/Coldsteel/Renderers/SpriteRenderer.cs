@@ -10,7 +10,19 @@ namespace Coldsteel.Renderers
     {
         private Layer _layer;
 
-        public Texture2D Texture { get; set; }
+        private Texture2D _texture;
+
+        public Texture2D Texture
+        {
+            get { return _texture; }
+            set
+            {
+                _texture = value;
+                _origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
+            }
+        }
+
+        private Vector2 _origin;
 
         public Color Color { get; set; } = Color.White;
 
@@ -25,8 +37,13 @@ namespace Coldsteel.Renderers
             _layer.Render(
                 this.Texture,
                 this.Transform.Position,
-                this.Color
-                );
+                null,
+                this.Color,
+                this.Transform.Rotation,
+                this._origin,
+                1f,
+                SpriteEffects.None,
+                1f);
         }
     }
 }
