@@ -22,5 +22,23 @@ namespace Coldsteel.Tests
 
             Assert.IsTrue(gameStage.GameObjects.Contains(gameObjectToAdd));
         }
+
+        [TestMethod]
+        public void CanAccessLoadedContent()
+        {
+            var gameStage = new MockGameStage();
+            var mockGameResourceFactory = new MockGameResourceFactory();
+            mockGameResourceFactory.MockContentManager = new MockContentManager();
+            gameStage.GameResourceFactory = mockGameResourceFactory;
+            gameStage.LoadContent<DummyContent>("test");
+
+            var gameObject = new GameObject();
+            var behavior = new MockBehavior();
+            gameObject.AddComponent(behavior);
+            gameStage.AddGameObject(gameObject);
+
+            var content = behavior.MockGetContent<DummyContent>("test");
+            Assert.AreSame(mockGameResourceFactory.MockContentManager.DummyContentLoaded, content);
+        }
     }
 }

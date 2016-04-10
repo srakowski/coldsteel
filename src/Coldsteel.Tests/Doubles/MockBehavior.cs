@@ -14,5 +14,10 @@ namespace Coldsteel.Tests.Doubles
         {
             HandleInputWasInvoked = true;
         }
+
+        internal T MockGetContent<T>(string path) where T : class
+        {
+            return GetContent<T>(path);
+        }
     }
 }

@@ -16,5 +16,17 @@ namespace Coldsteel
         {
             this.GameObject.GameStage.AddGameObject(gameObject);
         }
+
+        /// <summary>
+        /// Retrieve already loaded content.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public T GetContent<T>(string path) where T : class
+        {
+            var gameStage = this.GameObject.GameStage;
+            return gameStage?.GetContent<T>(path);
+        }
     }
 }
