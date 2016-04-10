@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
@@ -194,6 +195,18 @@ namespace Coldsteel
         public GameObject()
         {
             AddComponent(new Transform());
+        }
+
+        /// <summary>
+        /// Construction/initialization helper to set the initial position of the object.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public GameObject SetPosition(Vector2 position)
+        {
+            var transform = GetComponent<Transform>();
+            transform.Position = position;
+            return this;
         }
 
         /// <summary>

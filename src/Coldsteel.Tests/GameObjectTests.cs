@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Coldsteel.Tests.Doubles;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Tests
 {
@@ -272,6 +273,24 @@ namespace Coldsteel.Tests
             gameObject.HandleInput(new DummyGameTime(), new Input());
             Assert.IsTrue(mockBehavior.HandleInputWasInvoked);
             Assert.IsTrue(mockBehavior2.HandleInputWasInvoked);
+        }
+
+        [TestMethod]
+        public void SetPositionHelperInitializesThePositionVectorOfTheTransform()
+        {
+            var gameObject = new GameObject();
+            var newPosition = new Vector2(100, 100);
+            gameObject.SetPosition(newPosition);
+            var transform = gameObject.GetComponent<Transform>();
+            Assert.AreEqual(newPosition, transform.Position);
+        }
+
+        [TestMethod]
+        public void SetPositionCanBeChained()
+        {
+            var gameObject = new GameObject();
+            var result = gameObject.SetPosition(Vector2.Zero);
+            Assert.AreSame(gameObject, result);
         }
 
         #endregion
