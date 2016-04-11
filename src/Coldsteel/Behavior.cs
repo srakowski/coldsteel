@@ -20,6 +20,11 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Override to handle collisions with other GameObjects
+        /// </summary>
+        public virtual void OnCollision(Collision collision) { }
+
+        /// <summary>
         /// Override to handle input.
         /// </summary>
         /// <param name="gameTime"></param>

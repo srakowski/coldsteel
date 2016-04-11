@@ -271,6 +271,17 @@ namespace Coldsteel
             renderer?.Render(gameTime);
         }
 
+        /// <summary>
+        /// Invoked when this GameObject has collided with another GameObject
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void NotifyCollision(Collision collision)
+        {
+            var behaviors = GetComponents<Behavior>();
+            foreach (var behavior in behaviors)
+                behavior.OnCollision(collision);
+        }
+
         #endregion
     }
 }

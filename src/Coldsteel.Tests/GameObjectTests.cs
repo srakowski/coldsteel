@@ -324,6 +324,18 @@ namespace Coldsteel.Tests
             Assert.AreSame(gameObject, result);            
         }
 
+        [TestMethod]
+        public void BehaviorsAreNotifiedOfCollisions()
+        {
+            var gameObject = new GameObject();
+            var behavior = new MockBehavior();
+            gameObject.AddComponent(behavior);
+            var collideWith = new GameObject();
+            gameObject.NotifyCollision(new Collision(collideWith));
+            Assert.IsTrue(behavior.CollisionWasTriggered);
+            Assert.AreSame(collideWith, behavior.GameObjectCollidedWith);
+        }
+
         #endregion
 
         [TestMethod]

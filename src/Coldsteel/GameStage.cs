@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
+using Coldsteel.Algorithms;
 
 namespace Coldsteel
 {
@@ -21,8 +22,8 @@ namespace Coldsteel
         /// <summary>
         /// Gets the GameObjects contained in this stage.
         /// </summary>
-        public IEnumerable<GameObject> GameObjects { get { return _gameObjects; } }
-
+        public IEnumerable<GameObject> GameObjects { get { return _gameObjects; } }        
+               
         /// <summary>
         /// Adds a GameObject to the Stage
         /// </summary>
@@ -127,6 +128,33 @@ namespace Coldsteel
         /// Set the initial state of the GameStage. Create and initialize GameObjects.
         /// </summary>
         public virtual void Initialize() { }
+
+        /// <summary>
+        /// Gets or sets the object that will perform collision detections.
+        /// </summary>
+        private ICollisionDetector CollisionDetector { get; set; } = new NaiveCollisionDetector();
+
+        /// <summary>
+        /// Do physics updates and collision detection.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        internal void UpdatePhysics(IGameTime gameTime)
+        {
+            var colliders = new List<Collider>();
+            DoToAllGameObjects((go) => colliders.AddRange(go.GetComponents<Collider>()));
+            CollisionDetector.DetectCollisions(colliders, OnCollision);
+        }
+
+        /// <summary>
+        /// Action taken during collision.
+        /// </summary>
+        /// <param name="collider1"></param>
+        /// <param name="collider2"></param>
+        private void OnCollision(Collider collider1, Collider collider2)
+        {
+            collider1.NotifyCollision(collider2);
+            collider2.NotifyCollision(collider1);
+        }
 
         /// <summary>
         /// HandleInput on GameObjects.
