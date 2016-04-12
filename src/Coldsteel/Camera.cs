@@ -7,8 +7,14 @@ namespace Coldsteel
 {
     public class Camera : GameObjectComponent
     {
+        /// <summary>
+        /// Get or set whether or not this camera should be actively affecting the stage.
+        /// </summary>
         public bool IsActive { get; set; } = true;
 
+        /// <summary>
+        /// The transformation matrix that affects the rendering of a layer.
+        /// </summary>
         internal Matrix TransformMatrix
         {
             get

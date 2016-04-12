@@ -7,6 +7,8 @@ namespace Coldsteel
 {
     public abstract class Collider : GameObjectComponent
     {
+        public bool Enabled { get; set; } = true;
+
         internal abstract Rectangle Bounds { get; }
 
         internal void NotifyCollision(Collider collider)

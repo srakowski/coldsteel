@@ -157,7 +157,7 @@ namespace Coldsteel
         internal void UpdatePhysics(IGameTime gameTime)
         {
             var colliders = new List<Collider>();
-            DoToAllGameObjects((go) => colliders.AddRange(go.GetComponents<Collider>()));
+            DoToAllGameObjects((go) => colliders.AddRange(go.GetComponents<Collider>().Where((c) => c.Enabled)));
             CollisionDetector.DetectCollisions(colliders, OnCollision);
         }
 
