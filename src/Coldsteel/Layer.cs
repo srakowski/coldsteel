@@ -11,6 +11,12 @@ namespace Coldsteel
     /// </summary>
     public class Layer
     {
+        public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
+
+        public BlendState BlendState { get; set; } = null;
+
+        public SamplerState SamplerState { get; set; } = null;
+
         private SpriteBatch _spriteBatch;
 
         /// <summary>
@@ -27,7 +33,7 @@ namespace Coldsteel
         /// </summary>
         public void Begin()
         {
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState);
         }
 
         /// <summary>

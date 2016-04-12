@@ -103,6 +103,8 @@ namespace Coldsteel
         /// <param name="contentManager"></param>
         public virtual void LoadContent() { }
 
+        private SortedList<int, Layer> _layers = new SortedList<int, Layer>();
+
         private Layer _defaultLayer;
 
         /// <summary>
@@ -113,15 +115,28 @@ namespace Coldsteel
             get
             {
                 if (_defaultLayer == null)
-                {
-                    if (GameResourceFactory == null)
-                        throw new InvalidOperationException("GameResourceFactory must be assigned before a DefaultLayer can be accessed");
-
-                    _defaultLayer = new Layer(GameResourceFactory.CreateSpriteBatch());
-                }
+                    _defaultLayer = AddLayer("default", 0);
 
                 return _defaultLayer;
             }
+        }
+
+        /// <summary>
+        /// Adds a layer with given name. DefaultLayer is 0, to go under go negative, to go above add positive.
+        /// Layers are rendered in order of this zOrder.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="zOrder"></param>
+        /// <returns></returns>
+        public Layer AddLayer(string name, int zOrder)
+        {
+            if (GameResourceFactory == null)
+                throw new InvalidOperationException("GameResourceFactory must be assigned before a DefaultLayer can be accessed");
+
+            var layer = new Layer(GameResourceFactory.CreateSpriteBatch());
+            _layers.Add(zOrder, layer);
+
+            return layer;
         }
 
         /// <summary>
@@ -191,7 +206,8 @@ namespace Coldsteel
         /// </summary>
         private void BeginLayerRender()
         {
-            this.DefaultLayer.Begin();
+            foreach (var layer in _layers)
+                layer.Value.Begin();
         }
 
         /// <summary>
@@ -199,7 +215,8 @@ namespace Coldsteel
         /// </summary>
         private void EndLayerRender()
         {
-            this.DefaultLayer.End();
+            foreach (var layer in _layers)
+                layer.Value.End();
         }
 
         /// <summary>
