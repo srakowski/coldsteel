@@ -22,18 +22,22 @@ namespace Derpfender.Behaviors
         private int _fireRate = 60;
 
         public override void HandleInput(IGameTime gameTime, Input input)
-        { 
-            if (input.GetControl<ButtonControl>("MoveUp").IsDown())
+        {
+            if (input.GetControl<ButtonControl>("MoveUp").IsDown() ||
+                input.GetControl<ButtonControl>("AltMoveUp").IsDown())
             {
                 this.Transform.Position += new Vector2(0, -1) * _speed * gameTime.Delta;
             }
-            
-            if (input.GetControl<ButtonControl>("MoveDown").IsDown())
+
+            if (input.GetControl<ButtonControl>("MoveDown").IsDown() ||
+                input.GetControl<ButtonControl>("AltMoveDown").IsDown())
             {
                 this.Transform.Position += new Vector2(0, 1) * _speed * gameTime.Delta;
             }
 
-            if (input.GetControl<ButtonControl>("Fire").IsDown() && _allowFire)
+            if ((input.GetControl<ButtonControl>("Fire").IsDown() || 
+                input.GetControl<ButtonControl>("AltFire").IsDown())
+                && _allowFire)
                 StartCoroutine(Fire());
         }
 

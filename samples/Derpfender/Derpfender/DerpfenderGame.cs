@@ -26,8 +26,11 @@ namespace Derpfender
         public void InitializeControls(Input input)
         {
             input.AddControl(new KeyboardButtonControl("MoveUp", Keys.W));
+            input.AddControl(new GamePadButtonControl("AltMoveUp", GamePadButton.DPadUp));
             input.AddControl(new KeyboardButtonControl("MoveDown", Keys.S));
+            input.AddControl(new GamePadButtonControl("AltMoveDown", GamePadButton.DPadDown));
             input.AddControl(new KeyboardButtonControl("Fire", Keys.Space));
+            input.AddControl(new GamePadButtonControl("AltFire", GamePadButton.A));
         }
 
         public void RegisterStages(GameStageCollection stages)
