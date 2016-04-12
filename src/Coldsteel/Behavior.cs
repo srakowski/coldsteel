@@ -52,6 +52,16 @@ namespace Coldsteel
             return gameStage?.GetContent<T>(path);
         }
 
+        /// <summary>
+        /// Gets a layer from the stage.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public Layer GetLayer(string key)
+        {
+            return this.GameObject.GameStage.GetLayer(key);
+        }
+
         private List<Coroutine> _coroutines = new List<Coroutine>();
                 
         /// <summary>

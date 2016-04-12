@@ -134,10 +134,20 @@ namespace Coldsteel
             if (GameResourceFactory == null)
                 throw new InvalidOperationException("GameResourceFactory must be assigned before a DefaultLayer can be accessed");
 
-            var layer = new Layer(GameResourceFactory.CreateSpriteBatch());
+            var layer = new Layer(name, GameResourceFactory.CreateSpriteBatch());
             _layers.Add(zOrder, layer);
 
             return layer;
+        }
+
+        /// <summary>
+        /// Retrieves a layer by its name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Layer GetLayer(string name)
+        {
+            return _layers.Where(l => l.Value.Name == name).First().Value;
         }
 
         /// <summary>

@@ -11,13 +11,15 @@ namespace Coldsteel
     /// </summary>
     public class Layer
     {
+        public string Name { get; private set; }
+
         public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
 
         public BlendState BlendState { get; set; } = null;
 
         public SamplerState SamplerState { get; set; } = null;
 
-        public Matrix TransformMatrix { get; set; } = Matrix.Identity;
+        public Matrix TransformMatrix { get; set; } = Matrix.Identity;       
 
         private SpriteBatch _spriteBatch;
 
@@ -25,8 +27,9 @@ namespace Coldsteel
         /// Create a Layer with the provided SpriteBatch.
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public Layer(SpriteBatch spriteBatch)
+        public Layer(string name, SpriteBatch spriteBatch)
         {
+            Name = name;
             _spriteBatch = spriteBatch;
         }
 
