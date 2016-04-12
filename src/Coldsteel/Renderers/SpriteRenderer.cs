@@ -8,7 +8,7 @@ namespace Coldsteel.Renderers
 {
     public class SpriteRenderer : Renderer
     {
-        private Layer _layer;
+        public Layer Layer { get; set; }
 
         private Texture2D _texture;
 
@@ -34,13 +34,13 @@ namespace Coldsteel.Renderers
 
         public SpriteRenderer(Layer layer, Texture2D texture)
         {
-            _layer = layer;
+            Layer = layer;
             Texture = texture;
         }
 
         public override void Render(IGameTime gameTime)
         {
-            _layer.Render(
+            Layer.Render(
                 this.Texture,
                 this.Transform.Position,
                 null,
