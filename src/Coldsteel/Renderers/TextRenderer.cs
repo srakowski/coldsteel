@@ -6,21 +6,13 @@ using System.Text;
 
 namespace Coldsteel.Renderers
 {
-    public class SpriteRenderer : Renderer
+    public class TextRenderer : Renderer
     {
-        private Texture2D _texture;
+        private SpriteFont _font;
 
-        public Texture2D Texture
-        {
-            get { return _texture; }
-            set
-            {
-                _texture = value;
-                _origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
-            }
-        }
+        private Vector2 _origin = Vector2.Zero;
 
-        private Vector2 _origin;
+        public String Text { get; set; }
 
         public Color Color { get; set; } = Color.White;
 
@@ -30,19 +22,19 @@ namespace Coldsteel.Renderers
             set { Color = new Color(this.Color, value); }
         }
 
-        public SpriteRenderer(Layer layer, Texture2D texture)
+        public TextRenderer(Layer layer, SpriteFont font, string text = "")
             : base(layer)
         {
-            Layer = layer;
-            Texture = texture;
+            this._font = font;
+            this.Text = text;
         }
 
         public override void Render(IGameTime gameTime)
         {
-            Layer.Render(
-                this.Texture,
+            Layer.RenderText(
+                _font,
+                Text,
                 this.Transform.Position,
-                null,
                 this.Color,
                 this.Transform.Rotation,
                 this._origin,

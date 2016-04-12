@@ -42,11 +42,17 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Renders a Texture at the provided position with the given color.
+        /// Renders a Texture with the provided attributes
         /// </summary>
         /// <param name="texture"></param>
         /// <param name="position"></param>
+        /// <param name="destinationRectangle"></param>
         /// <param name="color"></param>
+        /// <param name="rotation"></param>
+        /// <param name="origin"></param>
+        /// <param name="scale"></param>
+        /// <param name="spriteEffects"></param>
+        /// <param name="layerDepth"></param>
         public void Render(
             Texture2D texture, 
             Vector2 position,
@@ -65,6 +71,41 @@ namespace Coldsteel
                 rotation, 
                 origin, 
                 scale, 
+                spriteEffects,
+                layerDepth);
+        }
+
+        /// <summary>
+        /// Renders the text with the provided attributes
+        /// </summary>
+        /// <param name="spriteFont"></param>
+        /// <param name="text"></param>
+        /// <param name="position"></param>
+        /// <param name="color"></param>
+        /// <param name="rotation"></param>
+        /// <param name="origin"></param>
+        /// <param name="scale"></param>
+        /// <param name="spriteEffects"></param>
+        /// <param name="layerDepth"></param>
+        public void RenderText(
+            SpriteFont spriteFont,
+            string text,
+            Vector2 position,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects spriteEffects,
+            float layerDepth)
+        {
+            _spriteBatch.DrawString(
+                spriteFont,
+                text,
+                position,
+                color,
+                rotation,
+                origin,
+                scale,
                 spriteEffects,
                 layerDepth);
         }

@@ -10,6 +10,11 @@ namespace Coldsteel.Tests.Doubles
     {
         public bool RenderWasInvoked { get; set; } = false;
 
+        public MockRenderer()
+            : base(null)
+        {
+        }
+
         public override void Render(IGameTime gameTime)
         {
             RenderWasInvoked = true;

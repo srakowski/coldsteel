@@ -43,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderers\SpriteRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderers\TextRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
   </ItemGroup>
 </Project>
