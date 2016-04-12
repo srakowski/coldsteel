@@ -17,6 +17,8 @@ namespace Coldsteel
 
         public SamplerState SamplerState { get; set; } = null;
 
+        public Matrix TransformMatrix { get; set; } = Matrix.Identity;
+
         private SpriteBatch _spriteBatch;
 
         /// <summary>
@@ -31,9 +33,9 @@ namespace Coldsteel
         /// <summary>
         /// Begins the rendering of a layer.
         /// </summary>
-        public void Begin()
+        public void Begin(Matrix cameraTransform)
         {
-            _spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState);
+            _spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, TransformMatrix * cameraTransform);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Coldsteel.Algorithms;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
@@ -206,9 +207,16 @@ namespace Coldsteel
         /// </summary>
         private void BeginLayerRender()
         {
+            Matrix transform = Matrix.Identity;
+            DoToAllGameObjects((go) => {
+                foreach (var camera in go.GetComponents<Camera>())
+                    if (camera.IsActive)
+                        transform *= camera.TransformMatrix;                
+                });
+
             foreach (var layer in _layers)
-                layer.Value.Begin();
-        }
+                layer.Value.Begin(transform);
+        }       
 
         /// <summary>
         /// Ends the rendering process on all layers (in order of when they should be drawn).
