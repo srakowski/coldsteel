@@ -16,5 +16,10 @@ namespace Coldsteel
         /// Gets or sets the Rotation of a GameObject (in Radians).
         /// </summary>
         public float Rotation { get; set; } = 0f;
+
+        /// <summary>
+        /// Gets or sets the Scale of the GameObject.
+        /// </summary>
+        public float Scale { get; set; } = 1f;
     }
 }
