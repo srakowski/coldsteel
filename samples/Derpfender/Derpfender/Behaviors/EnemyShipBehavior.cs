@@ -29,6 +29,9 @@ namespace Derpfender.Behaviors
 
         public override void OnCollision(Collision collision)
         {
+            if (collision.GameObject.Tag != "bullet")
+                return;
+
             GetComponent<Collider>().Enabled = false;
             var audio = GetComponent<AudioSource>();
             audio.Play(1, _rand.Next(-20, 21) / 100f, 0);

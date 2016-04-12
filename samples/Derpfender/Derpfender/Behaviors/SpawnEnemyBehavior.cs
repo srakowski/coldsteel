@@ -34,7 +34,7 @@ namespace Derpfender.Behaviors
         private IEnumerator Spawn()
         {
             _allowSpawn = false;
-            AddGameObject(new GameObject()
+            AddGameObject(new GameObject("enemy")
                 .SetPosition(new Vector2(1300, _rand.Next(20, 700)))
                 .SetRotation((float)MathHelper.ToRadians(270))
                 .AddComponent(new SpriteRenderer(DefaultLayer, GetContent<Texture2D>("enemy")))

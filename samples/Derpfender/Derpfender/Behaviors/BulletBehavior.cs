@@ -25,6 +25,9 @@ namespace Derpfender.Behaviors
 
         public override void OnCollision(Collision collision)
         {
+            if (collision.GameObject.Tag != "enemy")
+                return;
+
             Destroy();
         }
 

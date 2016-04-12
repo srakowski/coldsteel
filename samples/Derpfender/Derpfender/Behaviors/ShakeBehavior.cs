@@ -18,12 +18,12 @@ namespace Derpfender.Behaviors
             if (_isShaking)
                 return;
 
+            _isShaking = true;
             StartCoroutine(DoShake());
         }
 
         private IEnumerator DoShake()
-        {
-            _isShaking = true;
+        {            
             var originalPosition = Transform.Position;
             for (int i = 100; i > 0; i-= 10)
             {

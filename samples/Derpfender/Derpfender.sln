@@ -7,9 +7,12 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Derpfender", "Derpfender\De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derpfender.WindowsDX", "Derpfender.WindowsDX\Derpfender.WindowsDX.csproj", "{FAF79002-D53E-4E12-89D8-52A3A58CE6AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derpfender.DesktopGL", "Derpfender.DesktopGL\Derpfender.DesktopGL.csproj", "{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Derpfender\Derpfender.projitems*{8adc4c5f-4ebf-4703-bd0d-550b65b8e1d7}*SharedItemsImports = 13
+		Derpfender\Derpfender.projitems*{9f7b79be-c346-45fe-a5fc-a1edf49f9e5e}*SharedItemsImports = 4
 		Derpfender\Derpfender.projitems*{faf79002-d53e-4e12-89d8-52a3a58ce6ac}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +28,12 @@ Global
 		{FAF79002-D53E-4E12-89D8-52A3A58CE6AC}.Release|Any CPU.ActiveCfg = Release|x86
 		{FAF79002-D53E-4E12-89D8-52A3A58CE6AC}.Release|x86.ActiveCfg = Release|x86
 		{FAF79002-D53E-4E12-89D8-52A3A58CE6AC}.Release|x86.Build.0 = Release|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Debug|x86.ActiveCfg = Debug|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Debug|x86.Build.0 = Debug|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Release|Any CPU.ActiveCfg = Release|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Release|x86.ActiveCfg = Release|x86
+		{9F7B79BE-C346-45FE-A5FC-A1EDF49F9E5E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
