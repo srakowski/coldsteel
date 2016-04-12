@@ -26,6 +26,12 @@ namespace Coldsteel.Renderers
 
         public Color Color { get; set; } = Color.White;
 
+        public byte Alpha
+        {
+            get { return Color.A; }
+            set { Color = new Color(this.Color, value); }
+        }
+
         public SpriteRenderer(Layer layer, Texture2D texture)
         {
             _layer = layer;
@@ -41,7 +47,7 @@ namespace Coldsteel.Renderers
                 this.Color,
                 this.Transform.Rotation,
                 this._origin,
-                1f,
+                this.Transform.Scale,
                 SpriteEffects.None,
                 1f);
         }
