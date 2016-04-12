@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Algorithms\NaiveCollisionDetector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColdsteelComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collider.cs" />

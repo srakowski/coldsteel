@@ -94,5 +94,17 @@ namespace Coldsteel
         {
             this.GameObject.Destroy();
         }
+
+        /// <summary>
+        /// Gets a component of the given type from the GameObject.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="T"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        protected T GetComponent<T>() where T : GameObjectComponent
+        {
+            return this.GameObject.GetComponent<T>();
+        }
     }
 }
