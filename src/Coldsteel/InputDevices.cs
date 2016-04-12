@@ -9,10 +9,14 @@ namespace Coldsteel
     {
         public static KeyboardState PreviousKeyboardState { get; private set; } = new KeyboardState();
         public static KeyboardState CurrentKeyboardState { get; private set; } = new KeyboardState();
+        public static GamePadState PreviousGamePadState { get; private set; } = new GamePadState();
+        public static GamePadState CurrentGamePadState { get; private set; } = new GamePadState();
         public static void Update()
         {
             PreviousKeyboardState = CurrentKeyboardState;
             CurrentKeyboardState = Keyboard.GetState();
+            PreviousGamePadState = CurrentGamePadState;
+            CurrentGamePadState = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One);
         }
     }
 }
