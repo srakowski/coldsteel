@@ -204,11 +204,14 @@ namespace Coldsteel
             GameStage?.RemoveGameObject(this);
         }
 
+        public string Tag { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public GameObject()
+        public GameObject(string tag = null)
         {
+            this.Tag = tag;
             AddComponent(new Transform());
         }
 

@@ -360,5 +360,12 @@ namespace Coldsteel.Tests
             Assert.IsFalse(parent.Children.Contains(child));
             Assert.IsFalse(gameStage.GameObjects.Contains(child));
         }
+
+        [TestMethod]
+        public void MayBeCreatedWithTag()
+        {
+            var gameObject = new GameObject("go");
+            Assert.AreEqual("go", gameObject.Tag);
+        }
     }
 }
