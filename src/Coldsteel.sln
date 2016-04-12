@@ -16,6 +16,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Coldsteel\Coldsteel.projitems*{ea8ca643-fb39-4b22-94c2-a5d120a87a25}*SharedItemsImports = 13
+		Coldsteel\Coldsteel.projitems*{f8eaf61b-238a-4d6b-ac07-df048e61bed9}*SharedItemsImports = 4
 		Coldsteel\Coldsteel.projitems*{a3224cbb-4cf3-499d-8493-c103653f5bbb}*SharedItemsImports = 4
 		Coldsteel\Coldsteel.projitems*{6963af68-94fb-45d7-beae-b92b4081cff9}*SharedItemsImports = 4
 	EndGlobalSection
