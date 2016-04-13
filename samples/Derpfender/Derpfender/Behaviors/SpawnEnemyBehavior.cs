@@ -19,6 +19,8 @@ namespace Derpfender.Behaviors
 
         private GameObject _camera;
 
+        private int _spawnWait = 300;
+
         public SpawnEnemyBehavior(GameObject camera)
         {
             this._camera = camera;
@@ -40,8 +42,9 @@ namespace Derpfender.Behaviors
                 .AddComponent(new SpriteRenderer(DefaultLayer, GetContent<Texture2D>("enemy")))
                 .AddComponent(new EnemyShipBehavior(_camera, new Vector2(-1, 0), _rand.Next(100, 200) / 1000f))
                 .AddComponent(new BoxCollider(24, 24))
-                .AddComponent(new AudioSource(GetContent<SoundEffect>("explode"))));
-            yield return WaitMSecs(200);
+                .AddComponent(new AudioSource(GetContent<SoundEffect>("explode")))                
+                );
+            yield return WaitMSecs(_spawnWait);
             _allowSpawn = true;
         }
     }

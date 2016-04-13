@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bullet.png" />
+    <Content Include="Content\smoke.png" />
     <Content Include="Content\debris.png" />
     <Content Include="Content\enemy.png" />
     <Content Include="Content\explode.wav" />
@@ -68,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\MenuFont.spritefont" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\BulletBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuSelectorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ShakeBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\EnemyShipBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ShipBehavior.cs" />
@@ -17,5 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarMoveBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Stages\GameplayStage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Stages\MainMenuStage.cs" />
   </ItemGroup>
 </Project>

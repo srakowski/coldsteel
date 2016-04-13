@@ -25,6 +25,13 @@ namespace Derpfender
 
         public void InitializeControls(Input input)
         {
+            input.AddControl(new KeyboardButtonControl("MenuUp", Keys.W));
+            input.AddControl(new GamePadButtonControl("AltMenuUp", GamePadButton.DPadUp));
+            input.AddControl(new KeyboardButtonControl("MenuDown", Keys.S));
+            input.AddControl(new GamePadButtonControl("AltMenuDown", GamePadButton.DPadDown));
+            input.AddControl(new KeyboardButtonControl("MenuSelect", Keys.Space));
+            input.AddControl(new GamePadButtonControl("AltMenuSelect", GamePadButton.A));
+
             input.AddControl(new KeyboardButtonControl("MoveUp", Keys.W));
             input.AddControl(new GamePadButtonControl("AltMoveUp", GamePadButton.DPadUp));
             input.AddControl(new KeyboardButtonControl("MoveDown", Keys.S));
@@ -35,7 +42,8 @@ namespace Derpfender
 
         public void RegisterStages(GameStageCollection stages)
         {
-            stages.RegisterStage<GameplayStage>();
+            stages.RegisterStage<MainMenuStage>();
+            stages.RegisterStage<GameplayStage>();            
         }
     }
 }

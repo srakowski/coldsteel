@@ -25,7 +25,7 @@ namespace Derpfender.Behaviors
         private IEnumerator DoShake()
         {            
             var originalPosition = Transform.Position;
-            for (int i = 100; i > 0; i-= 10)
+            for (int i = 60; i > 0; i-= 6)
             {
                 Transform.Position = originalPosition + new Vector2((float)_rand.Next(-i, i) / 10f, (float)_rand.Next(-i, i) / 10f);
                 yield return WaitMSecs(10);

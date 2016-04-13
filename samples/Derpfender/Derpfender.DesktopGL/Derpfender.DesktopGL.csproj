@@ -70,6 +70,7 @@
     <Content Include="Content\fire.wav" />
     <Content Include="Content\flash.png" />
     <Content Include="Content\ship.png" />
+    <Content Include="Content\smoke.png" />
     <Content Include="Content\star.png" />
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -80,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\MenuFont.spritefont" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
