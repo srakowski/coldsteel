@@ -16,11 +16,11 @@ namespace Coldsteel.Renderers
             set
             {
                 _texture = value;
-                _origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
+                _spriteCenter = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
             }
         }
 
-        private Vector2 _origin;
+        private Vector2 _spriteCenter;
 
         public Color Color { get; set; } = Color.White;
 
@@ -45,7 +45,7 @@ namespace Coldsteel.Renderers
                 null,
                 this.Color,
                 this.Transform.Rotation,
-                this._origin,
+                this._spriteCenter,
                 this.Transform.Scale,
                 SpriteEffects.None,
                 1f);
