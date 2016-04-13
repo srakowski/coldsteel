@@ -39,11 +39,7 @@ namespace Coldsteel
         public void Initialize(IGameResourceFactory resourceFactory)
         {
             _resourceFactory = resourceFactory;
-            this.CurrentGameStage = Activator.CreateInstance(_stages.Default) as GameStage;
-            this.CurrentGameStage.GameStageManager = this;
-            this.CurrentGameStage.GameResourceFactory = resourceFactory;
-            this.CurrentGameStage.LoadContent();
-            this.CurrentGameStage.Initialize();
+            LoadStage(resourceFactory, _stages.Default);
         }
 
         /// <summary>
@@ -55,7 +51,7 @@ namespace Coldsteel
             CurrentGameStage?.UpdatePhysics(gameTime);
             _input.Update(gameTime);
             CurrentGameStage?.HandleInput(gameTime, _input);
-            CurrentGameStage?.Update(gameTime);            
+            CurrentGameStage?.Update(gameTime);
         }
 
         /// <summary>
@@ -65,6 +61,29 @@ namespace Coldsteel
         internal void Render(IGameTime gameTime)
         {
             CurrentGameStage?.Render(gameTime);
+        }
+
+        /// <summary>
+        /// Swaps the CurrentGameStage for the one provided.
+        /// </summary>
+        /// <param name="name"></param>
+        public void LoadStage(string name)
+        {
+            this.LoadStage(_resourceFactory, _stages[name]);
+        }
+
+        /// <summary>
+        /// Actually performs the stage loading.
+        /// </summary>
+        /// <param name="resourceFactory"></param>
+        /// <param name="stageType"></param>
+        private void LoadStage(IGameResourceFactory resourceFactory, Type stageType)
+        {
+            this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
+            this.CurrentGameStage.GameStageManager = this;
+            this.CurrentGameStage.GameResourceFactory = resourceFactory;
+            this.CurrentGameStage.LoadContent();
+            this.CurrentGameStage.Initialize();
         }
     }
 }
