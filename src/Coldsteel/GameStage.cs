@@ -147,7 +147,10 @@ namespace Coldsteel
         /// <returns></returns>
         public Layer GetLayer(string name)
         {
-            return _layers.Where(l => l.Value.Name == name).First().Value;
+            var result = _layers.Where(l => l.Value.Name == name);
+            if (!result.Any())
+                throw new ArgumentException(String.Format("no layer exists with the name \"{0}\"", name));
+            return result.First().Value;
         }
 
         /// <summary>
@@ -223,7 +226,6 @@ namespace Coldsteel
                     if (camera.IsActive)
                         transform *= camera.TransformMatrix;                
                 });
-
             foreach (var layer in _layers)
                 layer.Value.Begin(transform);
         }       

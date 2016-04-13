@@ -272,6 +272,9 @@ namespace Coldsteel
         {
             var renderer = GetComponent<Renderer>();
             renderer?.Render(gameTime);
+            var particleSystems = GetComponents<ParticleSystem>();
+            foreach (var particleSystem in particleSystems)
+                particleSystem.Render(gameTime);
         }
 
         /// <summary>

@@ -41,6 +41,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ParticleSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderers\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderers\TextRenderer.cs" />
