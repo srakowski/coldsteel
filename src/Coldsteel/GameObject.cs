@@ -10,8 +10,6 @@ namespace Coldsteel
     /// </summary>
     public class GameObject
     {
-        #region Composite Functionality
-
         /// <summary>
         /// The parent of this GameObject if added as a child to another.
         /// </summary>
@@ -98,11 +96,7 @@ namespace Coldsteel
             child.SetParent(null);
             if (this.IsAncestorOf(child))
                 _children.Remove(child);
-        }
-
-        #endregion
-
-        #region Component Functionality
+        }        
 
         private List<GameObjectComponent> _components = new List<GameObjectComponent>();
 
@@ -180,10 +174,6 @@ namespace Coldsteel
             component.DetachGameObject(this);
         }
 
-        #endregion
-
-        #region Game Loop Functionality
-
         private GameStage _gameStage;
 
         /// <summary>
@@ -193,6 +183,17 @@ namespace Coldsteel
         {
             get { return _gameStage ?? Parent?.GameStage; }
             internal set { _gameStage = value; }
+        }
+
+        /// <summary>
+        /// Gets the Input object.
+        /// </summary>
+        public Input Input
+        {
+            get
+            {
+                return GameStage.Input;
+            }
         }
 
         /// <summary>
@@ -251,18 +252,6 @@ namespace Coldsteel
         }       
 
         /// <summary>
-        /// Invoked when Input should be handled.
-        /// </summary>
-        /// <param name="gameTime"></param>
-        /// <param name="input"></param>
-        public void HandleInput(IGameTime gameTime, Input input)
-        {
-            var behaviors = GetComponents<Behavior>();
-            foreach (var behavior in behaviors)
-                behavior.HandleInput(gameTime, input);
-        }
-
-        /// <summary>
         /// Invoked when this GameObject should be updated.
         /// </summary>
         public void Update(IGameTime gameTime)
@@ -297,7 +286,5 @@ namespace Coldsteel
             foreach (var behavior in behaviors)
                 behavior.OnCollision(collision);
         }
-
-        #endregion
     }
 }

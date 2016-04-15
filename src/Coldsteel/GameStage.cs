@@ -193,14 +193,9 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// HandleInput on GameObjects.
+        /// Gets or sets the Input object.
         /// </summary>
-        /// <param name="gameTime"></param>
-        /// <param name="_input"></param>
-        internal void HandleInput(IGameTime gameTime, Input _input)
-        {
-            DoToAllGameObjects((go) => go.HandleInput(gameTime, _input));
-        }
+        public Input Input { get; set; }
 
         /// <summary>
         /// Update GmeObjects.

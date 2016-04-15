@@ -8,7 +8,6 @@ namespace Coldsteel.Tests.Doubles
 {
     class MockBehavior : Behavior
     {
-        public bool HandleInputWasInvoked { get; set; } = false;
         public bool CollisionWasTriggered { get; internal set; }
         public object GameObjectCollidedWith { get; internal set; }
 
@@ -16,11 +15,6 @@ namespace Coldsteel.Tests.Doubles
         {
             this.CollisionWasTriggered = true;
             this.GameObjectCollidedWith = collision.GameObject;
-        }
-
-        public override void HandleInput(IGameTime gameTime, Input input)
-        {
-            HandleInputWasInvoked = true;
         }
 
         internal T MockGetContent<T>(string path) where T : class

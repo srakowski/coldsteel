@@ -25,11 +25,9 @@ namespace Coldsteel
         public virtual void OnCollision(Collision collision) { }
 
         /// <summary>
-        /// Override to handle input.
+        /// Gets or sets the input provided to this Behavior for updates.
         /// </summary>
-        /// <param name="gameTime"></param>
-        /// <param name="input"></param>
-        public virtual void HandleInput(IGameTime gameTime, Input input) { }
+        public Input Input { get { return this.GameObject.Input; } }
 
         /// <summary>
         /// Adds a GameObject to the Stage without added it to the GameObject of this Behavior

@@ -274,21 +274,6 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
-        public void InvokesHandleInputOnBehaviorsWhenHandleInputIsInvoked()
-        {
-            var gameObject = new GameObject();
-            var mockBehavior = new MockBehavior();
-            gameObject.AddComponent(mockBehavior);
-            gameObject.HandleInput(new DummyGameTime(), new Input());
-            Assert.IsTrue(mockBehavior.HandleInputWasInvoked);
-            var mockBehavior2 = new MockBehavior();
-            gameObject.AddComponent(mockBehavior2);
-            gameObject.HandleInput(new DummyGameTime(), new Input());
-            Assert.IsTrue(mockBehavior.HandleInputWasInvoked);
-            Assert.IsTrue(mockBehavior2.HandleInputWasInvoked);
-        }
-
-        [TestMethod]
         public void SetPositionHelperInitializesThePositionVectorOfTheTransform()
         {
             var gameObject = new GameObject();
