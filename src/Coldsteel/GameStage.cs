@@ -92,6 +92,22 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Load
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <param name="paths"></param>
+        /// <returns></returns>
+        public T[] LoadContent<T>(string path, params string[] paths) where T : class
+        {
+            List<T> content = new List<T>();
+            content.Add(LoadContent<T>(path));
+            foreach (var p in paths)
+                content.Add(LoadContent<T>(p));
+            return content.ToArray();
+        }
+
+        /// <summary>
         /// Retrieves an already stored peices of content that was loaded with LoadContent<T>.
         /// </summary>
         /// <typeparam name="T"></typeparam>

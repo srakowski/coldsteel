@@ -14,15 +14,8 @@ namespace Derpfender.Stages
     {
         public override void LoadContent()
         {            
-            LoadContent<Texture2D>("star");
-            LoadContent<SoundEffect>("fire");
-            LoadContent<Texture2D>("ship");
-            LoadContent<Texture2D>("flash");
-            LoadContent<Texture2D>("bullet");
-            LoadContent<Texture2D>("smoke");
-            LoadContent<Texture2D>("enemy");
-            LoadContent<Texture2D>("debris");
-            LoadContent<SoundEffect>("explode");
+            LoadContent<Texture2D>("star", "ship", "flash", "bullet", "smoke", "enemy", "debris");
+            LoadContent<SoundEffect>("fire", "explode");
         }
 
         public override void Initialize()
