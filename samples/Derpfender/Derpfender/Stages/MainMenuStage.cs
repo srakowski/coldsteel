@@ -20,6 +20,8 @@ namespace Derpfender.Stages
 
         public override void Initialize()
         {
+            BackgroundColor = Color.Black;
+
             var background = AddLayer("background", -1);
             background.BlendState = BlendState.NonPremultiplied;
             background.SamplerState = SamplerState.PointClamp;

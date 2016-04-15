@@ -25,19 +25,19 @@ namespace Derpfender
 
         public void InitializeControls(Input input)
         {
-            input.AddControl(new KeyboardButtonControl("MenuUp", Keys.W));
-            input.AddControl(new GamePadButtonControl("AltMenuUp", GamePadButton.DPadUp));
-            input.AddControl(new KeyboardButtonControl("MenuDown", Keys.S));
-            input.AddControl(new GamePadButtonControl("AltMenuDown", GamePadButton.DPadDown));
-            input.AddControl(new KeyboardButtonControl("MenuSelect", Keys.Space));
-            input.AddControl(new GamePadButtonControl("AltMenuSelect", GamePadButton.A));
+            input.AddControl("MenuUp", new KeyboardButtonControl(Keys.W));
+            input.AddControl("AltMenuUp", new GamePadButtonControl(GamePadButton.DPadUp));
+            input.AddControl("MenuDown", new KeyboardButtonControl(Keys.S));
+            input.AddControl("AltMenuDown", new GamePadButtonControl(GamePadButton.DPadDown));
+            input.AddControl("MenuSelect", new KeyboardButtonControl(Keys.Space));
+            input.AddControl("AltMenuSelect", new GamePadButtonControl(GamePadButton.A));
 
-            input.AddControl(new KeyboardButtonControl("MoveUp", Keys.W));
-            input.AddControl(new GamePadButtonControl("AltMoveUp", GamePadButton.DPadUp));
-            input.AddControl(new KeyboardButtonControl("MoveDown", Keys.S));
-            input.AddControl(new GamePadButtonControl("AltMoveDown", GamePadButton.DPadDown));
-            input.AddControl(new KeyboardButtonControl("Fire", Keys.Space));
-            input.AddControl(new GamePadButtonControl("AltFire", GamePadButton.A));
+            input.AddControl("MoveUp", new KeyboardButtonControl(Keys.W));
+            input.AddControl("AltMoveUp", new GamePadButtonControl(GamePadButton.DPadUp));
+            input.AddControl("MoveDown", new KeyboardButtonControl(Keys.S));
+            input.AddControl("AltMoveDown", new GamePadButtonControl(GamePadButton.DPadDown));
+            input.AddControl("Fire", new KeyboardButtonControl(Keys.Space));
+            input.AddControl("AltFire", new GamePadButtonControl(GamePadButton.A));
         }
 
         public void RegisterStages(GameStageCollection stages)

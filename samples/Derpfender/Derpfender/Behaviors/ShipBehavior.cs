@@ -4,7 +4,6 @@ using Coldsteel.Controls;
 using Coldsteel.Renderers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,22 +21,22 @@ namespace Derpfender.Behaviors
 
         private int _fireRate = 100;
 
-        public override void HandleInput(IGameTime gameTime, Input input)
+        public override void Update(IGameTime gameTime)
         {
-            if (input.GetControl<ButtonControl>("MoveUp").IsDown() ||
-                input.GetControl<ButtonControl>("AltMoveUp").IsDown())
+            if (Input.GetControl<ButtonControl>("MoveUp").IsDown() ||
+                Input.GetControl<ButtonControl>("AltMoveUp").IsDown())
             {
                 this.Transform.Position += new Vector2(0, -1) * _speed * gameTime.Delta;
             }
 
-            if (input.GetControl<ButtonControl>("MoveDown").IsDown() ||
-                input.GetControl<ButtonControl>("AltMoveDown").IsDown())
+            if (Input.GetControl<ButtonControl>("MoveDown").IsDown() ||
+                Input.GetControl<ButtonControl>("AltMoveDown").IsDown())
             {
                 this.Transform.Position += new Vector2(0, 1) * _speed * gameTime.Delta;
             }
 
-            if ((input.GetControl<ButtonControl>("Fire").IsDown() || 
-                input.GetControl<ButtonControl>("AltFire").IsDown())
+            if ((Input.GetControl<ButtonControl>("Fire").IsDown() || 
+                Input.GetControl<ButtonControl>("AltFire").IsDown())
                 && _allowFire)
                 StartCoroutine(Fire());
         }

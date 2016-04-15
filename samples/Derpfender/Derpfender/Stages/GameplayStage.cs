@@ -27,6 +27,8 @@ namespace Derpfender.Stages
 
         public override void Initialize()
         {
+            BackgroundColor = Color.Black;
+
             var background = AddLayer("background", -2);
             background.BlendState = BlendState.NonPremultiplied;
             background.SamplerState = SamplerState.PointClamp;
@@ -47,6 +49,7 @@ namespace Derpfender.Stages
             AddGameObject(ship);
 
             var camera = new GameObject()
+                .SetPosition(1280 * 0.5f, 720 * 0.5f)
                 .AddComponent(new Camera())
                 .AddComponent(new ShakeBehavior());
             AddGameObject(camera);
