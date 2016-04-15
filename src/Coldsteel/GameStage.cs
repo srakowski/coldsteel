@@ -47,6 +47,11 @@ namespace Coldsteel
         private Dictionary<string, object> _content = new Dictionary<string, object>();
 
         /// <summary>
+        /// Gets or sets the background color of the Stage.
+        /// </summary>
+        public Color BackgroundColor { get; set; } = Color.CornflowerBlue;
+
+        /// <summary>
         /// Gets or sets the ResourceFactory used for ContentManagement, Rendering, and other services.
         /// </summary>
         public IGameResourceFactory GameResourceFactory { get; set; }
@@ -224,6 +229,8 @@ namespace Coldsteel
         {
             if (_graphicsService == null)
                 _graphicsService = GameResourceFactory?.CreateGraphicsService();
+
+            _graphicsService.Clear(BackgroundColor);
 
             Matrix transform = Matrix.Identity;
             DoToAllGameObjects((go) => {

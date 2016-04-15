@@ -20,5 +20,10 @@ namespace Coldsteel
                 return _game.GraphicsDevice.Viewport;
             }
         }
+
+        public void Clear(Color color)
+        {
+            _game.GraphicsDevice.Clear(color);
+        }
     }
 }
