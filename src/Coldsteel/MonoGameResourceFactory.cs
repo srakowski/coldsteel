@@ -21,7 +21,7 @@ namespace Coldsteel
             var gameContentManager = _game.Content;
             var contentManager = new ContentManager(
                 gameContentManager.ServiceProvider, gameContentManager.RootDirectory);
-            return new ContentManagerWrapper(contentManager);
+            return new MonoGameContentManager(contentManager);
         }
 
         public IGraphicsService CreateGraphicsService()

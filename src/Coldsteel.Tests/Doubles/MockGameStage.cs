@@ -14,14 +14,14 @@ namespace Coldsteel.Tests.Doubles
         public bool InitializeWasInvoked { get; set; } = false;
         public bool AttemptToLoadContent { get; internal set; }
 
-        public override void LoadContent()
+        protected override void LoadContent()
         {
             this.LoadContentWasInvoked = true;
             if (AttemptToLoadContent)
                 LoadContent<Texture2D>("testonly");
         }
 
-        public override void Initialize()
+        protected override void Initialize()
         {
             this.InitializeWasInvoked = true;
         }

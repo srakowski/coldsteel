@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Coldsteel
 {
-    internal class ContentManagerWrapper : IContentManager
+    internal class MonoGameContentManager : IContentManager
     {
         private ContentManager _contentManager;
 
-        public ContentManagerWrapper(ContentManager contentManager)
+        public MonoGameContentManager(ContentManager contentManager)
         {
             _contentManager = contentManager;
         }

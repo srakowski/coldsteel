@@ -79,11 +79,11 @@ namespace Coldsteel
         /// <param name="stageType"></param>
         private void LoadStage(IGameResourceFactory resourceFactory, Type stageType)
         {
+            this.CurrentGameStage?.Unload();
             this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
             this.CurrentGameStage.GameStageManager = this;
             this.CurrentGameStage.GameResourceFactory = resourceFactory;
-            this.CurrentGameStage.LoadContent();
-            this.CurrentGameStage.Initialize();
+            this.CurrentGameStage.Load();            
         }
     }
 }

@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colliders\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ContentManagerWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonoGameContentManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\DirectionalControl.cs" />

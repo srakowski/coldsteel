@@ -12,13 +12,13 @@ namespace Derpfender.Stages
 {
     class GameplayStage : GameStage
     {
-        public override void LoadContent()
+        protected override void LoadContent()
         {            
             LoadContent<Texture2D>("star", "ship", "flash", "bullet", "smoke", "enemy", "debris");
             LoadContent<SoundEffect>("fire", "explode");
         }
 
-        public override void Initialize()
+        protected override void Initialize()
         {
             BackgroundColor = Color.Black;
 

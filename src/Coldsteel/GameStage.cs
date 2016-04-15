@@ -13,39 +13,28 @@ namespace Coldsteel
     /// </summary>
     public abstract class GameStage
     {
+        private List<GameObject> _gameObjects = new List<GameObject>();
+
+        private Dictionary<string, object> _content = new Dictionary<string, object>();
+
+        private IGraphicsService _graphicsService;
+
+        private IContentManager _contenManager;
+
+        private SortedList<int, Layer> _layers = new SortedList<int, Layer>();
+
+        private Layer _defaultLayer;
+
         /// <summary>
         /// Gets the GameStageManager that created this GameStage.
         /// </summary>
         public GameStageManager GameStageManager { get; internal set; }
-
-        private List<GameObject> _gameObjects = new List<GameObject>();
 
         /// <summary>
         /// Gets the GameObjects contained in this stage.
         /// </summary>
         public IEnumerable<GameObject> GameObjects { get { return _gameObjects; } }        
                
-        /// <summary>
-        /// Adds a GameObject to the Stage
-        /// </summary>
-        /// <param name="gameObject"></param>
-        public void AddGameObject(GameObject gameObject)
-        {
-            _gameObjects.Add(gameObject);
-            gameObject.GameStage = this;
-        }
-
-        /// <summary>
-        /// Removes a GameObject from the Stage.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        public void RemoveGameObject(GameObject gameObject)
-        {
-            _gameObjects.Remove(gameObject);
-        }
-
-        private Dictionary<string, object> _content = new Dictionary<string, object>();
-
         /// <summary>
         /// Gets or sets the background color of the Stage.
         /// </summary>
@@ -56,9 +45,10 @@ namespace Coldsteel
         /// </summary>
         public IGameResourceFactory GameResourceFactory { get; set; }
 
-        private IGraphicsService _graphicsService;
-
-        private IContentManager _contenManager;
+        /// <summary>
+        /// Gets or sets the Input object.
+        /// </summary>
+        public Input Input { get; internal set; }
 
         /// <summary>
         /// Gets the ContentManager used to load and store content.
@@ -78,6 +68,58 @@ namespace Coldsteel
                 return _contenManager;
             }
         }
+
+        /// <summary>
+        /// The Default rendering layer for this Stage.
+        /// </summary>
+        public Layer DefaultLayer
+        {
+            get
+            {
+                if (_defaultLayer == null)
+                    _defaultLayer = AddLayer("default", 0);
+
+                return _defaultLayer;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the object that will perform collision detections.
+        /// </summary>
+        private ICollisionDetector CollisionDetector { get; set; } = new NaiveCollisionDetector();
+
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public GameStage()
+        {
+        }
+
+        /// <summary>
+        /// Performs initial load.
+        /// </summary>
+        internal void Load()
+        {
+            this.LoadContent();
+            this.Initialize();
+        }
+
+        public void Unload()
+        {
+            this.UnloadContent();
+        }
+
+        /// <summary>
+        /// Set the initial state of the GameStage. Create and initialize GameObjects.
+        /// </summary>
+        protected virtual void Initialize() { }
+
+        /// <summary>
+        /// Called when Content should be loaded. This is called before Initialize.
+        /// </summary>
+        /// <param name="contentManager"></param>
+        protected virtual void LoadContent() { }
 
         /// <summary>
         /// Loads and stores content uses for this stage.
@@ -122,27 +164,30 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Called when Content should be loaded. This is called before Initialize.
+        /// Unloads content loaded by this Stage.
         /// </summary>
-        /// <param name="contentManager"></param>
-        public virtual void LoadContent() { }
-
-        private SortedList<int, Layer> _layers = new SortedList<int, Layer>();
-
-        private Layer _defaultLayer;
+        private void UnloadContent()
+        {
+            _contenManager.Unload();
+        }
 
         /// <summary>
-        /// The Default rendering layer for this Stage.
+        /// Adds a GameObject to the Stage
         /// </summary>
-        public Layer DefaultLayer
+        /// <param name="gameObject"></param>
+        public void AddGameObject(GameObject gameObject)
         {
-            get
-            {
-                if (_defaultLayer == null)
-                    _defaultLayer = AddLayer("default", 0);
+            _gameObjects.Add(gameObject);
+            gameObject.GameStage = this;
+        }
 
-                return _defaultLayer;
-            }
+        /// <summary>
+        /// Removes a GameObject from the Stage.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void RemoveGameObject(GameObject gameObject)
+        {
+            _gameObjects.Remove(gameObject);
         }
 
         /// <summary>
@@ -177,16 +222,6 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Set the initial state of the GameStage. Create and initialize GameObjects.
-        /// </summary>
-        public virtual void Initialize() { }
-
-        /// <summary>
-        /// Gets or sets the object that will perform collision detections.
-        /// </summary>
-        private ICollisionDetector CollisionDetector { get; set; } = new NaiveCollisionDetector();
-
-        /// <summary>
         /// Do physics updates and collision detection.
         /// </summary>
         /// <param name="gameTime"></param>
@@ -207,11 +242,6 @@ namespace Coldsteel
             collider1.NotifyCollision(collider2);
             collider2.NotifyCollision(collider1);
         }
-
-        /// <summary>
-        /// Gets or sets the Input object.
-        /// </summary>
-        public Input Input { get; set; }
 
         /// <summary>
         /// Update GmeObjects.

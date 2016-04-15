@@ -7,5 +7,6 @@ namespace Coldsteel
     public interface IContentManager
     {
         T Load<T>(string path) where T : class;
+        void Unload();
     }
 }

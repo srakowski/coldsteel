@@ -11,14 +11,13 @@ namespace Derpfender.Stages
 {
     class MainMenuStage : GameStage
     {
-        public override void LoadContent()
+        protected override void LoadContent()
         {
             LoadContent<SpriteFont>("MenuFont");
-            LoadContent<Texture2D>("ship");
-            LoadContent<Texture2D>("star");
+            LoadContent<Texture2D>("ship", "star");
         }
 
-        public override void Initialize()
+        protected override void Initialize()
         {
             BackgroundColor = Color.Black;
 
