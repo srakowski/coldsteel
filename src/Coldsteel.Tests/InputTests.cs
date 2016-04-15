@@ -12,11 +12,11 @@ namespace Coldsteel.Tests
         public void CanAddControls()
         {
             var input = new Input();
-            var control = new MockControl("control1");
-            input.AddControl(control);
+            var control = new MockControl();
+            input.AddControl("control1", control);
             Assert.IsTrue(input.Controls.Contains(control));
-            var control2 = new MockControl("control2");
-            input.AddControl(control2);
+            var control2 = new MockControl();
+            input.AddControl("control2", control2);
             Assert.IsTrue(input.Controls.Contains(control2));
         }
 
@@ -25,18 +25,18 @@ namespace Coldsteel.Tests
         public void MayNotAdd2ControlsWithTheSameKey()
         {
             var input = new Input();
-            var control = new MockControl("control");
-            input.AddControl(control);
-            var control2 = new MockControl("control");
-            input.AddControl(control2);
+            var control = new MockControl();
+            input.AddControl("control", control);
+            var control2 = new MockControl();
+            input.AddControl("control", control2);
         }
 
         [TestMethod]
         public void MayGetControlByKey()
         {
             var input = new Input();
-            var control = new MockControl("control");
-            input.AddControl(control);
+            var control = new MockControl();
+            input.AddControl("control", control);
             var result = input.GetControl("control");
             Assert.AreSame(control, result);
         }
@@ -46,8 +46,8 @@ namespace Coldsteel.Tests
         public void ThrowsExceptionWhenGettingKeyThatDoesNotExist()
         {
             var input = new Input();
-            var control = new MockControl("control");
-            input.AddControl(control);
+            var control = new MockControl();
+            input.AddControl("control", control);
             input.GetControl("notcontrol");
         }
 
@@ -55,8 +55,8 @@ namespace Coldsteel.Tests
         public void CanGetControlAsType()
         {
             var input = new Input();
-            var control = new MockControl("control");
-            input.AddControl(control);
+            var control = new MockControl();
+            input.AddControl("control", control);
             var result = input.GetControl<MockControl>("control");
             Assert.AreSame(control, result);
         }

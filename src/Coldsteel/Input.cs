@@ -18,12 +18,12 @@ namespace Coldsteel
         /// Adds a control to the input.
         /// </summary>
         /// <param name="control"></param>
-        public void AddControl(Control control)
+        public void AddControl(string key, Control control)
         {
-            if (_controls.ContainsKey(control.Key))
-                throw new ArgumentException(String.Format("duplicate control key {0}", control.Key));
+            if (_controls.ContainsKey(key))
+                throw new ArgumentException(String.Format("duplicate control key {0}", key));
 
-            _controls.Add(control.Key, control);
+            _controls.Add(key, control);
         }
 
         /// <summary>

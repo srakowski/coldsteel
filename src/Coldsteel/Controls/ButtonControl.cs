@@ -8,7 +8,7 @@ namespace Coldsteel.Controls
     {
         public abstract bool IsDown();
 
-        public ButtonControl(string key) : base(key)
+        public ButtonControl() : base()
         {
         }        
     }

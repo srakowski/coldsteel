@@ -14,9 +14,5 @@ namespace Coldsteel.Controls
                 return InputDevices.CurrentGamePadState.ThumbSticks.Left;
             }
         }
-
-        public ThumbStickControl(string key) : base(key)
-        {
-        }
     }
 }

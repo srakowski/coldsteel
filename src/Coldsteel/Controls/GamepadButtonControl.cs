@@ -35,7 +35,7 @@ namespace Coldsteel.Controls
                 false;
         }
 
-        public GamePadButtonControl(string controlKey, GamePadButton gamePadButton) : base(controlKey)
+        public GamePadButtonControl(GamePadButton gamePadButton)
         {
             this._gamePadButton = gamePadButton;
         }

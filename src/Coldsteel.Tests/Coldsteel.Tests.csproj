@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="BehaviorTests.cs" />
     <Compile Include="ColdsteelComponentTests.cs" />
-    <Compile Include="ControlTests.cs" />
     <Compile Include="Doubles\DummyContent.cs" />
     <Compile Include="Doubles\DummyContentManager.cs" />
     <Compile Include="Doubles\DummyGameStage.cs" />

@@ -8,9 +8,5 @@ namespace Coldsteel.Tests.Doubles
 {
     class MockControl : Control
     {
-        public MockControl(string key)
-            : base(key)
-        {
-        }
     }
 }

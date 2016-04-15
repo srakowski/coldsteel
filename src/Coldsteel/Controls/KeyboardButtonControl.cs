@@ -14,7 +14,7 @@ namespace Coldsteel.Controls
             return InputDevices.CurrentKeyboardState.IsKeyDown(this.KeyboardKey);
         }
 
-        public KeyboardButtonControl(string controlKey, Keys keyboardKey) : base(controlKey)
+        public KeyboardButtonControl(Keys keyboardKey)
         {
             this.KeyboardKey = keyboardKey;
         }
