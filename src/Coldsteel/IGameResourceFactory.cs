@@ -8,6 +8,7 @@ namespace Coldsteel
     public interface IGameResourceFactory
     {
         IContentManager CreateContentManager();
+        IGraphicsService CreateGraphicsService();
         SpriteBatch CreateSpriteBatch();
     }
 }

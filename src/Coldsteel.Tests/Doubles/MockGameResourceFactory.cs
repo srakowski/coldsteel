@@ -16,6 +16,11 @@ namespace Coldsteel.Tests.Doubles
             return MockContentManager ?? new MockContentManager();
         }
 
+        public IGraphicsService CreateGraphicsService()
+        {
+            return null;
+        }
+
         public SpriteBatch CreateSpriteBatch()
         {
             return null;

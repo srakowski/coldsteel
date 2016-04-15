@@ -51,6 +51,8 @@ namespace Coldsteel
         /// </summary>
         public IGameResourceFactory GameResourceFactory { get; set; }
 
+        private IGraphicsService _graphicsService;
+
         private IContentManager _contenManager;
 
         /// <summary>
@@ -220,11 +222,15 @@ namespace Coldsteel
         /// </summary>
         private void BeginLayerRender()
         {
+            if (_graphicsService == null)
+                _graphicsService = GameResourceFactory?.CreateGraphicsService();
+
             Matrix transform = Matrix.Identity;
             DoToAllGameObjects((go) => {
                 foreach (var camera in go.GetComponents<Camera>())
                     if (camera.IsActive)
-                        transform *= camera.TransformMatrix;                
+                        transform *= camera.GetTransformationMatrix(_graphicsService.DefaultViewport)
+                        * Matrix.CreateTranslation(new Vector3());
                 });
             foreach (var layer in _layers)
                 layer.Value.Begin(transform);

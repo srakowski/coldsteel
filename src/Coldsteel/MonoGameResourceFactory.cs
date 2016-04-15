@@ -24,6 +24,11 @@ namespace Coldsteel
             return new ContentManagerWrapper(contentManager);
         }
 
+        public IGraphicsService CreateGraphicsService()
+        {
+            return new MonoGameGraphicsService(_game);
+        }
+
         public SpriteBatch CreateSpriteBatch()
         {
             return new SpriteBatch(_game.GraphicsDevice);

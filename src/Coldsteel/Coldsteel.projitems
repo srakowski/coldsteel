@@ -29,7 +29,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICollisionDetector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IGraphicsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InputDevices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonoGameGraphicsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameResourceFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStageCollection.cs" />

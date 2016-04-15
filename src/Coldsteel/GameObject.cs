@@ -228,6 +228,16 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Construction/initialization helper to set the initial position of the object.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public GameObject SetPosition(float x, float y)
+        {
+            return SetPosition(new Vector2(x, y));
+        }
+
+        /// <summary>
         /// Construction/initialization helper to set the initial rotation of the object.
         /// Rotation is in Radians.
         /// </summary>
