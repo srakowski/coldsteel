@@ -1,5 +1,6 @@
 ﻿using Coldsteel;
 using Coldsteel.Renderers;
+using Coldsteel.Transitions;
 using Derpfender.Behaviors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -12,6 +13,13 @@ namespace Derpfender.Stages
 {
     class GameplayStage : GameStage
     {
+        public GameplayStage()
+        {
+            this.BackgroundColor = BackgroundColor = Color.Black;
+            this.InTransition = FadeTransition.Out();
+            this.OutTransition = FadeTransition.In();
+        }
+
         protected override void LoadContent()
         {            
             LoadContent<Texture2D>("star", "ship", "flash", "bullet", "smoke", "enemy", "debris");
@@ -19,9 +27,7 @@ namespace Derpfender.Stages
         }
 
         protected override void Initialize()
-        {
-            BackgroundColor = Color.Black;
-
+        {            
             var background = AddLayer("background", -2);
             background.BlendState = BlendState.NonPremultiplied;
             background.SamplerState = SamplerState.PointClamp;

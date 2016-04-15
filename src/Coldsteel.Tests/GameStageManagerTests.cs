@@ -53,17 +53,5 @@ namespace Coldsteel.Tests
             gameStageMgr.Initialize(new MockGameResourceFactory());
             Assert.AreSame(gameStageMgr.CurrentGameStage.GameStageManager, gameStageMgr);
         }
-
-        [TestMethod]
-        public void GameResourceFactoryIsAssignedToGameStageDuringInitialize()
-        {
-            var dummyInput = new Input();
-            var stageCollection = new GameStageCollection();
-            stageCollection.RegisterStage<MockGameStage>();
-            var gameStageMgr = new GameStageManager(dummyInput, stageCollection);
-            gameStageMgr.Initialize(new MockGameResourceFactory());
-            var stage = gameStageMgr.CurrentGameStage as MockGameStage;
-            Assert.IsNotNull(stage.GameResourceFactory);
-        }
     }
 }

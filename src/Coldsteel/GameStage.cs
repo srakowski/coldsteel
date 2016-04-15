@@ -5,9 +5,18 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Coldsteel.Algorithms;
 using Microsoft.Xna.Framework;
+using Coldsteel.Transitions;
 
 namespace Coldsteel
 {
+    internal enum GameStageState
+    {
+        TransitionOn,
+        Active,
+        TransitionOff,
+        Hidden
+    }
+
     /// <summary>
     /// Represents a scene/level/screen in the game.
     /// </summary>
@@ -17,13 +26,15 @@ namespace Coldsteel
 
         private Dictionary<string, object> _content = new Dictionary<string, object>();
 
-        private IGraphicsService _graphicsService;
+        private IGraphicsService _graphicsService = null;
 
-        private IContentManager _contenManager;
+        private IContentManager _contenManager = null;
 
         private SortedList<int, Layer> _layers = new SortedList<int, Layer>();
 
-        private Layer _defaultLayer;
+        private Layer _defaultLayer = null;
+
+        private GameStageState _state = GameStageState.Hidden;
 
         /// <summary>
         /// Gets the GameStageManager that created this GameStage.
@@ -43,7 +54,7 @@ namespace Coldsteel
         /// <summary>
         /// Gets or sets the ResourceFactory used for ContentManagement, Rendering, and other services.
         /// </summary>
-        public IGameResourceFactory GameResourceFactory { get; set; }
+        internal IGameResourceFactory GameResourceFactory { get; set; }
 
         /// <summary>
         /// Gets or sets the Input object.
@@ -86,15 +97,11 @@ namespace Coldsteel
         /// <summary>
         /// Gets or sets the object that will perform collision detections.
         /// </summary>
-        private ICollisionDetector CollisionDetector { get; set; } = new NaiveCollisionDetector();
+        private ICollisionDetector CollisionDetector { get; set; } = new NaiveCollisionDetector();        
 
+        protected Transition InTransition { get; set; }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public GameStage()
-        {
-        }
+        protected Transition OutTransition { get; set; }
 
         /// <summary>
         /// Performs initial load.
@@ -103,11 +110,26 @@ namespace Coldsteel
         {
             this.LoadContent();
             this.Initialize();
+            this._state = GameStageState.TransitionOn;
+            this.InTransition = this.InTransition ?? ImmediateTransition.In();
+            this.InTransition.Start(() =>
+            {
+                this._state = GameStageState.Active;
+            });
         }
 
-        public void Unload()
+        /// <summary>
+        /// Unloads
+        /// </summary>
+        internal void Unload()
         {
-            this.UnloadContent();
+            this._state = GameStageState.TransitionOff;
+            this.OutTransition = this.OutTransition ?? ImmediateTransition.Out();
+            this.OutTransition.Start(() => 
+            {
+                this._state = GameStageState.Hidden;
+                this.UnloadContent();
+            });
         }
 
         /// <summary>
@@ -225,7 +247,7 @@ namespace Coldsteel
         /// Do physics updates and collision detection.
         /// </summary>
         /// <param name="gameTime"></param>
-        internal void UpdatePhysics(IGameTime gameTime)
+        private void UpdatePhysics(IGameTime gameTime)
         {
             var colliders = new List<Collider>();
             DoToAllGameObjects((go) => colliders.AddRange(go.GetComponents<Collider>().Where((c) => c.Enabled)));
@@ -249,7 +271,21 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
         {
-            DoToAllGameObjects((go) => go.Update(gameTime));
+            UpdatePhysics(gameTime);
+            switch (_state)
+            {
+                case GameStageState.Active:
+                    DoToAllGameObjects((go) => go.Update(gameTime));
+                    break;
+
+                case GameStageState.TransitionOn:
+                    this.InTransition.Update(gameTime);
+                    break;
+
+                case GameStageState.TransitionOff:
+                    this.OutTransition.Update(gameTime);
+                    break;
+            }            
         }
 
         /// <summary>
@@ -299,7 +335,7 @@ namespace Coldsteel
         /// <param name="action"></param>
         private void DoToAllGameObjects(Action<GameObject> action)
         {
-            DoToGamObjects(this.GameObjects.ToArray(), action);
+            DoToGameObjects(this.GameObjects.ToArray(), action);
         }
 
         /// <summary>
@@ -307,12 +343,12 @@ namespace Coldsteel
         /// </summary>
         /// <param name="gameObjects"></param>
         /// <param name="action"></param>
-        private static void DoToGamObjects(IEnumerable<GameObject> gameObjects, Action<GameObject> action)
+        private static void DoToGameObjects(IEnumerable<GameObject> gameObjects, Action<GameObject> action)
         {
             foreach (var gameObject in gameObjects)
             {
                 action.Invoke(gameObject);
-                DoToGamObjects(gameObject.Children.ToArray(), action);
+                DoToGameObjects(gameObject.Children.ToArray(), action);
             }
         }
     }

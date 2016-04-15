@@ -24,38 +24,6 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
-        public void CanAccessLoadedContent()
-        {
-            var gameStage = new MockGameStage();
-            var mockGameResourceFactory = new MockGameResourceFactory();
-            mockGameResourceFactory.MockContentManager = new MockContentManager();
-            gameStage.GameResourceFactory = mockGameResourceFactory;
-            gameStage.LoadContent<DummyContent>("test");
-
-            var gameObject = new GameObject();
-            var behavior = new MockBehavior();
-            gameObject.AddComponent(behavior);
-            gameStage.AddGameObject(gameObject);
-
-            var content = behavior.MockGetContent<DummyContent>("test");
-            Assert.AreSame(mockGameResourceFactory.MockContentManager.DummyContentLoaded, content);
-        }
-
-        [TestMethod]
-        public void CanAccessDefaultLayer()
-        {
-            var gameStage = new MockGameStage();
-            var mockGameResourceFactory = new MockGameResourceFactory();
-            mockGameResourceFactory.MockContentManager = new MockContentManager();
-            gameStage.GameResourceFactory = mockGameResourceFactory;
-            var gameObject = new GameObject();
-            var behavior = new MockBehavior();
-            gameObject.AddComponent(behavior);
-            gameStage.AddGameObject(gameObject);
-            Assert.IsNotNull(behavior.MockGetDefaultLayer());
-        }
-
-        [TestMethod]
         public void CanRemoveObjectFromStageUsingDestroy()
         {
             var gameStage = new MockGameStage();

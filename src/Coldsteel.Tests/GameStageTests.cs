@@ -48,36 +48,6 @@ namespace Coldsteel.Tests
         }
 
         [TestMethod]
-        public void CanLoadContent()
-        {
-            var gameStage = new MockGameStage();
-            var mockResourceFactory = new MockGameResourceFactory();
-            mockResourceFactory.MockContentManager = new MockContentManager();
-            gameStage.GameResourceFactory = mockResourceFactory;
-            gameStage.LoadContent<DummyContent>("dummypath");
-            var result = gameStage.GetContent<DummyContent>("dummypath");
-            Assert.AreSame(mockResourceFactory.MockContentManager.DummyContentLoaded, result);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CannotAccessContentIfNotLoaded()
-        {
-            var gameStage = new MockGameStage();
-            var mockContentManager = new MockContentManager();
-            gameStage.GameResourceFactory = new MockGameResourceFactory();
-            var result = gameStage.GetContent<DummyContent>("noresult");
-        }
-
-        [TestMethod]
-        public void ADefaultLayerIsAvailable()
-        {
-            var gameStage = new MockGameStage();
-            gameStage.GameResourceFactory = new MockGameResourceFactory();
-            Assert.IsNotNull(gameStage.DefaultLayer);
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void DefaultLayerDependsOnGameResourceFactoryBeingAssigned()
         {

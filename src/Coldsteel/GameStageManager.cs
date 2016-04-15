@@ -48,7 +48,6 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
         {
-            CurrentGameStage.UpdatePhysics(gameTime);
             _input.Update(gameTime);
             CurrentGameStage.Input = _input;
             CurrentGameStage.Update(gameTime);
