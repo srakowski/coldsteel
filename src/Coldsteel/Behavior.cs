@@ -14,8 +14,7 @@ namespace Coldsteel
         {
             get
             {
-                var gameStage = this.GameObject.GameStage;
-                return gameStage.DefaultLayer;
+                return this.GameObject.DefaultLayer;
             }
         }
 
@@ -45,9 +44,8 @@ namespace Coldsteel
         /// <param name="path"></param>
         /// <returns></returns>
         public T GetContent<T>(string path) where T : class
-        {
-            var gameStage = this.GameObject.GameStage;
-            return gameStage?.GetContent<T>(path);
+        {            
+            return this.GameObject.GetContent<T>(path);
         }
 
         /// <summary>

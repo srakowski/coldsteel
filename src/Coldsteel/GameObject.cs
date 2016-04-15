@@ -197,6 +197,28 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Get the default layer for the Stage this gameObject belongs to.
+        /// </summary>
+        public Layer DefaultLayer
+        {
+            get
+            {
+                return this.GameStage.DefaultLayer;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve already loaded content.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public T GetContent<T>(string path) where T : class
+        {
+            return this.GameStage.GetContent<T>(path);
+        }
+
+        /// <summary>
         /// Removes GameObject from game.
         /// </summary>
         public void Destroy()
