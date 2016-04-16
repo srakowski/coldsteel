@@ -20,13 +20,24 @@ namespace Coldsteel
         {
             var translation = Matrix.CreateTranslation(new Vector3(-(this.Transform?.Position.X ?? 0), -(this.Transform?.Position.Y ?? 0), 0f));
             var rotation = Matrix.CreateRotationZ(this.Transform?.Rotation ?? 0);
-            var scale = Matrix.CreateScale(this.Transform?.Scale ?? 1f);
-            var viewportTranslation = Matrix.CreateTranslation(new Vector3(viewport.Width * 0.5f, viewport.Height * 0.5f, 0f));
+            var scale = Matrix.CreateScale(this.Transform?.Scale ?? 1f);            
             return Matrix.Identity * 
                 translation * 
                 rotation *
-                scale *
-                viewportTranslation;
+                scale;
+        }
+
+        private List<Layer> _skippedLayers = new List<Layer>();
+
+        public Camera SkipLayer(Layer layer)
+        {
+            _skippedLayers.Add(layer);
+            return this;
+        }
+
+        public bool SkipsLayer(Layer layer)
+        {
+            return _skippedLayers.Contains(layer);
         }
     }
 }

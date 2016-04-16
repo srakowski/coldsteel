@@ -6,7 +6,11 @@ namespace Coldsteel.Controls
 {
     public abstract class ButtonControl : Control
     {
-        public abstract bool IsDown();
+        public virtual bool IsDown() { return false; }
+
+        public virtual bool IsUp() { return false; }
+
+        public virtual bool WasPressed() { return false; }
 
         public ButtonControl() : base()
         {

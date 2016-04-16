@@ -9,7 +9,7 @@ namespace Coldsteel.Controls
     {
         public override Vector2 Direction()
         {
-            return InputDevices.MouseState.Position.ToVector2() - _screenCenter;
+            return InputDevices.CurrentMouseState.Position.ToVector2() - _screenCenter;
         }
 
         private Vector2 _screenCenter;

@@ -19,6 +19,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseDirectionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MousePositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\PositionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameContentManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonControl.cs" />

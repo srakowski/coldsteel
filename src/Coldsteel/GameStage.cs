@@ -197,10 +197,13 @@ namespace Coldsteel
         /// Adds a GameObject to the Stage
         /// </summary>
         /// <param name="gameObject"></param>
-        public void AddGameObject(GameObject gameObject)
+        public GameObject AddGameObject(GameObject gameObject = null)
         {
+            if (gameObject == null)
+                gameObject = new GameObject();
             _gameObjects.Add(gameObject);
             gameObject.GameStage = this;
+            return gameObject;
         }
 
         /// <summary>
@@ -309,16 +312,14 @@ namespace Coldsteel
 
             _graphicsService.Clear(BackgroundColor);
 
-            Matrix transform = Matrix.Identity;
-            DoToAllGameObjects((go) => {
-                foreach (var camera in go.GetComponents<Camera>())
-                    if (camera.IsActive)
-                        transform *= camera.GetTransformationMatrix(_graphicsService.DefaultViewport)
-                        * Matrix.CreateTranslation(new Vector3());
-                });
-            foreach (var layer in _layers)
-                layer.Value.Begin(transform);
-        }       
+            List<Camera> cameras = CollectCameras();
+
+            foreach (var layer in _layers.Values)
+            {
+                Matrix transform = GetTransformForLayer(cameras, layer);
+                layer.Begin(transform);
+            }
+        }
 
         /// <summary>
         /// Ends the rendering process on all layers (in order of when they should be drawn).
@@ -350,6 +351,52 @@ namespace Coldsteel
                 action.Invoke(gameObject);
                 DoToGameObjects(gameObject.Children.ToArray(), action);
             }
+        }
+
+        /// <summary>
+        /// Converts a screen position to a world position taking Cameras into account.
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 ScreenPosToLayerPos(Vector2 screenPos, Layer layer)
+        {
+            var transform = GetTransformForLayer(CollectCameras(), layer);
+            return Vector2.Transform(screenPos, Matrix.Invert(transform));
+        }
+
+        /// <summary>
+        /// Gets all cameras.
+        /// </summary>
+        /// <returns></returns>
+        private List<Camera> CollectCameras()
+        {
+            List<Camera> cameras = new List<Camera>();
+            DoToAllGameObjects((go) =>
+            {
+                foreach (var camera in go.GetComponents<Camera>())
+                    if (camera.IsActive)
+                        cameras.Add(camera);
+            });
+            return cameras;
+        }
+
+        /// <summary>
+        /// Given all the cameras calculate the transform for a layer.
+        /// </summary>
+        /// <param name="cameras"></param>
+        /// <param name="layer"></param>
+        /// <returns></returns>
+        private Matrix GetTransformForLayer(List<Camera> cameras, Layer layer)
+        {
+            var transform = Matrix.Identity;
+            foreach (var camera in cameras)
+                if (!camera.SkipsLayer(layer))
+                {
+                    var viewport = _graphicsService.DefaultViewport;
+                    transform *= camera.GetTransformationMatrix(_graphicsService.DefaultViewport);
+                    var viewportTranslation = Matrix.CreateTranslation(new Vector3(viewport.Width * 0.5f, viewport.Height * 0.5f, 0f));
+                    transform *= viewportTranslation;
+                }
+            return transform;
         }
     }
 }

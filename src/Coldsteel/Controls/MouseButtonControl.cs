@@ -16,10 +16,31 @@ namespace Coldsteel.Controls
     {
         public override bool IsDown()
         {
-            return _mouseButton == MouseButton.Left ? InputDevices.MouseState.LeftButton == ButtonState.Pressed :
-                _mouseButton == MouseButton.Right ? InputDevices.MouseState.RightButton == ButtonState.Pressed :
-                _mouseButton == MouseButton.Middle ? InputDevices.MouseState.MiddleButton == ButtonState.Pressed :
+            return _mouseButton == MouseButton.Left ? InputDevices.CurrentMouseState.LeftButton == ButtonState.Pressed :
+                _mouseButton == MouseButton.Right ? InputDevices.CurrentMouseState.RightButton == ButtonState.Pressed :
+                _mouseButton == MouseButton.Middle ? InputDevices.CurrentMouseState.MiddleButton == ButtonState.Pressed :
                 false;
+        }
+
+        private bool WasDown()
+        {
+            return _mouseButton == MouseButton.Left ? InputDevices.PreviousMouseState.LeftButton == ButtonState.Pressed :
+                _mouseButton == MouseButton.Right ? InputDevices.PreviousMouseState.RightButton == ButtonState.Pressed :
+                _mouseButton == MouseButton.Middle ? InputDevices.PreviousMouseState.MiddleButton == ButtonState.Pressed :
+                false;
+        }
+
+        public override bool IsUp()
+        {
+            return _mouseButton == MouseButton.Left ? InputDevices.CurrentMouseState.LeftButton == ButtonState.Released :
+                _mouseButton == MouseButton.Right ? InputDevices.CurrentMouseState.RightButton == ButtonState.Released :
+                _mouseButton == MouseButton.Middle ? InputDevices.CurrentMouseState.MiddleButton == ButtonState.Released :
+                false;
+        }
+
+        public override bool WasPressed()
+        {
+            return IsUp() && WasDown();
         }
 
         private MouseButton _mouseButton;
