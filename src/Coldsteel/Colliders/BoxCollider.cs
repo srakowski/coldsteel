@@ -11,9 +11,8 @@ namespace Coldsteel.Colliders
         {
             get
             {
-                var t = this.GameObject.GetComponent<Transform>();
-                var pos = t.Position;
-                pos += _offset;
+                var t = this.GameObject.Transform;
+                var pos = t.Position + _offset;
                 return new Rectangle((int)(pos.X - (_width / 2)), (int)(pos.Y - (_height / 2)),
                     (int)_width, (int)_height);
             }

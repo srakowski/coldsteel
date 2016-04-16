@@ -48,7 +48,7 @@ namespace Coldsteel.Renderers
                 this._spriteCenter,
                 this.Transform.Scale,
                 SpriteEffects.None,
-                (this.Transform.Position.Y + 2000f) / 4000f); // TODO: fix this hack
+                1f);
         }
     }
 }
