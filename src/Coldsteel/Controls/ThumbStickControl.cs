@@ -7,12 +7,9 @@ namespace Coldsteel.Controls
 {
     public class ThumbStickControl : DirectionalControl
     {
-        public override Vector2 Direction
+        public override Vector2 Direction()
         {
-            get
-            {
-                return InputDevices.CurrentGamePadState.ThumbSticks.Left;
-            }
+            return InputDevices.CurrentGamePadState.ThumbSticks.Left;
         }
     }
 }

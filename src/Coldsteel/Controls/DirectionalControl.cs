@@ -7,6 +7,6 @@ namespace Coldsteel.Controls
 {
     public abstract class DirectionalControl : Control
     {
-        public abstract Vector2 Direction { get; }
+        public abstract Vector2 Direction();
     }
 }
