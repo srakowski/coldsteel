@@ -119,9 +119,9 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Unloads
+        /// Exits and unloads
         /// </summary>
-        internal void Unload()
+        internal void Exit()
         {
             this._state = GameStageState.TransitionOff;
             this.OutTransition = this.OutTransition ?? ImmediateTransition.Out();
