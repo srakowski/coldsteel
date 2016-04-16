@@ -29,6 +29,11 @@ namespace Coldsteel
         public Input Input { get { return this.GameObject.Input; } }
 
         /// <summary>
+        /// Gets the GameStageManager
+        /// </summary>
+        public GameStageManager GameStageManager { get { return GameObject.GameStage.GameStageManager; } }
+
+        /// <summary>
         /// Adds a GameObject to the Stage without added it to the GameObject of this Behavior
         /// </summary>
         /// <param name="gameObject"></param>
