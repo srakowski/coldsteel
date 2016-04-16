@@ -96,7 +96,7 @@ namespace Coldsteel
             child.SetParent(null);
             if (this.IsAncestorOf(child))
                 _children.Remove(child);
-        }        
+        }
 
         private List<GameObjectComponent> _components = new List<GameObjectComponent>();
 
@@ -138,6 +138,14 @@ namespace Coldsteel
                 return;
 
             throw new InvalidOperationException(String.Format("GameObject my only have 1 {0} component", typeof(T).Name));
+        }
+
+        /// <summary>
+        /// Gets the Transform for this game object.
+        /// </summary>
+        public Transform Transform
+        {
+            get { return GetComponent<Transform>(); }
         }
 
         /// <summary>

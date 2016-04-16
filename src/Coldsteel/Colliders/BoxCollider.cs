@@ -13,6 +13,7 @@ namespace Coldsteel.Colliders
             {
                 var t = this.GameObject.GetComponent<Transform>();
                 var pos = t.Position;
+                pos += _offset;
                 return new Rectangle((int)(pos.X - (_width / 2)), (int)(pos.Y - (_height / 2)),
                     (int)_width, (int)_height);
             }
@@ -22,10 +23,18 @@ namespace Coldsteel.Colliders
 
         private int _height = 0;
 
+        private Vector2 _offset = Vector2.Zero;
+
         public BoxCollider(int width, int height)
+            : this(width, height, Vector2.Zero)
+        {
+        }
+
+        public BoxCollider(int width, int height, Vector2 offset)
         {
             this._width = width;
             this._height = height;
+            this._offset = offset;
         }
     }
 }

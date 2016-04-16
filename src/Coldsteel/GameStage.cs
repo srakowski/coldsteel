@@ -270,12 +270,12 @@ namespace Coldsteel
         /// </summary>
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
-        {
-            UpdatePhysics(gameTime);
+        {            
             switch (_state)
             {
                 case GameStageState.Active:
                     DoToAllGameObjects((go) => go.Update(gameTime));
+                    UpdatePhysics(gameTime);
                     break;
 
                 case GameStageState.TransitionOn:
