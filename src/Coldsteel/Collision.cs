@@ -8,6 +8,8 @@ namespace Coldsteel
     {
         public GameObject GameObject { get; set; }
 
+        public bool Handled { get; set; } = false;
+
         public Collision(GameObject gameObject)
         {
             GameObject = gameObject;

@@ -14,13 +14,15 @@ namespace Coldsteel
         /// <summary>
         /// Gets the GameStage currently loaded (i.e. what the user is seeing).
         /// </summary>
-        public GameStage CurrentGameStage { get; private set; }
+        public GameStage CurrentGameStage { get; private set; }       
 
         private IGameResourceFactory _resourceFactory;
 
         private Input _input;
 
         private GameStageCollection _stages;
+
+        internal bool FirstUpdate { get; set; } = false;
 
         /// <summary>
         /// Construct a new GameStageManager
@@ -48,6 +50,9 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
         {
+            if (FirstUpdate)
+                FirstUpdate = false;
+
             _input.Update(gameTime);
             CurrentGameStage.Input = _input;
             CurrentGameStage.Update(gameTime);
@@ -66,9 +71,9 @@ namespace Coldsteel
         /// Swaps the CurrentGameStage for the one provided.
         /// </summary>
         /// <param name="name"></param>
-        public void LoadStage(string name)
+        public void LoadStage(string name, object param = null)
         {
-            this.LoadStage(_resourceFactory, _stages[name]);
+            this.LoadStage(_resourceFactory, _stages[name], param);
         }
 
         /// <summary>
@@ -76,13 +81,14 @@ namespace Coldsteel
         /// </summary>
         /// <param name="resourceFactory"></param>
         /// <param name="stageType"></param>
-        private void LoadStage(IGameResourceFactory resourceFactory, Type stageType)
+        private void LoadStage(IGameResourceFactory resourceFactory, Type stageType, object param = null)
         {
             this.CurrentGameStage?.Exit();
             this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
             this.CurrentGameStage.GameStageManager = this;
             this.CurrentGameStage.GameResourceFactory = resourceFactory;
-            this.CurrentGameStage.Load();            
+            this.CurrentGameStage.Load(param);
+            FirstUpdate = true;
         }
     }
 }

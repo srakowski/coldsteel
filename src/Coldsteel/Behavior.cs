@@ -37,9 +37,21 @@ namespace Coldsteel
         /// Adds a GameObject to the Stage without added it to the GameObject of this Behavior
         /// </summary>
         /// <param name="gameObject"></param>
-        public void AddGameObject(GameObject gameObject)
+        public GameObject AddGameObject(GameObject gameObject = null)
         {
-            this.GameObject.GameStage.AddGameObject(gameObject);
+            return this.GameObject.GameStage.AddGameObject(gameObject);
+        }
+        
+        /// <summary>
+        /// Auto add a game object with given tag.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public GameObject AddGameObject(string tag)
+        {
+            var go = AddGameObject();
+            go.Tag = tag;
+            return go;
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace Coldsteel.Algorithms
 {
     internal class NaiveCollisionDetector : ICollisionDetector
-    {
+    {     
         public void DetectCollisions(IEnumerable<Collider> colliders, Action<Collider, Collider> onCollision)
         {
             var dynamicColliders = colliders.Where(c => c.IsDynamic);

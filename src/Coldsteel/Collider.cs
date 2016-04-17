@@ -11,11 +11,13 @@ namespace Coldsteel
 
         public bool IsDynamic { get; set; } = false;
 
-        internal abstract Rectangle Bounds { get; }
+        internal abstract Rectangle Bounds { get; }       
 
-        internal void NotifyCollision(Collider collider)
+        internal bool NotifyCollision(Collider collider)
         {
-            this.GameObject?.NotifyCollision(new Collision(collider.GameObject));
+            var collision = new Collision(collider.GameObject);
+            this.GameObject?.NotifyCollision(collision);
+            return collision.Handled;
         }
 
         public Collider SetIsDynamic(bool isDynamic)

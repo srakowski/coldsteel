@@ -15,5 +15,10 @@ namespace Coldsteel.Tests.Doubles
                 throw new NotImplementedException();
             }
         }
+
+        public void Reset()
+        {
+
+        }
     }
 }

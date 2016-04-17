@@ -22,6 +22,8 @@ namespace Coldsteel
     /// </summary>
     public abstract class GameStage
     {
+        public static Color DefaultBackgroundColor { get; set; } = Color.CornflowerBlue;
+
         private List<GameObject> _gameObjects = new List<GameObject>();
 
         private Dictionary<string, object> _content = new Dictionary<string, object>();
@@ -44,12 +46,12 @@ namespace Coldsteel
         /// <summary>
         /// Gets the GameObjects contained in this stage.
         /// </summary>
-        public IEnumerable<GameObject> GameObjects { get { return _gameObjects; } }        
-               
+        public IEnumerable<GameObject> GameObjects { get { return _gameObjects; } }
+
         /// <summary>
         /// Gets or sets the background color of the Stage.
         /// </summary>
-        public Color BackgroundColor { get; set; } = Color.CornflowerBlue;
+        public Color BackgroundColor { get; set; } = DefaultBackgroundColor;
 
         /// <summary>
         /// Gets or sets the ResourceFactory used for ContentManagement, Rendering, and other services.
@@ -93,7 +95,7 @@ namespace Coldsteel
                 return _defaultLayer;
             }
         }
-
+        
         /// <summary>
         /// Gets or sets the object that will perform collision detections.
         /// </summary>
@@ -103,11 +105,18 @@ namespace Coldsteel
 
         protected Transition OutTransition { get; set; }
 
+        protected object Param { get; private set; }
+
+        public GameStage()
+        {
+        }
+
         /// <summary>
         /// Performs initial load.
         /// </summary>
-        internal void Load()
+        internal void Load(object param)
         {
+            this.Param = param;
             this.LoadContent();
             this.Initialize();
             this._state = GameStageState.TransitionOn;
@@ -246,15 +255,17 @@ namespace Coldsteel
             return result.First().Value;
         }
 
+        private List<GameObject> _activeGameObjects = new List<GameObject>();
+
+        private List<Collider> _colliders = new List<Collider>();
+
         /// <summary>
         /// Do physics updates and collision detection.
         /// </summary>
         /// <param name="gameTime"></param>
         private void UpdatePhysics(IGameTime gameTime)
         {
-            var colliders = new List<Collider>();
-            DoToAllGameObjects((go) => colliders.AddRange(go.GetComponents<Collider>().Where((c) => c.Enabled)));
-            CollisionDetector.DetectCollisions(colliders, OnCollision);
+            CollisionDetector.DetectCollisions(_colliders, OnCollision);            
         }
 
         /// <summary>
@@ -264,8 +275,8 @@ namespace Coldsteel
         /// <param name="collider2"></param>
         private void OnCollision(Collider collider1, Collider collider2)
         {
-            collider1.NotifyCollision(collider2);
-            collider2.NotifyCollision(collider1);
+            if (!collider1.NotifyCollision(collider2))
+                collider2.NotifyCollision(collider1);
         }
 
         /// <summary>
@@ -277,7 +288,8 @@ namespace Coldsteel
             switch (_state)
             {
                 case GameStageState.Active:
-                    DoToAllGameObjects((go) => go.Update(gameTime));
+                    PreUpdate();
+                    DoToAllGameObjects(go => go.Update(gameTime));                    
                     UpdatePhysics(gameTime);
                     break;
 
@@ -292,15 +304,44 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Updates the objects that should be rendered this frame.
+        /// </summary>
+        private void PreUpdate()
+        {
+            CollectCameras();
+            foreach (var layer in _layers)
+            {
+                layer.Value.TransformMatrix = GetTransformForLayer(layer.Value);
+                var tl = ScreenPosToLayerPos(Vector2.Zero, layer.Value);
+                layer.Value.Bounds = new Rectangle((int)tl.X - 100, (int)tl.Y - 100, _graphicsService.DefaultViewport.Width + 200, _graphicsService.DefaultViewport.Height + 200);
+            }
+            var defaultBounds = new Rectangle(-100, -100, _graphicsService.DefaultViewport.Width + 200, _graphicsService.DefaultViewport.Height + 200);
+
+            _colliders.Clear();     
+            _activeGameObjects.Clear();
+            DoToAllGameObjects((go) =>
+            {
+                var bounds = go.GetComponent<Renderer>()?.Layer.Bounds ?? defaultBounds;
+                if (bounds.Contains(go.Transform.Position))
+                {
+                    _activeGameObjects.Add(go);
+                    _colliders.AddRange(go.GetComponents<Collider>().Where(c => c.Enabled));
+                }
+            });
+        }
+
+        /// <summary>
         /// Render GameObjects.
         /// </summary>
         /// <param name="gameTime"></param>
         internal void Render(IGameTime gameTime)
         {            
-            BeginLayerRender();
-            DoToAllGameObjects((go) => go.Render(gameTime));
+            BeginLayerRender();            
+            _activeGameObjects.ForEach(go => go.Render(gameTime));
             EndLayerRender();
         }
+
+        private List<Camera> _cameras = new List<Camera>();
 
         /// <summary>
         /// Begins the rendering process on all layers.
@@ -310,15 +351,9 @@ namespace Coldsteel
             if (_graphicsService == null)
                 _graphicsService = GameResourceFactory?.CreateGraphicsService();
 
-            _graphicsService.Clear(BackgroundColor);
-
-            List<Camera> cameras = CollectCameras();
-
+            _graphicsService.Clear(BackgroundColor);           
             foreach (var layer in _layers.Values)
-            {
-                Matrix transform = GetTransformForLayer(cameras, layer);
-                layer.Begin(transform);
-            }
+                layer.Begin();
         }
 
         /// <summary>
@@ -359,24 +394,22 @@ namespace Coldsteel
         /// <returns></returns>
         public Vector2 ScreenPosToLayerPos(Vector2 screenPos, Layer layer)
         {
-            var transform = GetTransformForLayer(CollectCameras(), layer);
-            return Vector2.Transform(screenPos, Matrix.Invert(transform));
+            return Vector2.Transform(screenPos, Matrix.Invert(layer.TransformMatrix));
         }
 
         /// <summary>
         /// Gets all cameras.
         /// </summary>
         /// <returns></returns>
-        private List<Camera> CollectCameras()
+        private void CollectCameras()
         {
-            List<Camera> cameras = new List<Camera>();
+            _cameras.Clear();
             DoToAllGameObjects((go) =>
             {
                 foreach (var camera in go.GetComponents<Camera>())
                     if (camera.IsActive)
-                        cameras.Add(camera);
+                        _cameras.Add(camera);
             });
-            return cameras;
         }
 
         /// <summary>
@@ -385,10 +418,10 @@ namespace Coldsteel
         /// <param name="cameras"></param>
         /// <param name="layer"></param>
         /// <returns></returns>
-        private Matrix GetTransformForLayer(List<Camera> cameras, Layer layer)
+        private Matrix GetTransformForLayer(Layer layer)
         {
             var transform = Matrix.Identity;
-            foreach (var camera in cameras)
+            foreach (var camera in _cameras)
                 if (!camera.SkipsLayer(layer))
                 {
                     var viewport = _graphicsService.DefaultViewport;

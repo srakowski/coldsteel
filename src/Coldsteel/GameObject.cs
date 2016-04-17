@@ -279,15 +279,18 @@ namespace Coldsteel
             var transform = GetComponent<Transform>();
             transform.Rotation = rotation;
             return this;
-        }       
+        }
+
+        private List<GameObjectComponent> _componentsToUpdate = new List<GameObjectComponent>();
 
         /// <summary>
         /// Invoked when this GameObject should be updated.
         /// </summary>
         public void Update(IGameTime gameTime)
         {
-            var componentsToUpdate = _components.ToList();
-            componentsToUpdate.ForEach((c) => {
+            _componentsToUpdate.Clear();
+            _componentsToUpdate.AddRange(_components);
+            _componentsToUpdate.ForEach((c) => {
                 c.Update(gameTime);
                 (c as Behavior)?.UpdateCoroutines(gameTime);
             });

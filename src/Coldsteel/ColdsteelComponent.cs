@@ -48,6 +48,9 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            if (_gameStageManager.FirstUpdate)
+                Game.ResetElapsedTime();
+
             _gameStageManager.Update(new GameTimeWrapper(gameTime));
         }
 

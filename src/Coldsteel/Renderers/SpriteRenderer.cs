@@ -30,6 +30,8 @@ namespace Coldsteel.Renderers
             set { Color = new Color(this.Color, value); }
         }
 
+        public int LayerDepth { get; set; } = 100;
+
         public SpriteRenderer(Layer layer, Texture2D texture)
             : base(layer)
         {
@@ -48,7 +50,7 @@ namespace Coldsteel.Renderers
                 this._spriteCenter,
                 this.Transform.Scale,
                 SpriteEffects.None,
-                1f);
+                LayerDepth / 100f);
         }
     }
 }
