@@ -83,12 +83,25 @@ namespace Coldsteel
         /// <param name="stageType"></param>
         private void LoadStage(IGameResourceFactory resourceFactory, Type stageType, object param = null)
         {
-            this.CurrentGameStage?.Exit();
-            this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
-            this.CurrentGameStage.GameStageManager = this;
-            this.CurrentGameStage.GameResourceFactory = resourceFactory;
-            this.CurrentGameStage.Load(param);
-            FirstUpdate = true;
+            if (this.CurrentGameStage != null)
+            {
+                this.CurrentGameStage.Exit(() =>
+                {
+                    this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
+                    this.CurrentGameStage.GameStageManager = this;
+                    this.CurrentGameStage.GameResourceFactory = resourceFactory;
+                    this.CurrentGameStage.Load(param);
+                    FirstUpdate = true;
+                });
+            }
+            else
+            {
+                this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
+                this.CurrentGameStage.GameStageManager = this;
+                this.CurrentGameStage.GameResourceFactory = resourceFactory;
+                this.CurrentGameStage.Load(param);
+                FirstUpdate = true;
+            }
         }
     }
 }

@@ -32,6 +32,10 @@ namespace Coldsteel.Renderers
 
         public int LayerDepth { get; set; } = 100;
 
+        public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
+
+        public Rectangle? DestinationRectangle { get; set; } = null;
+
         public SpriteRenderer(Layer layer, Texture2D texture)
             : base(layer)
         {
@@ -44,12 +48,12 @@ namespace Coldsteel.Renderers
             Layer.Render(
                 this.Texture,
                 this.Transform.Position,
-                null,
+                this.DestinationRectangle,
                 this.Color,
                 this.Transform.Rotation,
                 this._spriteCenter,
                 this.Transform.Scale,
-                SpriteEffects.None,
+                SpriteEffects,
                 LayerDepth / 100f);
         }
     }

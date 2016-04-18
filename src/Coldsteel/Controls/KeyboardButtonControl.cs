@@ -14,6 +14,21 @@ namespace Coldsteel.Controls
             return InputDevices.CurrentKeyboardState.IsKeyDown(this.KeyboardKey);
         }
 
+        private bool WasDown()
+        {
+            return InputDevices.PreviousKeyboardState.IsKeyDown(this.KeyboardKey);
+        }
+
+        public override bool IsUp()
+        {
+            return InputDevices.CurrentKeyboardState.IsKeyUp(this.KeyboardKey);
+        }
+
+        public override bool WasPressed()
+        {
+            return WasDown() && IsUp();            
+        }
+
         public KeyboardButtonControl(Keys keyboardKey)
         {
             this.KeyboardKey = keyboardKey;

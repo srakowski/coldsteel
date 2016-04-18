@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Coldsteel.Algorithms;
 using Microsoft.Xna.Framework;
 using Coldsteel.Transitions;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Coldsteel
 {
@@ -22,6 +23,8 @@ namespace Coldsteel
     /// </summary>
     public abstract class GameStage
     {
+        public bool SkipFade { get; set; } = false;
+
         public static Color DefaultBackgroundColor { get; set; } = Color.CornflowerBlue;
 
         private List<GameObject> _gameObjects = new List<GameObject>();
@@ -62,6 +65,23 @@ namespace Coldsteel
         /// Gets or sets the Input object.
         /// </summary>
         public Input Input { get; internal set; }
+
+        private SpriteBatch _sb;
+
+        private SpriteBatch SpriteBatch
+        {
+            get
+            {
+                if (_sb == null)
+                    _sb = GameResourceFactory.CreateSpriteBatch();
+
+                return _sb;
+            }
+        }
+
+        private int alpha = 255;
+
+        private Texture2D fader = null;
 
         /// <summary>
         /// Gets the ContentManager used to load and store content.
@@ -120,25 +140,32 @@ namespace Coldsteel
             this.LoadContent();
             this.Initialize();
             this._state = GameStageState.TransitionOn;
-            this.InTransition = this.InTransition ?? ImmediateTransition.In();
-            this.InTransition.Start(() =>
-            {
-                this._state = GameStageState.Active;
-            });
+            this.fader = new Texture2D(SpriteBatch.GraphicsDevice, 1, 1);
+            Color[] texData = new Color[1];
+            texData[0] = Color.Black;
+            this.fader.SetData<Color>(texData);
+            //this.InTransition = this.InTransition ?? ImmediateTransition.In();
+            //this.InTransition.Start(() =>
+            //{
+            //    this._state = GameStageState.Active;
+            //});
         }
+
+        private Action _then;
 
         /// <summary>
         /// Exits and unloads
         /// </summary>
-        internal void Exit()
+        internal void Exit(Action then)
         {
+            _then = then;
             this._state = GameStageState.TransitionOff;
-            this.OutTransition = this.OutTransition ?? ImmediateTransition.Out();
-            this.OutTransition.Start(() => 
-            {
-                this._state = GameStageState.Hidden;
-                this.UnloadContent();
-            });
+            //this.OutTransition = this.OutTransition ?? ImmediateTransition.Out();
+            //this.OutTransition.Start(() => 
+            //{
+            //    this._state = GameStageState.Hidden;
+            //    this.UnloadContent();
+            //});
         }
 
         /// <summary>
@@ -279,26 +306,55 @@ namespace Coldsteel
                 collider2.NotifyCollision(collider1);
         }
 
+        bool _first = true;
+
         /// <summary>
         /// Update GmeObjects.
         /// </summary>
         /// <param name="gameTime"></param>
         internal void Update(IGameTime gameTime)
-        {            
+        {
+            if (_first)
+            {
+                _first = false;
+                return;
+            }
+
+            PreUpdate();
             switch (_state)
             {
                 case GameStageState.Active:
-                    PreUpdate();
+                    
                     DoToAllGameObjects(go => go.Update(gameTime));                    
                     UpdatePhysics(gameTime);
                     break;
 
                 case GameStageState.TransitionOn:
-                    this.InTransition.Update(gameTime);
+                    if (alpha > 0 && !SkipFade)
+                    {
+                        alpha -= 2;
+                        alpha = MathHelper.Clamp(alpha, 0, 255);
+                    }
+                    else
+                    {
+                        _state = GameStageState.Active;
+                    }
+
+                    //this.InTransition.Update(gameTime);
                     break;
 
                 case GameStageState.TransitionOff:
-                    this.OutTransition.Update(gameTime);
+                    if (alpha < 255 && !SkipFade)
+                    {
+                        alpha += 2;
+                        alpha = MathHelper.Clamp(alpha, 0, 255);
+                    }
+                    else
+                    {
+                        _then.Invoke();
+                        _state = GameStageState.Hidden;
+                    }
+                    //this.OutTransition.Update(gameTime);
                     break;
             }            
         }
@@ -336,9 +392,16 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Render(IGameTime gameTime)
         {            
-            BeginLayerRender();            
+            BeginLayerRender();
             _activeGameObjects.ForEach(go => go.Render(gameTime));
             EndLayerRender();
+
+            if (!SkipFade)
+            {
+                SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
+                SpriteBatch.Draw(this.fader, new Rectangle(0, 0, _graphicsService.DefaultViewport.Width, _graphicsService.DefaultViewport.Height), new Color(Color.Black, alpha));
+                SpriteBatch.End();
+            }
         }
 
         private List<Camera> _cameras = new List<Camera>();
