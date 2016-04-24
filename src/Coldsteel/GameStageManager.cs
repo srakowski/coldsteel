@@ -14,13 +14,16 @@ namespace Coldsteel
         /// <summary>
         /// Gets the GameStage currently loaded (i.e. what the user is seeing).
         /// </summary>
-        public GameStage CurrentGameStage { get; private set; }       
+        public GameStage ActiveGameStage { get; private set; }
 
         private IGameResourceFactory _resourceFactory;
 
         private Input _input;
 
-        private GameStageCollection _stages;
+        /// <summary>
+        /// Gets the Registry where GameStages are configured.
+        /// </summary>
+        public GameStageRegistry GameStageRegistry { get; private set; }
 
         internal bool FirstUpdate { get; set; } = false;
 
@@ -29,10 +32,10 @@ namespace Coldsteel
         /// </summary>
         /// <param name="input"></param>
         /// <param name="stages"></param>
-        public GameStageManager(Input input, GameStageCollection stages)
+        public GameStageManager(Input input, GameStageRegistry stages)
         {
             _input = input;
-            _stages = stages;
+            GameStageRegistry = stages;
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace Coldsteel
         public void Initialize(IGameResourceFactory resourceFactory)
         {
             _resourceFactory = resourceFactory;
-            LoadStage(resourceFactory, _stages.Default);
+            LoadStage(resourceFactory, GameStageRegistry.Default);
         }
 
         /// <summary>
@@ -54,8 +57,8 @@ namespace Coldsteel
                 FirstUpdate = false;
 
             _input.Update(gameTime);
-            CurrentGameStage.Input = _input;
-            CurrentGameStage.Update(gameTime);
+            ActiveGameStage.Input = _input;
+            ActiveGameStage.Update(gameTime);
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace Coldsteel
         /// <param name="gameTime"></param>
         internal void Render(IGameTime gameTime)
         {
-            CurrentGameStage?.Render(gameTime);
+            ActiveGameStage?.Render(gameTime);
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace Coldsteel
         /// <param name="name"></param>
         public void LoadStage(string name, object param = null)
         {
-            this.LoadStage(_resourceFactory, _stages[name], param);
+            this.LoadStage(_resourceFactory, GameStageRegistry[name], param);
         }
 
         /// <summary>
@@ -83,23 +86,23 @@ namespace Coldsteel
         /// <param name="stageType"></param>
         private void LoadStage(IGameResourceFactory resourceFactory, Type stageType, object param = null)
         {
-            if (this.CurrentGameStage != null)
+            if (this.ActiveGameStage != null)
             {
-                this.CurrentGameStage.Exit(() =>
+                this.ActiveGameStage.Exit(() =>
                 {
-                    this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
-                    this.CurrentGameStage.GameStageManager = this;
-                    this.CurrentGameStage.GameResourceFactory = resourceFactory;
-                    this.CurrentGameStage.Load(param);
+                    this.ActiveGameStage = Activator.CreateInstance(stageType) as GameStage;
+                    this.ActiveGameStage.GameStageManager = this;
+                    this.ActiveGameStage.GameResourceFactory = resourceFactory;
+                    this.ActiveGameStage.Load(param);
                     FirstUpdate = true;
                 });
             }
             else
             {
-                this.CurrentGameStage = Activator.CreateInstance(stageType) as GameStage;
-                this.CurrentGameStage.GameStageManager = this;
-                this.CurrentGameStage.GameResourceFactory = resourceFactory;
-                this.CurrentGameStage.Load(param);
+                this.ActiveGameStage = Activator.CreateInstance(stageType) as GameStage;
+                this.ActiveGameStage.GameStageManager = this;
+                this.ActiveGameStage.GameResourceFactory = resourceFactory;
+                this.ActiveGameStage.Load(param);
                 FirstUpdate = true;
             }
         }

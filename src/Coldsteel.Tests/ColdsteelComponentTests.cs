@@ -42,7 +42,7 @@ namespace Coldsteel.Tests
             var coldsteelComponent = new ColdsteelComponent(new Game(), initializer);
             coldsteelComponent.Initialize();
             var mgr = coldsteelComponent.GameStageManager;
-            Assert.IsNotNull(mgr.CurrentGameStage);
+            Assert.IsNotNull(mgr.ActiveGameStage);
         }
     }
 }

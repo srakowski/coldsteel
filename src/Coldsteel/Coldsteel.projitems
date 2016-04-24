@@ -38,7 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameGraphicsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameResourceFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStageCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameStageRegistry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStageManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameTimeWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IColdsteelInitializer.cs" />

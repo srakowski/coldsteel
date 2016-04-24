@@ -20,11 +20,11 @@ namespace Coldsteel.Tests.Doubles
 
         public bool RegisterStagesWasInvoked { get; set; } = false;
 
-        public GameStageCollection ProvidedGameStageCollection { get; set; } = null;
+        public GameStageRegistry ProvidedGameStageCollection { get; set; } = null;
 
         public Type TypeOfStageRegistered { get; set; }
 
-        public void RegisterStages(GameStageCollection stages)
+        public void RegisterStages(GameStageRegistry stages)
         {
             stages.RegisterStage<DummyGameStage>();
             TypeOfStageRegistered = typeof(DummyGameStage);

@@ -40,10 +40,10 @@ namespace Derpfender
             input.AddControl("AltFire", new GamePadButtonControl(GamePadButton.A));
         }
 
-        public void RegisterStages(GameStageCollection stages)
+        public void RegisterStages(GameStageRegistry registry)
         {
-            stages.RegisterStage<MainMenuStage>();
-            stages.RegisterStage<GameplayStage>();            
+            registry.RegisterStage<MainMenuStage>();
+            registry.RegisterStage<GameplayStage>();            
         }
     }
 }

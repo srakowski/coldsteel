@@ -10,7 +10,7 @@ namespace Coldsteel.Tests
         [TestMethod]
         public void CanRegisterStages()
         {
-            var stageCollection = new GameStageCollection();
+            var stageCollection = new GameStageRegistry();
             stageCollection.RegisterStage<MockGameStage>("stage1");
             Assert.AreEqual(typeof(MockGameStage), stageCollection["stage1"]);
             stageCollection.RegisterStage<DummyGameStage>("stage2");
@@ -20,7 +20,7 @@ namespace Coldsteel.Tests
         [TestMethod]
         public void UsesTypeNameAsKeyIfNoKeyIsProvided()
         {
-            var stageCollection = new GameStageCollection();
+            var stageCollection = new GameStageRegistry();
             stageCollection.RegisterStage<MockGameStage>();
             Assert.AreEqual(typeof(MockGameStage), stageCollection["MockGameStage"]);
         }
@@ -28,7 +28,7 @@ namespace Coldsteel.Tests
         [TestMethod]
         public void FirstAddedIsSetAsDefault()
         {
-            var stageCollection = new GameStageCollection();
+            var stageCollection = new GameStageRegistry();
             stageCollection.RegisterStage<MockGameStage>();
             stageCollection.RegisterStage<DummyGameStage>();
             Assert.AreEqual(stageCollection.Default, typeof(MockGameStage));

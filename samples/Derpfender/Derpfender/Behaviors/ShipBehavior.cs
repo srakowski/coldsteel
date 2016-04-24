@@ -50,7 +50,7 @@ namespace Derpfender.Behaviors
                 .SetPosition(this.Transform.Position + new Vector2(24, 0))
                 .AddComponent(new SpriteRenderer(DefaultLayer, GetContent<Texture2D>("flash")) { Color = Color.WhiteSmoke})
                 .AddComponent(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
-                .AddComponent(new BoxCollider(10, 10))
+                .AddComponent(new BoxCollider(10, 10).SetIsDynamic(true))
                 .AddComponent(new ParticleSystem(GetLayer("particles"), GetContent<Texture2D>("smoke")) { MaxScaleVelocity=0.01f }) 
                 .AddComponent(new ParticleSystem(GetLayer("particles"), GetContent<Texture2D>("smoke")) { Color = Color.Red, TTL = 30f })
                 .AddComponent(new ParticleSystem(GetLayer("particles"), GetContent<Texture2D>("smoke")) { Color = Color.Yellow, TTL = 40f })

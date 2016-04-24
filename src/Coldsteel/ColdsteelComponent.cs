@@ -35,7 +35,7 @@ namespace Coldsteel
         {
             var input = new Input();            
             _initializer.InitializeControls(input);
-            var stages = new GameStageCollection();
+            var stages = new GameStageRegistry();
             _initializer.RegisterStages(stages);
             base.Initialize();
             _gameStageManager = new GameStageManager(input, stages);

@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Coldsteel
 {
-    public class GameStageCollection
+    public class GameStageRegistry
     {
         public Type Default { get; private set; }
+
+        public IEnumerable<string> Keys { get { return _stages.Keys; } }
 
         private Dictionary<string, Type> _stages = new Dictionary<string, Type>();        
 
