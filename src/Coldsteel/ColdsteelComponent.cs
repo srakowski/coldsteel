@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -37,6 +38,8 @@ namespace Coldsteel
             _initializer.InitializeControls(input);
             var stages = new GameStageRegistry();
             _initializer.RegisterStages(stages);
+            if (!stages.Keys.Any())
+                throw new InvalidOperationException("At least 1 GameStage must be registered when the RegisterStages method is invoked on the IColdsteelInitializer");
             base.Initialize();
             _gameStageManager = new GameStageManager(input, stages);
             _gameStageManager.Initialize(new MonoGameResourceFactory(this.Game));
