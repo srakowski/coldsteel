@@ -18,7 +18,7 @@ namespace Coldsteel
             PreviousKeyboardState = CurrentKeyboardState;
             CurrentKeyboardState = Keyboard.GetState();
             PreviousGamePadState = CurrentGamePadState;
-            CurrentGamePadState = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One);
+            CurrentGamePadState = GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex.One, GamePadDeadZone.Circular);
             PreviousMouseState = CurrentMouseState;
             CurrentMouseState = Mouse.GetState();
         }

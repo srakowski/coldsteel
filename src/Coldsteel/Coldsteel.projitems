@@ -27,7 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\DirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GamePadButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\ThumbStickControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GamePadDirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
