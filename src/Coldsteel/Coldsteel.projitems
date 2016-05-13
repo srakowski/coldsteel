@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colliders\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardDirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseDirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MousePositionalControl.cs" />
