@@ -43,6 +43,11 @@ namespace Coldsteel.Controls
                 direction += new Vector2(1, 0);
             }
 
+            if (direction.Length() > 1)
+            {
+                direction.Normalize();
+            }
+
             return direction;
         }
     }
