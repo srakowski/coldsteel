@@ -23,7 +23,7 @@ namespace Coldsteel
     /// </summary>
     public abstract class GameStage
     {
-        public bool SkipFade { get; set; } = false;
+        public bool SkipFade { get; set; } = true;
 
         public static Color DefaultBackgroundColor { get; set; } = Color.CornflowerBlue;
 
