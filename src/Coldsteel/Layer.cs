@@ -48,7 +48,7 @@ namespace Coldsteel
         /// </summary>
         /// <param name="texture"></param>
         /// <param name="position"></param>
-        /// <param name="destinationRectangle"></param>
+        /// <param name="sourceRectangle"></param>
         /// <param name="color"></param>
         /// <param name="rotation"></param>
         /// <param name="origin"></param>
@@ -58,7 +58,7 @@ namespace Coldsteel
         public void Render(
             Texture2D texture, 
             Vector2 position,
-            Rectangle? destinationRectangle,
+            Rectangle? sourceRectangle,
             Color color,
             float rotation,            
             Vector2 origin,
@@ -68,7 +68,7 @@ namespace Coldsteel
         {
             _spriteBatch.Draw(texture, 
                 position, 
-                destinationRectangle, 
+                sourceRectangle, 
                 color, 
                 rotation, 
                 origin, 

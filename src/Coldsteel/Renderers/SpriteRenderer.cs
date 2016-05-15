@@ -34,7 +34,7 @@ namespace Coldsteel.Renderers
 
         public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
 
-        public Rectangle? DestinationRectangle { get; set; } = null;
+        public Rectangle? SourceRectangle { get; set; } = null;
 
         public SpriteRenderer(Layer layer, Texture2D texture)
             : base(layer)
@@ -48,7 +48,7 @@ namespace Coldsteel.Renderers
             Layer.Render(
                 this.Texture,
                 this.Transform.Position,
-                this.DestinationRectangle,
+                this.SourceRectangle,
                 this.Color,
                 this.Transform.Rotation,
                 this._spriteCenter,
