@@ -16,11 +16,11 @@ namespace Coldsteel.Renderers
             set
             {
                 _texture = value;
-                _spriteCenter = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
+                UpdateOrigin();
             }
         }
 
-        private Vector2 _spriteCenter;
+        private Vector2 _origin;
 
         public Color Color { get; set; } = Color.White;
 
@@ -34,7 +34,17 @@ namespace Coldsteel.Renderers
 
         public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
 
-        public Rectangle? SourceRectangle { get; set; } = null;
+        private Rectangle? _sourceRectangle = null;
+
+        public Rectangle? SourceRectangle
+        {
+            get { return _sourceRectangle; }
+            set
+            {
+                _sourceRectangle = value;
+                UpdateOrigin();
+            }
+        }
 
         public SpriteRenderer(Layer layer, Texture2D texture)
             : base(layer)
@@ -51,10 +61,18 @@ namespace Coldsteel.Renderers
                 this.SourceRectangle,
                 this.Color,
                 this.Transform.Rotation,
-                this._spriteCenter,
+                this._origin,
                 this.Transform.Scale,
                 SpriteEffects,
                 LayerDepth / 100f);
+        }
+
+        private void UpdateOrigin()
+        {
+            if (SourceRectangle.HasValue)
+                _origin = new Vector2(SourceRectangle.Value.Width * 0.5f, SourceRectangle.Value.Height * 0.5f);
+            else
+                _origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
         }
     }
 }
