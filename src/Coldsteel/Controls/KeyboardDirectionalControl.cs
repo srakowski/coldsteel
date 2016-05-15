@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Coldsteel.Controls
 {
     public class KeyboardDirectionalControl : DirectionalControl
     {
-        private Microsoft.Xna.Framework.Input.Keys _up, _left, _down, _right;
+        private Keys _up, _left, _down, _right;
 
         // Creates a directional control with the defined directions, defaults to "WASD".
         public KeyboardDirectionalControl(
-            Microsoft.Xna.Framework.Input.Keys up = Microsoft.Xna.Framework.Input.Keys.W,
-            Microsoft.Xna.Framework.Input.Keys left = Microsoft.Xna.Framework.Input.Keys.A, 
-            Microsoft.Xna.Framework.Input.Keys down = Microsoft.Xna.Framework.Input.Keys.S,
-            Microsoft.Xna.Framework.Input.Keys right = Microsoft.Xna.Framework.Input.Keys.D)
+            Keys up = Keys.W,
+            Keys left = Keys.A, 
+            Keys down = Keys.S,
+            Keys right = Keys.D)
         {
             _up = up;
             _left = left;
