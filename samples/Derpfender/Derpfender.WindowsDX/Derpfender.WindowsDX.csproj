@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Coldsteel.WindowsDX">
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.WindowsDX.dll</HintPath>
+      <HintPath>..\..\..\bin\WindowsDX\Coldsteel.WindowsDX.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
