@@ -393,7 +393,9 @@ namespace Coldsteel
         internal void Render(IGameTime gameTime)
         {            
             BeginLayerRender();
-            _activeGameObjects.ForEach(go => go.Render(gameTime));
+            DoToAllGameObjects(go => go.Render(gameTime));
+
+            //_activeGameObjects.ForEach(go => go.Render(gameTime));
             EndLayerRender();
 
             if (!SkipFade)
