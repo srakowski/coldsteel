@@ -1,5 +1,4 @@
-﻿using Coldsteel;
-using System;
+﻿using System;
 
 namespace Derpfender.DesktopGL
 {
@@ -14,7 +13,7 @@ namespace Derpfender.DesktopGL
         [STAThread]
         static void Main()
         {
-            using (var game = new Game())
+            using (var game = new DerpfenderGame())
                 game.Run();
         }
     }
