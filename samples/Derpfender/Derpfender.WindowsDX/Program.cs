@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coldsteel;
+using System;
 
 namespace Derpfender.WindowsDX
 {
@@ -14,7 +15,7 @@ namespace Derpfender.WindowsDX
         [STAThread]
         static void Main()
         {
-            using (var game = new DerpfenderGame())
+            using (var game = new Game())
                 game.Run();
         }
     }

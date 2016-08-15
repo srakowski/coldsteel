@@ -9,53 +9,7 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Algorithms\NaiveCollisionDetector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AudioSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ColdsteelComponent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Colliders\BoxCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collision.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardDirectionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\MouseDirectionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\MousePositionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\PositionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MonoGameContentManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Control.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\DirectionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\GamePadButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\GamePadDirectionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ICollisionDetector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IGraphicsService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)InputDevices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MonoGameGraphicsService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MonoGameResourceFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStageRegistry.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStageManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameTimeWrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IColdsteelInitializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IContentManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IGameResourceFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Particle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ParticleSystem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Renderers\SpriteRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Renderers\TextRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Transition.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Transitions\FadeTransition.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Transitions\ImmediateTransition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MonoGameImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
   </ItemGroup>
 </Project>
