@@ -9,7 +9,7 @@ namespace Coldsteel
     {
         private GraphicsDeviceManager _graphics;
 
-        private GameStateManager State { get; set; }
+        internal GameStateManager State { get; set; }
 
         public MonoGameImpl()
         {
@@ -17,6 +17,12 @@ namespace Coldsteel
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            State?.Initialize(this.GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)

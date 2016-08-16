@@ -18,8 +18,6 @@ namespace Derpfender.States
 
         public override void Create()
         {
-            Stage.BackgroundColor = Color.Black;
-
             var mainMenu = World.AddGameObject()
                 .Set.Position(200, 200)
                 .Add.TextRenderer("menu", "Derpfender");

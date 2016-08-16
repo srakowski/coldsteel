@@ -9,18 +9,25 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponentAdder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectConfigurator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameTimeWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\ButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameStateManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\InputDevices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LayerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
@@ -148,6 +155,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Factories\LinkFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)World.cs" />
   </ItemGroup>
   <ItemGroup>

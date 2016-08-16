@@ -15,5 +15,7 @@ namespace Coldsteel.Input
             _controls[key] = control;
             return control;
         }
+
+        public ButtonControl GetButtonControl(string key) => _controls[key] as ButtonControl;
     }
 }

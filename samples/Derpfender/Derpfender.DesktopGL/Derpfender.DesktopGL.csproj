@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\MenuFont.spritefont" />
+    <None Include="Content\menu.spritefont" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />

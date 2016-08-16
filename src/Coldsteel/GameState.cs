@@ -8,15 +8,17 @@ namespace Coldsteel
 {
     public abstract class GameState
     {
-        public ContentManager Load { get; private set; }
+        public ContentManager Load { get; internal set; }
 
-        public InputManager Input { get; private set;  }
+        public InputManager Input { get; internal set;  }
 
-        public GameStage Stage { get; private set; }
+        public GameStateManager State { get; internal set; }
 
-        public GameStateManager State { get; private set; }
+        public GameStage Stage { get; internal set; }
 
-        public World World { get; private set; }
+        public LayerManager Layers { get; internal set; }
+
+        public World World { get; internal set; }
 
         public virtual void Preload() { }
 
@@ -24,10 +26,12 @@ namespace Coldsteel
 
         internal void Update(GameTime gameTime)
         {
+            World.Update(gameTime);
         }
 
         internal void Render(GameTime gameTime)
         {
+            Stage.Render(gameTime, Layers);
         }
     }
 }

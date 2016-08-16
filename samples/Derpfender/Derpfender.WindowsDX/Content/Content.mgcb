@@ -97,12 +97,6 @@
 /processorParam:TextureFormat=Color
 /build:flash.png
 
-#begin MenuFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:MenuFont.spritefont
-
 #begin smoke.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -114,4 +108,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:smoke.png
+
+#begin menu.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:menu.spritefont
 

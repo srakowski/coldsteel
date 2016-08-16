@@ -11,16 +11,20 @@ namespace Coldsteel
 
         public InputManager Input { get; private set; }
 
+        public GameStage Stage { get; private set; }
+
         public GameStateManager State { get; private set; }
 
-        private ContentManager _contentManger;
+        private ContentManager Content { get; set; }
 
         public Game()
         {
             _gameImpl = new MonoGameImpl();
-            _contentManger = new ContentManager(_gameImpl);
+            Content = new ContentManager(_gameImpl.Content);
+            Stage = new GameStage();
             Input = new InputManager();
-            State = new GameStateManager(Input, _contentManger);
+            State = new GameStateManager(Input, Content, Stage);
+            _gameImpl.State = State;
         }
 
         public void Dispose()

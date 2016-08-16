@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
@@ -15,11 +16,13 @@ namespace Coldsteel
 
         public GameObject Position(float x, float y)
         {
+            _gameObject.Transform.LocalPosition = new Vector2(x, y);
             return _gameObject;
         }
 
         public GameObject RotationDegrees(int degrees)
         {
+            _gameObject.Transform.Rotation = MathHelper.ToRadians(degrees);
             return _gameObject;
         }
     }
