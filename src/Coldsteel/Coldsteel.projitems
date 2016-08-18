@@ -12,6 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponentAdder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectConfigurator.cs" />
@@ -30,6 +32,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)LayerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Collision\Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Collision\Distance.cs" />
@@ -154,6 +158,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Factories\JointFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Factories\LinkFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicalWorld.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />

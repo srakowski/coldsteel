@@ -4,11 +4,14 @@ using System.Text;
 using Coldsteel.Input;
 using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
+using Coldsteel.Physics;
 
 namespace Coldsteel
 {
     public class GameObject
     {
+        public string[] Tags { get; internal set; }
+
         public GameObjectConfigurator Set { get; private set; }
 
         public GameObjectComponentAdder Add { get; private set; }
@@ -52,6 +55,10 @@ namespace Coldsteel
 
         public IGameTime GameTime { get; private set; }
 
+        public Collider Collider { get; private set; }
+
+        internal Body Body { get; set; }
+
         internal GameObject(GameState gameState)
         {
             _gameState = gameState;
@@ -61,12 +68,20 @@ namespace Coldsteel
             AddGameObjectComponent(new Transform());
         }
 
-        public GameObject AddGameObject()
+        public GameObject AddGameObject(params string[] tags)
         {
-            var gameObject = World.AddGameObject();
+            var gameObject = World.AddGameObject(tags);
             gameObject.Parent = this;
             _children.Add(gameObject);
             return gameObject;
+        }
+
+        public void Kill()
+        {
+            Renderer = null;
+            World.RemoveGameObject(this);
+            foreach (var child in Children)
+                child.Kill();
         }
 
         internal void AddGameObjectComponent(GameObjectComponent component)
@@ -74,14 +89,34 @@ namespace Coldsteel
             component.GameObject = this;
             this.Transform = component as Transform ?? Transform;
             this.Renderer = component as Renderer ?? Renderer;
+            this.Collider = component as Collider ?? Collider;
             if (component is Behavior)
                 _behaviors.Add(component as Behavior);
         }
 
+        internal void HandlCollision(GameObject withGameObject)
+        {
+            var behaviorsToUpdate = _behaviors.ToArray();
+            foreach (var behavior in behaviorsToUpdate)
+                behavior.OnCollision(withGameObject);
+        }
+
         internal void Update(GameTime gameTime)
         {
+            Body?.SyncBodyToTransform();
             this.GameTime = new GameTimeWrapper(gameTime);
-            _behaviors.ForEach(b => b.Update());
+            var behaviorsToUpdate = _behaviors.ToArray();
+            foreach (var behavior in behaviorsToUpdate)
+                behavior.Update();
+            Body?.SyncTransformToBody();
+        }
+
+        internal void UpdateCoroutines(GameTime gameTime)
+        {
+            this.GameTime = new GameTimeWrapper(gameTime);
+            var behaviorsToUpdate = _behaviors.ToArray();
+            foreach (var behavior in behaviorsToUpdate)
+                behavior.UpdateCoroutines();
         }
     }
 }

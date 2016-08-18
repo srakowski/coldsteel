@@ -1,4 +1,5 @@
 ﻿using Coldsteel.Input;
+using FarseerPhysics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Coldsteel
             Input = new InputManager();
             State = new GameStateManager(Input, Content, Stage);
             _gameImpl.State = State;
+            ConvertUnits.SetDisplayUnitToSimUnitRatio(64f);
         }
 
         public void Dispose()

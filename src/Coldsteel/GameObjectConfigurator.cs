@@ -20,6 +20,12 @@ namespace Coldsteel
             return _gameObject;
         }
 
+        public GameObject Position(Vector2 position)
+        {
+            _gameObject.Transform.LocalPosition = position;
+            return _gameObject;
+        }
+
         public GameObject RotationDegrees(int degrees)
         {
             _gameObject.Transform.Rotation = MathHelper.ToRadians(degrees);

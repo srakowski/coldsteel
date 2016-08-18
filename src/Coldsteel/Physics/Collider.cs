@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Coldsteel.Physics
 {
-    public class Collider : GameObjectComponent
+    public abstract class Collider : GameObjectComponent
     {
+        internal Body Body => GameObject.Body;
+
+        internal override void Initialize()
+        {
+            Body?.Initialize();
+        }
     }
 }

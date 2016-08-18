@@ -32,10 +32,15 @@ namespace Derpfender.Behaviors
 
         private IEnumerator Fire()
         {
-            return null;
-            //_allowFire = false;
+            _allowFire = false;
             //var fireSound = GetComponent<AudioSource>();
             //fireSound.Play(1f, _rand.Next(-10, 11) / 100f, 0);
+            World.AddGameObject("bullet")
+                .Set.Position(this.Transform.Position + new Vector2(24, 0))
+                .Add.SpriteRenderer("flash")
+                .Add.Component(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
+                .Add.BoxCollider(10, 10);
+
             //AddGameObject(new GameObject("bullet")
             //    .SetPosition(this.Transform.Position + new Vector2(24, 0))
             //    .AddComponent(new SpriteRenderer(DefaultLayer, GetContent<Texture2D>("flash")) { Color = Color.WhiteSmoke })
@@ -45,8 +50,8 @@ namespace Derpfender.Behaviors
             //    .AddComponent(new ParticleSystem(GetLayer("particles"), GetContent<Texture2D>("smoke")) { Color = Color.Red, TTL = 30f })
             //    .AddComponent(new ParticleSystem(GetLayer("particles"), GetContent<Texture2D>("smoke")) { Color = Color.Yellow, TTL = 40f })
             //    );
-            //yield return WaitMSecs(_fireRate);
-            //_allowFire = true;
+            yield return WaitMSecs(_fireRate);
+            _allowFire = true;
         }
     }
 }

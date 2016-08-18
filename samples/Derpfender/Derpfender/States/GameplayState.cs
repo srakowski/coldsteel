@@ -26,7 +26,7 @@ namespace Derpfender.States
 		{
 			Stage.BackgroundColor = Color.Black;
 
-			World.AddGameObject()
+			World.AddGameObject("ship")
 				.Set.Position(60, 360)
 				.Set.RotationDegrees(90)
 				.Add.SpriteRenderer("ship")

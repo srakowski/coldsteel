@@ -8,20 +8,20 @@ namespace Coldsteel.Rendering
 {
     public class SpriteRenderer : Renderer
     {
-        private Texture2D _image;
+        public Texture2D Image { get; set; }
 
         private Vector2 _origin;
 
         public SpriteRenderer(Texture2D image)
         {
-            _image = image;
+            Image = image;
             _origin = new Vector2(image.Width * 0.5f, image.Height * 0.5f);
         }
 
         public override void Render(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                this._image,
+                this.Image,
                 this.Transform.Position,
                 null,
                 this.Color,

@@ -43,5 +43,11 @@ namespace Coldsteel
             _gameObject.AddGameObjectComponent(component);
             return _gameObject;
         }
+
+        public GameObject BoxCollider(int width, int height)
+        {
+            _gameObject.AddGameObjectComponent(new BoxCollider(width, height));
+            return _gameObject;
+        }
     }
 }

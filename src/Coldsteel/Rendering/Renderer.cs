@@ -11,5 +11,7 @@ namespace Coldsteel.Rendering
         public Color Color { get; set; } = Color.White;
 
         public abstract void Render(GameTime gameTime, SpriteBatch spriteBatch);
+
+        public T As<T>() where T : Renderer => this as T;
     }
 }
