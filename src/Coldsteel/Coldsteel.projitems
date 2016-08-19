@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\FarseerFixtureAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Collision\Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Collision\Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Collision\DynamicTree.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Factories\JointFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Factories\LinkFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Farseer\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\IBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicalWorld.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />

@@ -6,11 +6,10 @@ namespace Coldsteel.Physics
 {
     public abstract class Collider : GameObjectComponent
     {
-        internal Body Body => GameObject.Body;
-
-        internal override void Initialize()
+        public bool Enabled
         {
-            Body?.Initialize();
+            get { return Transform.Body.Enabled; }
+            set { Transform.Body.Enabled = value; }
         }
     }
 }

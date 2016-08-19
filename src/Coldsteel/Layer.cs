@@ -9,31 +9,23 @@ namespace Coldsteel
 {
     public class Layer
     {
-        private List<Renderer> _renderers = new List<Renderer>();
+        private List<GameObject> _gameObjects = new List<GameObject>();
 
-        internal Layer()
-        {
-        }
+        internal Layer() { }
 
         internal void Render(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            _renderers.ForEach(r => r.Render(gameTime, spriteBatch));
+            _gameObjects.ForEach(go => go?.Renderer?.Render(gameTime, spriteBatch));
         }
 
-        internal void AddRenderer(Renderer renderer)
+        internal void AddGameObject(GameObject gameObject)
         {
-            if (renderer == null)
-                return;
-
-            _renderers.Add(renderer);
+            _gameObjects.Add(gameObject);
         }
 
-        internal void RemoveRenderer(Renderer renderer)
+        internal void RemoveGameObject(GameObject gameObject)
         {
-            if (renderer == null)
-                return;
-
-            _renderers.Remove(renderer);
+            _gameObjects.Remove(gameObject);
         }
     }
 }

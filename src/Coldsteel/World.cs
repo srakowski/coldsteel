@@ -8,9 +8,9 @@ namespace Coldsteel
 {
     public class World
     {
-        private List<GameObject> _gameObjects = new List<GameObject>();
+        public GameState GameState { get; private set; }
 
-        private GameState _gameState;
+        private List<GameObject> _gameObjects = new List<GameObject>();
 
         private PhysicalWorld _physicalWorld;        
 
@@ -18,14 +18,13 @@ namespace Coldsteel
 
         internal World(GameState gameState)
         {
-            _gameState = gameState;
+            GameState = gameState;
             _physicalWorld = new PhysicalWorld();
         }
 
         public GameObject AddGameObject(params string[] tags)
         {
-            var go = new GameObject(_gameState);
-            PhysicalWorld.Add(go);
+            var go = new GameObject(this);
             go.Tags = tags;
             _gameObjects.Add(go);
             return go;
@@ -34,7 +33,6 @@ namespace Coldsteel
         internal void RemoveGameObject(GameObject gameObject)
         {
             _gameObjects.Remove(gameObject);
-            PhysicalWorld.Remove(gameObject);            
         }
 
         internal void Update(GameTime gameTime)

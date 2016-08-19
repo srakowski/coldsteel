@@ -3,52 +3,84 @@ using System.Collections.Generic;
 using System.Text;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Physics
 {
-    internal class Body
+    internal class Body : IBody
     {
         private FarseerPhysics.Dynamics.World _farseerWorld;
 
-        private GameObject _gameObject;
+        public Vector2 Position
+        {
+            get { return ConvertUnits.ToDisplayUnits(this._body.Position);  }
+            set { this._body.Position = ConvertUnits.ToSimUnits(value); }
+        }
+
+        public float Rotation
+        {
+            get { return this._body.Rotation; }
+            set { this._body.Rotation = value; }
+        }
+
+        private bool _isRigid = false;
+
+        public bool IsRigid
+        {
+            get { return _isRigid; }
+            set
+            {
+                _isRigid = value;
+                if (_isRigid)
+                {
+                    this._body.IgnoreGravity = false;
+                    this._body.Mass = 1f;
+                    this._body.IsSensor = false;
+                }
+                else
+                {
+                    this._body.IgnoreGravity = true;
+                    this._body.Mass = 0f;
+                    this._body.IsSensor = true;
+                }
+            }
+        }
+
+        private bool _enabled = false;
+
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                _enabled = value;
+                this._body.CollidesWith = _enabled ? Category.All : Category.None;
+            }
+        }
 
         private FarseerPhysics.Dynamics.Body _body;
 
         public Body(FarseerPhysics.Dynamics.World farseerWorld, GameObject gameObject)
         {
             this._farseerWorld = farseerWorld;
-            this._gameObject = gameObject;
-        }
-
-        public void Initialize()
-        {
-            if (this._body != null)
-                return;
-
             this._body = new FarseerPhysics.Dynamics.Body(
-                this._farseerWorld,
-                ConvertUnits.ToSimUnits(_gameObject.Transform.Position),
-                _gameObject.Transform.Rotation,
-                BodyType.Dynamic,
-                _gameObject
-                );
+                            this._farseerWorld,
+                            Vector2.Zero,
+                            0f,
+                            BodyType.Dynamic,
+                            gameObject
+                            );
+
+            this.IsRigid = false;
         }
 
-        private bool HandleCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
+        public void Dispose()
         {
-            (fixtureA.Body.UserData as GameObject).HandlCollision(fixtureB.Body.UserData as GameObject);
-            (fixtureB.Body.UserData as GameObject).HandlCollision(fixtureA.Body.UserData as GameObject);
-            return true;
+            _farseerWorld.RemoveBody(this._body);
+            this._body = null;
         }
 
-        public void Destroy()
-        {
-            this._farseerWorld.RemoveBody(_body);
-            _body.Dispose();
-            _body = null;
-        }
-
-        public void CreateBox(int width, int height)
+        public void CreateBoxCollider(int width, int height)
         {
             var w = FarseerPhysics.ConvertUnits.ToSimUnits(width);
             var h = FarseerPhysics.ConvertUnits.ToSimUnits(height);
@@ -59,22 +91,11 @@ namespace Coldsteel.Physics
             fixture.OnCollision += HandleCollision;
         }
 
-        public void SyncBodyToTransform()
+        private bool HandleCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            if (_body == null)
-                return;
-
-            _gameObject.Transform.Position = FarseerPhysics.ConvertUnits.ToDisplayUnits(_body.Position);
-            _gameObject.Transform.Rotation = _body.Rotation;
-        }
-
-        public void SyncTransformToBody()
-        {
-            if (_body == null)
-                return;
-
-            _body.Position = FarseerPhysics.ConvertUnits.ToSimUnits(_gameObject.Transform.Position);
-            _body.Rotation = _gameObject.Transform.Rotation;
+            (fixtureA.Body.UserData as GameObject).HandlCollision(fixtureB.Body.UserData as GameObject);
+            (fixtureB.Body.UserData as GameObject).HandlCollision(fixtureA.Body.UserData as GameObject);
+            return true;
         }
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using Coldsteel.Rendering;
+using Coldsteel.Physics;
 
 namespace Coldsteel
 {
     public abstract class Behavior : GameObjectComponent
     {
-        public World World => GameObject?.World;
-
         public Renderer Renderer => GameObject?.Renderer;
 
         public ContentManager Content => GameObject?.Content;
+
+        public Collider Collider => GameObject?.Collider;
 
         public GameObject AddGameObject(params string[] tags) => GameObject.AddGameObject(tags);
 
@@ -54,7 +55,5 @@ namespace Coldsteel
         }
 
         public virtual void OnCollision(GameObject with) { }
-
-        public void Kill() => GameObject.Kill();
     }
 }

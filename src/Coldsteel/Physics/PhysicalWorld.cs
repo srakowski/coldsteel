@@ -12,24 +12,13 @@ namespace Coldsteel.Physics
 
         public PhysicalWorld()
         {
+            //this._farseerWorld = new FarseerPhysics.Dynamics.World(new Vector2(0, 9.8f));
             this._farseerWorld = new FarseerPhysics.Dynamics.World(Microsoft.Xna.Framework.Vector2.Zero);
         }
 
-        public void Add(GameObject gameObject)
+        public IBody CreateBody(GameObject gameObject)
         {
-            if (gameObject.Body != null)
-                return;
-
-            gameObject.Body = new Body(_farseerWorld, gameObject);
-        }
-
-        public void Remove(GameObject gameObject)
-        {
-            if (gameObject.Body == null)
-                return;
-
-            gameObject.Body.Destroy();
-            gameObject.Body = null;
+            return new Body(this._farseerWorld, gameObject);
         }
 
         internal void Update(GameTime gameTime)

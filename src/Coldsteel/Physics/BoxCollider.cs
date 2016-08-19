@@ -9,15 +9,15 @@ namespace Coldsteel.Physics
         private int _height;
 
         public BoxCollider(int width, int height)
+            : base()
         {
             _width = width;
             _height = height;
         }
 
-        internal override void Initialize()
+        public override void Initialize()
         {
-            base.Initialize();
-            Body.CreateBox(_width, _height);
+            this.Transform.Body.CreateBoxCollider(_width, _height);
         }
     }
 }
