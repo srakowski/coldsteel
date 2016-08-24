@@ -20,12 +20,10 @@ namespace Coldsteel
             _spriteBatch = new SpriteBatch(graphicsDevice);
         }
 
-        internal void Render(GameTime gameTime, LayerManager layers)
+        internal void Render(GameTime gameTime, Camera camera, LayerManager layers)
         {
             _graphicsDevice.Clear(this.BackgroundColor);
-            _spriteBatch.Begin();
-            layers.ForEach(l => l.Render(gameTime, _spriteBatch));
-            _spriteBatch.End();
+            layers.ForEach(l => l.Render(gameTime, _spriteBatch, camera));
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Coldsteel.Audio;
 using Coldsteel.Input;
 using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
@@ -54,6 +54,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the Camera.
+        /// </summary>
+        public Camera Camera => World?.GameState?.Camera;
+
+
+        /// <summary>
         /// Gets the StateManager.
         /// </summary>
         public GameStateManager State => World?.GameState?.State;
@@ -99,6 +105,12 @@ namespace Coldsteel
         /// Gets the Collider.
         /// </summary>
         public Collider Collider { get; private set; }
+
+
+        /// <summary>
+        /// Gets the AudioSource.
+        /// </summary>
+        public AudioSource AudioSource { get; private set; }
 
 
         private Layer _layer;
@@ -201,6 +213,7 @@ namespace Coldsteel
             this.Renderer = component as Renderer ?? Renderer;
             this.Collider = component as Collider ?? Collider;
             this.RigidBody = component as RigidBody ?? RigidBody;
+            this.AudioSource = component as AudioSource ?? AudioSource;
             if (component is Behavior)
                 _behaviors.Add(component as Behavior);
 
@@ -222,7 +235,7 @@ namespace Coldsteel
         /// Updates the GameObject state.
         /// </summary>
         /// <param name="gameTime"></param>
-        internal void Update(GameTime gameTime)
+        internal virtual void Update(GameTime gameTime)
         {
             this.GameTime = new GameTimeWrapper(gameTime);
             ForEachBehavior(b => b.Update());

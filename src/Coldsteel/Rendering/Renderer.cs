@@ -10,6 +10,12 @@ namespace Coldsteel.Rendering
     {
         public Color Color { get; set; } = Color.White;
 
+        public byte Alpha
+        {
+            get { return Color.A; }
+            set { this.Color = new Color(Color, value); }
+        }
+
         public abstract void Render(GameTime gameTime, SpriteBatch spriteBatch);
 
         public T As<T>() where T : Renderer => this as T;

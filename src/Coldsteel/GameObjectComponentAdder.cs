@@ -4,6 +4,7 @@ using System.Text;
 using Coldsteel.Audio;
 using Coldsteel.Rendering;
 using Coldsteel.Physics;
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
@@ -25,16 +26,22 @@ namespace Coldsteel
             return _gameObject;
         }
 
-        public GameObject SpriteRenderer(string imageKey)
+        public GameObject SpriteRenderer(string imageKey) => SpriteRenderer(imageKey, Color.White);
+
+        public GameObject SpriteRenderer(string imageKey, Color color)
         {
             var image = Content.Images[imageKey];
-            _gameObject.AddGameObjectComponent(new SpriteRenderer(image));
+            _gameObject.AddGameObjectComponent(new SpriteRenderer(image)
+            {
+                Color = color
+            });
             return _gameObject;
         }
 
         public GameObject AudioSource(string audioKey)
         {
-            _gameObject.AddGameObjectComponent(new AudioSource());
+            var soundEffect = Content.SoundEffects[audioKey];
+            _gameObject.AddGameObjectComponent(new AudioSource(soundEffect));
             return _gameObject;
         }
 

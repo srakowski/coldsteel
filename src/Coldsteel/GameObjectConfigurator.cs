@@ -31,5 +31,11 @@ namespace Coldsteel
             _gameObject.Transform.Rotation = MathHelper.ToRadians(degrees);
             return _gameObject;
         }
+
+        public GameObject Layer(string key)
+        {
+            _gameObject.Layer = _gameObject.Layers[key];
+            return _gameObject;
+        }
     }
 }

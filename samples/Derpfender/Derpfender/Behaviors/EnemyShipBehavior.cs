@@ -17,15 +17,15 @@ namespace Derpfender.Behaviors
 
         private float _speed = 0f;
 
-        //		private GameObject _camera;
-
         private Random _rand = new Random();
 
-        public EnemyShipBehavior(float speed)
+        private ShakeBehavior _cameraShaker;
+
+        public EnemyShipBehavior(float speed, ShakeBehavior cameraShaker)
         {
-            //			_camera = camera;
-            _direction = new Vector2(-1, 0);
             _speed = speed;
+            _direction = new Vector2(-1, 0);
+            _cameraShaker = cameraShaker;
         }
 
         public override void Update()
@@ -42,10 +42,10 @@ namespace Derpfender.Behaviors
             if (!withGameObject.Tags.Contains("bullet"))
                 return;
 
-            //GetComponent<Collider>().Enabled = false;
+            AudioSource.Play();
             //var audio = GetComponent<AudioSource>();
             //audio.Play(1, _rand.Next(-20, 21) / 100f, 0);
-            //_camera.GetComponent<ShakeBehavior>().Shake();
+            _cameraShaker.Shake();
             StartCoroutine(BeginRemove());
         }
 
@@ -54,7 +54,7 @@ namespace Derpfender.Behaviors
             var renderer = Renderer.As<SpriteRenderer>();
             renderer.Image = Content.Images["debris"];
             Collider.Enabled = false;
-            //renderer.Layer = GetLayer("background");
+            Set.Layer("debris");
             for (byte a = 200; a > 30; a--)
             {
                 renderer.Alpha = a;

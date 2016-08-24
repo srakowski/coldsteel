@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />

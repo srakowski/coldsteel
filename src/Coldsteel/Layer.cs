@@ -11,11 +11,49 @@ namespace Coldsteel
     {
         private List<GameObject> _gameObjects = new List<GameObject>();
 
-        internal Layer() { }
+        private string _key;
 
-        internal void Render(GameTime gameTime, SpriteBatch spriteBatch)
+        public string Key => _key;
+
+        private int _sortIndex;
+
+        public int SortIndex => _sortIndex;
+
+        public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
+
+        public Layer SetSpriteSortMode(SpriteSortMode spriteSortMode)
         {
+            SpriteSortMode = spriteSortMode;
+            return this;
+        }
+
+        public BlendState BlendState { get; set; } = null;
+
+        public Layer SetBlendState(BlendState blendState)
+        {
+            BlendState = blendState;
+            return this;
+        }
+
+        public SamplerState SamplerState { get; set; } = null;
+
+        public Layer SetSamplerState(SamplerState samplerState)
+        {
+            SamplerState = samplerState;
+            return this;
+        }
+
+        public Layer(string key, int sortIndex)
+        {
+            this._key = key;
+            this._sortIndex = sortIndex;
+        }
+
+        internal void Render(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
+        {
+            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, camera.TransformationMatrix);
             _gameObjects.ForEach(go => go?.Renderer?.Render(gameTime, spriteBatch));
+            spriteBatch.End();
         }
 
         internal void AddGameObject(GameObject gameObject)

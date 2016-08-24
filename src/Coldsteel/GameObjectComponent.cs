@@ -1,4 +1,5 @@
-﻿using Coldsteel.Input;
+﻿using Coldsteel.Audio;
+using Coldsteel.Input;
 using Coldsteel.Physics;
 using System.Collections.Generic;
 
@@ -57,6 +58,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the Camera used to look into to the World.
+        /// </summary>
+        protected Camera Camera => GameObject?.Camera;
+
+
+        /// <summary>
         /// Gets the InputManager. Use this to evaluate controls.
         /// </summary>
         protected InputManager Input => GameObject?.Input;
@@ -87,6 +94,13 @@ namespace Coldsteel
         /// Gives the GameObject physical properties that respond to forces such as gravity.
         /// </summary>
         protected RigidBody RigidBody => GameObject?.RigidBody;
+
+
+        /// <summary>
+        /// Gets the AudioSource component assigned to the GameObject.
+        /// Used to emit audio sound effects.
+        /// </summary>
+        protected AudioSource AudioSource => GameObject?.AudioSource;
 
 
         /// <summary>

@@ -10,8 +10,6 @@ namespace Coldsteel.Rendering
     {
         public Texture2D Image { get; set; }
 
-        public float Alpha { get; set; }
-
         private Vector2 _origin;
 
         public SpriteRenderer(Texture2D image)

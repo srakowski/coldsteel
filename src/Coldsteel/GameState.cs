@@ -20,6 +20,8 @@ namespace Coldsteel
 
         public World World { get; internal set; }
 
+        public Camera Camera { get; internal set; }
+
         public virtual void Preload() { }
 
         public virtual void Create() { }
@@ -31,7 +33,7 @@ namespace Coldsteel
 
         internal void Render(GameTime gameTime)
         {
-            Stage.Render(gameTime, Layers);
+            Stage.Render(gameTime, Camera, Layers);
         }
     }
 }

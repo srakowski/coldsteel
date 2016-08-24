@@ -1,11 +1,6 @@
 ﻿using Coldsteel;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Derpfender.Behaviors
 {
@@ -15,7 +10,14 @@ namespace Derpfender.Behaviors
 
         private Random _rand = new Random();
 
-        private int _spawnWait = 10;
+        private int _spawnWait = 300;
+
+        private ShakeBehavior _cameraShaker;
+
+        public SpawnEnemyBehavior(ShakeBehavior cameraShaker)
+        {
+            _cameraShaker = cameraShaker;
+        }
 
         public override void Update()
         {
@@ -32,8 +34,8 @@ namespace Derpfender.Behaviors
                 .Add.SpriteRenderer("enemy")
                 .Add.BoxCollider(24, 24)
                 .Add.AudioSource("explode")
-                .Add.RigidBody()
-                .Add.Component(new EnemyShipBehavior(_rand.Next(100, 200) / 1000f));
+                .Add.Component(new EnemyShipBehavior(_rand.Next(100, 200) / 1000f, _cameraShaker));
+
             yield return WaitMSecs(_spawnWait);
             _allowSpawn = true;
         }

@@ -12,7 +12,7 @@ namespace Coldsteel
 
         private List<GameObject> _gameObjects = new List<GameObject>();
 
-        private PhysicalWorld _physicalWorld;        
+        private PhysicalWorld _physicalWorld;
 
         internal PhysicalWorld PhysicalWorld => _physicalWorld;
 
@@ -28,6 +28,13 @@ namespace Coldsteel
             go.Tags = tags;
             _gameObjects.Add(go);
             return go;
+        }
+
+        internal Camera AddCamera()
+        {
+            var camera = new Camera(this);
+            _gameObjects.Add(camera);
+            return camera;
         }
 
         internal void RemoveGameObject(GameObject gameObject)

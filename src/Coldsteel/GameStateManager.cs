@@ -58,9 +58,10 @@ namespace Coldsteel
             _pendingState.State = this;
             _pendingState.Input = this._input;
             _pendingState.Load = this._content;
-            _pendingState.Stage = this._stage;            
+            _pendingState.Stage = this._stage;
             _pendingState.Layers = new LayerManager();
             _pendingState.World = new World(_pendingState);
+            _pendingState.Camera = _pendingState.World.AddCamera();
             _pendingState.Preload();
             _state = _pendingState;
             _pendingState = null;
