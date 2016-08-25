@@ -8,6 +8,6 @@ namespace Coldsteel.Extensions
 {
     public static class MonoGameExtensions
     {
-        public static Vector2 Midpoint(this Texture2D texture) => new Vector2(texture.Width * 0.5f, texture.Height * 0.5f);
+        public static Vector2 GetMidpoint(this Texture2D texture) => new Vector2(texture.Width * 0.5f, texture.Height * 0.5f);
     }
 }

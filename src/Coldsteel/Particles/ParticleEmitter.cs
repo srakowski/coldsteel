@@ -31,7 +31,7 @@ namespace Coldsteel.Particles
                     Position = Transform.Position,
                     LayerKey = Layer.Key,
                     Image = Image,
-                    Origin = Image.Midpoint(),
+                    Origin = Image.GetMidpoint(),
                     Color = Color.White,
                     Rotation = 0f,
                     Scale = 1f,

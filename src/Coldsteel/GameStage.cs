@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Coldsteel
 {
-    public class GameStage
+    public sealed class GameStage
     {
         public Color BackgroundColor { get; set; }
 

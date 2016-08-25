@@ -39,6 +39,18 @@ namespace Coldsteel
             return _gameObject;
         }
 
+        public GameObject SpriteSheetRenderer(string spriteSheetKey) => SpriteSheetRenderer(spriteSheetKey, Color.White);
+
+        public GameObject SpriteSheetRenderer(string spriteSheetKey, Color color)
+        {
+            var spriteSheet = Content.SpriteSheets[spriteSheetKey];
+            _gameObject.AddGameObjectComponent(new SpriteSheetRenderer(spriteSheet)
+            {
+                Color = color
+            });
+            return _gameObject;
+        }
+
         public GameObject AudioSource(string audioKey)
         {
             var soundEffect = Content.SoundEffects[audioKey];
@@ -68,6 +80,15 @@ namespace Coldsteel
         {
             var image = Content.Images[imageKey];
             _gameObject.AddGameObjectComponent(new ParticleEmitter(image));
+            return _gameObject;
+        }
+
+        public GameObject Animation(string key, int[] frames, int rate)
+        {
+            var ssRenderer = _gameObject.Renderer.As<SpriteSheetRenderer>();
+            if (ssRenderer == null)
+                throw new Exception("animations may only be added if a SpriteSheetRenderer has been applied to the GameObject");
+            ssRenderer.Animations.Add(key, frames, rate);
             return _gameObject;
         }
     }

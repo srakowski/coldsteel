@@ -2,6 +2,7 @@
 using Coldsteel.Input;
 using Coldsteel.Particles;
 using Coldsteel.Physics;
+using Coldsteel.Rendering;
 using System.Collections.Generic;
 
 namespace Coldsteel
@@ -115,6 +116,18 @@ namespace Coldsteel
         /// Used to emit particles duh.
         /// </summary>
         protected ParticleEmitter ParticleEmitter => GameObject?.ParticleEmitter;
+
+
+        /// <summary>
+        /// Gets the Renderer component assigned to the GameObject;
+        /// </summary>
+        protected Renderer Renderer => GameObject?.Renderer;
+
+
+        /// <summary>
+        /// Gets the AnimationManager if Renderer is SpriteSheetRenderer.
+        /// </summary>
+        protected AnimationManager Animations => GameObject?.Animations;
 
 
         /// <summary>

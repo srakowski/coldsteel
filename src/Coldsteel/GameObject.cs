@@ -126,7 +126,14 @@ namespace Coldsteel
         public ParticleEmitter ParticleEmitter { get; private set; }
 
 
+        /// <summary>
+        /// Gets the AnimationManager, if SpriteSheetRenderer present.
+        /// </summary>
+        public AnimationManager Animations => Renderer?.As<SpriteSheetRenderer>()?.Animations;
+
+
         private Layer _layer;
+
 
         /// <summary>
         /// Gets the Layer this GameObject will be rendered to.
@@ -262,6 +269,7 @@ namespace Coldsteel
         {
             this.GameTime = new GameTimeWrapper(gameTime);
             ForEachBehavior(b => b.Update());
+            this.Renderer?.Update();
         }
 
 

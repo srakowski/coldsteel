@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Coldsteel.Rendering;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,15 @@ namespace Coldsteel
         public void Image(string name, string path = null)
         {
             _images.Add(name, _content.Load<Texture2D>(path ?? name));
+        }
+
+        private Dictionary<string, SpriteSheet> _spriteSheets = new Dictionary<string, SpriteSheet>();
+
+        public IDictionary<string, SpriteSheet> SpriteSheets => _spriteSheets;
+
+        public void SpriteSheet(string name, int frameWidth, int frameHeight, string path = null)
+        {
+            _spriteSheets.Add(name, new SpriteSheet(_content.Load<Texture2D>(path ?? name), frameWidth, frameHeight));
         }
 
         private Dictionary<string, SpriteFont> _spriteFonts = new Dictionary<string, SpriteFont>();
