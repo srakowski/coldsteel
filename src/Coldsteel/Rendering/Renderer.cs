@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Coldsteel.Rendering
 {
-    public abstract class Renderer : GameObjectComponent
+    public abstract class Renderer : GameObjectComponent, IRenderer
     {
         public Color Color { get; set; } = Color.White;
 

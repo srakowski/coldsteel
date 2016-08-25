@@ -5,6 +5,7 @@ using Coldsteel.Input;
 using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
 using Coldsteel.Physics;
+using Coldsteel.Particles;
 
 namespace Coldsteel
 {
@@ -51,6 +52,12 @@ namespace Coldsteel
         /// The World this GameObject belongs to.
         /// </summary>
         public World World { get; private set; }
+
+
+        /// <summary>
+        /// Gets the ParticleManager for internal use.
+        /// </summary>
+        internal ParticleManager Particles => World?.Particles;
 
 
         /// <summary>
@@ -113,6 +120,12 @@ namespace Coldsteel
         public AudioSource AudioSource { get; private set; }
 
 
+        /// <summary>
+        /// Gets the ParticleEmitter.
+        /// </summary>
+        public ParticleEmitter ParticleEmitter { get; private set; }
+
+
         private Layer _layer;
 
         /// <summary>
@@ -123,9 +136,13 @@ namespace Coldsteel
             get { return _layer; }
             set
             {
-                _layer?.RemoveGameObject(this);
+                if (this.Renderer != null)
+                    _layer?.RemoveRenderer(this.Renderer);
+
                 _layer = value;
-                _layer?.AddGameObject(this);
+
+                if (this.Renderer != null)
+                    _layer?.AddRenderer(this.Renderer);
             }
         }
 
@@ -140,9 +157,13 @@ namespace Coldsteel
             get { return _renderer; }
             set
             {
+                if (_renderer != null)
+                    Layer?.RemoveRenderer(_renderer);
+
                 _renderer = value;
-                if (Layer == null)
-                    Layer = Layers.Default;
+
+                if (_renderer != null)
+                    Layer?.AddRenderer(_renderer);
             }
         }
 
@@ -168,6 +189,7 @@ namespace Coldsteel
         internal GameObject(World world)
         {
             this.World = world;
+            this.Layer = world.GameState.Layers.Default;
             this.Set = new GameObjectConfigurator(this);
             this.Add = new GameObjectComponentAdder(this);
             this.AddGameObjectComponent(new Transform());
@@ -193,7 +215,7 @@ namespace Coldsteel
         /// </summary>
         public void Kill()
         {
-            Layer?.RemoveGameObject(this);
+            Renderer = null;
             Transform?.Dispose();
             World.RemoveGameObject(this);
             foreach (var child in Children)
@@ -214,6 +236,7 @@ namespace Coldsteel
             this.Collider = component as Collider ?? Collider;
             this.RigidBody = component as RigidBody ?? RigidBody;
             this.AudioSource = component as AudioSource ?? AudioSource;
+            this.ParticleEmitter = component as ParticleEmitter ?? ParticleEmitter;
             if (component is Behavior)
                 _behaviors.Add(component as Behavior);
 

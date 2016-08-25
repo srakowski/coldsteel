@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Coldsteel.Particles;
 using Coldsteel.Physics;
 using Microsoft.Xna.Framework;
 
@@ -16,10 +17,15 @@ namespace Coldsteel
 
         internal PhysicalWorld PhysicalWorld => _physicalWorld;
 
-        internal World(GameState gameState)
+        private ParticleManager _particles;
+
+        internal ParticleManager Particles => _particles;
+
+        internal World(GameState gameState, ParticleManager particles)
         {
             GameState = gameState;
             _physicalWorld = new PhysicalWorld();
+            _particles = particles;
         }
 
         public GameObject AddGameObject(params string[] tags)
@@ -50,6 +56,7 @@ namespace Coldsteel
                 go.Update(gameTime);
             foreach (var go in gameObjectsToUpdate)
                 go.UpdateCoroutines(gameTime);
+            _particles.Update(gameTime);
         }
     }
 }

@@ -5,6 +5,7 @@ using Coldsteel.Audio;
 using Coldsteel.Rendering;
 using Coldsteel.Physics;
 using Microsoft.Xna.Framework;
+using Coldsteel.Particles;
 
 namespace Coldsteel
 {
@@ -60,6 +61,13 @@ namespace Coldsteel
         public GameObject RigidBody()
         {
             _gameObject.AddGameObjectComponent(new RigidBody());
+            return _gameObject;
+        }
+
+        public GameObject ParticleEmitter(string imageKey)
+        {
+            var image = Content.Images[imageKey];
+            _gameObject.AddGameObjectComponent(new ParticleEmitter(image));
             return _gameObject;
         }
     }

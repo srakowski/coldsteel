@@ -1,5 +1,6 @@
 ﻿using Coldsteel.Audio;
 using Coldsteel.Input;
+using Coldsteel.Particles;
 using Coldsteel.Physics;
 using System.Collections.Generic;
 
@@ -58,6 +59,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the ParticleManager.
+        /// </summary>
+        internal ParticleManager Particles => GameObject?.Particles;
+
+
+        /// <summary>
         /// Gets the Camera used to look into to the World.
         /// </summary>
         protected Camera Camera => GameObject?.Camera;
@@ -104,10 +111,23 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the ParticleEmitter component assigned to the GameObject.
+        /// Used to emit particles duh.
+        /// </summary>
+        protected ParticleEmitter ParticleEmitter => GameObject?.ParticleEmitter;
+
+
+        /// <summary>
         /// Gets the Behavior components assigne to the GameObject.
         /// These are user defined classes that drive the behavior of the GameObject.
         /// </summary>
         protected IEnumerable<Behavior> Behaviors => GameObject?.Behaviors;
+
+
+        /// <summary>
+        /// Gets the Layer this GameObject belongs to.
+        /// </summary>
+        protected Layer Layer => GameObject?.Layer;
 
 
         /// <summary>

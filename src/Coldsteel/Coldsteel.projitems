@@ -15,6 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MonoGameExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RandomExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponentAdder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectConfigurator.cs" />
@@ -30,9 +32,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LayerAddedEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LayerManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MonoGameImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\Particle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleEmitter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
@@ -163,6 +170,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\IBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicalWorld.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\IRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />

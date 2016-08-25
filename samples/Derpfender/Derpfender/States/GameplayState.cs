@@ -28,9 +28,7 @@ namespace Derpfender.States
             Stage.BackgroundColor = Color.Black;
 
             CreateStarField();
-
-            Layers.Add("debris", -1)
-                .SetBlendState(BlendState.NonPremultiplied);
+            Layers.Add("debris", -1).SetBlendState(BlendState.NonPremultiplied);
 
             World.AddGameObject("ship")
                 .Set.Position(60, 360)

@@ -29,6 +29,8 @@ namespace Derpfender.Behaviors
 
         public override void Update()
         {
+            ParticleEmitter?.Emit(100);
+
             if (!_swappedTexture)
             {
                 Renderer.As<SpriteRenderer>().Image = Content.Images["bullet"];

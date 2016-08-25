@@ -8,6 +8,8 @@ namespace Coldsteel
 {
     public class LayerManager
     {
+        public event EventHandler<LayerAddedEvent> LayerAdded;
+
         private List<Layer> _layers = new List<Layer>();
 
         private Layer _defaultLayer;
@@ -34,6 +36,7 @@ namespace Coldsteel
             var layer = new Layer(key, sortIndex);
             _layers.Add(layer);
             _layers.Sort((a, b) => a.SortIndex.CompareTo(b.SortIndex));
+            LayerAdded?.Invoke(this, new LayerAddedEvent(layer));
             return layer;
         }
 

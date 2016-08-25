@@ -9,7 +9,7 @@ namespace Coldsteel
 {
     public class Layer
     {
-        private List<GameObject> _gameObjects = new List<GameObject>();
+        private List<IRenderer> _renderers = new List<IRenderer>();
 
         private string _key;
 
@@ -52,18 +52,18 @@ namespace Coldsteel
         internal void Render(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
             spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, camera.TransformationMatrix);
-            _gameObjects.ForEach(go => go?.Renderer?.Render(gameTime, spriteBatch));
+            _renderers.ForEach(r => r.Render(gameTime, spriteBatch));
             spriteBatch.End();
         }
 
-        internal void AddGameObject(GameObject gameObject)
+        internal void AddRenderer(IRenderer renderer)
         {
-            _gameObjects.Add(gameObject);
+            _renderers.Add(renderer);
         }
 
-        internal void RemoveGameObject(GameObject gameObject)
+        internal void RemoveRenderer(IRenderer renderer)
         {
-            _gameObjects.Remove(gameObject);
+            _renderers.Remove(renderer);
         }
     }
 }

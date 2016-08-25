@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Coldsteel.Input;
+using Coldsteel.Particles;
 
 namespace Coldsteel
 {

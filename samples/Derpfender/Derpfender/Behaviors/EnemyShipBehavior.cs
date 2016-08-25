@@ -43,8 +43,6 @@ namespace Derpfender.Behaviors
                 return;
 
             AudioSource.Play();
-            //var audio = GetComponent<AudioSource>();
-            //audio.Play(1, _rand.Next(-20, 21) / 100f, 0);
             _cameraShaker.Shake();
             StartCoroutine(BeginRemove());
         }
@@ -53,11 +51,13 @@ namespace Derpfender.Behaviors
         {
             var renderer = Renderer.As<SpriteRenderer>();
             renderer.Image = Content.Images["debris"];
+            Add.ParticleEmitter("smoke");
             Collider.Enabled = false;
             Set.Layer("debris");
+            ParticleEmitter.Emit(300);
             for (byte a = 200; a > 30; a--)
             {
-                renderer.Alpha = a;
+                renderer.Alpha = a;                
                 yield return null;
             }
             Kill();

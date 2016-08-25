@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Coldsteel.Input;
+using Coldsteel.Particles;
 
 namespace Coldsteel
 {
@@ -60,7 +61,7 @@ namespace Coldsteel
             _pendingState.Load = this._content;
             _pendingState.Stage = this._stage;
             _pendingState.Layers = new LayerManager();
-            _pendingState.World = new World(_pendingState);
+            _pendingState.World = new World(_pendingState, new ParticleManager(_pendingState.Layers));
             _pendingState.Camera = _pendingState.World.AddCamera();
             _pendingState.Preload();
             _state = _pendingState;
