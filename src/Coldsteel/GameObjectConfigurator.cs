@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Coldsteel.Rendering;
 
 namespace Coldsteel
 {
@@ -35,6 +37,15 @@ namespace Coldsteel
         public GameObject Layer(string key)
         {
             _gameObject.Layer = _gameObject.Layers[key];
+            return _gameObject;
+        }
+
+        public GameObject SpriteEffects(SpriteEffects spriteEffects)
+        {
+            var renderer = _gameObject?.Renderer.As<SpriteRenderer>();
+            if (renderer == null)
+                throw new Exception("a GameObject must have a SpriteRenderer to set SpriteEffects");
+            renderer.SpriteEffects = spriteEffects;
             return _gameObject;
         }
     }

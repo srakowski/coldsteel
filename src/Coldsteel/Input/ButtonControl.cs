@@ -29,14 +29,21 @@ namespace Coldsteel.Input
 
         public bool IsUp()
         {
-            return _controls.Any(c => c.ButtonIsUp());
+            return !IsDown();
         }
 
-        internal virtual bool ButtonWasPressed() { return false; }
+        internal virtual bool ButtonWasDown() { return false; }
 
-        public bool WasPressed()
+        public bool WasDown()
         {
-            return _controls.Any(c => c.ButtonWasPressed());
+            return _controls.Any(c => c.ButtonWasDown());
+        }
+
+        internal virtual bool ButtonWasUp() { return false; }
+
+        public bool WasUp()
+        {
+            return _controls.Any(c => c.ButtonWasUp());
         }
     }
 }

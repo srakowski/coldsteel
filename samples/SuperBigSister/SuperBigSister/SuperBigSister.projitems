@@ -9,7 +9,11 @@
     <Import_RootNamespace>SuperBigSister</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\PlayerBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\JumpBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\IdleBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\PlayerStateMachine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\RunLeftBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\RunRightBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StartGameBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)States\GameplayState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)States\MainMenuState.cs" />

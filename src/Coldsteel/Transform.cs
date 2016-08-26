@@ -10,6 +10,12 @@ namespace Coldsteel
     {
         internal IBody Body { get; set; }
 
+        public Vector2 Velocity
+        {
+            get { return Body.Velocity; }
+            set { Body.Velocity = value; }
+        }
+
         public Vector2 Position
         {
             get { return Body.Position + (GameObject?.Parent?.Transform?.Position ?? Vector2.Zero); }

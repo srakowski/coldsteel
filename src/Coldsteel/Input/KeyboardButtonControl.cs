@@ -19,19 +19,19 @@ namespace Coldsteel.Input
             return InputDevices.CurrentKeyboardState.IsKeyDown(this.KeyboardKey);
         }
 
-        private bool ButtonWasDown()
-        {
-            return InputDevices.PreviousKeyboardState.IsKeyDown(this.KeyboardKey);
-        }
-
         internal override bool ButtonIsUp()
         {
             return InputDevices.CurrentKeyboardState.IsKeyUp(this.KeyboardKey);
         }
 
-        internal override bool ButtonWasPressed()
+        internal override bool ButtonWasDown()
         {
-            return ButtonWasDown() && ButtonIsUp();
+            return InputDevices.PreviousKeyboardState.IsKeyDown(this.KeyboardKey) && ButtonIsUp();
+        }
+
+        internal override bool ButtonWasUp()
+        {
+            return InputDevices.PreviousKeyboardState.IsKeyUp(this.KeyboardKey) && ButtonIsDown();
         }
     }
 }

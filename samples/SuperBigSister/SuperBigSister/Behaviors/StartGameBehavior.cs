@@ -10,7 +10,7 @@ namespace SuperBigSister.Behaviors
     {
         public override void Update()
         {
-            if (Input.GetButtonControl("Start").IsDown())
+            if (Input.GetButtonControl("start").IsDown())
                 State.Start<GameplayState>();
         }
     }

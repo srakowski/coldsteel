@@ -21,6 +21,12 @@ namespace Coldsteel
 
         internal ParticleManager Particles => _particles;
 
+        public Vector2 Gravity
+        {
+            get { return PhysicalWorld?.Gravity ?? Vector2.Zero; }
+            set { PhysicalWorld.Gravity = value; }
+        }
+
         internal World(GameState gameState, ParticleManager particles)
         {
             GameState = gameState;

@@ -15,6 +15,8 @@ namespace Coldsteel.Rendering
 
         public Rectangle? SourceRectangle { get; set; }
 
+        public SpriteEffects SpriteEffects { get; set; }
+
         public SpriteRenderer(Texture2D image)
         {
             Image = image;
@@ -31,7 +33,7 @@ namespace Coldsteel.Rendering
                 this.Transform.Rotation,
                 Origin,
                 1f,
-                SpriteEffects.None,
+                SpriteEffects,
                 0f
                 );
         }

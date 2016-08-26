@@ -1,15 +1,17 @@
 ﻿using Coldsteel;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SuperBigSister.Behaviors
 {
-    class PlayerBehavior : Behavior
+    public class RunRightBehavior : Behavior
     {
         public override void Initialize()
         {
-            Animations.Play("stand");
+            Animations.Play("run");
+            Set.SpriteEffects(SpriteEffects.None);
         }
     }
 }

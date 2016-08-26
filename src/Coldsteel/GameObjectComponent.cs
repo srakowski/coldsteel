@@ -138,6 +138,13 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the StateMachine component assigned to the GameObject.
+        /// Use this to force state swaps.
+        /// </summary>
+        protected StateMachine StateMachine => GameObject?.StateMachine;
+
+
+        /// <summary>
         /// Gets the Layer this GameObject belongs to.
         /// </summary>
         protected Layer Layer => GameObject?.Layer;

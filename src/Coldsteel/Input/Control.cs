@@ -6,5 +6,6 @@ namespace Coldsteel.Input
 {
     public abstract class Control
     {
+        public ButtonControl ButtonControl => this as ButtonControl;
     }
 }

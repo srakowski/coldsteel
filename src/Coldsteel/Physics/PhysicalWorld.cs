@@ -8,11 +8,16 @@ namespace Coldsteel.Physics
 {
     internal class PhysicalWorld
     {
+        public Vector2 Gravity
+        {
+            get { return _farseerWorld.Gravity; }
+            set { _farseerWorld.Gravity = value; }
+        }
+
         private FarseerPhysics.Dynamics.World _farseerWorld;
 
         public PhysicalWorld()
         {
-            //this._farseerWorld = new FarseerPhysics.Dynamics.World(new Vector2(0, 9.8f));
             this._farseerWorld = new FarseerPhysics.Dynamics.World(Microsoft.Xna.Framework.Vector2.Zero);
         }
 

@@ -11,8 +11,17 @@ namespace SuperBigSister
     {
         public override void Initialize()
         {
-            Input.AddButtonControl("Start")
+            Input.AddButtonControl("start")
                 .Keyboard(Keys.Space);
+
+            Input.AddButtonControl("jump")
+                .Keyboard(Keys.Space);
+
+            Input.AddButtonControl("left")
+                .Keyboard(Keys.A, Keys.Left);
+
+            Input.AddButtonControl("right")
+                .Keyboard(Keys.D, Keys.Right);
 
             State.Start<MainMenuState>();
         }

@@ -127,6 +127,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the StateMachine component;
+        /// </summary>
+        public StateMachine StateMachine { get; private set; }
+
+
+        /// <summary>
         /// Gets the AnimationManager, if SpriteSheetRenderer present.
         /// </summary>
         public AnimationManager Animations => Renderer?.As<SpriteSheetRenderer>()?.Animations;
@@ -214,7 +220,7 @@ namespace Coldsteel
             gameObject.Parent = this;
             _children.Add(gameObject);
             return gameObject;
-        }
+        }        
 
 
         /// <summary>
@@ -244,10 +250,26 @@ namespace Coldsteel
             this.RigidBody = component as RigidBody ?? RigidBody;
             this.AudioSource = component as AudioSource ?? AudioSource;
             this.ParticleEmitter = component as ParticleEmitter ?? ParticleEmitter;
+            this.StateMachine = component as StateMachine ?? StateMachine;
             if (component is Behavior)
                 _behaviors.Add(component as Behavior);
 
             component.Initialize();
+        }
+
+
+        /// <summary>
+        /// Removes a GameObjectComponent from this GameObject.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <remarks>Currently only removes behaviors TODO: remove any</remarks>
+        public void RemoveGameObjectComponent(GameObjectComponent component)
+        {
+            if (component is Behavior)
+            {
+                _behaviors.Remove(component as Behavior);
+                component.GameObject = null;
+            }
         }
 
 
@@ -268,6 +290,7 @@ namespace Coldsteel
         internal virtual void Update(GameTime gameTime)
         {
             this.GameTime = new GameTimeWrapper(gameTime);
+            StateMachine?.Update();
             ForEachBehavior(b => b.Update());
             this.Renderer?.Update();
         }

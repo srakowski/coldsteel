@@ -34,8 +34,8 @@ namespace SuperBigSister.States
             var adi = World.AddGameObject()
                 .Set.Position(100, 300)
                 .Add.SpriteSheetRenderer("adi")
-                .Add.Animation("stand", new int[] { 0, 1 }, 900)
-                .Add.Component(new PlayerBehavior());
+                .Add.Animation("stand", new int[] { 0, 1 }, 900);
+                //.Add.Component(new PlayerBehavior());
 
             World.AddGameObject()
                 .Set.Position(150, 500)

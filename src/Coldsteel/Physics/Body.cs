@@ -23,6 +23,12 @@ namespace Coldsteel.Physics
             set { this._body.Rotation = value; }
         }
 
+        public Vector2 Velocity
+        {
+            get { return this._body.LinearVelocity; }
+            set { this._body.LinearVelocity = value; }
+        }
+
         private bool _isRigid = false;
 
         public bool IsRigid

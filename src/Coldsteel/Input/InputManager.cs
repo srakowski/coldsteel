@@ -16,6 +16,17 @@ namespace Coldsteel.Input
             return control;
         }
 
-        public ButtonControl GetButtonControl(string key) => _controls[key] as ButtonControl;
+        public ButtonControl GetButtonControl(string key) => this[key].ButtonControl;
+
+        public Control this[string key]
+        {
+            get
+            {
+                if (!this._controls.ContainsKey(key))
+                    throw new Exception($"\"{key}\" control not found. did you forget to add an input mapping?");
+
+                return _controls[key];
+            }
+        }
     }
 }

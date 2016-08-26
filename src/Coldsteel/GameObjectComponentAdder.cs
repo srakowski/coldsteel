@@ -83,6 +83,16 @@ namespace Coldsteel
             return _gameObject;
         }
 
+        public GameObject Animation(string key, int frame)
+        {
+            var ssRenderer = _gameObject.Renderer.As<SpriteSheetRenderer>();
+            if (ssRenderer == null)
+                throw new Exception("animations may only be added if a SpriteSheetRenderer has been applied to the GameObject");
+
+            ssRenderer.Animations.Add(key, frame);
+            return _gameObject;
+        }
+
         public GameObject Animation(string key, int[] frames, int rate)
         {
             var ssRenderer = _gameObject.Renderer.As<SpriteSheetRenderer>();

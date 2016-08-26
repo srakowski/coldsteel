@@ -1,38 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 
 namespace Coldsteel.Rendering
 {
     internal class AnimationState
     {
-        public int[] Frames { get; set; }
+        public bool IsStatic { get; private set; }
 
-        public int Rate { get; set; }
+        public int CurrentFrame { get; private set; }
 
-        public double TimeToNextFrame { get; set; }
+        private int[] _frames;
 
-        public int CurrentFrameIndex { get; set; }
+        private int _rate;
+
+        private double _timeToNextFrame;
+
+        private int _frameIdx;
+
+        public AnimationState(int frame)
+        {
+            this.IsStatic = true;
+            this.CurrentFrame = frame;
+        }
 
         public AnimationState(int[] frames, int rate)
         {
-            Frames = frames;
-            Rate = rate;
+            this.IsStatic = false;
+            this.CurrentFrame = frames.First();
+                        
+            _frames = frames;
+            _rate = rate;
             Reset();
+        }
+
+        internal void Update(IGameTime gameTime)
+        {
+            if (this.IsStatic)
+                return;
+
+            this._timeToNextFrame -= gameTime.Delta;
+            if (this._timeToNextFrame <= 0)
+                this.NextFrame();
         }
 
         internal void NextFrame()
         {
-            this.CurrentFrameIndex++;
-            if (this.CurrentFrameIndex >= Frames.Length)
-                this.CurrentFrameIndex = 0;
-            TimeToNextFrame = Rate;
+            if (this.IsStatic)
+                return;
+
+            this._frameIdx++;
+            if (this._frameIdx >= _frames.Length)
+                this._frameIdx = 0;
+
+            CurrentFrame = _frames[_frameIdx];
+            _timeToNextFrame = _rate;
         }
 
         internal void Reset()
         {
-            TimeToNextFrame = Rate;
-            CurrentFrameIndex = 0;
+            if (this.IsStatic)
+                return;
+
+            _timeToNextFrame = _rate;
+            _frameIdx = 0;
+            CurrentFrame = _frames[_frameIdx];
         }
     }
 }

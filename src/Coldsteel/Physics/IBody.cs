@@ -11,6 +11,7 @@ namespace Coldsteel.Physics
         Vector2 Position { get; set; }
         float Rotation { get; set; }
         bool Enabled { get; set; }
+        Vector2 Velocity { get; set; }
 
         void Dispose();
         void CreateBoxCollider(int width, int height);

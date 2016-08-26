@@ -56,6 +56,7 @@ namespace Coldsteel
         internal void Reset()
         {
             _images.Clear();
+            _spriteSheets.Clear();
             _spriteFonts.Clear();
             _soundEffects.Clear();
             _content.Unload();
