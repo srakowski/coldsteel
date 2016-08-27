@@ -16,7 +16,7 @@ namespace Coldsteel
             _trigger = trigger;
         }
 
-        public StateInfoConfigurator When(Func<bool> condition)
+        public StateInfoConfigurator When(Func<Behavior, bool> condition)
         {
             _trigger.Condition = condition;
             return _stateInfoConfigurator;

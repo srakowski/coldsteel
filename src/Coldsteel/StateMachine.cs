@@ -36,7 +36,7 @@ namespace Coldsteel
         {
             var triggers = _currentStateInfo.Triggers;
             foreach (var trigger in triggers)
-                if (trigger.Condition())
+                if (trigger.Condition(_currentState))
                 {
                     Start(trigger.StateKey);
                     break;

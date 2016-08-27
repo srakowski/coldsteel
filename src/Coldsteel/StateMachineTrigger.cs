@@ -6,7 +6,7 @@ namespace Coldsteel
 {
     public class StateMachineTrigger
     {
-        public Func<bool> Condition { get; set; } = () => true;
+        public Func<Behavior, bool> Condition { get; set; } = _ => true;
 
         public string StateKey { get; set; }
 
