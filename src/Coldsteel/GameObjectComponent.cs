@@ -151,6 +151,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets game Data.
+        /// </summary>
+        protected object Data => GameObject?.Data;
+
+
+        /// <summary>
         /// Kills the GameObject and all its children.
         /// </summary>
         protected void Kill() => GameObject?.Kill();

@@ -55,6 +55,12 @@ namespace Coldsteel
 
 
         /// <summary>
+        /// Gets the current game state.
+        /// </summary>
+        public GameState GameState => World.GameState;
+
+
+        /// <summary>
         /// Gets the ParticleManager for internal use.
         /// </summary>
         internal ParticleManager Particles => World?.Particles;
@@ -130,6 +136,12 @@ namespace Coldsteel
         /// Gets the StateMachine component;
         /// </summary>
         public StateMachine StateMachine { get; private set; }
+
+
+        /// <summary>
+        /// Gets game Data.
+        /// </summary>
+        public object Data => GameState?.Data;
 
 
         /// <summary>

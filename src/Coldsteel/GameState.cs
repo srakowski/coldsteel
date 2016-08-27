@@ -23,6 +23,11 @@ namespace Coldsteel
 
         public Camera Camera { get; internal set; }
 
+        /// <summary>
+        /// User defined data, like a gameplay state model.
+        /// </summary>
+        public object Data { get; set; }
+
         public virtual void Preload() { }
 
         public virtual void Create() { }
