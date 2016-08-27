@@ -1,4 +1,5 @@
 ﻿using Coldsteel.Input;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,5 +29,7 @@ namespace Coldsteel.Input
                 return _controls[key];
             }
         }
+
+        public Vector2 MousePosition => InputDevices.CurrentMouseState.Position.ToVector2();
     }
 }

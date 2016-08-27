@@ -9,13 +9,9 @@ namespace Coldsteel
     {
         private GameTime _gameTime;
 
-        public float Delta
-        {
-            get
-            {
-                return (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
-            }
-        }
+        public float Delta => (float)_gameTime.ElapsedGameTime.TotalMilliseconds;
+
+        public float DeltaSeconds => (float)_gameTime.ElapsedGameTime.TotalSeconds;
 
         public GameTimeWrapper(GameTime gameTime)
         {
