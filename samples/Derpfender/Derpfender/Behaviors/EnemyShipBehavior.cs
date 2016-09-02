@@ -1,62 +1,66 @@
-﻿using Coldsteel;
+﻿//using Coldsteel;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
-using Coldsteel.Renderers;
+using Coldsteel;
 using Microsoft.Xna.Framework.Graphics;
+using Coldsteel.Rendering;
 
 namespace Derpfender.Behaviors
 {
     class EnemyShipBehavior : Behavior
-    {        
+    {
         private Vector2 _direction;
 
         private float _speed = 0f;
 
-        private GameObject _camera;
-
         private Random _rand = new Random();
 
-        public EnemyShipBehavior(GameObject camera, Vector2 direction, float speed)
+        private ShakeBehavior _cameraShaker;
+
+        public EnemyShipBehavior(float speed, ShakeBehavior cameraShaker)
         {
-            _camera = camera;
-            direction.Normalize();
-            _direction = direction;
             _speed = speed;
+            _direction = new Vector2(-1, 0);
+            _cameraShaker = cameraShaker;
         }
 
-        public override void OnCollision(Collision collision)
+        public override void Update()
         {
-            if (collision.GameObject.Tag != "bullet")
+            this.Transform.Position += (_direction * _speed * GameTime.Delta);
+            if (this.Transform.Position.X < -24)
+                Kill();
+        }
+
+
+        public override void OnCollision(GameObject with)
+        {
+            var withGameObject = (with as GameObject);
+            if (!withGameObject.Tags.Contains("bullet"))
                 return;
 
-            GetComponent<Collider>().Enabled = false;
-            var audio = GetComponent<AudioSource>();
-            audio.Play(1, _rand.Next(-20, 21) / 100f, 0);
-            _camera.GetComponent<ShakeBehavior>().Shake();            
+            AudioSource.Play();
+            _cameraShaker.Shake();
             StartCoroutine(BeginRemove());
         }
 
         private IEnumerator BeginRemove()
         {
-            var renderer = GetComponent<SpriteRenderer>();
-            renderer.Texture = GetContent<Texture2D>("debris");
-            renderer.Layer = GetLayer("background");
+            var renderer = Renderer.As<SpriteRenderer>();
+            renderer.Image = Content.Images["debris"];
+            Add.ParticleEmitter("smoke");
+            Collider.Enabled = false;
+            Set.Layer("debris");
+            ParticleEmitter.Emit(300);
             for (byte a = 200; a > 30; a--)
             {
-                renderer.Alpha = a;
+                renderer.Alpha = a;                
                 yield return null;
             }
-            Destroy();
-        }
-
-        public override void Update(IGameTime gameTime)
-        {
-            this.Transform.Position += (_direction * _speed * gameTime.Delta);
-            if (this.Transform.Position.X < -24)
-                Destroy();
+            Kill();
         }
     }
 }

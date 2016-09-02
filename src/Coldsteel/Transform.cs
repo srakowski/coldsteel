@@ -1,45 +1,48 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Coldsteel.Physics;
 
 namespace Coldsteel
 {
     public class Transform : GameObjectComponent
     {
-        /// <summary>
-        /// Gets or sets the position relative to a parent game object.
-        /// </summary>
-        public Vector2 LocalPosition { get; set; } = Vector2.Zero;
+        internal IBody Body { get; set; }
 
-        /// <summary>
-        /// Gets the position of the parent. If none then the origin.
-        /// </summary>
-        private Vector2 ParentPosition
+        public Vector2 Velocity
         {
-            get
-            {
-                return this.GameObject?.Parent?.GetComponent<Transform>().Position ?? Vector2.Zero;
-            }
+            get { return Body.Velocity; }
+            set { Body.Velocity = value; }
         }
 
-        /// <summary>
-        /// Gets or sets the position of a GameObject relative to the Parent's Transform position or the origin.
-        /// </summary>
         public Vector2 Position
         {
-            get { return this.LocalPosition + this.ParentPosition; }
-            set { this.LocalPosition = value - this.ParentPosition; }
+            get { return Body.Position + (GameObject?.Parent?.Transform?.Position ?? Vector2.Zero); }
+            set { Body.Position = value - (GameObject?.Parent?.Transform?.Position ?? Vector2.Zero); }
         }
 
-        /// <summary>
-        /// Gets or sets the Rotation of a GameObject (in Radians).
-        /// </summary>
-        public float Rotation { get; set; } = 0f;
+        public Vector2 LocalPosition
+        {
+            get { return Body.Position; }
+            set { Body.Position = value; }
+        }
 
-        /// <summary>
-        /// Gets or sets the Scale of the GameObject.
-        /// </summary>
-        public float Scale { get; set; } = 1f;
+        public float Rotation
+        {
+            get { return Body.Rotation; }
+            set { Body.Rotation = value; }
+        }
+
+        public override void Initialize()
+        {
+            Body = Body ?? World.PhysicalWorld.CreateBody(this.GameObject);
+        }
+
+        public override void Dispose()
+        {
+            Body?.Dispose();
+            Body = null;
+        }
     }
 }

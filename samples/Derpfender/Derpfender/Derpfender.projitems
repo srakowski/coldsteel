@@ -17,7 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\SpawnEnemyBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarMoveBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Stages\GameplayStage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Stages\MainMenuStage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\GameplayState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)States\MainMenuState.cs" />
   </ItemGroup>
 </Project>

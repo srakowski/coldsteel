@@ -1,8 +1,5 @@
 ﻿using Coldsteel;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Derpfender.Behaviors
 {
@@ -15,9 +12,9 @@ namespace Derpfender.Behaviors
             _speed = alpha / 5000F;
         }
 
-        public override void Update(IGameTime gameTime)
+        public override void Update()
         {
-            this.Transform.Position += new Vector2(-1, 0) * _speed * gameTime.Delta;
+            this.Transform.Position += new Vector2(-1, 0) * _speed * GameTime.Delta;
             if (this.Transform.Position.X < 0)
                 this.Transform.Position += new Vector2(1280, 0);
         }

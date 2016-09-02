@@ -7,5 +7,6 @@ namespace Coldsteel
     public interface IGameTime
     {
         float Delta { get; }
+        float DeltaSeconds { get; }
     }
 }

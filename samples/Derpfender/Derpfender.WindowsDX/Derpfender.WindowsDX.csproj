@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\MenuFont.spritefont" />
+    <None Include="Content\menu.spritefont" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

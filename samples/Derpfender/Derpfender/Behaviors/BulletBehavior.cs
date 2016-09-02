@@ -1,11 +1,7 @@
 ﻿using Coldsteel;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using Coldsteel.Renderers;
-using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
+using Coldsteel.Rendering;
 
 namespace Derpfender.Behaviors
 {
@@ -23,25 +19,27 @@ namespace Derpfender.Behaviors
             _direction = direction;
         }
 
-        public override void OnCollision(Collision collision)
+        public override void OnCollision(GameObject with)
         {
-            if (collision.GameObject.Tag != "enemy")
+            if (!with.Tags.Contains("enemy"))
                 return;
 
-            Destroy();
+            Kill();
         }
 
-        public override void Update(IGameTime gameTime)
+        public override void Update()
         {
+            ParticleEmitter?.Emit(100);
+
             if (!_swappedTexture)
             {
-                GetComponent<SpriteRenderer>().Texture = GetContent<Texture2D>("bullet");
+                Renderer.As<SpriteRenderer>().Image = Content.Images["bullet"];
                 _swappedTexture = true;
-            }            
+            }
 
-            this.Transform.Position += (_direction * _speed * gameTime.Delta);
+            this.Transform.Position += (_direction * _speed * GameTime.Delta);
             if (this.Transform.Position.X > 1280)
-                Destroy();
+                Kill();
         }
     }
 }

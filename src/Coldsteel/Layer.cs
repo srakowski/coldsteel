@@ -1,123 +1,69 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Coldsteel.Rendering;
 
 namespace Coldsteel
 {
-    /// <summary>
-    /// Represents a layer where things are rendered. Anything belonging to layer should be rendered in that layer.
-    /// </summary>
     public class Layer
     {
-        public string Name { get; private set; }
+        private List<IRenderer> _renderers = new List<IRenderer>();
+
+        private string _key;
+
+        public string Key => _key;
+
+        private int _sortIndex;
+
+        public int SortIndex => _sortIndex;
 
         public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
 
+        public Layer SetSpriteSortMode(SpriteSortMode spriteSortMode)
+        {
+            SpriteSortMode = spriteSortMode;
+            return this;
+        }
+
         public BlendState BlendState { get; set; } = null;
+
+        public Layer SetBlendState(BlendState blendState)
+        {
+            BlendState = blendState;
+            return this;
+        }
 
         public SamplerState SamplerState { get; set; } = null;
 
-        internal Matrix TransformMatrix { get; set; } = Matrix.Identity;       
-
-        internal Rectangle Bounds { get; set; }
-
-        private SpriteBatch _spriteBatch;
-
-        /// <summary>
-        /// Create a Layer with the provided SpriteBatch.
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        public Layer(string name, SpriteBatch spriteBatch)
+        public Layer SetSamplerState(SamplerState samplerState)
         {
-            Name = name;
-            _spriteBatch = spriteBatch;
+            SamplerState = samplerState;
+            return this;
         }
 
-        /// <summary>
-        /// Begins the rendering of a layer.
-        /// </summary>
-        public void Begin()
+        public Layer(string key, int sortIndex)
         {
-            _spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, TransformMatrix);
+            this._key = key;
+            this._sortIndex = sortIndex;
         }
 
-        /// <summary>
-        /// Renders a Texture with the provided attributes
-        /// </summary>
-        /// <param name="texture"></param>
-        /// <param name="position"></param>
-        /// <param name="sourceRectangle"></param>
-        /// <param name="color"></param>
-        /// <param name="rotation"></param>
-        /// <param name="origin"></param>
-        /// <param name="scale"></param>
-        /// <param name="spriteEffects"></param>
-        /// <param name="layerDepth"></param>
-        public void Render(
-            Texture2D texture, 
-            Vector2 position,
-            Rectangle? sourceRectangle,
-            Color color,
-            float rotation,            
-            Vector2 origin,
-            float scale,
-            SpriteEffects spriteEffects,
-            float layerDepth)
+        internal void Render(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
-            _spriteBatch.Draw(texture, 
-                position, 
-                sourceRectangle, 
-                color, 
-                rotation, 
-                origin, 
-                scale, 
-                spriteEffects,
-                layerDepth);
+            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, camera.TransformationMatrix);
+            _renderers.ForEach(r => r.Render(gameTime, spriteBatch));
+            spriteBatch.End();
         }
 
-        /// <summary>
-        /// Renders the text with the provided attributes
-        /// </summary>
-        /// <param name="spriteFont"></param>
-        /// <param name="text"></param>
-        /// <param name="position"></param>
-        /// <param name="color"></param>
-        /// <param name="rotation"></param>
-        /// <param name="origin"></param>
-        /// <param name="scale"></param>
-        /// <param name="spriteEffects"></param>
-        /// <param name="layerDepth"></param>
-        public void RenderText(
-            SpriteFont spriteFont,
-            string text,
-            Vector2 position,
-            Color color,
-            float rotation,
-            Vector2 origin,
-            float scale,
-            SpriteEffects spriteEffects,
-            float layerDepth)
+        internal void AddRenderer(IRenderer renderer)
         {
-            _spriteBatch.DrawString(
-                spriteFont,
-                text,
-                position,
-                color,
-                rotation,
-                origin,
-                scale,
-                spriteEffects,
-                layerDepth);
+            _renderers.Add(renderer);
         }
 
-        /// <summary>
-        /// Actually renders the layer.
-        /// </summary>
-        public void End()
+        internal void RemoveRenderer(IRenderer renderer)
         {
-            _spriteBatch.End();
+            _renderers.Remove(renderer);
         }
     }
 }

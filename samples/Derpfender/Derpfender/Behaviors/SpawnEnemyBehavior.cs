@@ -1,13 +1,6 @@
 ﻿using Coldsteel;
-using Coldsteel.Colliders;
-using Coldsteel.Renderers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Derpfender.Behaviors
 {
@@ -17,18 +10,17 @@ namespace Derpfender.Behaviors
 
         private Random _rand = new Random();
 
-        private GameObject _camera;
-
         private int _spawnWait = 300;
 
-        public SpawnEnemyBehavior(GameObject camera)
+        private ShakeBehavior _cameraShaker;
+
+        public SpawnEnemyBehavior(ShakeBehavior cameraShaker)
         {
-            this._camera = camera;
+            _cameraShaker = cameraShaker;
         }
 
-        public override void Update(IGameTime gameTime)
+        public override void Update()
         {
-            base.Update(gameTime);
             if (_allowSpawn)
                 StartCoroutine(Spawn());
         }
@@ -36,14 +28,14 @@ namespace Derpfender.Behaviors
         private IEnumerator Spawn()
         {
             _allowSpawn = false;
-            AddGameObject(new GameObject("enemy")
-                .SetPosition(new Vector2(1300, _rand.Next(20, 700)))
-                .SetRotation((float)MathHelper.ToRadians(270))
-                .AddComponent(new SpriteRenderer(DefaultLayer, GetContent<Texture2D>("enemy")))
-                .AddComponent(new EnemyShipBehavior(_camera, new Vector2(-1, 0), _rand.Next(100, 200) / 1000f))
-                .AddComponent(new BoxCollider(24, 24))
-                .AddComponent(new AudioSource(GetContent<SoundEffect>("explode")))                
-                );
+            World.AddGameObject("enemy")
+                .Set.Position(1300, _rand.Next(20, 700))
+                .Set.RotationDegrees(270)
+                .Add.SpriteRenderer("enemy")
+                .Add.BoxCollider(24, 24)
+                .Add.AudioSource("explode")
+                .Add.Component(new EnemyShipBehavior(_rand.Next(100, 200) / 1000f, _cameraShaker));
+
             yield return WaitMSecs(_spawnWait);
             _allowSpawn = true;
         }

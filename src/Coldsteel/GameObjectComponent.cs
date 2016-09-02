@@ -1,48 +1,183 @@
-﻿using System;
+﻿using Coldsteel.Audio;
+using Coldsteel.Input;
+using Coldsteel.Particles;
+using Coldsteel.Physics;
+using Coldsteel.Rendering;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Coldsteel
 {
-    /// <summary>
-    /// A component of a GameObject.
-    /// </summary>
-    public abstract class GameObjectComponent
+    public class GameObjectComponent
     {
         /// <summary>
-        /// The GameObject this Behavior is atteched to.
+        /// Gets the game object this component is part of.
         /// </summary>
-        public GameObject GameObject { get; private set; }
+        public GameObject GameObject { get; internal set; }
+
 
         /// <summary>
-        /// Provides the ability to attach this behavior to a GameObject.
+        /// Gets any Tags assigned to the GameObject.
         /// </summary>
-        /// <param name="gameObject"></param>
-        internal void AttachGameObject(GameObject gameObject)
-        {
-            this.GameObject = gameObject;
-        }
+        protected string[] Tags => GameObject?.Tags;
+
 
         /// <summary>
-        /// Detaches the GameObject if attached.
+        /// Gets access to the GameObject's GameObjectConfigurator.
+        /// Use this to make common modifications to the GameObject.
         /// </summary>
-        /// <param name="gameObject"></param>
-        internal void DetachGameObject(GameObject gameObject)
-        {
-            if (this.GameObject != gameObject)
-                return;
+        protected GameObjectConfigurator Set => GameObject?.Set;
 
-            this.GameObject = null;
-        }
 
         /// <summary>
-        /// Gets the Transform of the GameObject this Behavior is applied to.
+        /// Gets access to the GameObject's GameObjectComponentAdder.
+        /// Use this to add componets to the GameObject.
         /// </summary>
-        protected Transform Transform { get { return GameObject?.GetComponent<Transform>(); } }
+        protected GameObjectComponentAdder Add => GameObject?.Add;
+
 
         /// <summary>
-        /// Update the Component.
+        /// Gets the GameStateManager use to swap game states.
         /// </summary>
-        public virtual void Update(IGameTime gameTime) { }
+        protected GameStateManager State => GameObject?.State;
+
+
+        /// <summary>
+        /// Gets the ContentManager. Use to load or retrieve game content such as images or sounds.
+        /// </summary>
+        protected ContentManager Content => GameObject?.Content;
+
+
+        /// <summary>
+        /// Gets the GameStage, represents the window/view the world is rendered on.
+        /// </summary>
+        protected GameStage Stage => GameObject?.Stage;
+
+
+        /// <summary>
+        /// Gets the World. This is where all game objects live.
+        /// </summary>
+        protected World World => GameObject?.World;
+
+
+        /// <summary>
+        /// Gets the ParticleManager.
+        /// </summary>
+        internal ParticleManager Particles => GameObject?.Particles;
+
+
+        /// <summary>
+        /// Gets the Camera used to look into to the World.
+        /// </summary>
+        protected Camera Camera => GameObject?.Camera;
+
+
+        /// <summary>
+        /// Gets the InputManager. Use this to evaluate controls.
+        /// </summary>
+        protected InputManager Input => GameObject?.Input;
+
+
+        /// <summary>
+        /// Gets the GameTime. Use this to make updates time independent.
+        /// </summary>
+        protected IGameTime GameTime => GameObject?.GameTime;
+
+
+        /// <summary>
+        /// Gets the Transform component assigned to the GameObject. 
+        /// Defines the Position, Rotation, and Scale of the game object in the World.
+        /// </summary>
+        protected Transform Transform => GameObject?.Transform;
+
+
+        /// <summary>
+        /// Gets the Collider component assigned to the GameObject.
+        /// A shape or fixture that may collide with other objects in the World.
+        /// </summary>
+        protected Collider Collider => GameObject?.Collider;
+
+
+        /// <summary>
+        /// Gets the RigidBody components assigned to the GameObject.
+        /// Gives the GameObject physical properties that respond to forces such as gravity.
+        /// </summary>
+        protected RigidBody RigidBody => GameObject?.RigidBody;
+
+
+        /// <summary>
+        /// Gets the AudioSource component assigned to the GameObject.
+        /// Used to emit audio sound effects.
+        /// </summary>
+        protected AudioSource AudioSource => GameObject?.AudioSource;
+
+
+        /// <summary>
+        /// Gets the ParticleEmitter component assigned to the GameObject.
+        /// Used to emit particles duh.
+        /// </summary>
+        protected ParticleEmitter ParticleEmitter => GameObject?.ParticleEmitter;
+
+
+        /// <summary>
+        /// Gets the Renderer component assigned to the GameObject;
+        /// </summary>
+        protected Renderer Renderer => GameObject?.Renderer;
+
+
+        /// <summary>
+        /// Gets the AnimationManager if Renderer is SpriteSheetRenderer.
+        /// </summary>
+        protected AnimationManager Animations => GameObject?.Animations;
+
+
+        /// <summary>
+        /// Gets the Behavior components assigne to the GameObject.
+        /// These are user defined classes that drive the behavior of the GameObject.
+        /// </summary>
+        protected IEnumerable<Behavior> Behaviors => GameObject?.Behaviors;
+
+
+        /// <summary>
+        /// Gets the StateMachine component assigned to the GameObject.
+        /// Use this to force state swaps.
+        /// </summary>
+        protected StateMachine StateMachine => GameObject?.StateMachine;
+
+
+        /// <summary>
+        /// Gets the Layer this GameObject belongs to.
+        /// </summary>
+        protected Layer Layer => GameObject?.Layer;
+
+
+        /// <summary>
+        /// Gets game Data.
+        /// </summary>
+        protected object Data => GameObject?.Data;
+
+
+        /// <summary>
+        /// Kills the GameObject and all its children.
+        /// </summary>
+        protected void Kill() => GameObject?.Kill();
+
+
+        /// <summary>
+        /// Called after the GameObject is assigned and this component
+        /// has access to everything it may need to do stuff.
+        /// </summary>
+        public virtual void Initialize() { }
+
+
+        /// <summary>
+        /// Called if the Component is about to be removed from the GameObject.
+        /// </summary>
+        public virtual void Dispose() { }
+
+
+        /// <summary>
+        /// Called when the GameObject is updated.
+        /// </summary>
+        public virtual void Update() { }
     }
 }

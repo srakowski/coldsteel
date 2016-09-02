@@ -18,7 +18,7 @@ namespace Coldsteel
         public Coroutine(IEnumerator coroutine)
         {
             this._done = false;
-            this._coroutine = coroutine;            
+            this._coroutine = coroutine;
         }
 
         /// <summary>
