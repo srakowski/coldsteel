@@ -29,9 +29,7 @@ namespace Derpfender.States
 
             CreateStarField();
             Layers.Add("debris", -1)
-                .SetBlendState(BlendState.NonPremultiplied)
-                .SetFixedToCamera(true);
-            Layers.Default.FixedToCamera = true;
+                .SetBlendState(BlendState.NonPremultiplied);
 
             World.AddGameObject("ship")
                 .Set.Position(60, 360)
@@ -51,8 +49,7 @@ namespace Derpfender.States
         {
             Layers.Add("starfield", -2)
                 .SetBlendState(BlendState.NonPremultiplied)
-                .SetSamplerState(SamplerState.PointClamp)
-                .SetFixedToCamera(true);
+                .SetSamplerState(SamplerState.PointClamp);
 
             var rand = new Random();
             foreach (var color in StarColors(rand))

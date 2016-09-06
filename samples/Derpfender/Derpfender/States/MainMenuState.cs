@@ -20,7 +20,6 @@ namespace Derpfender.States
         public override void Create()
         {
             CreateStarField();
-            Layers.Default.SetFixedToCamera(true);
 
             var mainMenu = World.AddGameObject()
                 .Set.Position(200, 200)
@@ -45,8 +44,7 @@ namespace Derpfender.States
         {
             Layers.Add("starfield", -1)
                 .SetBlendState(BlendState.NonPremultiplied)
-                .SetSamplerState(SamplerState.PointClamp)
-                .SetFixedToCamera(true);
+                .SetSamplerState(SamplerState.PointClamp);
 
             var rand = new Random();
             foreach (var color in StarColors(rand))
