@@ -23,7 +23,7 @@ namespace Derpfender
             Input.AddButtonControl("Fire")
                 .Keyboard(Keys.Space);
 
-            this.State.Start<MainMenuState>();
+            State.Start<MainMenuState>();
         }
     }
 }

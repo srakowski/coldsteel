@@ -137,17 +137,15 @@ namespace Coldsteel
         /// </summary>
         public StateMachine StateMachine { get; private set; }
 
+        /// <summary>
+        /// Gets the AnimationManager.
+        /// </summary>
+        public AnimationManager Animations { get; private set; }
 
         /// <summary>
         /// Gets game Data.
         /// </summary>
         public object Data => GameState?.Data;
-
-
-        /// <summary>
-        /// Gets the AnimationManager, if SpriteSheetRenderer present.
-        /// </summary>
-        public AnimationManager Animations => Renderer?.As<SpriteSheetRenderer>()?.Animations;
 
 
         private Layer _layer;
@@ -263,6 +261,7 @@ namespace Coldsteel
             this.AudioSource = component as AudioSource ?? AudioSource;
             this.ParticleEmitter = component as ParticleEmitter ?? ParticleEmitter;
             this.StateMachine = component as StateMachine ?? StateMachine;
+            this.Animations = component as AnimationManager ?? Animations;
             if (component is Behavior)
                 _behaviors.Add(component as Behavior);
 
@@ -304,6 +303,7 @@ namespace Coldsteel
             this.GameTime = new GameTimeWrapper(gameTime);
             StateMachine?.Update();
             ForEachBehavior(b => b.Update());
+            this.Animations?.Update();
             this.Renderer?.Update();
         }
 

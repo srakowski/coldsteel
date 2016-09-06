@@ -12,9 +12,11 @@ namespace Coldsteel
         {
             get
             {
+                var screenCenter = Matrix.CreateTranslation(new Vector3((Stage?.Width * 0.5f ?? 0), (Stage?.Height * 0.5f ?? 0), 0f));
                 var translation = Matrix.CreateTranslation(new Vector3(-(Transform?.Position.X ?? 0), -(Transform?.Position.Y ?? 0), 0f));
                 var rotation = Matrix.CreateRotationZ(Transform?.Rotation ?? 0);
                 return Matrix.Identity *
+                    screenCenter *
                     translation *
                     rotation;
             }

@@ -10,7 +10,7 @@ namespace Coldsteel.Rendering
     {
         private SpriteSheet _spriteSheet;
 
-        public AnimationManager Animations { get; private set; }
+        public int Frame { get; set; } = 0;
 
         public SpriteSheetRenderer(SpriteSheet spriteSheet)
             : base(spriteSheet.Image)
@@ -18,13 +18,11 @@ namespace Coldsteel.Rendering
             _spriteSheet = spriteSheet;
             this.Origin = spriteSheet.Origin;
             this.SourceRectangle = spriteSheet[0];
-            this.Animations = new AnimationManager();
         }
 
         public override void Update()
         {
-            this.Animations.Update(GameTime);
-            this.SourceRectangle = _spriteSheet[this.Animations.CurrentFrame];
+            this.SourceRectangle = _spriteSheet[this.Frame];
         }
     }
 }

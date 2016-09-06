@@ -43,15 +43,25 @@ namespace Coldsteel
             return this;
         }
 
-        public Layer(string key, int sortIndex)
+        public bool FixedToCamera { get; set; } = false;
+
+        public Layer SetFixedToCamera(bool value)
+        {
+            FixedToCamera = value;
+            return this;
+        }
+
+        public Layer(string key, int sortIndex, bool fixedToCamera = false)
         {
             this._key = key;
             this._sortIndex = sortIndex;
+            this.FixedToCamera = fixedToCamera;
         }
 
         internal void Render(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
-            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, camera.TransformationMatrix);
+            var matrix = FixedToCamera ? (Matrix?)null : camera.TransformationMatrix;
+            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, matrix);
             _renderers.ForEach(r => r.Render(gameTime, spriteBatch));
             spriteBatch.End();
         }

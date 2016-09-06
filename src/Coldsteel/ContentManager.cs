@@ -53,6 +53,15 @@ namespace Coldsteel
             _soundEffects.Add(name, _content.Load<SoundEffect>(path ?? name));
         }
 
+        private Dictionary<string, Effect> _effects = new Dictionary<string, Effect>();
+
+        public IDictionary<string, Effect> Effects => _effects;
+
+        public void Effect(string name, string path = null)
+        {
+            _effects.Add(name, _content.Load<Effect>(path ?? name));
+        }
+
         internal void Reset()
         {
             _images.Clear();

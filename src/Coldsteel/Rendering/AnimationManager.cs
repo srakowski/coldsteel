@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Coldsteel.Rendering
 {
-    public class AnimationManager
+    public class AnimationManager : GameObjectComponent
     {
         internal int CurrentFrame { get { return _currentAnimation?.CurrentFrame ?? 0;  } }
 
@@ -20,11 +20,12 @@ namespace Coldsteel.Rendering
 
             _currentAnimation = _animations[key];
             _currentAnimation.Reset();
+            Renderer.As<SpriteSheetRenderer>().Frame = _currentAnimation.CurrentFrame;
         }
 
-        internal void Update(IGameTime gameTime)
+        internal void Update()
         {
-            _currentAnimation?.Update(gameTime);
+            _currentAnimation?.Update(GameTime);
         }
 
         public void Add(string key, int frame)

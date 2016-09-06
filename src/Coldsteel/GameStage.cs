@@ -10,6 +10,10 @@ namespace Coldsteel
     {
         public Color BackgroundColor { get; set; }
 
+        public float Width => _graphicsDevice.Viewport.Width;
+
+        public float Height => _graphicsDevice.Viewport.Height;
+
         private GraphicsDevice _graphicsDevice;
 
         private SpriteBatch _spriteBatch;
