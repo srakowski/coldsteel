@@ -6,7 +6,7 @@ namespace Coldsteel.Rendering
 {
     public class AnimationManager : GameObjectComponent
     {
-        internal int CurrentFrame { get { return _currentAnimation?.CurrentFrame ?? 0;  } }
+        internal int CurrentFrame { get { return _currentAnimation?.CurrentFrame ?? 0; } }
 
         private Dictionary<string, AnimationState> _animations = new Dictionary<string, AnimationState>();
 
@@ -26,6 +26,7 @@ namespace Coldsteel.Rendering
         internal void Update()
         {
             _currentAnimation?.Update(GameTime);
+            Renderer.As<SpriteSheetRenderer>().Frame = _currentAnimation.CurrentFrame;
         }
 
         public void Add(string key, int frame)
