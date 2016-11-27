@@ -1,7 +1,6 @@
 ﻿using Coldsteel.Audio;
 using Coldsteel.Input;
 using Coldsteel.Particles;
-using Coldsteel.Physics;
 using Coldsteel.Rendering;
 using System.Collections.Generic;
 
@@ -88,20 +87,6 @@ namespace Coldsteel
         /// Defines the Position, Rotation, and Scale of the game object in the World.
         /// </summary>
         protected Transform Transform => GameObject?.Transform;
-
-
-        /// <summary>
-        /// Gets the Collider component assigned to the GameObject.
-        /// A shape or fixture that may collide with other objects in the World.
-        /// </summary>
-        protected Collider Collider => GameObject?.Collider;
-
-
-        /// <summary>
-        /// Gets the RigidBody components assigned to the GameObject.
-        /// Gives the GameObject physical properties that respond to forces such as gravity.
-        /// </summary>
-        protected RigidBody RigidBody => GameObject?.RigidBody;
 
 
         /// <summary>

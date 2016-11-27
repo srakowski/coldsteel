@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Coldsteel.Particles;
-using Coldsteel.Physics;
 using Microsoft.Xna.Framework;
 
 namespace Coldsteel
@@ -13,24 +12,13 @@ namespace Coldsteel
 
         private List<GameObject> _gameObjects = new List<GameObject>();
 
-        private PhysicalWorld _physicalWorld;
-
-        internal PhysicalWorld PhysicalWorld => _physicalWorld;
-
         private ParticleManager _particles;
 
         internal ParticleManager Particles => _particles;
 
-        public Vector2 Gravity
-        {
-            get { return PhysicalWorld?.Gravity ?? Vector2.Zero; }
-            set { PhysicalWorld.Gravity = value; }
-        }
-
         internal World(GameState gameState, ParticleManager particles)
         {
             GameState = gameState;
-            _physicalWorld = new PhysicalWorld();
             _particles = particles;
         }
 
@@ -56,7 +44,6 @@ namespace Coldsteel
 
         internal void Update(GameTime gameTime)
         {
-            _physicalWorld.Update(gameTime);
             var gameObjectsToUpdate = _gameObjects.ToArray();
             foreach (var go in gameObjectsToUpdate)
                 go.Update(gameTime);

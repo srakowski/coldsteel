@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using Coldsteel.Rendering;
-using Coldsteel.Physics;
 
 namespace Coldsteel
 {
@@ -12,8 +11,6 @@ namespace Coldsteel
         public Renderer Renderer => GameObject?.Renderer;
 
         public ContentManager Content => GameObject?.Content;
-
-        public Collider Collider => GameObject?.Collider;
 
         public GameObject AddGameObject(params string[] tags) => GameObject.AddGameObject(tags);
 

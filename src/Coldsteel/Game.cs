@@ -1,5 +1,4 @@
 ﻿using Coldsteel.Input;
-using FarseerPhysics;
 using System;
 
 namespace Coldsteel
@@ -24,7 +23,6 @@ namespace Coldsteel
             Input = new InputManager();
             State = new GameStateManager(Input, _content, Stage);
             _gameImpl.State = State;
-            ConvertUnits.SetDisplayUnitToSimUnitRatio(64f);
         }
 
         public abstract void Initialize();

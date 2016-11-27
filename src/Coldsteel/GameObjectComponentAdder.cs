@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Coldsteel.Audio;
 using Coldsteel.Rendering;
-using Coldsteel.Physics;
 using Microsoft.Xna.Framework;
 using Coldsteel.Particles;
 
@@ -61,18 +60,6 @@ namespace Coldsteel
         public GameObject Component(GameObjectComponent component)
         {
             _gameObject.AddGameObjectComponent(component);
-            return _gameObject;
-        }
-
-        public GameObject BoxCollider(int width, int height)
-        {
-            _gameObject.AddGameObjectComponent(new BoxCollider(width, height));
-            return _gameObject;
-        }
-
-        public GameObject RigidBody()
-        {
-            _gameObject.AddGameObjectComponent(new RigidBody());
             return _gameObject;
         }
 

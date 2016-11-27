@@ -4,7 +4,6 @@ using Coldsteel.Audio;
 using Coldsteel.Input;
 using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
-using Coldsteel.Physics;
 using Coldsteel.Particles;
 
 namespace Coldsteel
@@ -106,18 +105,6 @@ namespace Coldsteel
         /// Gets the Tranform.
         /// </summary>
         public Transform Transform { get; private set; }
-
-
-        /// <summary>
-        /// Gets the RigidBody.
-        /// </summary>
-        public RigidBody RigidBody { get; private set; }
-
-
-        /// <summary>
-        /// Gets the Collider.
-        /// </summary>
-        public Collider Collider { get; private set; }
 
 
         /// <summary>
@@ -256,8 +243,6 @@ namespace Coldsteel
 
             this.Transform = component as Transform ?? Transform;
             this.Renderer = component as Renderer ?? Renderer;
-            this.Collider = component as Collider ?? Collider;
-            this.RigidBody = component as RigidBody ?? RigidBody;
             this.AudioSource = component as AudioSource ?? AudioSource;
             this.ParticleEmitter = component as ParticleEmitter ?? ParticleEmitter;
             this.StateMachine = component as StateMachine ?? StateMachine;
