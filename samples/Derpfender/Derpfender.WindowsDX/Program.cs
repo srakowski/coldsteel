@@ -1,5 +1,4 @@
-﻿using Coldsteel;
-using System;
+﻿using System;
 
 namespace Derpfender.WindowsDX
 {

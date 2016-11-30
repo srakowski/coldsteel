@@ -1,29 +1,26 @@
-﻿using System;
-using Coldsteel;
-using Derpfender.States;
+﻿using Coldsteel;
+using Derpfender.Scenes;
+//using Derpfender.States;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Derpfender
 {
+    /// <summary>
+    /// This is the main type for your game.
+    /// </summary>
     public class DerpfenderGame : Game
     {
-        public override void Initialize()
+        GraphicsDeviceManager _graphics;
+
+        public DerpfenderGame()
         {
-            Input.AddButtonControl("MenuUp")
-                .Keyboard(Keys.W, Keys.Up);
-            Input.AddButtonControl("MenuDown")
-                .Keyboard(Keys.S, Keys.Down);
-            Input.AddButtonControl("MenuSelect")
-                .Keyboard(Keys.Space, Keys.Enter);
-
-            Input.AddButtonControl("MoveUp")
-                .Keyboard(Keys.W, Keys.Up);
-            Input.AddButtonControl("MoveDown")
-                .Keyboard(Keys.S, Keys.Down);
-            Input.AddButtonControl("Fire")
-                .Keyboard(Keys.Space);
-
-            State.Start<MainMenuState>();
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            var coldsteel = new ColdsteelGameComponent(this);
+            Components.Add(coldsteel);
+            coldsteel.Start<MainMenuScene>();
         }
     }
 }

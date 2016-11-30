@@ -3,24 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25914.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel", "Coldsteel\Coldsteel.shproj", "{EA8CA643-FB39-4B22-94C2-A5D120A87A25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{BC2046AE-0A43-4708-857C-2103BE5C0B67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{A3224CBB-4CF3-499D-8493-C103653F5BBB}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel", "Coldsteel\Coldsteel.shproj", "{D349864B-9945-411F-8888-5A7EC658C4F3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Coldsteel\Coldsteel.projitems*{a3224cbb-4cf3-499d-8493-c103653f5bbb}*SharedItemsImports = 4
-		Coldsteel\Coldsteel.projitems*{ea8ca643-fb39-4b22-94c2-a5d120a87a25}*SharedItemsImports = 13
+		Coldsteel\Coldsteel.projitems*{bc2046ae-0a43-4708-857c-2103be5c0b67}*SharedItemsImports = 4
+		Coldsteel\Coldsteel.projitems*{d349864b-9945-411f-8888-5a7ec658c4f3}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A3224CBB-4CF3-499D-8493-C103653F5BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3224CBB-4CF3-499D-8493-C103653F5BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3224CBB-4CF3-499D-8493-C103653F5BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3224CBB-4CF3-499D-8493-C103653F5BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
