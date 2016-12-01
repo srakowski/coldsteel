@@ -11,17 +11,14 @@ namespace Coldsteel
 
         public ColdsteelGameComponent(Game game) : base(game)
         {
-            _sceneManager = new SceneManager(game.Content);
+            _sceneManager = new SceneManager(game);
         }
 
         public void Start<T>() where T : Scene, new() =>
             _sceneManager.Start<T>();
 
-        public override void Initialize()
-        {
-            base.Initialize();
+        public override void Initialize() =>
             _sceneManager.Initialize();
-        }
 
         public override void Update(GameTime gameTime) =>
             _sceneManager.Update(gameTime);

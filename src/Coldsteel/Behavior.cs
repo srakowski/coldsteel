@@ -1,4 +1,5 @@
 ﻿using Coldsteel.Components;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,9 @@ namespace Coldsteel
 
         protected InputManager Input { get; set; }
 
-        public virtual void Initialize() { }
+        public GameTime GameTime { get; internal set; }
+
+        public float Delta => (float)(GameTime?.ElapsedGameTime.TotalMilliseconds ?? 0f);
 
         public virtual void Update() { }
     }

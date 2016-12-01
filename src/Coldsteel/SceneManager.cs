@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Coldsteel
@@ -14,10 +15,19 @@ namespace Coldsteel
 
         private bool _initialized;
 
-        internal SceneManager(ContentManager contentManager)
+        private Game _game;
+
+        private RenderingManager _renderingManager;
+
+        private ScriptingManager _scriptingManager;
+
+        internal SceneManager(Game game)
         {
-            _content = new ContentBundle(contentManager);
+            _game = game;
+            _content = new ContentBundle(game.Content);
             _initialized = false;
+            _scriptingManager = new ScriptingManager(game);
+            _renderingManager = new RenderingManager(game);
         }
 
         public void Start<T>() where T : Scene, new()
@@ -30,16 +40,18 @@ namespace Coldsteel
 
         internal void Initialize()
         {
+            _scriptingManager.Initialize();
+            _renderingManager.Initialize();
             _initialized = true;
             if (_pendingScene != null)
                 LoadPendingScene();
         }
 
         internal void Update(GameTime gameTime) =>
-            _activeScene.Update(gameTime);
+            _scriptingManager.Update(gameTime, _activeScene);
 
         internal void Render(GameTime gameTime) =>
-            _activeScene.Render(gameTime);
+            _renderingManager.Render(_activeScene);
 
         private void LoadPendingScene()
         {
@@ -49,8 +61,8 @@ namespace Coldsteel
             pendingScene.SceneManager = this;
             pendingScene.Content = _content;
             pendingScene.Configure();
+            pendingScene.Initialize();
             _activeScene = pendingScene;
-            _content.Load();
         }
 
         private void UnloadActiveScene()

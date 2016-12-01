@@ -7,5 +7,7 @@ namespace Coldsteel.Components
     public interface IComponent
     {
         GameObject GameObject { get; set; }
+
+        void Initialize();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Coldsteel.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,11 @@ namespace Coldsteel
 {
     public class Layer
     {
-        private string _name;
+        public string Name { get; private set; }
 
-        private int _depth;
+        public bool IsDefault => Name == "default";
+
+        public int Order { get; set; }
 
         public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
 
@@ -28,8 +31,19 @@ namespace Coldsteel
 
         public Layer(string name, int depth)
         {
-            this._name = name;
-            this._depth = depth;
+            this.Name = name;
+            this.Order = depth;
+        }
+
+        internal void Render(SpriteBatch spriteBatch, IEnumerable<Renderer> renderers)
+        {
+            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState,
+                DepthStencilState, RasterizerState, Effect, TransformMatrix);
+
+            foreach (var renderer in renderers)
+                renderer.Render(spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }

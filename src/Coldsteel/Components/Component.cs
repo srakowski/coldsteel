@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Coldsteel
 {
-    public class Component : IComponent
+    public abstract class Component : IComponent
     {
         public GameObject GameObject { get; set; }
+        public virtual void Initialize() { }
     }
 }

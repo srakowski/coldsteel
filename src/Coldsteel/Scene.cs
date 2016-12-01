@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Linq;
+using Coldsteel.Components;
 
 namespace Coldsteel
 {
@@ -12,22 +14,19 @@ namespace Coldsteel
 
         public ContentBundle Content { get; internal set; }
 
-        protected LayerCollection Layers { get; private set; } = new LayerCollection();
+        public LayerCollection Layers { get; private set; }
 
-        protected GameObjectCollection GameObjects { get; private set; } = new GameObjectCollection();
+        public GameObjectCollection GameObjects { get; private set; }
+
+        public Scene()
+        {
+            Layers = new LayerCollection();
+            GameObjects = new GameObjectCollection(this);
+        }
 
         public abstract void Configure();
 
-        internal void Initialize()
-        {
-        }
-
-        internal void Update(GameTime gameTime)
-        {
-        }
-
-        internal void Render(GameTime gameTime)
-        {
-        }
+        internal void Initialize() =>
+            GameObjects.Initialize();
     }
 }

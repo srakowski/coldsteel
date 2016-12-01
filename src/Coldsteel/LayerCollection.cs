@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,11 @@ namespace Coldsteel
     public class LayerCollection : IEnumerable<Layer>
     {
         private List<Layer> _layers = new List<Layer>();
+
+        public LayerCollection()
+        {
+            Add(new Layer("default", 0));
+        }
 
         public void Add(Layer layer)
         {
