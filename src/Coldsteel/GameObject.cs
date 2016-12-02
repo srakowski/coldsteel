@@ -5,6 +5,8 @@ namespace Coldsteel
 {
     public class GameObject
     {
+        public string Name { get; private set; }
+
         private List<IComponent> _components = new List<IComponent>();
 
         public IEnumerable<IComponent> Components => _components;
@@ -14,6 +16,11 @@ namespace Coldsteel
         public Scene Scene { get; internal set; }
 
         private bool _isInitialized = false;
+
+        public GameObject(string name = "")
+        {
+            Name = name;
+        }
 
         internal void Initialize()
         {
@@ -28,6 +35,6 @@ namespace Coldsteel
                 component.Initialize();
 
             _components.Add(component);
-        }
+        } 
     }
 }

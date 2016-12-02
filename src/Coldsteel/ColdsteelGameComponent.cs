@@ -9,6 +9,8 @@ namespace Coldsteel
     {
         private SceneManager _sceneManager;
 
+        internal SceneManager SceneManager => _sceneManager;
+
         public ColdsteelGameComponent(Game game) : base(game)
         {
             _sceneManager = new SceneManager(game);

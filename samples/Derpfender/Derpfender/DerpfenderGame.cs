@@ -1,4 +1,5 @@
 ﻿using Coldsteel;
+using Coldsteel.DeveloperTools;
 using Derpfender.Scenes;
 //using Derpfender.States;
 using Microsoft.Xna.Framework;
@@ -20,6 +21,7 @@ namespace Derpfender
             Content.RootDirectory = "Content";
             var coldsteel = new ColdsteelGameComponent(this);
             Components.Add(coldsteel);
+            coldsteel.UseDeveloperTools();
             coldsteel.Start<MainMenuScene>();
         }
     }

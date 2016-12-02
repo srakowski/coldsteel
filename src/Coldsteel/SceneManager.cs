@@ -21,6 +21,10 @@ namespace Coldsteel
 
         private ScriptingManager _scriptingManager;
 
+        internal event EventHandler<EventArgs> ActiveSceneChanged;
+
+        internal Scene ActiveScene => _activeScene;
+
         internal SceneManager(Game game)
         {
             _game = game;
@@ -63,6 +67,7 @@ namespace Coldsteel
             pendingScene.Configure();
             pendingScene.Initialize();
             _activeScene = pendingScene;
+            ActiveSceneChanged?.Invoke(this, null);
         }
 
         private void UnloadActiveScene()

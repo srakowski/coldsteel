@@ -58,6 +58,10 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Coldsteel.DeveloperTools\Coldsteel.DeveloperTools.csproj">
+      <Project>{29463ef2-9332-49dd-947b-87bfa01760bd}</Project>
+      <Name>Coldsteel.DeveloperTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\src\Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj">
       <Project>{bc2046ae-0a43-4708-857c-2103be5c0b67}</Project>
       <Name>Coldsteel.WindowsDX</Name>
