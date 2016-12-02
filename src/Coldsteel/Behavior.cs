@@ -10,7 +10,7 @@ namespace Coldsteel
     {
         protected Transform Transform => GameObject?.Transform;
 
-        protected InputManager Input { get; set; }
+        protected ControlsManager Controls => GameObject?.Scene?.Controls;
 
         public GameTime GameTime { get; internal set; }
 

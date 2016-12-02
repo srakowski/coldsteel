@@ -91,8 +91,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\ComponentViewModel.cs" />
+    <Compile Include="ViewModels\GameObjectComponentViewModel.cs" />
     <Compile Include="ViewModels\GameObjectViewModel.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
+    <Compile Include="ViewModels\TransformViewModel.cs" />
+    <Compile Include="Views\BindableSelectedItemBehavior.cs" />
     <Compile Include="Views\SceneView.xaml.cs">
       <DependentUpon>SceneView.xaml</DependentUpon>
     </Compile>

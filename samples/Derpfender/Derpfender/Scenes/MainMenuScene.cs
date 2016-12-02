@@ -1,9 +1,11 @@
 ﻿using Coldsteel;
 using Coldsteel.Components;
+using Coldsteel.Controls;
 using Derpfender.Behaviors;
 using Derpfender.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -16,26 +18,30 @@ namespace Derpfender.Scenes
             Content.Load<SpriteFont>("fonts/menu");
             Content.Load<Texture2D>("sprites/ship");
 
+            Controls.Add("MenuUp", new KeyboardButtonControl(Keys.Up));
+            Controls.Add("MenuDown", new KeyboardButtonControl(Keys.Down));
+            Controls.Add("MenuSelect", new KeyboardButtonControl(Keys.Enter));
+
             CreateStarField();
 
-            var mainMenu = new GameObject();
+            var mainMenu = new GameObject("mainMenu");
             mainMenu.Transform.Position = new Vector2(200, 200);
             mainMenu.Add(new TextRenderer("fonts/menu", "Derpfender"));
             GameObjects.Add(mainMenu);
 
-            var playOption = new GameObject();
+            var playOption = new GameObject("play");
             playOption.Transform.Position = new Vector2(40, 40);
             playOption.Add(new TextRenderer("fonts/menu", "Play"));
             playOption.Transform.SetParent(mainMenu.Transform);
             GameObjects.Add(playOption);
 
-            var exitOption = new GameObject();
+            var exitOption = new GameObject("exit");
             exitOption.Transform.Position = new Vector2(40, 80);
             exitOption.Add(new TextRenderer("fonts/menu", "Exit"));
             exitOption.Transform.SetParent(mainMenu.Transform);
             GameObjects.Add(exitOption);
 
-            var selectorShip = new GameObject();
+            var selectorShip = new GameObject("ship");
             selectorShip.Transform.Position = new Vector2(15, 53);
             selectorShip.Transform.Rotation = MathHelper.ToRadians(90);
             selectorShip.Add(new SpriteRenderer("sprites/ship"));
@@ -57,10 +63,12 @@ namespace Derpfender.Scenes
                 SamplerState = SamplerState.PointClamp
             });
 
+            var starField = new GameObject("starfield");
+
             var rand = new Random();
             foreach (var color in StarColors(rand))
             {
-                var star = new GameObject();
+                var star = new GameObject("star");
                 star.Transform.Position = new Vector2(rand.Next(0, 1280), rand.Next(0, 720));
                 star.Add(new SpriteRenderer("sprites/star")
                 {
@@ -68,8 +76,11 @@ namespace Derpfender.Scenes
                     Color = color
                 });
                 star.Add(new StarMoveBehavior(color.A));
+                star.Transform.SetParent(starField.Transform);
                 GameObjects.Add(star);
             }
+
+            GameObjects.Add(starField);
         }
 
         private IEnumerable<Color> StarColors(Random rand)

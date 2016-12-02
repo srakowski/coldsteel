@@ -6,5 +6,6 @@ namespace Coldsteel.Controls
 {
     public abstract class Control
     {
+        internal InputManager InputManager { get; set; }
     }
 }

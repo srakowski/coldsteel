@@ -7,6 +7,6 @@ namespace Coldsteel.Controls
 {
     public abstract class ButtonControl : Control
     {
-        public bool IsDown(PlayerIndex playerIndex = PlayerIndex.One) => false;
+        public abstract bool IsDown(PlayerIndex playerIndex = PlayerIndex.One);
     }
 }

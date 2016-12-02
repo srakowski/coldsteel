@@ -12,7 +12,9 @@ namespace Coldsteel
     {
         public SceneManager SceneManager { get; internal set; }
 
-        public ContentBundle Content { get; internal set; }
+        public ContentManager Content { get; internal set; }
+
+        public ControlsManager Controls { get; internal set; }
 
         public LayerCollection Layers { get; private set; }
 

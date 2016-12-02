@@ -11,15 +11,16 @@ namespace Coldsteel
 
         public IEnumerable<IComponent> Components => _components;
 
-        public Transform Transform { get; private set; } = new Transform();
+        public Transform Transform { get; private set; }
 
         public Scene Scene { get; internal set; }
 
         private bool _isInitialized = false;
 
-        public GameObject(string name = "")
+        public GameObject(string name)
         {
             Name = name;
+            Transform = new Transform(this);
         }
 
         internal void Initialize()

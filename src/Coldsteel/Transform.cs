@@ -1,10 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Coldsteel
 {
     public class Transform
     {
+        public GameObject GameObject { get; private set; }
+
         private Transform _parent;
+
+        private List<Transform> _children = new List<Transform>();
+        
+        public Transform Parent => _parent;
+
+        public IEnumerable<Transform> Children => _children;
 
         public Vector2 Position
         {
@@ -39,10 +48,15 @@ namespace Coldsteel
         internal Matrix InvertedTransformationMatrix =>
             Matrix.Invert(this.TransformationMatrix);
 
+        public Transform(GameObject gameObject)
+        {
+            this.GameObject = gameObject;
+        }
+
         public void SetParent(Transform parent)
         {
-            this._parent = parent;
-            // TODO: ensure no recursive parents
+            _parent = parent;
+            _parent._children.Add(this);
         }
     }
 }

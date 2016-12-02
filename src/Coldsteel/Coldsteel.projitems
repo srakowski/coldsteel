@@ -15,9 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\TextRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ContentBundle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Control.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\IComponent.cs" />
@@ -28,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RenderingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scope.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
   </ItemGroup>

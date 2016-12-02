@@ -11,11 +11,15 @@ namespace Coldsteel
 
         private Scene _pendingScene;
 
-        private ContentBundle _content;
+        private ContentManager _content;
+
+        private ControlsManager _controls;
 
         private bool _initialized;
 
         private Game _game;
+
+        private InputManager _inputManager;
 
         private RenderingManager _renderingManager;
 
@@ -28,10 +32,12 @@ namespace Coldsteel
         internal SceneManager(Game game)
         {
             _game = game;
-            _content = new ContentBundle(game.Content);
-            _initialized = false;
+            _content = new ContentManager(game.Content);
+            _inputManager = new InputManager(game);
+            _controls = new ControlsManager(_inputManager);
             _scriptingManager = new ScriptingManager(game);
             _renderingManager = new RenderingManager(game);
+            _initialized = false;
         }
 
         public void Start<T>() where T : Scene, new()
@@ -44,6 +50,7 @@ namespace Coldsteel
 
         internal void Initialize()
         {
+            _inputManager.Initialize();
             _scriptingManager.Initialize();
             _renderingManager.Initialize();
             _initialized = true;
@@ -51,8 +58,11 @@ namespace Coldsteel
                 LoadPendingScene();
         }
 
-        internal void Update(GameTime gameTime) =>
+        internal void Update(GameTime gameTime)
+        {
+            _inputManager.Update(gameTime);
             _scriptingManager.Update(gameTime, _activeScene);
+        }
 
         internal void Render(GameTime gameTime) =>
             _renderingManager.Render(_activeScene);
@@ -64,6 +74,7 @@ namespace Coldsteel
 
             pendingScene.SceneManager = this;
             pendingScene.Content = _content;
+            pendingScene.Controls = _controls;
             pendingScene.Configure();
             pendingScene.Initialize();
             _activeScene = pendingScene;
@@ -72,7 +83,8 @@ namespace Coldsteel
 
         private void UnloadActiveScene()
         {
-            _content.Unload();
+            _content.UnloadSceneContent();
+            _controls.UnloadSceneControls();
             _activeScene = null;
         }
     }
