@@ -3,17 +3,11 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>b38f9d18-c748-4e6e-a02a-2e82a07f31f1</SharedGUID>
+    <SharedGUID>3739e959-a7d9-4533-9029-e1c9687cc294</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>Derpfender</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuSelectBehavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarMoveBehavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\MenuOption.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\GameplayScene.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\MainMenuScene.cs" />
   </ItemGroup>
 </Project>

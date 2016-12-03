@@ -10,36 +10,18 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\bin\Windows\x86\Debug\Derpfender.WindowsDX.dll
+/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Configuration.WindowsDX.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin sprites/ship.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sprites/ship.png
+#begin game.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:game.xml
 
-#begin sprites/star.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sprites/star.png
-
-#begin fonts/menu.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:fonts/menu.spritefont
+#begin Scenes/mainMenu.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Scenes/mainMenu.xml
 

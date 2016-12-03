@@ -3,12 +3,13 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>dabb2852-9cf7-4bfe-b516-6c97ddee5df5</SharedGUID>
+    <SharedGUID>5b781e19-39a8-447b-81f6-fbc835f7163f</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Coldsteel</Import_RootNamespace>
+    <Import_RootNamespace>Coldsteel.Composition</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ColdsteelGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneCatalog.cs" />
   </ItemGroup>
 </Project>
