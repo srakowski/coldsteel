@@ -9,9 +9,6 @@
     <Import_RootNamespace>Derpfender</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Prefabs\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuSelectBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarMoveBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />

@@ -24,7 +24,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\IComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InputManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Prefab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LayerCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RenderingManager.cs" />
