@@ -5,72 +5,34 @@ using System;
 
 namespace Coldsteel.Core
 {
-    public class SceneManager
+    public class SceneManager : GameComponent
     {
-        public ISceneCatalog SceneCatalog { get; set; }
+        private SceneBuilder _sceneBuilder;
 
-        private Scene _activeScene;
+        public event EventHandler<EventArgs> ActiveSceneChanged;
 
-        private Scene _pendingScene;
+        public Scene ActiveScene { get; private set; }
 
-        private ContentManager _content;
+        public ISceneDirector SceneDirector { get; set; }
 
-        private ControlsManager _controls;
-
-        private bool _initialized;
-
-        private Game _game;
-
-        internal event EventHandler<EventArgs> ActiveSceneChanged;
-
-        internal Scene ActiveScene => _activeScene;
-
-        public SceneManager(Game game)
+        public SceneManager(Game game) : base(game)
         {
-            _game = game;
-            _content = new ContentManager(game.Content);
-            _controls = new ControlsManager();
-            _initialized = false;
+             _sceneBuilder = new SceneBuilder(Game.Content);
         }
 
-        public void Start()
+        public void Start(string sceneId) =>
+            SceneDirector.BeginConstruction(sceneId, _sceneBuilder);
+
+        public override void Update(GameTime gameTime)
         {
-
-        }
-
-        internal void Start(string sceneId)
-        {
-            UnloadActiveScene();
-            _pendingScene = SceneCatalog.Instantiate(sceneId);
-            if (_initialized)
-                LoadPendingScene();
-        }
-
-        public void Initialize()
-        {
-            _initialized = true;
-            if (_pendingScene != null)
-                LoadPendingScene();
-        }
-
-        private void LoadPendingScene()
-        {
-            var pendingScene = _pendingScene;
-            _pendingScene = null;
-
-            pendingScene.SceneManager = this;
-            pendingScene.Content = _content;
-            pendingScene.Controls = _controls;
-            pendingScene.Initialize();
-            _activeScene = pendingScene;
-            ActiveSceneChanged?.Invoke(this, null);
-        }
-
-        private void UnloadActiveScene()
-        {
-            _content.UnloadSceneContent();
-            _controls.UnloadSceneControls();
-            _activeScene = null;
+            SceneDirector.Update();
+            if (_sceneBuilder.HasResult)
+            {
+                var newScene = _sceneBuilder.GetResult();
+                newScene.Initialize();
+                ActiveScene = newScene;
+                ActiveSceneChanged?.Invoke(this, null);
+            }
         }
     }
 }

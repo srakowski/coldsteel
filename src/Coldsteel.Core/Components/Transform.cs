@@ -1,12 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
-namespace Coldsteel.Core
+namespace Coldsteel.Core.Components
 {
-    internal class Transform
+    public class Transform : Component
     {
-        public GameObject GameObject { get; private set; }
-
         private Transform _parent;
 
         private List<Transform> _children = new List<Transform>();
@@ -47,11 +45,6 @@ namespace Coldsteel.Core
 
         internal Matrix InvertedTransformationMatrix =>
             Matrix.Invert(this.TransformationMatrix);
-
-        public Transform(GameObject gameObject)
-        {
-            this.GameObject = gameObject;
-        }
 
         public void SetParent(Transform parent)
         {

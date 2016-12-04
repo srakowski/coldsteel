@@ -26,6 +26,7 @@ namespace Coldsteel
             _gameComposer = new GameComposer();
 
             _sceneManager = new SceneManager(this);
+            Components.Add(_sceneManager);
 
             _inputManager = new InputManager(this);
             Components.Add(_inputManager);
@@ -40,12 +41,9 @@ namespace Coldsteel
         protected override void Initialize()
         {
             base.Initialize();
-            Debugger.Break();
-            var gameConfig = Content.Load<Configuration.Game>("game");
-            _sceneManager.SceneCatalog = _gameComposer.Compose(Content, gameConfig);
-            _sceneManager.Start();
-
-            //_sceneManager.Initialize();
+            _gameComposer.Compose(Content);
+            _sceneManager.SceneDirector = _gameComposer.SceneDirector;
+            _sceneManager.Start(_gameComposer.StartingSceneId);
         }
     }
 }

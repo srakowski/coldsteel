@@ -8,6 +8,5 @@
     <Scenes>
       <Item>Scenes/mainMenu</Item>
     </Scenes>
-    <StartingSceneId>bc33809c-0b65-4974-851f-883f65875f93</StartingSceneId>
   </Asset>
 </XnaContent>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Coldsteel.Core.Controls
 {
-    internal abstract class Control
+    public abstract class Control
     {
     }
 }

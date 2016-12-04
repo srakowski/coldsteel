@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Coldsteel.Core.Components
 {
-    internal interface IComponent
+    public interface IComponent
     {
         GameObject GameObject { get; set; }
 

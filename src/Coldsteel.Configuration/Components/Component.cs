@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Coldsteel.Configuration
+namespace Coldsteel.Configuration.Components
 {
-    public class Layer : ConfigurationObject
+    public abstract class Component : ConfigurationObject
     {
     }
 }

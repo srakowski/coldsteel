@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Coldsteel.Configuration
+namespace Coldsteel.Configuration.Controls
 {
-    public class Content : ConfigurationObject
+    public class Control : ConfigurationObject
     {
         public string Name { get; set; }
-
-        public string Type { get; set; }
     }
 }

@@ -9,5 +9,7 @@
     <Import_RootNamespace>Derpfender</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuSelectBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MenuOption.cs" />
   </ItemGroup>
 </Project>

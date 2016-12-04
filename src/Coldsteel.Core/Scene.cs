@@ -10,20 +10,23 @@ namespace Coldsteel.Core
 {
     public class Scene
     {
-        internal SceneManager SceneManager { get; set; }
+        internal string Name { get; set; }
 
-        internal ContentManager Content { get; set; }
+        internal ContentCache Content { get; set; }
 
         internal ControlsManager Controls { get; set; }
 
-        internal LayerCollection Layers { get; private set; }
+        internal LayerCollection Layers { get; set; }
 
-        internal GameObjectCollection GameObjects { get; private set; }
+        internal GameObjectCollection GameObjects { get; set; }
 
         public Scene()
         {
-            Layers = new LayerCollection();
-            GameObjects = new GameObjectCollection(this);
+            this.Name = string.Empty;
+            this.Content = new ContentCache();
+            this.Controls = new ControlsManager();
+            this.Layers = new LayerCollection();
+            this.GameObjects = new GameObjectCollection(this);
         }
 
         internal void Initialize() =>

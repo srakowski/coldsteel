@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coldsteel.Configuration.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,7 +12,5 @@ namespace Coldsteel.Configuration
         public string[] Assemblies { get; set; }
 
         public string[] Scenes { get; set; }
-
-        public string StartingSceneId { get; set; }
     }
 }

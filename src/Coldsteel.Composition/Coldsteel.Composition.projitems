@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)GameComposer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneCatalog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjectDirector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneDirector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeHelper.cs" />
   </ItemGroup>
 </Project>

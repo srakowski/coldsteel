@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Coldsteel.Core.Components
 {
-    internal abstract class Behavior : Component
+    public abstract class Behavior : Component
     {
         protected Transform Transform => GameObject?.Transform;
 

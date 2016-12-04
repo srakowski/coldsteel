@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Coldsteel.Core.Controls
 {
-    internal abstract class ButtonControl : Control
+    public abstract class ButtonControl : Control
     {
         public abstract bool IsDown(PlayerIndex playerIndex = PlayerIndex.One);
     }

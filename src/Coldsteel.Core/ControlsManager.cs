@@ -5,42 +5,26 @@ using System.Text;
 
 namespace Coldsteel.Core
 {
-    internal class ControlsManager
+    public class ControlsManager
     {
         private Dictionary<string, Control> _gameControls = new Dictionary<string, Control>();
-
-        private Dictionary<string, Control> _sceneControls = new Dictionary<string, Control>();
 
         internal ControlsManager()
         {
         }
 
-        public void Add(string name, Control control, Scope scope = Scope.Game)
+        public void Add(string name, Control control)
         {
-            if (scope == Scope.Game)
-                _gameControls.Add(name, control);
-            else
-                _gameControls.Add(name, control);
+            _gameControls.Add(name, control);
         }
 
         public Control this[string controlName] =>
-            _sceneControls.ContainsKey(controlName) 
-                ? _sceneControls[controlName]
-                : _gameControls[controlName];
+            _gameControls[controlName];
 
         public T Get<T>(string controlName) where T : Control =>
             this[controlName] as T;
 
-        internal void UnloadSceneControls() =>
-            _sceneControls.Clear();
-
-        internal void UnloadGameControls() =>
+        internal void Unload() =>
             _gameControls.Clear();
-
-        internal void Unload()
-        {
-            UnloadSceneControls();
-            UnloadGameControls();
-        }
     }
 }

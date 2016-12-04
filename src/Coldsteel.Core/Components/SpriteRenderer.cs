@@ -6,31 +6,23 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Core.Components
 {
-    internal class SpriteRenderer : Renderer
+    public class SpriteRenderer : Renderer
     {
-        private Texture2D _texture;
-
         private Vector2 _origin;
 
-        private string _textureAssetName;
+        public Texture2D Texture2D { get; set; }
 
         public Color Color { get; set; } = Color.White;
 
-        public SpriteRenderer(string textureAssetName)
-        {
-            this._textureAssetName = textureAssetName;
-        }
-
         public override void Initialize()
         {
-            this._texture = GameObject.Scene.Content.Load<Texture2D>(_textureAssetName);
-            this._origin = new Vector2(_texture.Width * 0.5f, _texture.Height * 0.5f);
+            this._origin = new Vector2(Texture2D.Width * 0.5f, Texture2D.Height * 0.5f);
         }
 
         internal override void Render(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                this._texture,
+                this.Texture2D,
                 this.GameObject.Transform.Position,
                 null,
                 this.Color,

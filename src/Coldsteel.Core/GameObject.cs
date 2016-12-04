@@ -1,9 +1,10 @@
 ﻿using Coldsteel.Core.Components;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Coldsteel.Core
 {
-    internal class GameObject
+    public class GameObject
     {
         public string Name { get; private set; }
 
@@ -11,7 +12,8 @@ namespace Coldsteel.Core
 
         public IEnumerable<IComponent> Components => _components;
 
-        public Transform Transform { get; private set; }
+        // TODO: make this not lookup every time
+        public Transform Transform => _components.FirstOrDefault(c => c is Transform) as Transform;
 
         public Scene Scene { get; internal set; }
 
@@ -20,7 +22,6 @@ namespace Coldsteel.Core
         public GameObject(string name)
         {
             Name = name;
-            Transform = new Transform(this);
         }
 
         internal void Initialize()

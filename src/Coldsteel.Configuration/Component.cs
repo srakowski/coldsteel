@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Coldsteel
+namespace Coldsteel.Configuration
 {
-    interface IComponent
+    public abstract class Component
     {
     }
 }

@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Coldsteel.Core.WindowsDX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Core.WindowsDX.dll</HintPath>
+    </Reference>
     <Reference Include="Coldsteel.WindowsDX, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.WindowsDX.exe</HintPath>
@@ -57,7 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\game.xml" />
-    <Content Include="Content\Scenes\mainMenu.xml" />
+    <Content Include="Content\Scenes\mainMenu.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Sprites\ship.png" />
+    <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Content\Fonts\menu.spritefont" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
