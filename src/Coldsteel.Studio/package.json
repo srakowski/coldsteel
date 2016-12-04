@@ -1,0 +1,12 @@
+{
+  "name": "coldsteel.studio",
+  "version": "0.0.0",
+  "description": "Coldsteel.Studio",
+  "main": "main.js",
+  "author": {
+    "name": "srako"
+  },
+  "devDependencies": {
+    "electron": "^1.4.1"
+  }
+}

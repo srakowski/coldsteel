@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.Configuration.Win
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel.Configuration", "Coldsteel.Configuration\Coldsteel.Configuration.shproj", "{89538E76-38C5-48E8-9AE5-1A9908123034}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.Studio", "Coldsteel.Studio\Coldsteel.Studio.csproj", "{512C264F-5D7C-48FC-BBD5-944258E942EE}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Coldsteel.Studio", "Coldsteel.Studio\Coldsteel.Studio.njsproj", "{B0998AE1-2400-4251-923A-D1BC60C2AE17}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B882416E-B8CB-45C6-906F-4C47E4D95559}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B882416E-B8CB-45C6-906F-4C47E4D95559}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B882416E-B8CB-45C6-906F-4C47E4D95559}.Release|Any CPU.Build.0 = Release|Any CPU
-		{512C264F-5D7C-48FC-BBD5-944258E942EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{512C264F-5D7C-48FC-BBD5-944258E942EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{512C264F-5D7C-48FC-BBD5-944258E942EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{512C264F-5D7C-48FC-BBD5-944258E942EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0998AE1-2400-4251-923A-D1BC60C2AE17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0998AE1-2400-4251-923A-D1BC60C2AE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0998AE1-2400-4251-923A-D1BC60C2AE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0998AE1-2400-4251-923A-D1BC60C2AE17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
