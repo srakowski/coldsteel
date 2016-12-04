@@ -23,10 +23,16 @@ namespace Coldsteel.Core
                 return;
 
             var behaviors = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Behavior).Select(c => c as Behavior));
+
             foreach (var behavior in behaviors)
             {
                 behavior.GameTime = gameTime;
                 behavior.Update();
+            }
+
+            foreach (var behavior in behaviors)
+            {
+                behavior.UpdateCoroutines();
             }
         }
     }

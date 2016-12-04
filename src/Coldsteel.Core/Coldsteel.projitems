@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Control.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\KeyboardButtonControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectCollection.cs" />
@@ -36,5 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Transform.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\WaitYieldInstruction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\YieldInstruction.cs" />
   </ItemGroup>
 </Project>
