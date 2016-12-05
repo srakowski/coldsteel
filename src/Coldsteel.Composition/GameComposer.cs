@@ -17,22 +17,26 @@ namespace Coldsteel.Composition
 
         public void Compose(ContentManager content)
         {
-            var gameConfig = content.Load<Configuration.Game>("game");
-
-            foreach (var assembly in gameConfig.Assemblies)
-                Assembly.LoadFrom(assembly);
-
-            var sceneCatalog = new List<Configuration.Scene>();
-            foreach (var sceneConfig in gameConfig.Scenes)
+            try
             {
-                var scene = content.Load<Configuration.Scene>(sceneConfig);
-                sceneCatalog.Add(scene);
-                if (scene.IsStarting)
-                    StartingSceneId = scene.Id;
-            }
-            StartingSceneId = StartingSceneId ?? sceneCatalog.First().Id;
+                var gameConfig = content.Load<Configuration.Game>("game");
 
-            SceneDirector = new SceneDirector(sceneCatalog);
+                foreach (var assembly in gameConfig.Assemblies)
+                    Assembly.LoadFrom(assembly);
+
+                var sceneCatalog = new List<Configuration.Scene>();
+                foreach (var sceneConfig in gameConfig.Scenes)
+                {
+                    var scene = content.Load<Configuration.Scene>(sceneConfig);
+                    sceneCatalog.Add(scene);
+                    if (scene.IsStarting)
+                        StartingSceneId = scene.Id;
+                }
+                StartingSceneId = StartingSceneId ?? sceneCatalog.First().Id;
+
+                SceneDirector = new SceneDirector(sceneCatalog);
+            }
+            catch { }
         }
     }
 }

@@ -21,11 +21,11 @@ namespace Coldsteel.Core
         }
 
         public void Start(string sceneId) =>
-            SceneDirector.BeginConstruction(sceneId, _sceneBuilder);
+            SceneDirector?.BeginConstruction(sceneId, _sceneBuilder);
 
         public override void Update(GameTime gameTime)
         {
-            SceneDirector.Update();
+            SceneDirector?.Update();
             if (_sceneBuilder.HasResult)
             {
                 var newScene = _sceneBuilder.GetResult();

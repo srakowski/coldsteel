@@ -42,8 +42,11 @@ namespace Coldsteel
         {
             base.Initialize();
             _gameComposer.Compose(Content);
-            _sceneManager.SceneDirector = _gameComposer.SceneDirector;
-            _sceneManager.Start(_gameComposer.StartingSceneId);
+            if (_gameComposer.SceneDirector != null)
+            {
+                _sceneManager.SceneDirector = _gameComposer.SceneDirector;
+                _sceneManager.Start(_gameComposer.StartingSceneId);
+            }
         }
     }
 }
