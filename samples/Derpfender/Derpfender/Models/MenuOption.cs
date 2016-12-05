@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Derpfender.Models
 {
-    class MenuOption
+    public class MenuOption
     {
         public Vector2 SelectorPosition { get; private set; }
 

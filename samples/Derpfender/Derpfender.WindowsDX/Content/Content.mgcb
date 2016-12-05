@@ -10,10 +10,21 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Configuration.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin sprites/ship.png
+#begin game.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:game.xml
+
+#begin Scenes/mainMenu.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Scenes/mainMenu.xml
+
+#begin Sprites/ship.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,9 +34,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/ship.png
+/build:Sprites/ship.png
 
-#begin sprites/star.png
+#begin Sprites/star.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,11 +46,11 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/star.png
+/build:Sprites/star.png
 
-#begin fonts/menu.spritefont
+#begin Fonts/menu.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:fonts/menu.spritefont
+/build:Fonts/menu.spritefont
 

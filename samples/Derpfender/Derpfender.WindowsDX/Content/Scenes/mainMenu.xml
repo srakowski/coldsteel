@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+  <Asset Type="Coldsteel.Configuration.Scene">
+    <Id>mainMenuScene</Id>
+    <Name>Main Menu</Name>
+    <IsStarting>true</IsStarting>
+
+    <Content>
+      <Item>menuSpriteFont</Item>
+      <Item>shipTexture2D</Item>
+      <Item>starTexture2D</Item>
+    </Content>
+    
+    <Controls>
+
+      <Control Type="Coldsteel.Configuration.Controls.KeyboardButtonControl">
+        <Id>menuUpControl</Id>
+        <Name>MenuUp</Name>
+        <Key>W</Key>
+      </Control>
+
+      <Control Type="Coldsteel.Configuration.Controls.KeyboardButtonControl">
+        <Id>menuDownControl</Id>
+        <Name>MenuDown</Name>
+        <Key>S</Key>
+      </Control>
+
+      <Control Type="Coldsteel.Configuration.Controls.KeyboardButtonControl">
+        <Id>menuSelectControl</Id>
+        <Name>MenuSelect</Name>
+        <Key>Space</Key>
+      </Control>
+
+    </Controls>
+
+    <GameObjects>
+      
+      <GameObject>
+        <Id>mainMenuGameObject</Id>
+        <Name>mainMenu</Name>
+        <Components>
+          <Component Type="Coldsteel.Configuration.Components.Transform">
+            <Id>mainMenuGameObject_Transform</Id>
+            <Position>200 200</Position>
+          </Component>
+          <Component Type="Coldsteel.Configuration.Components.TextRenderer">
+            <Id>mainMenuGameObject_TextRenderer</Id>
+            <SpriteFont>
+              <Id>menuSpriteFont</Id>
+            </SpriteFont>
+            <Text>Derpfender</Text>
+          </Component>
+        </Components>
+      </GameObject>
+      
+      <GameObject>
+        <Id>playGameObject</Id>
+        <Name>play</Name>
+        <Components>
+          <Component Type="Coldsteel.Configuration.Components.Transform">
+            <Id>playGameObject_Transform</Id>
+            <Parent>
+              <Id>mainMenuGameObject_Transform</Id>
+            </Parent>
+            <Position>40 40</Position>
+          </Component>
+          <Component Type="Coldsteel.Configuration.Components.TextRenderer">
+            <Id>playGameObject_TextRenderer</Id>
+            <SpriteFont>
+              <Id>menuSpriteFont</Id>
+            </SpriteFont>
+            <Text>Play</Text>
+          </Component>
+        </Components>
+      </GameObject>
+
+      <GameObject>
+        <Id>exitGameObject</Id>
+        <Name>exit</Name>
+        <Components>
+          <Component Type="Coldsteel.Configuration.Components.Transform">
+            <Id>exitGameObject_Transform</Id>
+            <Parent>
+              <Id>mainMenuGameObject_Transform</Id>
+            </Parent>
+            <Position>40 80</Position>
+          </Component>
+          <Component Type="Coldsteel.Configuration.Components.TextRenderer">
+            <Id>exitGameObject_TextRenderer</Id>
+            <SpriteFont>
+              <Id>menuSpriteFont</Id>
+            </SpriteFont>
+            <Text>Exit</Text>
+          </Component>
+        </Components>
+      </GameObject>
+
+      <GameObject>
+        <Id>shipGameObject</Id>
+        <Name>ship</Name>
+        <Components>
+          <Component Type="Coldsteel.Configuration.Components.Transform">
+            <Id>shipGameObject_Transform</Id>
+            <Parent>
+              <Id>mainMenuGameObject_Transform</Id>
+            </Parent>
+            <Position>15 53</Position>
+            <Rotation>1.5708</Rotation>
+          </Component>
+          <Component Type="Coldsteel.Configuration.Components.SpriteRenderer">
+            <Id>shipGameObject_SpriteRenderer</Id>
+            <Texture2D>
+              <Id>shipTexture2D</Id>
+            </Texture2D>
+          </Component>
+        </Components>
+      </GameObject>
+
+    </GameObjects>
+  </Asset>
+</XnaContent>

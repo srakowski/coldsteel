@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8679F4C2-4800-44B5-B796-1990D4F631A8}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Derpfender.WindowsDX</RootNamespace>
-    <AssemblyName>Derpfender.WindowsDX</AssemblyName>
+    <AssemblyName>Behaviors</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -38,11 +38,19 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Coldsteel">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.exe</HintPath>
+    </Reference>
+    <Reference Include="Coldsteel.Core">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -50,28 +58,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\sprites\ship.png" />
-    <Content Include="Content\sprites\star.png" />
+    <Content Include="Content\game.xml" />
+    <Content Include="Content\Scenes\mainMenu.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Sprites\ship.png" />
+    <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Coldsteel.DeveloperTools\Coldsteel.DeveloperTools.csproj">
-      <Project>{29463ef2-9332-49dd-947b-87bfa01760bd}</Project>
-      <Name>Coldsteel.DeveloperTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj">
-      <Project>{bc2046ae-0a43-4708-857c-2103be5c0b67}</Project>
-      <Name>Coldsteel.WindowsDX</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\fonts\menu.spritefont" />
+    <None Include="Content\Fonts\menu.spritefont" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

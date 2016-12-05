@@ -1,5 +1,5 @@
-﻿using Coldsteel;
-using Coldsteel.Controls;
+﻿using Coldsteel.Core.Components;
+using Coldsteel.Core.Controls;
 using Derpfender.Models;
 using Microsoft.Xna.Framework;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Derpfender.Behaviors
 {
-    class MenuSelectBehavior : Behavior
+    public class MenuSelectBehavior : Behavior
     {
         private MenuOption[] _options;
 
@@ -20,9 +20,8 @@ namespace Derpfender.Behaviors
 
         private ButtonControl _menuSelect;
 
-        public MenuSelectBehavior(params MenuOption[] options)
+        public MenuSelectBehavior()
         {
-            _options = options;
             _selectedOption = 0;
         }
 

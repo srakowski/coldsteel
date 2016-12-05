@@ -3,22 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derpfender.WindowsDX", "Derpfender.WindowsDX\Derpfender.WindowsDX.csproj", "{8679F4C2-4800-44B5-B796-1990D4F631A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derpfender.WindowsDX", "Derpfender.WindowsDX\Derpfender.WindowsDX.csproj", "{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Derpfender", "Derpfender\Derpfender.shproj", "{B38F9D18-C748-4E6E-A02A-2E82A07F31F1}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel", "..\..\src\Coldsteel\Coldsteel.shproj", "{D349864B-9945-411F-8888-5A7EC658C4F3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "..\..\src\Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{BC2046AE-0A43-4708-857C-2103BE5C0B67}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.DeveloperTools", "..\..\src\Coldsteel.DeveloperTools\Coldsteel.DeveloperTools.csproj", "{29463EF2-9332-49DD-947B-87BFA01760BD}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Derpfender", "Derpfender\Derpfender.shproj", "{3739E959-A7D9-4533-9029-E1C9687CC294}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Derpfender\Derpfender.projitems*{8679f4c2-4800-44b5-b796-1990d4f631a8}*SharedItemsImports = 4
-		Derpfender\Derpfender.projitems*{b38f9d18-c748-4e6e-a02a-2e82a07f31f1}*SharedItemsImports = 13
-		..\..\src\Coldsteel\Coldsteel.projitems*{bc2046ae-0a43-4708-857c-2103be5c0b67}*SharedItemsImports = 4
-		..\..\src\Coldsteel\Coldsteel.projitems*{d349864b-9945-411f-8888-5a7ec658c4f3}*SharedItemsImports = 13
+		Derpfender\Derpfender.projitems*{3739e959-a7d9-4533-9029-e1c9687cc294}*SharedItemsImports = 13
+		Derpfender\Derpfender.projitems*{98a4eedd-005c-44b5-bca5-4f8a1171f8d2}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,29 +19,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Debug|Any CPU.Build.0 = Debug|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Debug|x86.ActiveCfg = Debug|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Debug|x86.Build.0 = Debug|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Release|Any CPU.ActiveCfg = Release|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Release|x86.ActiveCfg = Release|x86
-		{8679F4C2-4800-44B5-B796-1990D4F631A8}.Release|x86.Build.0 = Release|x86
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Debug|x86.Build.0 = Debug|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|x86.ActiveCfg = Release|Any CPU
-		{BC2046AE-0A43-4708-857C-2103BE5C0B67}.Release|x86.Build.0 = Release|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Debug|x86.Build.0 = Debug|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Release|x86.ActiveCfg = Release|Any CPU
-		{29463EF2-9332-49DD-947B-87BFA01760BD}.Release|x86.Build.0 = Release|Any CPU
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Debug|x86.ActiveCfg = Debug|x86
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Debug|x86.Build.0 = Debug|x86
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|Any CPU.ActiveCfg = Release|x86
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|x86.ActiveCfg = Release|x86
+		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
