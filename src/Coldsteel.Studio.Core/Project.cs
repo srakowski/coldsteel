@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Coldsteel.Studio.Core
         private string _projectPath;
 
         public string Name => Path.GetFileName(_projectPath);
+
+        private string ContentPipelineFilePath => Path.Combine(_projectPath, "content", "Content.mgcb");
 
         public Project(string projectPath)
         {
@@ -34,7 +37,17 @@ namespace Coldsteel.Studio.Core
 
         public void Run()
         {
+            // build content
+            var procStartInfo = new ProcessStartInfo(@"C:\Program Files (x86)\MSBuild\MonoGame\v3.0\MGCB\MGCB.exe");
+            procStartInfo.Arguments = $"/@:\"{ContentPipelineFilePath}\"";
+            procStartInfo.WorkingDirectory = Path.Combine(_projectPath, "content");
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.RedirectStandardOutput = true;
+            var proc = Process.Start(procStartInfo);
+            Console.WriteLine(proc.StandardOutput.ReadToEnd());
+            proc.WaitForExit();
 
+            Process.Start(Path.Combine(_projectPath, "bin", "Coldsteel.WindowsDX.exe"));
         }
 
         private void Initialize()
@@ -61,7 +74,7 @@ namespace Coldsteel.Studio.Core
             Directory.CreateDirectory(Path.Combine(_projectPath, "content"));
             CopyColdsteelFileToContent("gameLogo.png");
 
-            var contentPipelineFile = Path.Combine(_projectPath, "content", "Content.mgcb");
+            var contentPipelineFile = ContentPipelineFilePath;
             if (!File.Exists(contentPipelineFile))
 
                 File.WriteAllText(contentPipelineFile, @"
@@ -72,7 +85,7 @@ namespace Coldsteel.Studio.Core
 /platform:Windows
 /config:
 /profile:Reach
-/compress:False
+#/compress:False
 
 #-------------------------------- References --------------------------------#
 

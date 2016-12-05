@@ -47,7 +47,7 @@ namespace Coldsteel.Studio.Cli
                 case "init":
                     Console.Write("name: ");
                     var name = Console.ReadLine().Trim();
-                    var project = Project.Create(@"C:\Users\srako\Desktop\", name);
+                    var project = Project.Create(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), name);
                     if (shell)
                         ProjectShell(project);
                     break;
