@@ -37,6 +37,17 @@ namespace Coldsteel.Studio.Core
 
         public void Run()
         {
+            BuildContent();
+            StartGame();
+        }
+
+        private void StartGame()
+        {
+            Process.Start(Path.Combine(_projectPath, "bin", "Coldsteel.WindowsDX.exe"));
+        }
+
+        private void BuildContent()
+        {
             // build content
             var procStartInfo = new ProcessStartInfo(@"C:\Program Files (x86)\MSBuild\MonoGame\v3.0\MGCB\MGCB.exe");
             procStartInfo.Arguments = $"/@:\"{ContentPipelineFilePath}\"";
@@ -46,8 +57,6 @@ namespace Coldsteel.Studio.Core
             var proc = Process.Start(procStartInfo);
             Console.WriteLine(proc.StandardOutput.ReadToEnd());
             proc.WaitForExit();
-
-            Process.Start(Path.Combine(_projectPath, "bin", "Coldsteel.WindowsDX.exe"));
         }
 
         private void Initialize()
