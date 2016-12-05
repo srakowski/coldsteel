@@ -7,7 +7,7 @@
     <ProjectGuid>{B2F5E4B6-B29A-4143-8030-DA21A3B750CC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Coldsteel.WindowsDX</RootNamespace>
-    <AssemblyName>Coldsteel.WindowsDX</AssemblyName>
+    <AssemblyName>Coldsteel</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

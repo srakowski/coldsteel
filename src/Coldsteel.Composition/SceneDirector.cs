@@ -12,13 +12,16 @@ namespace Coldsteel.Composition
     {
         private IEnumerable<Configuration.Scene> _sceneCatalog;
 
+        private IEnumerable<Configuration.Content> _contentCatalog;
+
         private IEnumerator<string> _steps;
 
         private GameObjectBuilder _gameObjectBuilder;
 
-        public SceneDirector(IEnumerable<Configuration.Scene> sceneCatalog)
+        public SceneDirector(IEnumerable<Configuration.Scene> sceneCatalog, IEnumerable<Configuration.Content> contentCatalog)
         {
             _sceneCatalog = sceneCatalog;
+            _contentCatalog = contentCatalog;
             _gameObjectBuilder = new GameObjectBuilder();
         }
 
@@ -45,8 +48,9 @@ namespace Coldsteel.Composition
             sceneBuilder.Begin(scene.Name);
 
             if (scene.Content != null)
-                foreach (var content in scene.Content)
+                foreach (var contentId in scene.Content)
                 {
+                    var content = _contentCatalog.First(c => c.Id == contentId);
                     yield return $"loading {content.Name}";
                     var type = TypeHelper.FindType(content.Type);
                     var result = sceneBuilder.AddContent(type, content.Name);

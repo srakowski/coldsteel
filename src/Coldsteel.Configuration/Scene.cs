@@ -14,8 +14,8 @@ namespace Coldsteel.Configuration
         [ContentSerializer(Optional = true)]
         public bool IsStarting { get; set; }
 
-        [ContentSerializer(Optional = true, CollectionItemName = "Asset")]
-        public Content[] Content { get; set; }
+        [ContentSerializer(Optional = true)]
+        public string[] Content { get; set; }
 
         [ContentSerializer(Optional = true, CollectionItemName = "Control")]
         public Control[] Controls { get; set; }

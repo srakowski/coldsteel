@@ -10,8 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\bin\Windows\x86\Debug\Derpfender.WindowsDX.dll
-/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Configuration.WindowsDX.dll
+/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Configuration.dll
 
 #---------------------------------- Content ---------------------------------#
 

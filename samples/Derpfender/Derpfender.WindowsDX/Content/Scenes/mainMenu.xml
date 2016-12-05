@@ -4,25 +4,13 @@
     <Id>mainMenuScene</Id>
     <Name>Main Menu</Name>
     <IsStarting>true</IsStarting>
-    
-    <Content>
-      <Asset>
-        <Id>menuSpriteFont</Id>
-        <Name>Fonts/menu</Name>
-        <Type>Microsoft.Xna.Framework.Graphics.SpriteFont</Type>
-      </Asset>
-      <Asset>
-        <Id>shipTexture2D</Id>
-        <Name>Sprites/ship</Name>
-        <Type>Microsoft.Xna.Framework.Graphics.Texture2D</Type>
-      </Asset>
-      <Asset>
-        <Id>starTexture2D</Id>
-        <Name>Sprites/star</Name>
-        <Type>Microsoft.Xna.Framework.Graphics.Texture2D</Type>
-      </Asset>
-    </Content>
 
+    <Content>
+      <Item>menuSpriteFont</Item>
+      <Item>shipTexture2D</Item>
+      <Item>starTexture2D</Item>
+    </Content>
+    
     <Controls>
 
       <Control Type="Coldsteel.Configuration.Controls.KeyboardButtonControl">

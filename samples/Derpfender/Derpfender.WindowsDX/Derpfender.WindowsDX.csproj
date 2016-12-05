@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Derpfender.WindowsDX</RootNamespace>
-    <AssemblyName>Derpfender.WindowsDX</AssemblyName>
+    <AssemblyName>Behaviors</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -45,13 +45,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Coldsteel.Core.WindowsDX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Core.WindowsDX.dll</HintPath>
+    <Reference Include="Coldsteel">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.exe</HintPath>
     </Reference>
-    <Reference Include="Coldsteel.WindowsDX, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.WindowsDX.exe</HintPath>
+    <Reference Include="Coldsteel.Core">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Core.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>

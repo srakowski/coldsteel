@@ -43,7 +43,7 @@ namespace Coldsteel.Studio.Core
 
         private void StartGame()
         {
-            Process.Start(Path.Combine(_projectPath, "bin", "Coldsteel.WindowsDX.exe"));
+            Process.Start(Path.Combine(_projectPath, "bin", "Coldsteel.exe"));
         }
 
         private void BuildContent()
@@ -65,11 +65,11 @@ namespace Coldsteel.Studio.Core
             Directory.CreateDirectory(Path.Combine(_projectPath, "bin", "Content"));
             Directory.CreateDirectory(Path.Combine(_projectPath, "content"));
             // TODO: make this configurable list
-            CopyColdsteelFileToBin("Coldsteel.WindowsDX.exe");
+            CopyColdsteelFileToBin("Coldsteel.exe");
             CopyColdsteelFileToBin("SharpDX.XInput.dll");
-            CopyColdsteelFileToBin("Coldsteel.Composition.WindowsDX.dll");
-            CopyColdsteelFileToBin("Coldsteel.Configuration.WindowsDX.dll");
-            CopyColdsteelFileToBin("Coldsteel.Core.WindowsDX.dll");
+            CopyColdsteelFileToBin("Coldsteel.Composition.dll");
+            CopyColdsteelFileToBin("Coldsteel.Configuration.dll");
+            CopyColdsteelFileToBin("Coldsteel.Core.dll");
             CopyColdsteelFileToBin("MonoGame.Framework.dll");
             CopyColdsteelFileToBin("SharpDX.Direct2D1.dll");
             CopyColdsteelFileToBin("SharpDX.Direct3D9.dll");
@@ -98,7 +98,7 @@ namespace Coldsteel.Studio.Core
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\bin\Coldsteel.Configuration.WindowsDX.dll
+/reference:..\bin\Coldsteel.Configuration.dll
 
 #---------------------------------- Content ---------------------------------#
 

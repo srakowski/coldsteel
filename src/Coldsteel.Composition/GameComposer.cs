@@ -6,6 +6,7 @@ using System.Reflection;
 using Microsoft.Xna.Framework.Content;
 using Coldsteel.Core;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Coldsteel.Composition
 {
@@ -21,8 +22,7 @@ namespace Coldsteel.Composition
             {
                 var gameConfig = content.Load<Configuration.Game>("game");
 
-                foreach (var assembly in gameConfig.Assemblies)
-                    Assembly.LoadFrom(assembly);
+                Assembly.LoadFrom("Behaviors.dll");
 
                 var sceneCatalog = new List<Configuration.Scene>();
                 foreach (var sceneConfig in gameConfig.Scenes)
@@ -34,7 +34,7 @@ namespace Coldsteel.Composition
                 }
                 StartingSceneId = StartingSceneId ?? sceneCatalog.First().Id;
 
-                SceneDirector = new SceneDirector(sceneCatalog);
+                SceneDirector = new SceneDirector(sceneCatalog, gameConfig.Content);
             }
             catch { }
         }

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Coldsteel.Composition.WindowsDX</RootNamespace>
-    <AssemblyName>Coldsteel.Composition.WindowsDX</AssemblyName>
+    <AssemblyName>Coldsteel.Composition</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

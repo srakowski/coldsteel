@@ -9,7 +9,7 @@ namespace Coldsteel.Configuration
     {
         public string Title { get; set; }
 
-        public string[] Assemblies { get; set; }
+        public Content[] Content { get; set; }
 
         public string[] Scenes { get; set; }
     }
