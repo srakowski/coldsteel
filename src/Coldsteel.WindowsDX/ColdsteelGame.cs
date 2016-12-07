@@ -14,7 +14,7 @@ namespace Coldsteel
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Engine.Attach(this);
+            Components.Add(new Bootstrapper(this));
         }
     }
 }
