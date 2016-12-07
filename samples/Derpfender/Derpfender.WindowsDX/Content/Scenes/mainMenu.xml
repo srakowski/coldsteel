@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Coldsteel.Configuration.Scene">
-    <Id>mainMenuScene</Id>
-    <Name>Main Menu</Name>
-    <IsStarting>true</IsStarting>
+  <Asset Type="Coldsteel.Composition.SceneConfiguration">
+    <Name>MainMenu</Name>
+    <Elements>
+      <Element>
+        <Id>mainMenu</Id>
+        <Type>Coldsteel.GameObject</Type>
+      </Element>
+    </Elements>
 
-    <Content>
+    <!--<Content>
       <Item>menuSpriteFont</Item>
       <Item>shipTexture2D</Item>
       <Item>starTexture2D</Item>
@@ -116,6 +120,6 @@
         </Components>
       </GameObject>
 
-    </GameObjects>
+    </GameObjects>-->
   </Asset>
 </XnaContent>

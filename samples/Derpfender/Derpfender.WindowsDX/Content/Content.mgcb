@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Configuration.dll
+/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Composition.dll
 
 #---------------------------------- Content ---------------------------------#
 

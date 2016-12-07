@@ -46,10 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Coldsteel">
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.exe</HintPath>
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.exe</HintPath>
     </Reference>
     <Reference Include="Coldsteel.Core">
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Debug\Coldsteel.Core.dll</HintPath>
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Core.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>

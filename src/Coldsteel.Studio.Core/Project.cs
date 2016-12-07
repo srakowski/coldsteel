@@ -67,8 +67,6 @@ namespace Coldsteel.Studio.Core
             // TODO: make this configurable list
             CopyColdsteelFileToBin("Coldsteel.exe");
             CopyColdsteelFileToBin("SharpDX.XInput.dll");
-            CopyColdsteelFileToBin("Coldsteel.Composition.dll");
-            CopyColdsteelFileToBin("Coldsteel.Configuration.dll");
             CopyColdsteelFileToBin("Coldsteel.Core.dll");
             CopyColdsteelFileToBin("MonoGame.Framework.dll");
             CopyColdsteelFileToBin("SharpDX.Direct2D1.dll");

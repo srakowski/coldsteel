@@ -1,19 +1,22 @@
-﻿using Coldsteel.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Coldsteel.WindowsDX
 {
-    class Program
+#if WINDOWS || LINUX
+    /// <summary>
+    /// The main class.
+    /// </summary>
+    public static class Program
     {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
         [STAThread]
-        public static void Main()
+        static void Main()
         {
             using (var game = new ColdsteelGame())
                 game.Run();
         }
     }
+#endif
 }

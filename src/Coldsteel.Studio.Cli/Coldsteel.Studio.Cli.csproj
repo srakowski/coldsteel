@@ -49,25 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coldsteel.Composition.WindowsDX\Coldsteel.Composition.WindowsDX.csproj">
-      <Project>{5672f855-4408-4d31-9bba-8fedd0d95b87}</Project>
-      <Name>Coldsteel.Composition.WindowsDX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Coldsteel.Configuration.WindowsDX\Coldsteel.Configuration.WindowsDX.csproj">
-      <Project>{b882416e-b8cb-45c6-906f-4c47e4d95559}</Project>
-      <Name>Coldsteel.Configuration.WindowsDX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Coldsteel.Core.WindowsDX\Coldsteel.Core.WindowsDX.csproj">
-      <Project>{bc2046ae-0a43-4708-857c-2103be5c0b67}</Project>
-      <Name>Coldsteel.Core.WindowsDX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Coldsteel.Studio.Core\Coldsteel.Studio.Core.csproj">
       <Project>{530adcb0-9d5c-4af3-a293-67fa21098917}</Project>
       <Name>Coldsteel.Studio.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj">
-      <Project>{b2f5e4b6-b29a-4143-8030-da21a3b750cc}</Project>
-      <Name>Coldsteel.WindowsDX</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

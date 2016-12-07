@@ -1,29 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Coldsteel.Configuration.Game">
+  <Asset Type="Coldsteel.Composition.GameConfiguration">
     <Title>Derpfender</Title>
-    
-    <Content>
-      <Item>
-        <Id>menuSpriteFont</Id>
+    <InitialScene>MainMenu</InitialScene>
+    <Assets>
+      <Asset>
+        <Name>Scenes/mainMenu</Name>
+        <Type>Coldsteel.Composition.SceneConfiguration</Type>
+      </Asset>
+      <Asset>
         <Name>Fonts/menu</Name>
         <Type>Microsoft.Xna.Framework.Graphics.SpriteFont</Type>
-      </Item>
-      <Item>
-        <Id>shipTexture2D</Id>
+      </Asset>
+      <Asset>
         <Name>Sprites/ship</Name>
         <Type>Microsoft.Xna.Framework.Graphics.Texture2D</Type>
-      </Item>
-      <Item>
-        <Id>starTexture2D</Id>
+      </Asset>
+      <Asset>
         <Name>Sprites/star</Name>
         <Type>Microsoft.Xna.Framework.Graphics.Texture2D</Type>
-      </Item>
-    </Content>
-    
-    <Scenes>
-      <Item>Scenes/mainMenu</Item>
-    </Scenes>
-    
+      </Asset>
+    </Assets>
   </Asset>
 </XnaContent>
