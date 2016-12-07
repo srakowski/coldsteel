@@ -12,11 +12,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedSceneComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\ISceneBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\ReflectiveSceneBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentGameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WaitYieldInstruction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YieldInstruction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />

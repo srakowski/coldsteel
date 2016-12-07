@@ -14,7 +14,7 @@ namespace Coldsteel
     /// the numerically lowest and ending with the numerically highest. The
     /// order of numerically equal Order values is undefined.
     /// </summary>
-    public class Layer
+    public class Layer : ISceneElement
     {
         /// <summary>
         /// The Name of this layer, referenced by Renderers to identify the

@@ -9,8 +9,8 @@
     <ProjectGuid>{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Derpfender.WindowsDX</RootNamespace>
-    <AssemblyName>Behaviors</AssemblyName>
+    <RootNamespace>Derpfender</RootNamespace>
+    <AssemblyName>Derpfender</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -59,9 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\game.xml" />
-    <Content Include="Content\Scenes\mainMenu.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Sprites\ship.png" />
     <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />

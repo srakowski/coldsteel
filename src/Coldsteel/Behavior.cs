@@ -5,6 +5,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel
 {
@@ -27,6 +28,13 @@ namespace Coldsteel
         /// The time, in milleseconds, since the last update.
         /// </summary>
         public float Delta => (float)(GameTime?.ElapsedGameTime.TotalMilliseconds ?? 0f);
+
+        /// <summary>
+        /// The Transform of the GameObject.
+        /// </summary>
+        public new Transform Transform => base.Transform;
+
+        public virtual void Activate() { }
 
         public virtual void Update() { }
 
@@ -53,6 +61,8 @@ namespace Coldsteel
             _pendingCoroutines.Add(coroutine);
             return coroutine;
         }
+
+        internal override void Activate(ContentManager content) => Activate();
 
         internal void UpdateCoroutines()
         {

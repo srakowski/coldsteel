@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Composition.dll
+/reference:..\..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Core.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -18,11 +18,6 @@
 /importer:XmlImporter
 /processor:PassThroughProcessor
 /build:game.xml
-
-#begin Scenes/mainMenu.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:Scenes/mainMenu.xml
 
 #begin Sprites/ship.png
 /importer:TextureImporter

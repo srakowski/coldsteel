@@ -4,6 +4,7 @@
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel.Components
 {
@@ -13,6 +14,8 @@ namespace Coldsteel.Components
     public class TextRenderer : Renderer
     {
         private Vector2 _origin = Vector2.Zero;
+
+        private string _spriteFontAssetName;
 
         /// <summary>
         /// The SpriteFont to render the Text in.
@@ -28,6 +31,25 @@ namespace Coldsteel.Components
         /// The Color of the Text.
         /// </summary>
         public Color Color { get; set; } = Color.White;
+
+        /// <summary>
+        /// Constructs an empty TextRenderer.
+        /// </summary>
+        public TextRenderer() { }
+
+        /// <summary>
+        /// Constructs a TextRenderer with the assetName of the SpriteFont that will be 
+        /// loaded during the activation of the GameObject, and the initial text.
+        /// </summary>
+        /// <param name="textureAssetName"></param>
+        public TextRenderer(string spriteFontAssetName, string text)
+        {
+            _spriteFontAssetName = spriteFontAssetName;
+            Text = text;
+        }
+
+        internal override void Activate(ContentManager content) =>
+            SpriteFont = content.Load<SpriteFont>(_spriteFontAssetName);
 
         internal override void Render(SpriteBatch spriteBatch)
         {

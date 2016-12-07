@@ -4,6 +4,7 @@
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel.Components
 {
@@ -13,6 +14,8 @@ namespace Coldsteel.Components
     public class SpriteRenderer : Renderer
     {
         private Vector2 _origin;
+
+        private string _textureAssetName;
 
         private Texture2D _texture2D;
 
@@ -34,6 +37,24 @@ namespace Coldsteel.Components
         /// Color to tint the Sprite, White is none.
         /// </summary>
         public Color Color { get; set; } = Color.White;
+
+        /// <summary>
+        /// Constructs an empty SpriteRenderer.
+        /// </summary>
+        public SpriteRenderer() { }
+
+        /// <summary>
+        /// Constructs a SpriteRenderer with the textureAsset that will be loaded
+        /// during the activation of the GameObject.
+        /// </summary>
+        /// <param name="textureAssetName"></param>
+        public SpriteRenderer(string textureAssetName)
+        {
+            _textureAssetName = textureAssetName;
+        }
+
+        internal override void Activate(ContentManager content) =>
+            Texture2D = content.Load<Texture2D>(_textureAssetName);
 
         internal override void Render(SpriteBatch spriteBatch)
         {

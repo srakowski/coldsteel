@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections;
 using System.Reflection;
 
@@ -46,6 +47,11 @@ namespace Coldsteel
                 yield return $"loading assembly {reference}";
                 Assembly.LoadFrom(reference);
             }
+
+            yield return "creating scene composer";
+            var sceneComposerType = TypeHelper.FindType(gameConfiguration.SceneComposerType);
+            var sceneComposer = Activator.CreateInstance(sceneComposerType) as ISceneComposer;
+            Game.Services.AddService<ISceneComposer>(sceneComposer);
 
             yield return $"starting scene {gameConfiguration.StartupScene}";
             _sceneManager.Start(gameConfiguration.StartupScene);

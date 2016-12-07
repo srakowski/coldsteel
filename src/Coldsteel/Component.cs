@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Content;
 using System.Linq;
 
 namespace Coldsteel
@@ -14,6 +15,8 @@ namespace Coldsteel
     {
         public GameObject GameObject { get; internal set; }
 
-        internal Transform Transform => GameObject.Components.OfType<Transform>().First() as Transform;
+        internal Transform Transform => GameObject.Transform;
+
+        internal virtual void Activate(ContentManager content) { }
     }
 }

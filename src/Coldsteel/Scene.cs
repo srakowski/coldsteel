@@ -2,6 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +17,8 @@ namespace Coldsteel
         private List<GameObject> _gameObjects;
 
         private List<Layer> _layers;
+
+        private ContentManager _contentManager;
 
         /// <summary>
         /// The GameObjects present in this Scene.
@@ -52,7 +56,36 @@ namespace Coldsteel
         public Scene(IEnumerable<GameObject> gameObjects, IEnumerable<Layer> layers)
         {
             _gameObjects = new List<GameObject>(gameObjects);
-            _layers = new List<Layer>(_layers);
+            _layers = new List<Layer>(layers);
+            _layers.Add(new Layer(Scene.DefaultLayerName, 0));
+        }
+
+        /// <summary>
+        /// Adds a Layer to this Scene.
+        /// </summary>
+        /// <param name="layer"></param>
+        public void Add(Layer layer)
+        {
+            _layers.Add(layer);
+        }
+
+        /// <summary>
+        /// Adds a GameObject to this Scene.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void Add(GameObject gameObject)
+        {
+            _gameObjects.Add(gameObject);
+        }
+
+        internal void Add(ISceneElement sceneElement)
+        {
+            if (sceneElement is GameObject)
+                Add(sceneElement as GameObject);
+            else if (sceneElement is Layer)
+                Add(sceneElement as Layer);
+            else
+                throw new Exception($"unrecognized scene element type {sceneElement.GetType().Name}");
         }
 
         /// <summary>
@@ -60,8 +93,19 @@ namespace Coldsteel
         /// state. This call readies the GameObjects for gameplay. This must be
         /// called before the scene becomes the active scene.
         /// </summary>
-        internal void Activate()
+        internal void Activate(ContentManager contentManager)
         {
+            _contentManager = contentManager;
+            _gameObjects.ForEach(go => go.Activate(contentManager));
+        }
+
+        /// <summary>
+        /// Does any cleanup tasks required after this Scene is close.
+        /// </summary>
+        /// <param name="contentManager"></param>
+        internal void Deactivate()
+        {
+            _contentManager.Unload();
         }
     }
 }

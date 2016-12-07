@@ -17,6 +17,12 @@ namespace Coldsteel.Configuration
         public string[] References { get; set; }
 
         /// <summary>
+        /// The CLR Type of the SceneComposer to be used. The entered
+        /// type must derrive from ISceneComposer.
+        /// </summary>
+        public string SceneComposerType { get; set; }
+
+        /// <summary>
         /// The name of the Scene that should be loaded when the Game is Loaded.
         /// </summary>
         public string StartupScene { get; set; }
