@@ -13,7 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Registration\Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\TextRenderer.cs" />
