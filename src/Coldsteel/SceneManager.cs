@@ -15,8 +15,6 @@ namespace Coldsteel
     {
         private ISceneComposer _sceneComposer;
 
-        private ContentManager _activeSceneContentManager;
-
         private Scene _outgoingScene;
 
         private string _pendingScene;

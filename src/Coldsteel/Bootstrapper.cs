@@ -2,6 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Input;
+using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
@@ -16,13 +18,16 @@ namespace Coldsteel
     {
         private SceneManager _sceneManager;
 
+        private InputManager _inputManager;
+
         private IEnumerator _tasks;
 
         public Bootstrapper(Game game) : base(game)
         {
             _sceneManager = new SceneManager(game);
             game.Components.Add(_sceneManager);
-            game.Components.Add(new InputManager(game));
+            _inputManager = new InputManager(game);
+            game.Components.Add(_inputManager);
             game.Components.Add(new ScriptingManager(game));
             game.Components.Add(new RenderingManager(game));
         }
@@ -47,6 +52,13 @@ namespace Coldsteel
                 yield return $"loading assembly {reference}";
                 Assembly.LoadFrom(reference);
             }
+
+            yield return "creating game composer";
+            var gameComposerType = TypeHelper.FindType(gameConfiguration.GameComposerType);
+            var gameComposer = Activator.CreateInstance(gameComposerType) as IGameComposer;
+
+            yield return "configuring input";
+            gameComposer.ConfigureInput(_inputManager);
 
             yield return "creating scene composer";
             var sceneComposerType = TypeHelper.FindType(gameConfiguration.SceneComposerType);

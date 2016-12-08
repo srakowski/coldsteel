@@ -19,9 +19,11 @@ namespace Coldsteel.Composition
             Compose();
         }
 
-        public void ConfigureLayers() => AddPropertyValuesToScene<Layer>();
-
-        public void ConfigureGameObjects() => AddPropertyValuesToScene<GameObject>();
+        public void ConfigureScene()
+        {
+            AddPropertyValuesToScene<Layer>();
+            AddPropertyValuesToScene<GameObject>();
+        }
 
         public Scene GetResult() => _scene;
 

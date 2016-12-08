@@ -2,14 +2,16 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System.Collections.Generic;
+
 namespace Coldsteel.Composition
 {
     /// <summary>
-    /// Contract that defines the steps for building a scene.
+    /// Contract that defines the steps for configuring the game controls.
     /// </summary>
-    public interface ISceneBuilder
+    public interface IControlsBuilder
     {
-        void ConfigureScene();
-        Scene GetResult();
+        void ConfigureControls();
+        IEnumerable<IControl> GetResult();
     }
 }

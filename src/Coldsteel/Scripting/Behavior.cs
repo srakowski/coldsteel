@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 
-namespace Coldsteel
+namespace Coldsteel.Scripting
 {
     /// <summary>
     /// Developer defined GameObject behavior. This is the primary
@@ -33,6 +33,16 @@ namespace Coldsteel
         /// The Transform of the GameObject.
         /// </summary>
         public new Transform Transform => base.Transform;
+
+        /// <summary>
+        /// The SceneManager object.
+        /// </summary>
+        public ISceneManager SceneManager { get; internal set; }
+
+        /// <summary>
+        /// The InputManager object.
+        /// </summary>
+        public IInputManager Input { get; internal set; }
 
         public virtual void Activate() { }
 

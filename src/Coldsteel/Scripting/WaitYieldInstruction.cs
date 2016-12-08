@@ -5,7 +5,7 @@
 using Microsoft.Xna.Framework;
 using System;
 
-namespace Coldsteel
+namespace Coldsteel.Scripting
 {
     /// <summary>
     /// A yield instruction that informs the coroutinte to wait a specified 

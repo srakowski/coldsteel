@@ -12,16 +12,13 @@ namespace Coldsteel.Composition
     /// This scene composer is used when the developer has opted to manually
     /// compose a Scene in code. Looks for classes that implement ISceneBuilder
     /// </summary>
-    public class CodeBasedSceneComposer : ISceneComposer
+    internal class CodeBasedSceneComposer : ISceneComposer
     {
-        private List<Type> _sceneBuilderTypes;
+        private IEnumerable<Type> _sceneBuilderTypes;
 
         public CodeBasedSceneComposer()
         {
-            var sceneBuilderType = typeof(ISceneBuilder);
-            _sceneBuilderTypes = new List<Type>(AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())
-                .Where(t => sceneBuilderType.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract));
+            _sceneBuilderTypes = TypeHelper.FindConcreteClassesAssignableToType<ISceneBuilder>();
         }
 
         public Scene ComposeScene(string sceneName)
@@ -34,8 +31,7 @@ namespace Coldsteel.Composition
         private static Scene BuildScene(Type sceneBuilderType)
         {
             var sceneBuilder = Activator.CreateInstance(sceneBuilderType) as ISceneBuilder;
-            sceneBuilder.ConfigureLayers();
-            sceneBuilder.ConfigureGameObjects();
+            sceneBuilder.ConfigureScene();
             var scene = sceneBuilder.GetResult();
             return scene;
         }

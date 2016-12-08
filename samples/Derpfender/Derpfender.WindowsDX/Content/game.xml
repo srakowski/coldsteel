@@ -5,6 +5,7 @@
     <References>
       <Item>Derpfender.dll</Item>
     </References>
+    <GameComposerType>Coldsteel.Composition.CodeBasedGameComposer</GameComposerType>
     <SceneComposerType>Coldsteel.Composition.CodeBasedSceneComposer</SceneComposerType>
     <StartupScene>MainMenuScene</StartupScene>
   </Asset>

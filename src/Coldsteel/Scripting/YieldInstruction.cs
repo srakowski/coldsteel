@@ -2,14 +2,13 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-namespace Coldsteel.Composition
+namespace Coldsteel.Scripting
 {
     /// <summary>
-    /// Contract that defines the steps for building a scene.
+    /// Base class for all types of yield instructions returned
+    /// during coroutine execution.
     /// </summary>
-    public interface ISceneBuilder
+    public abstract class YieldInstruction
     {
-        void ConfigureScene();
-        Scene GetResult();
     }
 }

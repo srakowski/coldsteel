@@ -5,7 +5,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections;
 
-namespace Coldsteel
+namespace Coldsteel.Scripting
 {
     /// <summary>
     /// Encapsulates behavior logic whose execution is to be distributed

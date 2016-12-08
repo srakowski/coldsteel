@@ -17,6 +17,12 @@ namespace Coldsteel.Configuration
         public string[] References { get; set; }
 
         /// <summary>
+        /// The CLR Type of the GameComposer to be used. The entered
+        /// type must derrive from IGameComposer.
+        /// </summary>
+        public string GameComposerType { get; set; }
+
+        /// <summary>
         /// The CLR Type of the SceneComposer to be used. The entered
         /// type must derrive from ISceneComposer.
         /// </summary>

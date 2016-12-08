@@ -3,10 +3,11 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Coldsteel.Components;
+using Coldsteel.Input;
 using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace Coldsteel
+namespace Coldsteel.Scripting
 {
     /// <summary>
     /// Is responsible for updating developer defined scripts (Behaviors), and any
@@ -15,6 +16,8 @@ namespace Coldsteel
     internal class ScriptingManager : GameComponent
     {
         private ISceneManager _sceneManager;
+
+        private IInputManager _inputManager;
 
         public ScriptingManager(Game game)
             : base(game)
@@ -25,6 +28,7 @@ namespace Coldsteel
         {
             base.Initialize();
             _sceneManager = Game.Services.GetService<ISceneManager>();
+            _inputManager = Game.Services.GetService<IInputManager>();
         }
 
         public override void Update(GameTime gameTime)
@@ -36,7 +40,10 @@ namespace Coldsteel
 
             foreach (var behavior in behaviors)
             {
+                // TODO: maybe not set these every time?
                 behavior.GameTime = gameTime;
+                behavior.SceneManager = _sceneManager;
+                behavior.Input = _inputManager;
                 behavior.Update();
             }
 

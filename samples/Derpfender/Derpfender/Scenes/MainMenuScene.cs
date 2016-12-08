@@ -3,6 +3,7 @@ using Coldsteel;
 using Coldsteel.Fluent;
 using Coldsteel.Components;
 using Derpfender.Behaviors;
+using Derpfender.Models;
 
 namespace Derpfender.Scenes
 {
@@ -28,7 +29,7 @@ namespace Derpfender.Scenes
         public GameObject ShipSelector { get; } = new GameObject()
             .SetRotationInDegrees(90)
             .Add(new SpriteRenderer("sprites/ship"))
-            .Add(new MenuSelectBehavior());
+            .Add(new MainMenuBehavior());
 
         protected override void Compose()
         {
