@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedGameComposer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedSceneComposer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\IControlsBuilder.cs" />

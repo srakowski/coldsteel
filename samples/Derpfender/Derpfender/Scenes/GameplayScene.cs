@@ -22,10 +22,13 @@ namespace Derpfender.Scenes
             .SetName("ship") // TODO: constructor should accept name
             .SetPosition(60, 360)
             .SetRotationInDegrees(90)
-            .Add(new SpriteRenderer("sprites/ship"))
+            .Add(new SpriteRenderer("sprites/ship"));
             //.Add(new AudioSource("audio/fire")) TODO: implement
-            .Add(new ShipBehavior());
+            //.Add(new ShipBehavior());
 
+        public GameObject MainCamera { get; } = new GameObject()
+            .Add(new Camera())
+            .Add(new ShipBehavior());
 
     }
 }

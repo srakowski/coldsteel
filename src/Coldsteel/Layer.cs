@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -74,10 +75,13 @@ namespace Coldsteel
             this.Order = order;
         }
 
-        internal void Render(SpriteBatch spriteBatch, IEnumerable<Renderer> renderers)
+        internal void Render(SpriteBatch spriteBatch, IEnumerable<Renderer> renderers, Camera camera = null)
         {
+            var matrix = (camera?.Transform.TransformationMatrix ?? Matrix.Identity) *
+                (TransformMatrix ?? Matrix.Identity);
+
             spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState,
-                DepthStencilState, RasterizerState, Effect, TransformMatrix);
+                DepthStencilState, RasterizerState, Effect, matrix);
 
             foreach (var renderer in renderers)
                 renderer.Render(spriteBatch);

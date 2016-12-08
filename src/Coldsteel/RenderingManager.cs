@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
@@ -49,12 +50,15 @@ namespace Coldsteel
                 return;
             }
 
+            // TODO: don't look this up every frame mmkay?
+            var camera = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Camera)).Select(c => c as Camera).FirstOrDefault();
+
             // TODO: don't look this up every frame ok?
             var renderers = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Renderer).Select(c => c as Renderer));
             foreach (var layer in _sceneManager.ActiveScene.Layers.OrderBy(l => l.Order))
             {
                 var renderersThisLayer = renderers.Where(r => r.Layer == layer.Name || (layer.Name == Scene.DefaultLayerName && string.IsNullOrEmpty(r.Layer)));
-                layer.Render(_spriteBatch, renderersThisLayer);
+                layer.Render(_spriteBatch, renderersThisLayer, camera);
             }
         }
 
