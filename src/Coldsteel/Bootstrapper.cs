@@ -36,6 +36,7 @@ namespace Coldsteel
         {
             base.Initialize();
             var gameConfiguration = Game.Content.Load<Configuration.Game>("game");
+            Game.Window.Title = gameConfiguration.Title;
             _tasks = Begin(gameConfiguration);
         }
 

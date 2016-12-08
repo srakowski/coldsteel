@@ -3,13 +3,15 @@ using Coldsteel;
 using Coldsteel.Fluent;
 using Coldsteel.Components;
 using Derpfender.Behaviors;
-using Derpfender.Models;
+using Microsoft.Xna.Framework;
 
 namespace Derpfender.Scenes
 {
     public class MainMenuScene : ReflectiveSceneBuilder
     {
         private const string MenuFontAssetName = "fonts/menu";
+
+        public override Color BackgroundColor => Color.Black;
 
         public Layer StarField = new Layer("starfield", -1);
 

@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,12 @@ namespace Coldsteel
         /// Rendering Layers available to Renderer components in this Scene.
         /// </summary>
         public IEnumerable<Layer> Layers => _layers;
+
+        /// <summary>
+        /// When the graphics device is at the start of scene rendering, this determines
+        /// the background color of the scene.
+        /// </summary>
+        public Color BackgroundColor { get; set; } = Color.CornflowerBlue;
 
         /// <summary>
         /// Constructs an empty scene.

@@ -41,7 +41,7 @@ namespace Coldsteel
 
         public override void Draw(GameTime gameTime)
         {
-            Game.GraphicsDevice.Clear(new Color(55, 55, 55));
+            Game.GraphicsDevice.Clear(_sceneManager?.ActiveScene?.BackgroundColor ?? new Color(55, 55, 55));
 
             if (_sceneManager.ActiveScene == null)
             {
