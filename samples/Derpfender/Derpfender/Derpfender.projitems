@@ -11,10 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MainMenuBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ShipBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\ControlsBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MenuOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\GameplayScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\MainMenuScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\SpaceSceneBase.cs" />
   </ItemGroup>
 </Project>

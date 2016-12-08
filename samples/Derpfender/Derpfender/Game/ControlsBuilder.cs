@@ -8,31 +8,32 @@ namespace Derpfender.Game
 {
     public class ControlsBuilder : IControlsBuilder
     {
-        public ButtonControl MenuUp { get; } = new ButtonControl("MenuUp");
+        public ButtonControl Up { get; } = new ButtonControl("Up");
 
-        public ButtonControl MenuDown { get; } = new ButtonControl("MenuDown");
+        public ButtonControl Down { get; } = new ButtonControl("Down");
 
-        public ButtonControl MenuSelect { get; } = new ButtonControl("MenuSelect");
+        public ButtonControl Select { get; } = new ButtonControl("Select");
+
 
         public void ConfigureControls()
         {
-            MenuUp.AddBinding(new KeyboardButtonControlBinding(Keys.W));
-            MenuUp.AddBinding(new KeyboardButtonControlBinding(Keys.Up));
+            Up.AddBinding(new KeyboardButtonControlBinding(Keys.W));
+            Up.AddBinding(new KeyboardButtonControlBinding(Keys.Up));
 
-            MenuDown.AddBinding(new KeyboardButtonControlBinding(Keys.S));
-            MenuDown.AddBinding(new KeyboardButtonControlBinding(Keys.Down));
+            Down.AddBinding(new KeyboardButtonControlBinding(Keys.S));
+            Down.AddBinding(new KeyboardButtonControlBinding(Keys.Down));
 
-            MenuSelect.AddBinding(new KeyboardButtonControlBinding(Keys.Space));
-            MenuSelect.AddBinding(new KeyboardButtonControlBinding(Keys.Enter));
+            Select.AddBinding(new KeyboardButtonControlBinding(Keys.Space));
+            Select.AddBinding(new KeyboardButtonControlBinding(Keys.Enter));
         }
 
         public IEnumerable<IControl> GetResult()
         {
             return new IControl[]
             {
-                MenuUp,
-                MenuDown,
-                MenuSelect
+                Up,
+                Down,
+                Select
             };
         }
     }

@@ -26,19 +26,19 @@ namespace Derpfender.Behaviors
 
         public override void Update()
         {
-            if (Input.GetButtonControl("MenuUp").IsDown())
+            if (Input.GetButtonControl("Up").IsDown())
             {
                 _selectedOption--;
                 _selectedOption = MathHelper.Clamp(_selectedOption, 0, _options.Count - 1);
                 this.Transform.LocalPosition = _options[_selectedOption].SelectorPosition;
             }
-            else if (Input.GetButtonControl("MenuDown").IsDown())
+            else if (Input.GetButtonControl("Down").IsDown())
             {
                 _selectedOption++;
                 _selectedOption = MathHelper.Clamp(_selectedOption, 0, _options.Count - 1);
                 this.Transform.LocalPosition = _options[_selectedOption].SelectorPosition;
             }
-            else if (Input.GetButtonControl("MenuSelect").IsDown())
+            else if (Input.GetButtonControl("Select").IsDown())
             {
                 _options[_selectedOption].Invoke();
             }

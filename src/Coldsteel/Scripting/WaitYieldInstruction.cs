@@ -30,7 +30,7 @@ namespace Coldsteel.Scripting
         /// </summary>
         /// <param name="milleseconds"></param>
         /// <returns></returns>
-        public static WaitYieldInstruction CreateWaitYieldInstruction(int milleseconds)
+        public static WaitYieldInstruction Create(int milleseconds)
             => new WaitYieldInstruction((float)milleseconds);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Coldsteel.Scripting
         /// </summary>
         /// <param name="timespan"></param>
         /// <returns></returns>
-        public static WaitYieldInstruction CreateWaitYieldInstruction(TimeSpan timespan)
+        public static WaitYieldInstruction Create(TimeSpan timespan)
             => new WaitYieldInstruction((float)timespan.TotalMilliseconds);
     }
 }
