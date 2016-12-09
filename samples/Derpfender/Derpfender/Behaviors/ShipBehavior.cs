@@ -1,4 +1,7 @@
-﻿using Coldsteel.Scripting;
+﻿using Coldsteel;
+using Coldsteel.Components;
+using Coldsteel.Fluent;
+using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
@@ -34,10 +37,15 @@ namespace Derpfender.Behaviors
             _allowFire = false;
             //AudioSource.Play();
             //TODO: how to add stuff to the scene?
-            //World.AddGameObject("bullet")
-            //    .Set.Position(this.Transform.Position + new Vector2(24, 0))
-            //    .Add.SpriteRenderer("flash", Color.WhiteSmoke)
-            //    .Add.Component(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
+            SceneManager.ActiveScene.Add(new GameObject()
+                .SetPosition(this.Transform.Position)
+                .Add(new SpriteRenderer("Sprites/flash")
+                {
+                    Color = Color.WhiteSmoke
+                })
+                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
+
+            // TODO: collisions
             //    .Add.BoxCollider(10, 10);
 
             yield return WaitYieldInstruction.Create(_fireRate);

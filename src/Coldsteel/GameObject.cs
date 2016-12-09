@@ -5,6 +5,7 @@
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Coldsteel
 {
@@ -15,6 +16,10 @@ namespace Coldsteel
     public class GameObject : ISceneElement
     {
         private List<Component> _components;
+
+        private bool _activated = false;
+
+        private ContentManager _contentManager;
 
         /// <summary>
         /// The name of this GameObject.
@@ -31,6 +36,11 @@ namespace Coldsteel
         /// Gets the transform component of this GameObject.
         /// </summary>
         public Transform Transform => _components.OfType<Transform>().First();
+
+        /// <summary>
+        /// Whether or not this GameObject is destroyed.
+        /// </summary>
+        public bool IsDestroyed { get; private set; }
 
         /// <summary>
         /// Constructs an empty GameObject with only a Transform component.
@@ -56,6 +66,11 @@ namespace Coldsteel
         public void AddComponent(Component component)
         {
             _components.Add(component);
+            if (_activated)
+            {
+                component.GameObject = this;
+                component.Activate(_contentManager);
+            }
         }
 
         /// <summary>
@@ -65,11 +80,21 @@ namespace Coldsteel
         /// </summary>
         internal void Activate(ContentManager content)
         {
+            _contentManager = content;
+            _activated = true;
             _components.ForEach(c =>
             {
                 c.GameObject = this;
                 c.Activate(content);
             });
+        }
+
+        /// <summary>
+        /// Destroys the GameObject.
+        /// </summary>
+        internal void Destroy()
+        {
+            this.IsDestroyed = true;
         }
     }
 }

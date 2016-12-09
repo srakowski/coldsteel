@@ -9,6 +9,7 @@
     <Import_RootNamespace>Derpfender</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\BulletBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MainMenuBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ShipBehavior.cs" />

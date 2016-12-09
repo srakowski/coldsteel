@@ -44,6 +44,11 @@ namespace Coldsteel.Scripting
         /// </summary>
         public IInputManager Input { get; internal set; }
 
+        /// <summary>
+        /// Content manager used to dynamically load or retrieve content.
+        /// </summary>
+        public ContentManager Content { get; private set; }
+
         public virtual void Activate() { }
 
         public virtual void Update() { }
@@ -72,7 +77,16 @@ namespace Coldsteel.Scripting
             return coroutine;
         }
 
-        internal override void Activate(ContentManager content) => Activate();
+        public void Destroy(GameObject gameObject)
+        {
+            gameObject.Destroy();
+        }
+
+        internal override void Activate(ContentManager content)
+        {
+            this.Content = content;
+            Activate();
+        }
 
         internal void UpdateCoroutines()
         {

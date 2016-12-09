@@ -12,7 +12,7 @@ namespace Derpfender.Behaviors
 
         public StarBehavior(float alpha)
         {
-            _speed = alpha / 5000F; ;
+            _speed = alpha / 5000F;
         }
 
         public override void Update()

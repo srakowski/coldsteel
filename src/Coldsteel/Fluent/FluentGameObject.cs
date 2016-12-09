@@ -23,6 +23,12 @@ namespace Coldsteel.Fluent
             return self;
         }
 
+        public static GameObject SetPosition(this GameObject self, Vector2 position)
+        {
+            self.Transform.LocalPosition = position;
+            return self;
+        }
+
         public static GameObject SetRotation(this GameObject self, float rotationInRadians)
         {
             self.Transform.LocalRotation = rotationInRadians;

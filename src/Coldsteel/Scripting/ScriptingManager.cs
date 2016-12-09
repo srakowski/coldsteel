@@ -36,7 +36,7 @@ namespace Coldsteel.Scripting
             if (_sceneManager.ActiveScene == null)
                 return;
 
-            var behaviors = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Behavior).Select(c => c as Behavior));
+            var behaviors = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Behavior).Select(c => c as Behavior)).ToArray();
 
             foreach (var behavior in behaviors)
             {

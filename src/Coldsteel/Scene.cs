@@ -21,6 +21,8 @@ namespace Coldsteel
 
         private ContentManager _contentManager;
 
+        private bool _activated = false;
+
         /// <summary>
         /// The GameObjects present in this Scene.
         /// </summary>
@@ -65,6 +67,7 @@ namespace Coldsteel
             _gameObjects = new List<GameObject>(gameObjects);
             _layers = new List<Layer>(layers);
             _layers.Add(new Layer(Scene.DefaultLayerName, 0));
+            _activated = false;
         }
 
         /// <summary>
@@ -83,6 +86,8 @@ namespace Coldsteel
         public void Add(GameObject gameObject)
         {
             _gameObjects.Add(gameObject);
+            if (_activated)
+                gameObject.Activate(_contentManager);
         }
 
         internal void Add(ISceneElement sceneElement)

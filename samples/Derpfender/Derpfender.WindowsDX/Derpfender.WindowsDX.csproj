@@ -58,7 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\explode.wav" />
+    <Content Include="Content\Audio\fire.wav" />
     <Content Include="Content\game.xml" />
+    <Content Include="Content\Sprites\bullet.png" />
+    <Content Include="Content\Sprites\debris.png" />
+    <Content Include="Content\Sprites\enemy.png" />
     <Content Include="Content\Sprites\ship.png" />
     <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />
