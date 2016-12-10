@@ -12,6 +12,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\IPositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPositionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\CollisionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Camera.cs" />

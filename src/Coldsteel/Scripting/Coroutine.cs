@@ -27,6 +27,12 @@ namespace Coldsteel.Scripting
             _routine = routine;
         }
 
+        // TODO: should be able to start again, maybe that is a Pause?
+        public void Stop()
+        {
+            IsComplete = true;
+        }
+
         internal void Update(GameTime gameTime)
         {
             if (IsComplete)

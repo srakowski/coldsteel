@@ -5,6 +5,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Coldsteel.Input
 {
@@ -32,9 +33,18 @@ namespace Coldsteel.Input
         }
 
         public bool IsDown(PlayerIndex playerIndex = PlayerIndex.One) =>
-            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsDown());
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsDown(playerIndex));
 
         public bool IsUp(PlayerIndex playerIndex = PlayerIndex.One) => 
-            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsUp());
+            _bindingsByPlayer[(int)playerIndex].All(b => b.IsUp(playerIndex));
+
+        public bool WasDown(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsDown(playerIndex));
+
+        public bool WasUp(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].All(b => b.WasUp(playerIndex));
+
+        public bool WasPressed(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.WasPressed(playerIndex));
     }
 }

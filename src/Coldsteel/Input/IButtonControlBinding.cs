@@ -10,6 +10,12 @@ namespace Coldsteel.Input
     {
         bool IsDown(PlayerIndex pIdx = PlayerIndex.One);
 
+        bool WasDown(PlayerIndex pIdx = PlayerIndex.One);
+
         bool IsUp(PlayerIndex pIdx = PlayerIndex.One);
+
+        bool WasUp(PlayerIndex pIdx = PlayerIndex.One);
+
+        bool WasPressed(PlayerIndex pIdx = PlayerIndex.One);
     }
 }

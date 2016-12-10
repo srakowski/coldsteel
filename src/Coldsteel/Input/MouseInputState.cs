@@ -18,7 +18,7 @@ namespace Coldsteel.Input
 
         public void Update()
         {
-            PreviousState = PreviousState;
+            PreviousState = CurrentState;
             CurrentState = Mouse.GetState();
         }
     }

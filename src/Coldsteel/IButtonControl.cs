@@ -8,7 +8,10 @@ namespace Coldsteel
 {
     public interface IButtonControl : IControl
     {
-        bool IsDown(PlayerIndex playerIndex = PlayerIndex.One);
-        bool IsUp(PlayerIndex playerIndex = PlayerIndex.One);
+        bool IsDown(PlayerIndex pIdx = PlayerIndex.One);
+        bool WasDown(PlayerIndex pIdx = PlayerIndex.One);
+        bool IsUp(PlayerIndex pIdx = PlayerIndex.One);
+        bool WasUp(PlayerIndex pIdx = PlayerIndex.One);
+        bool WasPressed(PlayerIndex pIdx = PlayerIndex.One);
     }
 }

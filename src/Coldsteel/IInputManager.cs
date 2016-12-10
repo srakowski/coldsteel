@@ -11,6 +11,7 @@ namespace Coldsteel
     public interface IInputManager
     {
         IButtonControl GetButtonControl(string name);
+        IPositionalControl GetPositionalControl(string name);
         void AddControl(IControl control);
     }
 }
