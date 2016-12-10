@@ -26,7 +26,7 @@ namespace Coldsteel.Physics
             base.Update(gameTime);
             var boxColliders = _sceneManager?.ActiveScene?.GameObjects
                 .SelectMany(go => go.Components).OfType<BoxCollider>()
-                .ToArray();
+                .ToArray() ?? new BoxCollider[] { };
 
             for (int i = 0; i < boxColliders.Count(); i++)
                 for (int j = i + 1; j < boxColliders.Count(); j++)
