@@ -64,6 +64,7 @@
     <Content Include="Content\Sprites\bullet.png" />
     <Content Include="Content\Sprites\debris.png" />
     <Content Include="Content\Sprites\enemy.png" />
+    <Content Include="Content\Sprites\flash.png" />
     <Content Include="Content\Sprites\ship.png" />
     <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />

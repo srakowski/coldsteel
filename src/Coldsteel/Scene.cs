@@ -109,6 +109,7 @@ namespace Coldsteel
         {
             _contentManager = contentManager;
             _gameObjects.ForEach(go => go.Activate(contentManager));
+            _activated = true;
         }
 
         /// <summary>
