@@ -20,7 +20,7 @@ namespace Coldsteel.Scripting
         /// <summary>
         /// Has the Coroutine run to completion?
         /// </summary>
-        public bool IsComplete => !_routine.MoveNext();
+        public bool IsComplete { get; private set; } = false;
 
         internal Coroutine(IEnumerator routine)
         {
@@ -29,6 +29,9 @@ namespace Coldsteel.Scripting
 
         internal void Update(GameTime gameTime)
         {
+            if (IsComplete)
+                return;
+
             if (_wait != null)
             {
                 _wait.Update(gameTime);
@@ -38,8 +41,10 @@ namespace Coldsteel.Scripting
                 _wait = null;
             }
 
-            if (IsComplete)
-                return;
+            if (!_routine.MoveNext())
+            {
+                IsComplete = true;
+            }
 
             _wait = _routine.Current as WaitYieldInstruction;
         }

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Coldsteel.Fluent;
 using Derpfender.Behaviors;
 using Coldsteel.Rendering;
+using Coldsteel.Audio;
 
 namespace Derpfender.Scenes
 {
@@ -23,7 +24,7 @@ namespace Derpfender.Scenes
             .SetPosition(60, 360)
             .SetRotationInDegrees(90)
             .Add(new SpriteRenderer("sprites/ship"))
-            //.Add(new AudioSource("audio/fire")) TODO: implement
+            .Add(new AudioSource("audio/fire"))
             .Add(new ShipBehavior());
 
         public GameObject MainCamera { get; } = new GameObject()

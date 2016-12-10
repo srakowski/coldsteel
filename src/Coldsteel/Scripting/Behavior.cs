@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
+using System.Diagnostics;
 
 namespace Coldsteel.Scripting
 {

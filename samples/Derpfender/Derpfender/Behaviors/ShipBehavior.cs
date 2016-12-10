@@ -1,4 +1,5 @@
 ﻿using Coldsteel;
+using Coldsteel.Audio;
 using Coldsteel.Fluent;
 using Coldsteel.Rendering;
 using Coldsteel.Scripting;
@@ -6,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Derpfender.Behaviors
@@ -35,7 +37,7 @@ namespace Derpfender.Behaviors
         private IEnumerator Fire()
         {
             _allowFire = false;
-            //AudioSource.Play();
+            this.GameObject.Components.OfType<AudioSource>().First().Play();
             //TODO: how to add stuff to the scene?
             SceneManager.ActiveScene.Add(new GameObject()
                 .SetPosition(this.Transform.Position)
@@ -49,7 +51,7 @@ namespace Derpfender.Behaviors
             //    .Add.BoxCollider(10, 10);
 
             yield return WaitYieldInstruction.Create(_fireRate);
-            _allowFire = true;
+             _allowFire = true;
         }
     }
 }
