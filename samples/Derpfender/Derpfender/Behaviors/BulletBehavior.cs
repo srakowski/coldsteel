@@ -1,4 +1,4 @@
-﻿using Coldsteel.Components;
+﻿using Coldsteel.Rendering;
 using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

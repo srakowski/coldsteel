@@ -2,13 +2,13 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Components;
+using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Coldsteel
+namespace Coldsteel.Rendering
 {
     /// <summary>
     /// Is responsible for orchestrating the rendering of GameObjects in a Scene

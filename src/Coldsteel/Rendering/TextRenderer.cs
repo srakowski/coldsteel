@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace Coldsteel.Components
+namespace Coldsteel.Rendering
 {
     /// <summary>
     /// Renders the provided Text to a Scene Layer using the provided SpriteFont.

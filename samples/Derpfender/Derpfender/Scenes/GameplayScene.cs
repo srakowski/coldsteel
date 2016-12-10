@@ -6,8 +6,8 @@ using Microsoft.Xna.Framework;
 using Coldsteel;
 using Microsoft.Xna.Framework.Graphics;
 using Coldsteel.Fluent;
-using Coldsteel.Components;
 using Derpfender.Behaviors;
+using Coldsteel.Rendering;
 
 namespace Derpfender.Scenes
 {

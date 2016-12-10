@@ -1,7 +1,7 @@
 ﻿using Coldsteel;
-using Coldsteel.Components;
 using Coldsteel.Composition;
 using Coldsteel.Fluent;
+using Coldsteel.Rendering;
 using Derpfender.Behaviors;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

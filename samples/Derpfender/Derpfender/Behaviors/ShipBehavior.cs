@@ -1,6 +1,6 @@
 ﻿using Coldsteel;
-using Coldsteel.Components;
 using Coldsteel.Fluent;
+using Coldsteel.Rendering;
 using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System;

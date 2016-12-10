@@ -4,7 +4,7 @@
 
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Coldsteel
+namespace Coldsteel.Rendering
 {
     /// <summary>
     /// Derived components are responsible for rendering content to a Layer.

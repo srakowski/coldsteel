@@ -2,7 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Components;
+using Coldsteel.Rendering;
 using Coldsteel.Input;
 using Microsoft.Xna.Framework;
 using System.Linq;

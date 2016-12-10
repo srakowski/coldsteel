@@ -1,13 +1,8 @@
-﻿using Coldsteel.Composition;
-using Coldsteel;
+﻿using Coldsteel;
 using Coldsteel.Fluent;
-using Coldsteel.Components;
 using Derpfender.Behaviors;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections;
-using System.Collections.Generic;
-using System;
+using Coldsteel.Rendering;
 
 namespace Derpfender.Scenes
 {
