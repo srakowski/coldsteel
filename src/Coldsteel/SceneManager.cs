@@ -78,6 +78,7 @@ namespace Coldsteel
             base.Update(gameTime);
             _outgoingScene?.Deactivate();
             _outgoingScene = null;
+            ActiveScene?.Update(gameTime);
         }
     }
 }

@@ -101,6 +101,13 @@ namespace Coldsteel
         }
 
         /// <summary>
+        /// Update the scene, remove any destroyed objects.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        internal void Update(GameTime gameTime) =>
+            _gameObjects.RemoveAll(go => go.IsDestroyed);
+
+        /// <summary>
         /// Before this is called the GameObjects are composed but in an inactive
         /// state. This call readies the GameObjects for gameplay. This must be
         /// called before the scene becomes the active scene.
