@@ -1,14 +1,13 @@
 ﻿using Coldsteel;
 using Coldsteel.Audio;
 using Coldsteel.Fluent;
+using Coldsteel.Physics;
 using Coldsteel.Rendering;
 using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Derpfender.Behaviors
 {
@@ -45,7 +44,8 @@ namespace Derpfender.Behaviors
                 {
                     Color = Color.WhiteSmoke
                 })
-                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
+                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
+                .Add(new BoxCollider(new Rectangle(-10, -10, 20, 20))));
 
             // TODO: collisions
             //    .Add.BoxCollider(10, 10);

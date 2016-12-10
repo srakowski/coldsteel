@@ -3,6 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Coldsteel.Input;
+using Coldsteel.Physics;
 using Coldsteel.Rendering;
 using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
@@ -27,6 +28,7 @@ namespace Coldsteel
         {
             _sceneManager = new SceneManager(game);
             game.Components.Add(_sceneManager);
+            game.Components.Add(new CollisionManager(game));
             _inputManager = new InputManager(game);
             game.Components.Add(_inputManager);
             game.Components.Add(new ScriptingManager(game));
