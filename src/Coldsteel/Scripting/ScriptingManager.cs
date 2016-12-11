@@ -42,8 +42,6 @@ namespace Coldsteel.Scripting
             {
                 // TODO: maybe not set these every time?
                 behavior.GameTime = gameTime;
-                behavior.SceneManager = _sceneManager;
-                behavior.Input = _inputManager;
                 behavior.Update();
             }
 

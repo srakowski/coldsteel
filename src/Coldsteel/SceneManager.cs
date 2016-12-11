@@ -15,6 +15,10 @@ namespace Coldsteel
     {
         private ISceneComposer _sceneComposer;
 
+        private IPhysicsManager _physicsManager;
+
+        private IInputManager _inputManager;
+
         private Scene _outgoingScene;
 
         private string _pendingScene;
@@ -41,6 +45,8 @@ namespace Coldsteel
         {
             base.Initialize();
             this._sceneComposer = Game.Services.GetService<ISceneComposer>();
+            this._physicsManager = Game.Services.GetService<IPhysicsManager>();
+            this._inputManager = Game.Services.GetService<IInputManager>();
             _initialized = true;
 
             if (_pendingScene != null)
@@ -68,7 +74,11 @@ namespace Coldsteel
 
             _outgoingScene = ActiveScene;
             var scene = _sceneComposer.ComposeScene(sceneName);
-            scene.Activate(new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory));
+            scene.Activate(new Context(this, 
+                _physicsManager,
+                _inputManager,
+                new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory),
+                Game.GraphicsDevice));
             ActiveScene = scene;
             ActiveSceneChanged?.Invoke(this, null);
         }

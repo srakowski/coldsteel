@@ -7,6 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
+using Coldsteel.Physics;
+using System.Linq;
 
 namespace Coldsteel.Scripting
 {
@@ -36,6 +38,16 @@ namespace Coldsteel.Scripting
         public new Transform Transform => base.Transform;
 
         /// <summary>
+        /// Gets the RigidBody component of the GameObject, if any.
+        /// </summary>
+        public RigidBody RigidBody => GameObject?.Components.OfType<RigidBody>().FirstOrDefault();
+
+        /// <summary>
+        /// Gets the Collider component of the GameObject, if any.
+        /// </summary>
+        public Collider Collider => GameObject?.Components.OfType<Collider>().FirstOrDefault();
+
+        /// <summary>
         /// The SceneManager object.
         /// </summary>
         public ISceneManager SceneManager { get; internal set; }
@@ -49,6 +61,11 @@ namespace Coldsteel.Scripting
         /// Content manager used to dynamically load or retrieve content.
         /// </summary>
         public ContentManager Content { get; private set; }
+
+        /// <summary>
+        /// The active scene the GameObject is part of.
+        /// </summary>
+        public Scene Scene => SceneManager?.ActiveScene;
 
         public virtual void Activate() { }
 
@@ -83,9 +100,11 @@ namespace Coldsteel.Scripting
             gameObject.Destroy();
         }
 
-        internal override void Activate(ContentManager content)
+        internal override void Activate(Context context)
         {
-            this.Content = content;
+            this.SceneManager = context.SceneManager;
+            this.Input = context.Input;
+            this.Content = context.Content;
             Activate();
         }
 

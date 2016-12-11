@@ -12,7 +12,12 @@ namespace Coldsteel
 
         public ColdsteelGame()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                // TODO: make this configurable
+                PreferredBackBufferWidth = 1280,
+                PreferredBackBufferHeight = 720
+            };
             Content.RootDirectory = "Content";
             Components.Add(new Bootstrapper(this));
         }
