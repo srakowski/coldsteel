@@ -11,6 +11,8 @@ namespace Coldsteel
     /// </summary>
     internal class Context
     {
+        public Scene Scene { get; }
+
         public ISceneManager SceneManager { get; }
 
         public IPhysicsManager PhysicsManager { get; }
@@ -21,12 +23,14 @@ namespace Coldsteel
 
         public GraphicsDevice GraphicsDevice { get; }
 
-        public Context(SceneManager sceneManager, 
+        public Context(Scene scene,
+            SceneManager sceneManager, 
             IPhysicsManager physicsManager,
             IInputManager inputManager, 
             ContentManager contentManager,
             GraphicsDevice graphicsDevice)
         {
+            Scene = scene;
             SceneManager = sceneManager;
             PhysicsManager = physicsManager;
             Input = inputManager;

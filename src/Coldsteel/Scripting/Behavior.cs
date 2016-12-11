@@ -65,7 +65,7 @@ namespace Coldsteel.Scripting
         /// <summary>
         /// The active scene the GameObject is part of.
         /// </summary>
-        public Scene Scene => SceneManager?.ActiveScene;
+        public Scene Scene { get; private set; }
 
         public virtual void Activate() { }
 
@@ -100,8 +100,14 @@ namespace Coldsteel.Scripting
             gameObject.Destroy();
         }
 
+        public void Destroy(Component component)
+        {
+            component.GameObject.RemoveComponent(component);
+        }
+
         internal override void Activate(Context context)
         {
+            this.Scene = context.Scene;
             this.SceneManager = context.SceneManager;
             this.Input = context.Input;
             this.Content = context.Content;

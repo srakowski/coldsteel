@@ -15,8 +15,8 @@ namespace Coldsteel
             _graphics = new GraphicsDeviceManager(this)
             {
                 // TODO: make this configurable
-                PreferredBackBufferWidth = 1280,
-                PreferredBackBufferHeight = 720
+                PreferredBackBufferWidth = 1920,
+                PreferredBackBufferHeight = 1080
             };
             Content.RootDirectory = "Content";
             Components.Add(new Bootstrapper(this));

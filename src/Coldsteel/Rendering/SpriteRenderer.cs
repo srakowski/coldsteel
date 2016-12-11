@@ -45,6 +45,11 @@ namespace Coldsteel.Rendering
         public Color Color { get; set; } = Color.White;
 
         /// <summary>
+        /// Get or sets the sprite effects;
+        /// </summary>
+        public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
+
+        /// <summary>
         /// Constructs an empty SpriteRenderer.
         /// </summary>
         public SpriteRenderer() { }
@@ -72,7 +77,7 @@ namespace Coldsteel.Rendering
                 this.Transform.Rotation,
                 this.Origin ?? this._origin,
                 this.Transform.Scale,
-                SpriteEffects.None,
+                this.SpriteEffects,
                 0f);
         }
     }

@@ -96,6 +96,6 @@ namespace Coldsteel
         }
 
         private Matrix GetCameraTransformationMatrix(Camera camera) => 
-            (IsCameraSticky ? Matrix.Identity : (camera?.Transform.TransformationMatrix ?? Matrix.Identity));
+            (IsCameraSticky ? Matrix.Identity : (camera?.TransformationMatrix ?? Matrix.Identity));
     }
 }

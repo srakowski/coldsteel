@@ -69,7 +69,7 @@ namespace Coldsteel
         /// </summary>
         public float LocalScale { get; set; } = 1f;
 
-        internal Matrix TransformationMatrix =>
+        public Matrix TransformationMatrix =>
             Matrix.Identity *
             Matrix.CreateRotationZ(this.Rotation) *
             Matrix.CreateScale(this.Scale) *

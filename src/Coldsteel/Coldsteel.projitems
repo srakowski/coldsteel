@@ -13,9 +13,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDirectionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\DirectionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\IDirectionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IPositionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseDirectionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />

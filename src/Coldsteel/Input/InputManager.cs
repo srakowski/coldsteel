@@ -17,6 +17,7 @@ namespace Coldsteel.Input
 
         private Dictionary<string, IButtonControl> _buttonControls = new Dictionary<string, IButtonControl>();
         private Dictionary<string, IPositionalControl> _positionalControls = new Dictionary<string, IPositionalControl>();
+        private Dictionary<string, IDirectionalControl> _directionalControls = new Dictionary<string, IDirectionalControl>();
 
         public InputManager(Game game) : base(game)
         {
@@ -40,10 +41,14 @@ namespace Coldsteel.Input
         public IPositionalControl GetPositionalControl(string name) =>
             _positionalControls[name];
 
+        public IDirectionalControl GetDirectionalControl(string name) =>
+            _directionalControls[name];
+
         public void AddControl(IControl control)
         {
             AddButtonControl(control as IButtonControl);
             AddPositionalControl(control as IPositionalControl);
+            AddDirectionalControl(control as IDirectionalControl);
         }
 
         public void AddButtonControl(IButtonControl buttonControl)
@@ -60,8 +65,18 @@ namespace Coldsteel.Input
             _positionalControls[control.Name] = control;
         }
 
+        public void AddDirectionalControl(IDirectionalControl control)
+        {
+            if (control == null)
+                return;
+
+            _directionalControls[control.Name] = control;
+        }
+
         public override void Update(GameTime gameTime)
         {
+            InputStates.CenterScreen = new Vector2(Game.GraphicsDevice.Viewport.Width * 0.5f,
+                Game.GraphicsDevice.Viewport.Height * 0.5f);
             foreach (var inputState in _inputStates)
                 inputState.Update();
         }
