@@ -19,7 +19,7 @@ namespace Coldsteel
 
         private List<Layer> _layers;
 
-        private ContentManager _contentManager;
+        private Context _context;
 
         private bool _activated = false;
 
@@ -87,7 +87,7 @@ namespace Coldsteel
         {
             _gameObjects.Add(gameObject);
             if (_activated)
-                gameObject.Activate(_contentManager);
+                gameObject.Activate(_context);
         }
 
         internal void Add(ISceneElement sceneElement)
@@ -112,10 +112,10 @@ namespace Coldsteel
         /// state. This call readies the GameObjects for gameplay. This must be
         /// called before the scene becomes the active scene.
         /// </summary>
-        internal void Activate(ContentManager contentManager)
+        internal void Activate(Context context)
         {
-            _contentManager = contentManager;
-            _gameObjects.ForEach(go => go.Activate(contentManager));
+            _context = context;
+            _gameObjects.ForEach(go => go.Activate(context));
             _activated = true;
         }
 
@@ -125,7 +125,7 @@ namespace Coldsteel
         /// <param name="contentManager"></param>
         internal void Deactivate()
         {
-            _contentManager.Unload();
+            _context.Unload();
         }
     }
 }

@@ -2,10 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Coldsteel
 {
@@ -19,12 +17,17 @@ namespace Coldsteel
 
         private bool _activated = false;
 
-        private ContentManager _contentManager;
+        private Context _context;
 
         /// <summary>
         /// The name of this GameObject.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Tags used to identify this GameObject in various contexts.
+        /// </summary>
+        public List<string> Tags { get; } = new List<string>();
 
         /// <summary>
         /// Gets the Components that define this GameObject's state, 
@@ -69,7 +72,7 @@ namespace Coldsteel
             if (_activated)
             {
                 component.GameObject = this;
-                component.Activate(_contentManager);
+                component.Activate(_context);
             }
         }
 
@@ -78,14 +81,14 @@ namespace Coldsteel
         /// may need to be done to get it ready for gameplay. This is done
         /// in the activation step.
         /// </summary>
-        internal void Activate(ContentManager content)
+        internal void Activate(Context context)
         {
-            _contentManager = content;
+            _context = context;
             _activated = true;
             _components.ForEach(c =>
             {
                 c.GameObject = this;
-                c.Activate(content);
+                c.Activate(context);
             });
         }
 

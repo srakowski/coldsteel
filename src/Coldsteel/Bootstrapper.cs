@@ -28,7 +28,7 @@ namespace Coldsteel
         {
             _sceneManager = new SceneManager(game);
             game.Components.Add(_sceneManager);
-            game.Components.Add(new CollisionManager(game));
+            game.Components.Add(new PhysicsManager(game));
             _inputManager = new InputManager(game);
             game.Components.Add(_inputManager);
             game.Components.Add(new ScriptingManager(game));

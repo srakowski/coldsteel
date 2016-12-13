@@ -16,6 +16,7 @@ namespace Coldsteel.Input
         private IInputState[] _inputStates;
 
         private Dictionary<string, IButtonControl> _buttonControls = new Dictionary<string, IButtonControl>();
+        private Dictionary<string, IPositionalControl> _positionalControls = new Dictionary<string, IPositionalControl>();
 
         public InputManager(Game game) : base(game)
         {
@@ -36,15 +37,27 @@ namespace Coldsteel.Input
         public IButtonControl GetButtonControl(string name) =>
             _buttonControls[name];
 
+        public IPositionalControl GetPositionalControl(string name) =>
+            _positionalControls[name];
+
         public void AddControl(IControl control)
         {
             AddButtonControl(control as IButtonControl);
+            AddPositionalControl(control as IPositionalControl);
         }
 
         public void AddButtonControl(IButtonControl buttonControl)
         {
             if (buttonControl != null)
                 _buttonControls[buttonControl.Name] = buttonControl;
+        }
+
+        public void AddPositionalControl(IPositionalControl control)
+        {
+            if (control == null)
+                return;
+
+            _positionalControls[control.Name] = control;
         }
 
         public override void Update(GameTime gameTime)

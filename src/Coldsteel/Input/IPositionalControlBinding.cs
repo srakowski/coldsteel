@@ -4,11 +4,10 @@
 
 using Microsoft.Xna.Framework;
 
-namespace Coldsteel.Rendering
+namespace Coldsteel.Input
 {
-    public class Camera : Component
+    public interface IPositionalControlBinding
     {
-        public Vector2 ToWorldCoords(Vector2 coords) =>
-            Vector2.Transform(coords, Matrix.Invert(Transform.TransformationMatrix));
+        Vector2 GetPosition(PlayerIndex pIdx = PlayerIndex.One);
     }
 }

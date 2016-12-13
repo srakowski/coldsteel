@@ -6,20 +6,23 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Physics
 {
-    public class BoxCollider : Component
+    public class BoxCollider : Collider
     {
-        public Rectangle BoundingBox =>
+        public Rectangle Bounds =>
             new Rectangle(
-                Transform.Position.ToPoint() - LocalBoundingBox.Location,
-                LocalBoundingBox.Size);
+                Transform.Position.ToPoint() + BoxShape.Location,
+                BoxShape.Size);
 
-        public Rectangle LocalBoundingBox { get; set; }
+        public Rectangle BoxShape { get; set; }
 
-        public BoxCollider() { }
+        public BoxCollider() : this(0, 0, 0, 0) { }
 
-        public BoxCollider(Rectangle boundingBox)
+        public BoxCollider(int originOffsetX, int originOffsetY, int width, int height)
+            : this(new Rectangle(originOffsetX, originOffsetY, width, height)) { }
+
+        public BoxCollider(Rectangle boxShape)
         {
-            LocalBoundingBox = boundingBox;
+            BoxShape = boxShape;
         }
     }
 }

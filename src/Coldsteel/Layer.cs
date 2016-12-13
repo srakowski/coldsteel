@@ -65,6 +65,12 @@ namespace Coldsteel
         public Matrix? TransformMatrix { get; set; } = null;
 
         /// <summary>
+        /// If true, this layer sticks with the camera and is unnaffected 
+        /// by the camera's transformation matrix.
+        /// </summary>
+        public bool IsCameraSticky { get; set; } = false;
+
+        /// <summary>
         /// Constructs a layer with the provided name and order.
         /// </summary>
         /// <param name="name"></param>
@@ -77,7 +83,7 @@ namespace Coldsteel
 
         internal void Render(SpriteBatch spriteBatch, IEnumerable<Renderer> renderers, Camera camera = null)
         {
-            var matrix = (camera?.Transform.TransformationMatrix ?? Matrix.Identity) *
+            var matrix = GetCameraTransformationMatrix(camera) *
                 (TransformMatrix ?? Matrix.Identity);
 
             spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState,
@@ -88,5 +94,8 @@ namespace Coldsteel
 
             spriteBatch.End();
         }
+
+        private Matrix GetCameraTransformationMatrix(Camera camera) => 
+            (IsCameraSticky ? Matrix.Identity : (camera?.Transform.TransformationMatrix ?? Matrix.Identity));
     }
 }

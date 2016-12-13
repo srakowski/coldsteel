@@ -27,7 +27,7 @@ namespace Coldsteel.Audio
 
         public void Play(float volume, float pitch, float pan) => SoundEffect.Play(volume, pitch, pan);
 
-        internal override void Activate(ContentManager content) =>
-            SoundEffect = content.Load<SoundEffect>(_soundEffectAssetName);
+        internal override void Activate(Context context) =>
+            SoundEffect = context.Content.Load<SoundEffect>(_soundEffectAssetName);
     }
 }

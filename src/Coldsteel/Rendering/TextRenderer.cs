@@ -48,8 +48,8 @@ namespace Coldsteel.Rendering
             Text = text;
         }
 
-        internal override void Activate(ContentManager content) =>
-            SpriteFont = content.Load<SpriteFont>(_spriteFontAssetName);
+        internal override void Activate(Context context) =>
+            SpriteFont = context.Content.Load<SpriteFont>(_spriteFontAssetName);
 
         internal override void Render(SpriteBatch spriteBatch)
         {

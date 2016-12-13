@@ -32,6 +32,12 @@ namespace Coldsteel.Rendering
                     this._origin = new Vector2(Texture2D.Width * 0.5f, Texture2D.Height * 0.5f);
             }
         }
+        
+        /// <summary>
+        /// The origin used to position the texture. If none is provided 
+        /// the center of the texture is used.
+        /// </summary>
+        public Vector2? Origin { get; set; }
 
         /// <summary>
         /// Color to tint the Sprite, White is none.
@@ -53,8 +59,8 @@ namespace Coldsteel.Rendering
             _textureAssetName = textureAssetName;
         }
 
-        internal override void Activate(ContentManager content) =>
-            Texture2D = content.Load<Texture2D>(_textureAssetName);
+        internal override void Activate(Context context) =>
+            Texture2D = context.Content.Load<Texture2D>(_textureAssetName);
 
         internal override void Render(SpriteBatch spriteBatch)
         {
@@ -64,7 +70,7 @@ namespace Coldsteel.Rendering
                 null,
                 this.Color,
                 this.Transform.Rotation,
-                this._origin,
+                this.Origin ?? this._origin,
                 this.Transform.Scale,
                 SpriteEffects.None,
                 0f);

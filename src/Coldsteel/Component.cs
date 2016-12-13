@@ -17,6 +17,6 @@ namespace Coldsteel
 
         internal Transform Transform => GameObject.Transform;
 
-        internal virtual void Activate(ContentManager content) { }
+        internal virtual void Activate(Context context) { }
     }
 }
