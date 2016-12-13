@@ -6,14 +6,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FAF79002-D53E-4E12-89D8-52A3A58CE6AC}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Derpfender.WindowsDX</RootNamespace>
-    <AssemblyName>Derpfender.WindowsDX</AssemblyName>
+    <RootNamespace>Derpfender</RootNamespace>
+    <AssemblyName>Derpfender</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -38,13 +38,18 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Coldsteel.WindowsDX">
-      <HintPath>..\..\..\bin\WindowsDX\Coldsteel.WindowsDX.dll</HintPath>
+    <Reference Include="Coldsteel">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.exe</HintPath>
+    </Reference>
+    <Reference Include="Coldsteel.Core">
+      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Core.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
@@ -53,15 +58,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bullet.png" />
-    <Content Include="Content\smoke.png" />
-    <Content Include="Content\debris.png" />
-    <Content Include="Content\enemy.png" />
-    <Content Include="Content\explode.wav" />
-    <Content Include="Content\fire.wav" />
-    <Content Include="Content\flash.png" />
-    <Content Include="Content\ship.png" />
-    <Content Include="Content\star.png" />
+    <Content Include="Content\Audio\explode.wav" />
+    <Content Include="Content\Audio\fire.wav" />
+    <Content Include="Content\game.xml" />
+    <Content Include="Content\Sprites\bullet.png" />
+    <Content Include="Content\Sprites\debris.png" />
+    <Content Include="Content\Sprites\enemy.png" />
+    <Content Include="Content\Sprites\flash.png" />
+    <Content Include="Content\Sprites\ship.png" />
+    <Content Include="Content\Sprites\star.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -69,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Content\menu.spritefont" />
+    <None Include="Content\Fonts\menu.spritefont" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

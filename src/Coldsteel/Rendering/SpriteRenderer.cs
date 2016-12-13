@@ -1,41 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using Microsoft.Xna.Framework.Graphics;
-using Coldsteel.Extensions;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel.Rendering
 {
+    /// <summary>
+    /// Renders a Sprite to a Scene Layer.
+    /// </summary>
     public class SpriteRenderer : Renderer
     {
-        public Texture2D Image { get; set; }
+        private Vector2 _origin;
 
-        public Vector2 Origin { get; protected set; }
+        private string _textureAssetName;
 
-        public Rectangle? SourceRectangle { get; set; }
+        private Texture2D _texture2D;
 
-        public SpriteEffects SpriteEffects { get; set; }
-
-        public SpriteRenderer(Texture2D image)
+        /// <summary>
+        /// The Texture2D content used to compose the Sprite.
+        /// </summary>
+        public Texture2D Texture2D
         {
-            Image = image;
-            Origin = image.GetMidpoint();
+            get { return _texture2D; }
+            set
+            {
+                _texture2D = value;
+                if (_texture2D != null)
+                    this._origin = new Vector2(Texture2D.Width * 0.5f, Texture2D.Height * 0.5f);
+            }
+        }
+        
+        /// <summary>
+        /// The origin used to position the texture. If none is provided 
+        /// the center of the texture is used.
+        /// </summary>
+        public Vector2? Origin { get; set; }
+
+        /// <summary>
+        /// Color to tint the Sprite, White is none.
+        /// </summary>
+        public Color Color { get; set; } = Color.White;
+
+        /// <summary>
+        /// Constructs an empty SpriteRenderer.
+        /// </summary>
+        public SpriteRenderer() { }
+
+        /// <summary>
+        /// Constructs a SpriteRenderer with the textureAsset that will be loaded
+        /// during the activation of the GameObject.
+        /// </summary>
+        /// <param name="textureAssetName"></param>
+        public SpriteRenderer(string textureAssetName)
+        {
+            _textureAssetName = textureAssetName;
         }
 
-        public override void Render(GameTime gameTime, SpriteBatch spriteBatch)
+        internal override void Activate(Context context) =>
+            Texture2D = context.Content.Load<Texture2D>(_textureAssetName);
+
+        internal override void Render(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                this.Image,
+                this.Texture2D,
                 this.Transform.Position,
-                this.SourceRectangle,
-                new Color(this.Color, Alpha),
+                null,
+                this.Color,
                 this.Transform.Rotation,
-                Origin,
-                1f,
-                SpriteEffects,
-                0f
-                );
+                this.Origin ?? this._origin,
+                this.Transform.Scale,
+                SpriteEffects.None,
+                0f);
         }
     }
 }

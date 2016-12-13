@@ -1,79 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Coldsteel.Rendering;
+using System.Collections.Generic;
 
 namespace Coldsteel
 {
-    public class Layer
+    /// <summary>
+    /// Represents a slice of a frame of a rendered Scene. When a frame is 
+    /// rendered each layer is rendered on top of each other beginning with
+    /// the numerically lowest and ending with the numerically highest. The
+    /// order of numerically equal Order values is undefined.
+    /// </summary>
+    public class Layer : ISceneElement
     {
-        private List<IRenderer> _renderers = new List<IRenderer>();
+        /// <summary>
+        /// The Name of this layer, referenced by Renderers to identify the
+        /// layer they are to render to.
+        /// </summary>
+        public string Name { get; private set; }
 
-        private string _key;
+        /// <summary>
+        /// The Z-Order/DrawOrder. Scenes are rendered from lowest Order to highest
+        /// Order, with the highest Order being rendered last and above all others.
+        /// </summary>
+        public int Order { get; set; }
 
-        public string Key => _key;
-
-        private int _sortIndex;
-
-        public int SortIndex => _sortIndex;
-
+        /// <summary>
+        /// The SpriteSortMode used within this layer.
+        /// </summary>
         public SpriteSortMode SpriteSortMode { get; set; } = SpriteSortMode.Deferred;
 
-        public Layer SetSpriteSortMode(SpriteSortMode spriteSortMode)
-        {
-            SpriteSortMode = spriteSortMode;
-            return this;
-        }
-
+        /// <summary>
+        /// The BlendState used within this layer.
+        /// </summary>
         public BlendState BlendState { get; set; } = null;
 
-        public Layer SetBlendState(BlendState blendState)
-        {
-            BlendState = blendState;
-            return this;
-        }
-
+        /// <summary>
+        /// The SamplerState used within this layer.
+        /// </summary>
         public SamplerState SamplerState { get; set; } = null;
 
-        public Layer SetSamplerState(SamplerState samplerState)
+        /// <summary>
+        /// The DepthStencilState used within this layer.
+        /// </summary>
+        public DepthStencilState DepthStencilState { get; set; } = null;
+
+        /// <summary>
+        /// The RasterizerState used within this layer.
+        /// </summary>
+        public RasterizerState RasterizerState { get; set; } = null;
+
+        /// <summary>
+        /// The Effect applied to this layer.
+        /// </summary>
+        public Effect Effect { get; set; } = null;
+
+        /// <summary>
+        /// The TransformationMatrix applied to this layer.
+        /// </summary>
+        public Matrix? TransformMatrix { get; set; } = null;
+
+        /// <summary>
+        /// If true, this layer sticks with the camera and is unnaffected 
+        /// by the camera's transformation matrix.
+        /// </summary>
+        public bool IsCameraSticky { get; set; } = false;
+
+        /// <summary>
+        /// Constructs a layer with the provided name and order.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="order"></param>
+        public Layer(string name, int order)
         {
-            SamplerState = samplerState;
-            return this;
+            this.Name = name;
+            this.Order = order;
         }
 
-        public bool FixedToCamera { get; set; } = false;
-
-        public Layer SetFixedToCamera(bool value)
+        internal void Render(SpriteBatch spriteBatch, IEnumerable<Renderer> renderers, Camera camera = null)
         {
-            FixedToCamera = value;
-            return this;
-        }
+            var matrix = GetCameraTransformationMatrix(camera) *
+                (TransformMatrix ?? Matrix.Identity);
 
-        public Layer(string key, int sortIndex, bool fixedToCamera = false)
-        {
-            this._key = key;
-            this._sortIndex = sortIndex;
-            this.FixedToCamera = fixedToCamera;
-        }
+            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState,
+                DepthStencilState, RasterizerState, Effect, matrix);
 
-        internal void Render(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
-        {
-            var matrix = FixedToCamera ? (Matrix?)null : camera.TransformationMatrix;
-            spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, null, null, null, matrix);
-            _renderers.ForEach(r => r.Render(gameTime, spriteBatch));
+            foreach (var renderer in renderers)
+                renderer.Render(spriteBatch);
+
             spriteBatch.End();
         }
 
-        internal void AddRenderer(IRenderer renderer)
-        {
-            _renderers.Add(renderer);
-        }
-
-        internal void RemoveRenderer(IRenderer renderer)
-        {
-            _renderers.Remove(renderer);
-        }
+        private Matrix GetCameraTransformationMatrix(Camera camera) => 
+            (IsCameraSticky ? Matrix.Identity : (camera?.Transform.TransformationMatrix ?? Matrix.Identity));
     }
 }

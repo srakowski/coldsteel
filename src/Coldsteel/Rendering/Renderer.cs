@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Coldsteel.Rendering
 {
-    public abstract class Renderer : GameObjectComponent, IRenderer
+    /// <summary>
+    /// Derived components are responsible for rendering content to a Layer.
+    /// </summary>
+    public abstract class Renderer : Component
     {
-        public Color Color { get; set; } = Color.White;
+        /// <summary>
+        /// The name of the Layer this Renderer will be rendered to.
+        /// </summary>
+        public string Layer { get; set; }
 
-        public byte Alpha
-        {
-            get { return Color.A; }
-            set { this.Color = new Color(Color, value); }
-        }
-
-        public abstract void Render(GameTime gameTime, SpriteBatch spriteBatch);
-
-        public T As<T>() where T : Renderer => this as T;
+        internal abstract void Render(SpriteBatch spriteBatch);
     }
 }

@@ -1,49 +1,50 @@
-﻿using Microsoft.Xna.Framework.Input;
-using System;
-using System.Linq;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System;
 
 namespace Coldsteel.Input
 {
-    public class ButtonControl : Control
+    public class ButtonControl : IButtonControl
     {
-        private List<ButtonControl> _controls = new List<ButtonControl>();
-
-        public ButtonControl Keyboard(Keys primary, Keys? alt = null)
+        private List<IButtonControlBinding>[] _bindingsByPlayer = new[]
         {
-            _controls.Add(new KeyboardButtonControl(primary));
-            if (alt.HasValue)
-                _controls.Add(new KeyboardButtonControl(alt.Value));
-            return this;
+            new List<IButtonControlBinding>(),
+            new List<IButtonControlBinding>(),
+            new List<IButtonControlBinding>(),
+            new List<IButtonControlBinding>()
+        };
+
+        public string Name { get; set; }
+
+        public ButtonControl(string name)
+        {
+            this.Name = name;
         }
 
-        internal virtual bool ButtonIsDown() { return false; }
-
-        public bool IsDown()
+        public void AddBinding(IButtonControlBinding binding)
         {
-            return _controls.Any(c => c.ButtonIsDown());
+            // TODO: figure this out for more than one player
+            _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);
         }
 
-        internal virtual bool ButtonIsUp() { return false; }
+        public bool IsDown(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsDown(playerIndex));
 
-        public bool IsUp()
-        {
-            return !IsDown();
-        }
+        public bool IsUp(PlayerIndex playerIndex = PlayerIndex.One) => 
+            _bindingsByPlayer[(int)playerIndex].All(b => b.IsUp(playerIndex));
 
-        internal virtual bool ButtonWasDown() { return false; }
+        public bool WasDown(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.IsDown(playerIndex));
 
-        public bool WasDown()
-        {
-            return _controls.Any(c => c.ButtonWasDown());
-        }
+        public bool WasUp(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].All(b => b.WasUp(playerIndex));
 
-        internal virtual bool ButtonWasUp() { return false; }
-
-        public bool WasUp()
-        {
-            return _controls.Any(c => c.ButtonWasUp());
-        }
+        public bool WasPressed(PlayerIndex playerIndex = PlayerIndex.One) =>
+            _bindingsByPlayer[(int)playerIndex].Any(b => b.WasPressed(playerIndex));
     }
 }

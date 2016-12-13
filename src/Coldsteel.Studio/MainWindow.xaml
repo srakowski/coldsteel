@@ -1,0 +1,57 @@
+﻿<Window x:Class="Coldsteel.Studio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        xmlns:local="clr-namespace:Coldsteel.Studio"
+        xmlns:vm="clr-namespace:Coldsteel.Studio.ViewModels"
+        xmlns:v="clr-namespace:Coldsteel.Studio.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding WindowTitle}" Height="768" Width="1024">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:GameViewModel}">
+            <v:GameView />
+        </DataTemplate>
+    </Window.Resources>
+    <ContentControl Content="{Binding CurrentViewModel}"/>
+    
+    <!--<Window.Resources>
+        <DataTemplate DataType="{x:Type vm:ScenesViewModel}">
+            <v:ScenesView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SceneViewModel}">
+            <v:SceneView />
+        </DataTemplate>        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <TreeView Margin="3" ItemsSource="{Binding Children}" MinWidth="200">
+                    <i:Interaction.Behaviors>
+                        <local:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                    </i:Interaction.Behaviors>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <Grid>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </Grid>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ContentControl Margin="3" Content="{Binding SelectedItem}"/>
+            </Grid>
+        </Grid>
+    </Grid>-->
+</Window>

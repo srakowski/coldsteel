@@ -3,57 +3,67 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>ea8ca643-fb39-4b22-94c2-a5d120a87a25</SharedGUID>
+    <SharedGUID>dabb2852-9cf7-4bfe-b516-6c97ddee5df5</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Behavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ContentManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Coroutine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CoroutineWait.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\MonoGameExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RandomExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjectComponentAdder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjectConfigurator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameTimeWrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IGameTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\IPositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IPositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\BoxRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedGameComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedSceneComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\IControlsBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\ISceneBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\ReflectiveSceneBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentGameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IButtonControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IGameComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IInputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\ButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\Control.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameStateManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\InputDevices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\IButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\GamePadInputState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\IInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LayerAddedEvent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LayerManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MonoGameImpl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Particles\Particle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleEmitter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Particles\ParticleRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rendering\AnimationManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rendering\AnimationState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rendering\IRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\InputStates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardInputState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseInputState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteSheet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteSheetRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StateInfoConfigurator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StateInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StateMachine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StateMachineTrigger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StateMachineTriggerConfigurator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\Behavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\Coroutine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptingManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\WaitYieldInstruction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\YieldInstruction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISceneComposer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISceneManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\RenderingManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)World.cs" />
   </ItemGroup>
 </Project>

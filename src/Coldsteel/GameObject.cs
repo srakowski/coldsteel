@@ -1,318 +1,103 @@
-﻿using System;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using System.Collections.Generic;
-using Coldsteel.Audio;
-using Coldsteel.Input;
-using Coldsteel.Rendering;
-using Microsoft.Xna.Framework;
-using Coldsteel.Particles;
+using System.Linq;
 
 namespace Coldsteel
 {
-    public class GameObject
+    /// <summary>
+    /// Representative of some object in the game, visual or otherwise. These
+    /// are the building blocks on which a Scene is built.
+    /// </summary>
+    public class GameObject : ISceneElement
     {
-        /// <summary>
-        /// Tags are used to identify what type of GameObject this GameObject is.
-        /// </summary>
-        public string[] Tags { get; internal set; }
+        private List<Component> _components;
 
+        private bool _activated = false;
 
-        /// <summary>
-        /// Used to perform common modifications to the state of the 
-        /// GameObject such as rotating or transforming.
-        /// </summary>
-        public GameObjectConfigurator Set { get; private set; }
-
+        private Context _context;
 
         /// <summary>
-        /// Use to add GameObjectComponents to the GameObject.
+        /// The name of this GameObject.
         /// </summary>
-        public GameObjectComponentAdder Add { get; private set; }
-
+        public string Name { get; set; }
 
         /// <summary>
-        /// If this GameObject is a child of another GameObject and not the World
-        /// then this will be populated with the parent. Being a child of another
-        /// GameObject affects components such as the Transform. The transform of
-        /// a child GameObject is relative to the Parent.
+        /// Tags used to identify this GameObject in various contexts.
         /// </summary>
-        public GameObject Parent { get; private set; }
-
-
-        private List<GameObject> _children = new List<GameObject>();
+        public List<string> Tags { get; } = new List<string>();
 
         /// <summary>
-        /// The Children of this GameObject. Some behaviors are relative
-        /// to this GameObject.
+        /// Gets the Components that define this GameObject's state, 
+        /// behavior, and visual representation.
         /// </summary>
-        public IEnumerable<GameObject> Children => _children;
-
+        public IEnumerable<Component> Components => _components;
 
         /// <summary>
-        /// The World this GameObject belongs to.
+        /// Gets the transform component of this GameObject.
         /// </summary>
-        public World World { get; private set; }
-
+        public Transform Transform => _components.OfType<Transform>().First();
 
         /// <summary>
-        /// Gets the current game state.
+        /// Whether or not this GameObject is destroyed.
         /// </summary>
-        public GameState GameState => World.GameState;
-
+        public bool IsDestroyed { get; private set; }
 
         /// <summary>
-        /// Gets the ParticleManager for internal use.
+        /// Constructs an empty GameObject with only a Transform component.
         /// </summary>
-        internal ParticleManager Particles => World?.Particles;
-
+        public GameObject() : this(Enumerable.Empty<Component>()) { }
 
         /// <summary>
-        /// Gets the Camera.
+        /// Constructs a GameObject with the provided components. If no
+        /// Transform component is provided then one will be added.
         /// </summary>
-        public Camera Camera => World?.GameState?.Camera;
-
-
-        /// <summary>
-        /// Gets the StateManager.
-        /// </summary>
-        public GameStateManager State => World?.GameState?.State;
-
-
-        /// <summary>
-        /// Gets the GameStage.
-        /// </summary>
-        public GameStage Stage => World?.GameState?.Stage;
-
-
-        /// <summary>
-        /// Gets the ContentManager.
-        /// </summary>
-        public ContentManager Content => World?.GameState?.Load;
-
-
-        /// <summary>
-        /// Gets the LayerManager.
-        /// </summary>
-        public LayerManager Layers => World?.GameState?.Layers;
-
-
-        /// <summary>
-        /// Gets the InputManager.
-        /// </summary>
-        public InputManager Input => World?.GameState?.Input;
-
-
-        /// <summary>
-        /// Gets the Tranform.
-        /// </summary>
-        public Transform Transform { get; private set; }
-
-
-        /// <summary>
-        /// Gets the AudioSource.
-        /// </summary>
-        public AudioSource AudioSource { get; private set; }
-
-
-        /// <summary>
-        /// Gets the ParticleEmitter.
-        /// </summary>
-        public ParticleEmitter ParticleEmitter { get; private set; }
-
-
-        /// <summary>
-        /// Gets the StateMachine component;
-        /// </summary>
-        public StateMachine StateMachine { get; private set; }
-
-        /// <summary>
-        /// Gets the AnimationManager.
-        /// </summary>
-        public AnimationManager Animations { get; private set; }
-
-        /// <summary>
-        /// Gets game Data.
-        /// </summary>
-        public object Data => GameState?.Data;
-
-
-        private Layer _layer;
-
-
-        /// <summary>
-        /// Gets the Layer this GameObject will be rendered to.
-        /// </summary>
-        public Layer Layer
+        /// <param name="components"></param>
+        public GameObject(IEnumerable<Component> components)
         {
-            get { return _layer; }
-            set
-            {
-                if (this.Renderer != null)
-                    _layer?.RemoveRenderer(this.Renderer);
-
-                _layer = value;
-
-                if (this.Renderer != null)
-                    _layer?.AddRenderer(this.Renderer);
-            }
+            _components = new List<Component>(components);
+            if (!_components.OfType<Transform>().Any())
+                _components.Add(new Transform());
         }
 
-
-        private Renderer _renderer;
-
         /// <summary>
-        /// Gets the Renderer, if any.
-        /// </summary>
-        public Renderer Renderer
-        {
-            get { return _renderer; }
-            set
-            {
-                if (_renderer != null)
-                    Layer?.RemoveRenderer(_renderer);
-
-                _renderer = value;
-
-                if (_renderer != null)
-                    Layer?.AddRenderer(_renderer);
-            }
-        }
-
-
-        private List<Behavior> _behaviors = new List<Behavior>();
-
-        /// <summary>
-        /// Gets the Behaviors.
-        /// </summary>
-        public IEnumerable<Behavior> Behaviors => _behaviors;
-
-
-        /// <summary>
-        /// Gets the GameTime.
-        /// </summary>
-        public IGameTime GameTime { get; private set; }
-
-
-        /// <summary>
-        /// Construct a GameObject for the provided World.
-        /// </summary>
-        /// <param name="world"></param>
-        internal GameObject(World world)
-        {
-            this.World = world;
-            this.Layer = world.GameState.Layers.Default;
-            this.Set = new GameObjectConfigurator(this);
-            this.Add = new GameObjectComponentAdder(this);
-            this.AddGameObjectComponent(new Transform());
-        }
-
-
-        /// <summary>
-        /// Adds a child GameObject.
-        /// </summary>
-        /// <param name="tags"></param>
-        /// <returns></returns>
-        public GameObject AddGameObject(params string[] tags)
-        {
-            var gameObject = World.AddGameObject(tags);
-            gameObject.Parent = this;
-            _children.Add(gameObject);
-            return gameObject;
-        }        
-
-
-        /// <summary>
-        /// Kills this GameObject and all its children.
-        /// </summary>
-        public void Kill()
-        {
-            Renderer = null;
-            Transform?.Dispose();
-            World.RemoveGameObject(this);
-            foreach (var child in Children)
-                child.Kill();
-        }
-
-
-        /// <summary>
-        /// Adds or updates a component for this GameObject.
+        /// Adds a component to this GameObject.
         /// </summary>
         /// <param name="component"></param>
-        internal void AddGameObjectComponent(GameObjectComponent component)
+        public void AddComponent(Component component)
         {
-            component.GameObject = this;
-
-            this.Transform = component as Transform ?? Transform;
-            this.Renderer = component as Renderer ?? Renderer;
-            this.AudioSource = component as AudioSource ?? AudioSource;
-            this.ParticleEmitter = component as ParticleEmitter ?? ParticleEmitter;
-            this.StateMachine = component as StateMachine ?? StateMachine;
-            this.Animations = component as AnimationManager ?? Animations;
-            if (component is Behavior)
-                _behaviors.Add(component as Behavior);
-
-            component.Initialize();
-        }
-
-
-        /// <summary>
-        /// Removes a GameObjectComponent from this GameObject.
-        /// </summary>
-        /// <param name="component"></param>
-        /// <remarks>Currently only removes behaviors TODO: remove any</remarks>
-        public void RemoveGameObjectComponent(GameObjectComponent component)
-        {
-            if (component is Behavior)
+            _components.Add(component);
+            if (_activated)
             {
-                _behaviors.Remove(component as Behavior);
-                component.GameObject = null;
+                component.GameObject = this;
+                component.Activate(_context);
             }
         }
 
-
         /// <summary>
-        /// Handles collisions with other GameObjects.
+        /// The GameObject is created and composed, but there is work that
+        /// may need to be done to get it ready for gameplay. This is done
+        /// in the activation step.
         /// </summary>
-        /// <param name="withGameObject"></param>
-        internal void HandlCollision(GameObject withGameObject)
+        internal void Activate(Context context)
         {
-            ForEachBehavior(b => b.OnCollision(withGameObject));
+            _context = context;
+            _activated = true;
+            _components.ForEach(c =>
+            {
+                c.GameObject = this;
+                c.Activate(context);
+            });
         }
 
-
         /// <summary>
-        /// Updates the GameObject state.
+        /// Destroys the GameObject.
         /// </summary>
-        /// <param name="gameTime"></param>
-        internal virtual void Update(GameTime gameTime)
+        internal void Destroy()
         {
-            this.GameTime = new GameTimeWrapper(gameTime);
-            StateMachine?.Update();
-            ForEachBehavior(b => b.Update());
-            this.Animations?.Update();
-            this.Renderer?.Update();
-        }
-
-
-        /// <summary>
-        /// Updates any Coroutines this GameObject has in flight.
-        /// </summary>
-        /// <param name="gameTime"></param>
-        internal void UpdateCoroutines(GameTime gameTime)
-        {
-            this.GameTime = new GameTimeWrapper(gameTime);
-            ForEachBehavior(b => b.UpdateCoroutines());
-        }
-
-
-        /// <summary>
-        /// Helper method used to do various updates to Behaviors.
-        /// </summary>
-        /// <param name="action"></param>
-        private void ForEachBehavior(Action<Behavior> action)
-        {
-            var behaviorsToUpdate = _behaviors.ToArray();
-            foreach (var behavior in behaviorsToUpdate)
-                action(behavior);
+            this.IsDestroyed = true;
         }
     }
 }

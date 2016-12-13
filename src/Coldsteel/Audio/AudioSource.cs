@@ -1,39 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace Coldsteel.Audio
 {
-    public class AudioSource : GameObjectComponent
+    public class AudioSource : Component
     {
-        //private AudioEmitter _emitter;
+        private string _soundEffectAssetName;
 
-        private SoundEffect _soundEffect;
+        /// <summary>
+        /// The SoundEffect this AudioSource plays.
+        /// </summary>
+        private SoundEffect SoundEffect { get; set; }
 
-        //private SoundEffectInstance _soundEffectInstance;
+        public AudioSource() { }
 
-        public AudioSource(SoundEffect soundEffect)
+        public AudioSource(string soundEffectAssetName)
         {
-            //this._emitter = new AudioEmitter();
-            this._soundEffect = soundEffect;
+            _soundEffectAssetName = soundEffectAssetName;
         }
 
-        public override void Initialize()
-        {
-            //_soundEffectInstance = _soundEffect.CreateInstance();
-        }
+        public void Play() => SoundEffect.Play();
 
-        public void Play()
-        {
-            // TODO: figure out why positional audio only plays in a single speaker
-            // TODO: cleanup this class
-            //_emitter.Position = new Microsoft.Xna.Framework.Vector3(this.Transform.Position.X, _emitter.Position.Y, _emitter.Position.Z);
-            //_soundEffectInstance.Apply3D(Camera.AudioListener, _emitter);
-            //_soundEffectInstance.Play();
-            //_soundEffect.Play(0.25f, 0.0f, 1.0f);
-            //_soundEffect.Play(0.25f, 0.0f, -1.0f);
-            _soundEffect.Play(0.01f, 0f, 0f);
-        }
+        public void Play(float volume, float pitch, float pan) => SoundEffect.Play(volume, pitch, pan);
+
+        internal override void Activate(Context context) =>
+            SoundEffect = context.Content.Load<SoundEffect>(_soundEffectAssetName);
     }
 }

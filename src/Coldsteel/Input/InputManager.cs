@@ -1,35 +1,69 @@
-﻿using Coldsteel.Input;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Coldsteel.Input
 {
-    public class InputManager
+    /// <summary>
+    /// This component is responsible for ensuring input states are 
+    /// updated between frames.
+    /// </summary>
+    internal class InputManager : GameComponent, IInputManager
     {
-        private Dictionary<string, Control> _controls = new Dictionary<string, Control>();
+        private IInputState[] _inputStates;
 
-        public ButtonControl AddButtonControl(string key)
+        private Dictionary<string, IButtonControl> _buttonControls = new Dictionary<string, IButtonControl>();
+        private Dictionary<string, IPositionalControl> _positionalControls = new Dictionary<string, IPositionalControl>();
+
+        public InputManager(Game game) : base(game)
         {
-             var control = new ButtonControl();
-            _controls[key] = control;
-            return control;
-        }
+            game.Services.AddService<IInputManager>(this);
 
-        public ButtonControl GetButtonControl(string key) => this[key].ButtonControl;
-
-        public Control this[string key]
-        {
-            get
+            // TODO: maybe this doesn't belong here?
+            _inputStates = new IInputState[]
             {
-                if (!this._controls.ContainsKey(key))
-                    throw new Exception($"\"{key}\" control not found. did you forget to add an input mapping?");
-
-                return _controls[key];
-            }
+                InputStates.Keyboard,
+                InputStates.Mouse,
+                InputStates.GamePads[(int)PlayerIndex.One],
+                InputStates.GamePads[(int)PlayerIndex.Two],
+                InputStates.GamePads[(int)PlayerIndex.Three],
+                InputStates.GamePads[(int)PlayerIndex.Four]
+            };
         }
 
-        public Vector2 MousePosition => InputDevices.CurrentMouseState.Position.ToVector2();
+        public IButtonControl GetButtonControl(string name) =>
+            _buttonControls[name];
+
+        public IPositionalControl GetPositionalControl(string name) =>
+            _positionalControls[name];
+
+        public void AddControl(IControl control)
+        {
+            AddButtonControl(control as IButtonControl);
+            AddPositionalControl(control as IPositionalControl);
+        }
+
+        public void AddButtonControl(IButtonControl buttonControl)
+        {
+            if (buttonControl != null)
+                _buttonControls[buttonControl.Name] = buttonControl;
+        }
+
+        public void AddPositionalControl(IPositionalControl control)
+        {
+            if (control == null)
+                return;
+
+            _positionalControls[control.Name] = control;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            foreach (var inputState in _inputStates)
+                inputState.Update();
+        }
     }
 }
