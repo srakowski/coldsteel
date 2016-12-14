@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\ShipBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarBehavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MenuOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\GameplayScene.cs" />

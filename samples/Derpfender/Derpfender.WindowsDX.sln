@@ -16,7 +16,6 @@ Global
 		..\..\src\Coldsteel\Coldsteel.projitems*{29494738-38f7-4531-b05d-feb8b5b219c3}*SharedItemsImports = 4
 		Derpfender\Derpfender.projitems*{3739e959-a7d9-4533-9029-e1c9687cc294}*SharedItemsImports = 13
 		Derpfender\Derpfender.projitems*{98a4eedd-005c-44b5-bca5-4f8a1171f8d2}*SharedItemsImports = 4
-		..\..\src\Coldsteel\Coldsteel.projitems*{98a4eedd-005c-44b5-bca5-4f8a1171f8d2}*SharedItemsImports = 4
 		..\..\src\Coldsteel\Coldsteel.projitems*{dabb2852-9cf7-4bfe-b516-6c97ddee5df5}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

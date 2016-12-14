@@ -4,18 +4,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+using static Coldsteel.Helpers.TypeHelper;
 
 namespace Coldsteel.Composition
 {
     internal class CodeBasedGameComposer : IGameComposer
     {
+        public const string GameCompositionMethodKey = "Code";
+
         private IEnumerable<Type> _controlsBuilderTypes;
+
+        private IEnumerable<Type> _sceneBuilderTypes;
 
         public CodeBasedGameComposer()
         {
-            _controlsBuilderTypes = TypeHelper.FindConcreteClassesAssignableToType<IControlsBuilder>();
+            _controlsBuilderTypes = FindConcreteClassesAssignableToType<IControlsBuilder>();
+            _sceneBuilderTypes = FindConcreteClassesAssignableToType<ISceneBuilder>();
         }
 
         public void ConfigureInput(IInputManager inputManager)
@@ -29,5 +33,8 @@ namespace Coldsteel.Composition
                     inputManager.AddControl(control);
             }
         }
+
+        public ISceneFactory CreateSceneFactory() =>
+            new SceneFactory(_sceneBuilderTypes);
     }
 }

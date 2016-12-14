@@ -25,6 +25,5 @@ namespace Derpfender.Scenes
 
         public GameObject MainCamera { get; } = new GameObject()
             .Add(new Camera());
-
     }
 }

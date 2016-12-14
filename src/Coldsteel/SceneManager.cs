@@ -13,7 +13,7 @@ namespace Coldsteel
     /// </summary>
     internal class SceneManager : GameComponent, ISceneManager
     {
-        private ISceneComposer _sceneComposer;
+        private ISceneFactory _sceneFactory;
 
         private IPhysicsManager _physicsManager;
 
@@ -44,7 +44,7 @@ namespace Coldsteel
         public override void Initialize()
         {
             base.Initialize();
-            this._sceneComposer = Game.Services.GetService<ISceneComposer>();
+            this._sceneFactory = Game.Services.GetService<ISceneFactory>();
             this._physicsManager = Game.Services.GetService<IPhysicsManager>();
             this._inputManager = Game.Services.GetService<IInputManager>();
             _initialized = true;
@@ -65,15 +65,15 @@ namespace Coldsteel
                 return;
             }
 
-            if (_sceneComposer == null)
+            if (_sceneFactory == null)
             {
-                _sceneComposer = Game.Services.GetService<ISceneComposer>();
-                if (_sceneComposer == null)
+                _sceneFactory = Game.Services.GetService<ISceneFactory>();
+                if (_sceneFactory == null)
                     throw new Exception("an ISceneComposer service provider is required");
             }
 
             _outgoingScene = ActiveScene;
-            var scene = _sceneComposer.ComposeScene(sceneName);
+            var scene = _sceneFactory.Create(sceneName);
             scene.Activate(new Context(this, 
                 _physicsManager,
                 _inputManager,

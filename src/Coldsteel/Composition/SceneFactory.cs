@@ -8,22 +8,18 @@ using System.Linq;
 
 namespace Coldsteel.Composition
 {
-    /// <summary>
-    /// This scene composer is used when the developer has opted to manually
-    /// compose a Scene in code. Looks for classes that implement ISceneBuilder
-    /// </summary>
-    internal class CodeBasedSceneComposer : ISceneComposer
+    internal class SceneFactory : ISceneFactory
     {
         private IEnumerable<Type> _sceneBuilderTypes;
 
-        public CodeBasedSceneComposer()
+        public SceneFactory(IEnumerable<Type> sceneBuilderTypess)
         {
-            _sceneBuilderTypes = TypeHelper.FindConcreteClassesAssignableToType<ISceneBuilder>();
+            _sceneBuilderTypes = sceneBuilderTypess;
         }
 
-        public Scene ComposeScene(string sceneName)
+        public Scene Create(string name)
         {
-            var sceneBuilderType = FindSceneBuilderType(sceneName);
+            var sceneBuilderType = FindSceneBuilderType(name);
             var scene = BuildScene(sceneBuilderType);
             return scene;
         }

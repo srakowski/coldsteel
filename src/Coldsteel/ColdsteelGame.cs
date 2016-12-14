@@ -4,16 +4,17 @@
 
 using Microsoft.Xna.Framework;
 
-namespace Derpfender
+namespace Coldsteel
 {
-    class DerpfenderGame : Game
+    public class ColdsteelGame : Game
     {
         private GraphicsDeviceManager _graphics;
 
-        public DerpfenderGame()
+        public ColdsteelGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-            Components.Add(new Coldsteel.Bootstrapper(this));
+            Content.RootDirectory = "Content";
+            Components.Add(new Composition.Bootstrapper(this));
         }
     }
 }

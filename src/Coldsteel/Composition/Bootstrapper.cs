@@ -9,9 +9,11 @@ using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Reflection;
+using static Coldsteel.Helpers.TypeHelper;
 
-namespace Coldsteel
+namespace Coldsteel.Composition
 {
     /// <summary>
     /// Bootstraps the Game based on the "game.xml" Configuration.Game content.
@@ -38,9 +40,9 @@ namespace Coldsteel
         public override void Initialize()
         {
             base.Initialize();
-            var gameConfiguration = Game.Content.Load<Configuration.Game>("game");
+            var gameConfiguration = LoadGameConfiguration();
             Game.Window.Title = gameConfiguration.Title;
-            _tasks = Begin(gameConfiguration);
+            _tasks = LoadGame(gameConfiguration);
         }
 
         public override void Update(GameTime gameTime)
@@ -49,28 +51,49 @@ namespace Coldsteel
                 Game.Components.Remove(this);
         }
 
-        private IEnumerator Begin(Configuration.Game gameConfiguration)
+        private GameConfig LoadGameConfiguration()
         {
-            foreach (var reference in gameConfiguration.References)
+            GameConfig config = null;
+            try
+            {
+                config = Game.Content.Load<GameConfig>("game");
+            }
+            catch (Exception ex)
+            {
+                config = new GameConfig()
+                {
+                    GameCompositionMethod = CodeBasedGameComposer.GameCompositionMethodKey
+                };
+            }
+            return config;
+        }
+
+        private IEnumerator LoadGame(GameConfig gameConfig)
+        {
+            foreach (var reference in gameConfig?.References ?? Enumerable.Empty<string>())
             {
                 yield return $"loading assembly {reference}";
                 Assembly.LoadFrom(reference);
             }
 
             yield return "creating game composer";
-            var gameComposerType = TypeHelper.FindType(gameConfiguration.GameComposerType);
-            var gameComposer = Activator.CreateInstance(gameComposerType) as IGameComposer;
+            var gameComposer = CreateGameComposer(gameConfig.GameCompositionMethod);
+            Game.Services.AddService<ISceneFactory>(gameComposer.CreateSceneFactory());
 
             yield return "configuring input";
             gameComposer.ConfigureInput(_inputManager);
 
-            yield return "creating scene composer";
-            var sceneComposerType = TypeHelper.FindType(gameConfiguration.SceneComposerType);
-            var sceneComposer = Activator.CreateInstance(sceneComposerType) as ISceneComposer;
-            Game.Services.AddService<ISceneComposer>(sceneComposer);
+            yield return $"starting scene {gameConfig.StartupScene}";
+            _sceneManager.Start(gameConfig.StartupScene);
+        }
 
-            yield return $"starting scene {gameConfiguration.StartupScene}";
-            _sceneManager.Start(gameConfiguration.StartupScene);
+        private static IGameComposer CreateGameComposer(string compositionMethod)
+        {
+            if (compositionMethod.Equals(CodeBasedGameComposer.GameCompositionMethodKey, StringComparison.OrdinalIgnoreCase))
+                return new CodeBasedGameComposer();
+
+            throw new Exception($"Unrecognized GameCompositionMethod must be one of" + 
+                " \"{CodeBasedGameComposer.CompositionMethodKey}\", ...");
         }
     }
 }

@@ -9,8 +9,9 @@ namespace Coldsteel
     /// Providers implementing this service are responsible for composing
     /// the game, i.e. configuring the input, screen, etc.
     /// </summary>
-    public interface IGameComposer
+    internal interface IGameComposer
     {
         void ConfigureInput(IInputManager inputManager);
+        ISceneFactory CreateSceneFactory();
     }
 }
