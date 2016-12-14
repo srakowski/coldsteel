@@ -40,7 +40,7 @@ namespace Coldsteel.Composition
         private void AddPropertyValuesToScene<T>() where T : ISceneElement
         {
             var properties = this.GetType().GetProperties()
-                .Where(p => p.PropertyType == typeof(T));
+                .Where(p => typeof(T).IsAssignableFrom(p.PropertyType));
             foreach (var property in properties)
                 _scene.Add(property.GetValue(this) as ISceneElement);
         }

@@ -115,8 +115,9 @@ namespace Coldsteel
         internal void Activate(Context context)
         {
             _context = context;
-            _gameObjects.ForEach(go => go.Activate(context));
             _activated = true;
+            var gameObjectsToActivate = _gameObjects.ToList();
+            gameObjectsToActivate.ForEach(go => go.Activate(context));
         }
 
         /// <summary>

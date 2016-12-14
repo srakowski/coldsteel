@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Coldsteel
 {
@@ -11,6 +12,8 @@ namespace Coldsteel
     /// </summary>
     internal class Context
     {
+        public Scene Scene { get; }
+
         public ISceneManager SceneManager { get; }
 
         public IPhysicsManager PhysicsManager { get; }
@@ -21,12 +24,14 @@ namespace Coldsteel
 
         public GraphicsDevice GraphicsDevice { get; }
 
-        public Context(SceneManager sceneManager, 
+        public Context(Scene scene,
+            SceneManager sceneManager,
             IPhysicsManager physicsManager,
-            IInputManager inputManager, 
+            IInputManager inputManager,
             ContentManager contentManager,
             GraphicsDevice graphicsDevice)
         {
+            Scene = scene;
             SceneManager = sceneManager;
             PhysicsManager = physicsManager;
             Input = inputManager;

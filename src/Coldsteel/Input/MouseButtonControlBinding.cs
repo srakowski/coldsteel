@@ -2,15 +2,16 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using static Coldsteel.Input.MouseButton;
 
 namespace Coldsteel.Input
 {
-    public class MouseButtonControlBinding : IButtonControlBinding
+    public class MouseButtonControlBinding : IButtonControl
     {
+        public string Name => $"{_button}Mouse";
+
         private MouseButton _button;
 
         public MouseButtonControlBinding(MouseButton button)

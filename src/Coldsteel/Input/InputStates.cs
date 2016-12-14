@@ -8,6 +8,8 @@ namespace Coldsteel.Input
 {
     internal static class InputStates
     {
+        public static Vector2 CenterScreen { get; set; } = Vector2.Zero;
+
         public static KeyboardInputState Keyboard { get; } = new KeyboardInputState();
 
         public static MouseInputState Mouse { get; } = new MouseInputState();

@@ -16,11 +16,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Composition\SceneFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\GameConfig.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\IPositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDirectionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\DirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MouseDirectionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISceneFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPositionalControl.cs" />
@@ -41,7 +44,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Composition\IGameComposer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IInputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\ButtonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\IButtonControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\GamePadInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
@@ -49,7 +51,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseInputState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />

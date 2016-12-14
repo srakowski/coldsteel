@@ -44,30 +44,27 @@ namespace Coldsteel.Physics
 
             foreach (var rigidBody in _rigidBodies)
             {
-                rigidBody.UpdateVelocity(gameTime);
+                var move = (rigidBody.Velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
-                var originalPosition = rigidBody.GameObject.Transform.Position;
+                var origPos = rigidBody.Transform.Position;
+                rigidBody.GameObject.Transform.Position += move;
 
-                rigidBody.GameObject.Transform.Position +=
-                    (rigidBody.Velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
-
-                var collider = rigidBody.GameObject.Components.OfType<Collider>().FirstOrDefault() as BoxCollider;
+                var collider = _colliders.FirstOrDefault(c => c.GameObject == rigidBody.GameObject);
                 if (collider == null)
                     continue;
 
-                var collisionCollider = CheckForCollision(collider);
-                if (collisionCollider != null)
+                var collisions = CheckForCollision(collider as BoxCollider);
+                if (collisions.Any())
                 {
-                    rigidBody.GameObject.Transform.Position = originalPosition;
+                    //TODO: inform collisions and figure physics out one day.
                 }
             }
         }
 
-        private Collider CheckForCollision(BoxCollider collider)
+        private IEnumerable<BoxCollider> CheckForCollision(BoxCollider collider)
         {
             return _colliders.OfType<BoxCollider>()
-                .Where(c => c != collider && c.Bounds.Intersects(collider.Bounds))
-                .FirstOrDefault();
+                .Where(c => c != collider && c.BoundingBox.Intersects(collider.BoundingBox));
         }
     }
 }

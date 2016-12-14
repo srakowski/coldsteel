@@ -8,6 +8,10 @@ namespace Coldsteel.Physics
 {
     public class BoxCollider : Collider
     {
+        public BoundingBox BoundingBox =>
+            new BoundingBox(new Vector3(Transform.Position + BoxShape.Location.ToVector2(), 0),
+                new Vector3(Transform.Position + new Vector2(BoxShape.Right, BoxShape.Bottom), 0));
+
         public Rectangle Bounds =>
             new Rectangle(
                 Transform.Position.ToPoint() + BoxShape.Location,

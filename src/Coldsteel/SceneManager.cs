@@ -74,11 +74,15 @@ namespace Coldsteel
 
             _outgoingScene = ActiveScene;
             var scene = _sceneFactory.Create(sceneName);
-            scene.Activate(new Context(this, 
+            var context = new Context(
+                scene,
+                this, 
                 _physicsManager,
                 _inputManager,
                 new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory),
-                Game.GraphicsDevice));
+                Game.GraphicsDevice);
+
+            scene.Activate(context);
             ActiveScene = scene;
             ActiveSceneChanged?.Invoke(this, null);
         }

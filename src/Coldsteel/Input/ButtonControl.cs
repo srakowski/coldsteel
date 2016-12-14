@@ -11,12 +11,12 @@ namespace Coldsteel.Input
 {
     public class ButtonControl : IButtonControl
     {
-        private List<IButtonControlBinding>[] _bindingsByPlayer = new[]
+        private List<IButtonControl>[] _bindingsByPlayer = new[]
         {
-            new List<IButtonControlBinding>(),
-            new List<IButtonControlBinding>(),
-            new List<IButtonControlBinding>(),
-            new List<IButtonControlBinding>()
+            new List<IButtonControl>(),
+            new List<IButtonControl>(),
+            new List<IButtonControl>(),
+            new List<IButtonControl>()
         };
 
         public string Name { get; set; }
@@ -26,7 +26,7 @@ namespace Coldsteel.Input
             this.Name = name;
         }
 
-        public void AddBinding(IButtonControlBinding binding)
+        public void AddBinding(IButtonControl binding)
         {
             // TODO: figure this out for more than one player
             _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);

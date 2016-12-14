@@ -14,9 +14,7 @@ namespace Coldsteel.Input
     internal class InputManager : GameComponent, IInputManager
     {
         private IInputState[] _inputStates;
-
-        private Dictionary<string, IButtonControl> _buttonControls = new Dictionary<string, IButtonControl>();
-        private Dictionary<string, IPositionalControl> _positionalControls = new Dictionary<string, IPositionalControl>();
+        private Dictionary<string, IControl> _controls = new Dictionary<string, IControl>();
 
         public InputManager(Game game) : base(game)
         {
@@ -35,33 +33,23 @@ namespace Coldsteel.Input
         }
 
         public IButtonControl GetButtonControl(string name) =>
-            _buttonControls[name];
+            _controls[name] as IButtonControl;
 
         public IPositionalControl GetPositionalControl(string name) =>
-            _positionalControls[name];
+            _controls[name] as IPositionalControl;
 
-        public void AddControl(IControl control)
-        {
-            AddButtonControl(control as IButtonControl);
-            AddPositionalControl(control as IPositionalControl);
-        }
+        public IDirectionalControl GetDirectionalControl(string name) =>
+                    _controls[name] as IDirectionalControl;
 
-        public void AddButtonControl(IButtonControl buttonControl)
-        {
-            if (buttonControl != null)
-                _buttonControls[buttonControl.Name] = buttonControl;
-        }
-
-        public void AddPositionalControl(IPositionalControl control)
-        {
-            if (control == null)
-                return;
-
-            _positionalControls[control.Name] = control;
-        }
+        public void AddControl(IControl control) =>
+            _controls[control.Name] = control;
 
         public override void Update(GameTime gameTime)
         {
+            InputStates.CenterScreen = new Vector2(
+                Game.GraphicsDevice.Viewport.Width * 0.5f,
+                Game.GraphicsDevice.Viewport.Height * 0.5f);
+
             foreach (var inputState in _inputStates)
                 inputState.Update();
         }

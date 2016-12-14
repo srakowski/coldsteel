@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -76,6 +77,12 @@ namespace Coldsteel
             }
         }
 
+        internal void RemoveComponent(Component component)
+        {
+            _components.Remove(component);
+            // TODO: add deactivate
+        }
+
         /// <summary>
         /// The GameObject is created and composed, but there is work that
         /// may need to be done to get it ready for gameplay. This is done
@@ -85,7 +92,8 @@ namespace Coldsteel
         {
             _context = context;
             _activated = true;
-            _components.ForEach(c =>
+            var componentsToActivate = _components.ToList();
+            componentsToActivate.ForEach(c =>
             {
                 c.GameObject = this;
                 c.Activate(context);
@@ -98,6 +106,8 @@ namespace Coldsteel
         internal void Destroy()
         {
             this.IsDestroyed = true;
+            foreach (var child in this.Transform.Children.Select(t => t.GameObject))
+                child.Destroy();
         }
     }
 }

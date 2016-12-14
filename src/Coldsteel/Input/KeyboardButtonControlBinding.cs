@@ -8,8 +8,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Coldsteel.Input
 {
-    public struct KeyboardButtonControlBinding : IButtonControlBinding
+    public struct KeyboardButtonControlBinding : IButtonControl
     {
+        public string Name => Key.ToString();
+
         public Keys Key { get; set; }
 
         public KeyboardButtonControlBinding(Keys key)

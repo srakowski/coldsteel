@@ -5,36 +5,35 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Coldsteel.Input
 {
-    public class PositionalControl : IPositionalControl
+    public class DirectionalControl : IDirectionalControl
     {
-        private List<IPositionalControl>[] _bindingsByPlayer = new[]
+        private List<IDirectionalControl>[] _bindingsByPlayer = new[]
         {
-            new List<IPositionalControl>(),
-            new List<IPositionalControl>(),
-            new List<IPositionalControl>(),
-            new List<IPositionalControl>()
+            new List<IDirectionalControl>(),
+            new List<IDirectionalControl>(),
+            new List<IDirectionalControl>(),
+            new List<IDirectionalControl>()
         };
 
         public string Name { get; set; }
 
-        public PositionalControl(string name)
+        public DirectionalControl(string name)
         {
             this.Name = name;
         }
 
-        public void AddBinding(IPositionalControl binding)
+        public void AddBinding(IDirectionalControl binding)
         {
             // TODO: figure this out for more than one player
             _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);
         }
 
-        public Vector2 GetPosition(PlayerIndex playerIndex = PlayerIndex.One) =>
+        public Vector2 GetDirection(PlayerIndex playerIndex = PlayerIndex.One) =>
             // TODO: resolve if you can have more than one binding for this?
-            _bindingsByPlayer[(int)playerIndex].FirstOrDefault()?.GetPosition(playerIndex) ?? Vector2.Zero;
+            _bindingsByPlayer[(int)playerIndex].FirstOrDefault()?.GetDirection(playerIndex) ?? Vector2.Zero;
 
     }
 }

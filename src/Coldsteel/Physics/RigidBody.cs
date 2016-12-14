@@ -13,23 +13,7 @@ namespace Coldsteel.Physics
         /// </summary>
         public Vector2 Velocity { get; set; }
 
-        /// <summary>
-        /// A force acting upon this rigid body.
-        /// </summary>
-        internal Vector2 Force { get; private set; } = Vector2.Zero;
-
-        internal override void Activate(Context context) => 
+        internal override void Activate(Context context) =>
             context.PhysicsManager.RegisterRigidBody(this);
-
-        public void ApplyForce(Vector2 force)
-        {
-            Force += force;
-        }
-
-        internal void UpdateVelocity(GameTime gameTime)
-        {
-            Velocity += Force;
-            Force = Vector2.Zero;
-        }
     }
 }

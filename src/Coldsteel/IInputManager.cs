@@ -12,6 +12,7 @@ namespace Coldsteel
     {
         IButtonControl GetButtonControl(string name);
         IPositionalControl GetPositionalControl(string name);
+        IDirectionalControl GetDirectionalControl(string name);
         void AddControl(IControl control);
     }
 }

@@ -4,10 +4,10 @@
 
 using Microsoft.Xna.Framework;
 
-namespace Coldsteel.Input
+namespace Coldsteel
 {
-    public interface IPositionalControlBinding
+    public interface IDirectionalControl : IControl
     {
-        Vector2 GetPosition(PlayerIndex pIdx = PlayerIndex.One);
+        Vector2 GetDirection(PlayerIndex pIdx = PlayerIndex.One);
     }
 }
