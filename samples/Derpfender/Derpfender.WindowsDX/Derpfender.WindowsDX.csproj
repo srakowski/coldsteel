@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Derpfender</RootNamespace>
     <AssemblyName>Derpfender</AssemblyName>
@@ -42,15 +42,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Coldsteel">
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.exe</HintPath>
-    </Reference>
-    <Reference Include="Coldsteel.Core">
-      <HintPath>..\..\..\src\Coldsteel.WindowsDX\bin\Windows\x86\Debug\Coldsteel.Core.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -77,6 +72,7 @@
     <None Include="Content\Fonts\menu.spritefont" />
   </ItemGroup>
   <Import Project="..\Derpfender\Derpfender.projitems" Label="Shared" />
+  <Import Project="..\..\..\src\Coldsteel\Coldsteel.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

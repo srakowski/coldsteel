@@ -1,16 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.25914.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derpfender.WindowsDX", "Derpfender.WindowsDX\Derpfender.WindowsDX.csproj", "{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Derpfender", "Derpfender\Derpfender.shproj", "{3739E959-A7D9-4533-9029-E1C9687CC294}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel", "..\..\src\Coldsteel\Coldsteel.shproj", "{DABB2852-9CF7-4BFE-B516-6C97DDEE5DF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "..\..\src\Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{29494738-38F7-4531-B05D-FEB8B5B219C3}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\src\Coldsteel\Coldsteel.projitems*{29494738-38f7-4531-b05d-feb8b5b219c3}*SharedItemsImports = 4
 		Derpfender\Derpfender.projitems*{3739e959-a7d9-4533-9029-e1c9687cc294}*SharedItemsImports = 13
 		Derpfender\Derpfender.projitems*{98a4eedd-005c-44b5-bca5-4f8a1171f8d2}*SharedItemsImports = 4
+		..\..\src\Coldsteel\Coldsteel.projitems*{98a4eedd-005c-44b5-bca5-4f8a1171f8d2}*SharedItemsImports = 4
+		..\..\src\Coldsteel\Coldsteel.projitems*{dabb2852-9cf7-4bfe-b516-6c97ddee5df5}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +32,14 @@ Global
 		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|Any CPU.ActiveCfg = Release|x86
 		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|x86.ActiveCfg = Release|x86
 		{98A4EEDD-005C-44B5-BCA5-4F8A1171F8D2}.Release|x86.Build.0 = Release|x86
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

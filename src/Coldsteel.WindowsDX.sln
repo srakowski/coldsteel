@@ -5,41 +5,30 @@ VisualStudioVersion = 15.0.25914.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Coldsteel", "Coldsteel\Coldsteel.shproj", "{DABB2852-9CF7-4BFE-B516-6C97DDEE5DF5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsDX", "WindowsDX", "{66629992-3755-431C-981E-23EAF3366D9C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{484CC970-5914-46E2-8A50-215466BC7F77}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.Core.WindowsDX", "Coldsteel.Core.WindowsDX\Coldsteel.Core.WindowsDX.csproj", "{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.WindowsDX", "Coldsteel.WindowsDX\Coldsteel.WindowsDX.csproj", "{29494738-38F7-4531-B05D-FEB8B5B219C3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Coldsteel\Coldsteel.projitems*{29494738-38f7-4531-b05d-feb8b5b219c3}*SharedItemsImports = 4
 		Coldsteel\Coldsteel.projitems*{dabb2852-9cf7-4bfe-b516-6c97ddee5df5}*SharedItemsImports = 13
-		Coldsteel\Coldsteel.projitems*{faa09812-dc2a-4466-a464-ccceba58a5b5}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
-		LD37|x86 = LD37|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{484CC970-5914-46E2-8A50-215466BC7F77}.Debug|x86.ActiveCfg = Debug|x86
-		{484CC970-5914-46E2-8A50-215466BC7F77}.Debug|x86.Build.0 = Debug|x86
-		{484CC970-5914-46E2-8A50-215466BC7F77}.LD37|x86.ActiveCfg = LD37|x86
-		{484CC970-5914-46E2-8A50-215466BC7F77}.LD37|x86.Build.0 = LD37|x86
-		{484CC970-5914-46E2-8A50-215466BC7F77}.Release|x86.ActiveCfg = Release|x86
-		{484CC970-5914-46E2-8A50-215466BC7F77}.Release|x86.Build.0 = Release|x86
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.Debug|x86.Build.0 = Debug|Any CPU
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.LD37|x86.ActiveCfg = LD37|Any CPU
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.LD37|x86.Build.0 = LD37|Any CPU
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.Release|x86.ActiveCfg = Release|Any CPU
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5}.Release|x86.Build.0 = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{29494738-38F7-4531-B05D-FEB8B5B219C3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{484CC970-5914-46E2-8A50-215466BC7F77} = {66629992-3755-431C-981E-23EAF3366D9C}
-		{FAA09812-DC2A-4466-A464-CCCEBA58A5B5} = {66629992-3755-431C-981E-23EAF3366D9C}
 	EndGlobalSection
 EndGlobal

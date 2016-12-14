@@ -31,7 +31,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Composition\IControlsBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\ISceneBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\ReflectiveSceneBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configuration\Game.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentGameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IButtonControl.cs" />
