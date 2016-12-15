@@ -3,7 +3,6 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +65,6 @@ namespace Coldsteel
         {
             _gameObjects = new List<GameObject>(gameObjects);
             _layers = new List<Layer>(layers);
-            _layers.Add(new Layer(Scene.DefaultLayerName, 0));
             _activated = false;
         }
 
@@ -115,6 +113,10 @@ namespace Coldsteel
         internal void Activate(Context context)
         {
             _context = context;
+
+            if (!_layers.Any(l => l.Name == Scene.DefaultLayerName))
+                _layers.Add(new Layer(Scene.DefaultLayerName, 0));
+
             _activated = true;
             var gameObjectsToActivate = _gameObjects.ToList();
             gameObjectsToActivate.ForEach(go => go.Activate(context));

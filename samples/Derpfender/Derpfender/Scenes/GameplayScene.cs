@@ -22,8 +22,5 @@ namespace Derpfender.Scenes
             .Add(new SpriteRenderer("sprites/ship"))
             .Add(new AudioSource("audio/fire"))
             .Add(new ShipBehavior());
-
-        public GameObject MainCamera { get; } = new GameObject()
-            .Add(new Camera());
     }
 }
