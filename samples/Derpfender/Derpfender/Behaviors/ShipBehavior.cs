@@ -38,7 +38,7 @@ namespace Derpfender.Behaviors
             _allowFire = false;
             this.GameObject.Components.OfType<AudioSource>().First().Play();
             //TODO: how to add stuff to the scene?
-            SceneManager.ActiveScene.Add(new GameObject()
+            Scene.AddElement(new GameObject()
                 .SetPosition(this.Transform.Position)
                 .Add(new SpriteRenderer("Sprites/flash")
                 {

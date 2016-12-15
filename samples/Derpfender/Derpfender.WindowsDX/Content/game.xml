@@ -3,6 +3,5 @@
   <Asset Type="Coldsteel.Composition.GameConfig">
     <Title>Derpfender</Title>
     <GameCompositionMethod>Code</GameCompositionMethod>
-    <StartupScene>MainMenuScene</StartupScene>
   </Asset>
 </XnaContent>

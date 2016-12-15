@@ -5,10 +5,11 @@
 namespace Coldsteel
 {
     /// <summary>
-    /// Internal helper interface used to give GameObject and Layer a common
-    /// type which they can be assigned to.
+    /// Base type for all elements that compose a scene, e.g. GameObjects, Layers, etc.
     /// </summary>
-    internal interface ISceneElement
+    public abstract class SceneElement
     {
+        public virtual bool IsDestroyed { get; }
+        internal virtual void Activate(Context context) { }
     }
 }

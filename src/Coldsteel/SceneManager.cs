@@ -28,7 +28,7 @@ namespace Coldsteel
         /// <summary>
         /// Is triggered when the ActiveScene is updated.
         /// </summary>
-        public event EventHandler<EventArgs> ActiveSceneChanged;
+        public event EventHandler<SceneActivatedEventArgs> SceneActivated;
 
         /// <summary>
         /// The scene being played.
@@ -84,7 +84,10 @@ namespace Coldsteel
 
             scene.Activate(context);
             ActiveScene = scene;
-            ActiveSceneChanged?.Invoke(this, null);
+            SceneActivated?.Invoke(this, new SceneActivatedEventArgs()
+            {
+                Scene = scene
+            });
         }
 
         public override void Update(GameTime gameTime)

@@ -58,16 +58,26 @@ namespace Coldsteel.Composition
             {
                 config = Game.Content.Load<GameConfig>("game");
             }
-            catch (Exception ex)
+            catch
             {
-                config = new GameConfig()
-                {
-                    GameCompositionMethod = CodeBasedGameComposer.GameCompositionMethodKey
-                };
+                config = new GameConfig();
             }
+
+            config.GameCompositionMethod =
+                config.GameCompositionMethod ??
+                CodeBasedGameComposer.GameCompositionMethodKey;
+
+            config.StartupScene = config.StartupScene ?? FindStartupScene();
+
             return config;
         }
 
+        private string FindStartupScene() =>
+            AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(t => t.GetCustomAttribute(typeof(StartupSceneAttribute)) != null)
+                .FirstOrDefault()?.Name;
+            
         private IEnumerator LoadGame(GameConfig gameConfig)
         {
             foreach (var reference in gameConfig?.References ?? Enumerable.Empty<string>())

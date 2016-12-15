@@ -14,7 +14,7 @@ namespace Coldsteel
         /// <summary>
         /// Is triggered when the ActiveScene is updated.
         /// </summary>
-        event EventHandler<EventArgs> ActiveSceneChanged;
+        event EventHandler<SceneActivatedEventArgs> SceneActivated;
 
         /// <summary>
         /// The currently active scene.
