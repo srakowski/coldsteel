@@ -2,11 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Physics;
-
-namespace Coldsteel
+namespace Coldsteel.Physics
 {
-    internal interface IPhysicsManager
+    public abstract class Body : Component
     {
     }
 }

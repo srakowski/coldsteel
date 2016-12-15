@@ -37,18 +37,14 @@ namespace Derpfender.Behaviors
         {
             _allowFire = false;
             this.GameObject.Components.OfType<AudioSource>().First().Play();
-            //TODO: how to add stuff to the scene?
+
             Scene.AddElement(new GameObject()
                 .SetPosition(this.Transform.Position)
                 .Add(new SpriteRenderer("Sprites/flash")
                 {
                     Color = Color.WhiteSmoke
                 })
-                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
-                .Add(new BoxCollider(new Rectangle(-10, -10, 20, 20))));
-
-            // TODO: collisions
-            //    .Add.BoxCollider(10, 10);
+                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
 
             yield return WaitYieldInstruction.Create(_fireRate);
              _allowFire = true;

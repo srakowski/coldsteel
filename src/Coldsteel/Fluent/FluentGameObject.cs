@@ -52,11 +52,5 @@ namespace Coldsteel.Fluent
             self.Transform.SetParent(gameObject.Transform);
             return self;
         }
-
-        public static GameObject Add(this GameObject self, Component component)
-        {
-            self.AddComponent(component);
-            return self;
-        }
     }
 }

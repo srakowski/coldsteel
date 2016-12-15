@@ -2,11 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Physics;
-
-namespace Coldsteel
+namespace Coldsteel.Physics.Arcade
 {
-    internal interface IPhysicsManager
+    public class Body : Physics.Body
     {
+        public float Drag { get; set; }
+
+        public float MaxVelocity { get; set; }
     }
 }

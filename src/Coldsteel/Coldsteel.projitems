@@ -9,6 +9,10 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Arcade\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Arcade\World.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneActivatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />
@@ -29,11 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ISceneFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPositionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\Arcade\World.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\BoxRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedGameComposer.cs" />

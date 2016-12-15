@@ -3,15 +3,20 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Coldsteel.Composition;
-using Coldsteel.Fluent;
+using Coldsteel.Physics;
 
 namespace Coldsteel.Examples.ArcadePhysics
 {
     [StartupScene]
     public class AsteroidsMovement : ReflectiveSceneBuilder
     {
-        public GameObject World { get; } = new GameObject()
-            .Add(new Coldsteel.Physics.Arcade.World());
+        public World World { get; } = new Physics.Arcade.World();
 
+        public GameObject Ship { get; } = new GameObject()
+            .AddComponent(new Physics.Arcade.Body()
+            {
+                Drag = 100,
+                MaxVelocity = 200
+            });
     }
 }

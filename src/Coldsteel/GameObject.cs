@@ -69,7 +69,7 @@ namespace Coldsteel
         /// Adds a component to this GameObject.
         /// </summary>
         /// <param name="component"></param>
-        public void AddComponent(Component component)
+        public GameObject AddComponent(Component component)
         {
             _components.Add(component);
             if (_activated)
@@ -77,6 +77,7 @@ namespace Coldsteel
                 component.GameObject = this;
                 component.Activate(_context);
             }
+            return this;
         }
 
         internal void RemoveComponent(Component component)

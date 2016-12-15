@@ -38,16 +38,6 @@ namespace Coldsteel.Scripting
         public new Transform Transform => base.Transform;
 
         /// <summary>
-        /// Gets the RigidBody component of the GameObject, if any.
-        /// </summary>
-        public RigidBody RigidBody => GameObject?.Components.OfType<RigidBody>().FirstOrDefault();
-
-        /// <summary>
-        /// Gets the Collider component of the GameObject, if any.
-        /// </summary>
-        public Collider Collider => GameObject?.Components.OfType<Collider>().FirstOrDefault();
-
-        /// <summary>
         /// The SceneManager object.
         /// </summary>
         public ISceneManager SceneManager { get; internal set; }
