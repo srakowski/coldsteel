@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AsteroidsMovement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainMenuScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ShipBehavior.cs" />
   </ItemGroup>
 </Project>

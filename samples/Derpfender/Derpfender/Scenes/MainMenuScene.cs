@@ -17,22 +17,22 @@ namespace Derpfender.Scenes
         public GameObject MainMenu { get; } = new GameObject()
             .SetName("mainMenu")
             .SetPosition(200, 200)
-            .Add(new TextRenderer(MenuFontAssetName, "Derpfender"));
+            .AddComponent(new TextRenderer(MenuFontAssetName, "Derpfender"));
 
         public GameObject[] Options { get; private set; }
 
         private GameObject PlayOption { get; } = new GameObject()
             .SetPosition(40, 40)
-            .Add(new TextRenderer(MenuFontAssetName, "Play"));
+            .AddComponent(new TextRenderer(MenuFontAssetName, "Play"));
 
         private GameObject ExitOption { get; } = new GameObject()
             .SetPosition(40, 80)
-            .Add(new TextRenderer(MenuFontAssetName, "Exit"));
+            .AddComponent(new TextRenderer(MenuFontAssetName, "Exit"));
 
         public GameObject ShipSelector { get; } = new GameObject()
             .SetRotationInDegrees(90)
-            .Add(new SpriteRenderer("sprites/ship"))
-            .Add(new MainMenuBehavior());
+            .AddComponent(new SpriteRenderer("sprites/ship"))
+            .AddComponent(new MainMenuBehavior());
 
         protected override void Compose()
         {

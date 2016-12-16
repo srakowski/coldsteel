@@ -40,11 +40,11 @@ namespace Derpfender.Behaviors
 
             Scene.AddElement(new GameObject()
                 .SetPosition(this.Transform.Position)
-                .Add(new SpriteRenderer("Sprites/flash")
+                .AddComponent(new SpriteRenderer("Sprites/flash")
                 {
                     Color = Color.WhiteSmoke
                 })
-                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
+                .AddComponent(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
 
             yield return WaitYieldInstruction.Create(_fireRate);
              _allowFire = true;

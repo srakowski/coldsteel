@@ -26,12 +26,12 @@ namespace Derpfender.Scenes
             {
                 yield return new GameObject()
                     .SetPosition(rand.Next(0, 1280), rand.Next(0, 720))
-                    .Add(new SpriteRenderer("sprites/star")
+                    .AddComponent(new SpriteRenderer("sprites/star")
                     {
                         Layer = "starfield",
                         Color = color
                     })
-                    .Add(new StarBehavior(color.A));
+                    .AddComponent(new StarBehavior(color.A));
             }
         }
 
