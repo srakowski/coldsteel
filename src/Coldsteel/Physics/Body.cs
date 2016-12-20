@@ -6,7 +6,14 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Physics
 {
-    public abstract class Body : Component
+    public class Body : Component
     {
+        public Vector2 Acceleration { get; set; }
+
+        public Vector2 Velocity { get; set; }
+
+        public float Drag { get; set; }
+
+        public float MaxVelocity { get; set; }
     }
 }
