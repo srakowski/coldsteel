@@ -21,7 +21,7 @@ namespace Coldsteel.Rendering
         /// <summary>
         /// The name of the Layer this Renderer will be rendered to.
         /// </summary>
-        public string Layer { get; set; }
+        public string Layer { get; set; } = DefaultLayerName;
 
         internal abstract void Render(SpriteBatch spriteBatch);
     }

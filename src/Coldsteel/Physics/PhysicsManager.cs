@@ -3,10 +3,7 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Diagnostics;
 
 namespace Coldsteel.Physics
 {
@@ -23,11 +20,28 @@ namespace Coldsteel.Physics
         {
             base.Initialize();
             _sceneManager = Game.Services.GetService<ISceneManager>();
+            _sceneManager.SceneActivated += _sceneManager_SceneActivated;
+        }
+
+        private void _sceneManager_SceneActivated(object sender, SceneActivatedEventArgs e)
+        {
+            var worlds = e.Scene.Elements.OfType<World>();
+            if (!worlds.Any(w => w.Name == Body.DefaultWorldName))
+                e.Scene.AddElement(new World(Body.DefaultWorldName));
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            if (_sceneManager?.ActiveScene == null)
+                return;
+
+            var worlds = _sceneManager.ActiveScene.Elements.OfType<World>();
+            var bodies = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.OfType<Body>());
+            foreach (var world in worlds)
+            {
+                var bodiesThisWorld = bodies.Where(b => b.World == world.Name);
+                world.Step(gameTime, bodiesThisWorld);
+            }
         }
     }
 }

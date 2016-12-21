@@ -5,6 +5,7 @@ using Coldsteel.Fluent;
 using Derpfender.Behaviors;
 using Coldsteel.Rendering;
 using Coldsteel.Audio;
+using Coldsteel.Physics;
 
 namespace Derpfender.Scenes
 {
@@ -19,6 +20,7 @@ namespace Derpfender.Scenes
             .SetName("ship") // TODO: constructor should accept name
             .SetPosition(60, 360)
             .SetRotationInDegrees(90)
+            .AddComponent(new Body() { AngularDrag = 50, MaxAngularVelocity = 500 })
             .AddComponent(new SpriteRenderer("sprites/ship"))
             .AddComponent(new AudioSource("audio/fire"))
             .AddComponent(new ShipBehavior());

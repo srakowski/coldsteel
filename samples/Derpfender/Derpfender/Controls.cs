@@ -36,7 +36,9 @@ namespace Derpfender
             {
                 Up,
                 Down,
-                Select
+                Select,
+                new KeyboardButtonControlBinding(Keys.Left),
+                new KeyboardButtonControlBinding(Keys.Right)
             };
         }
     }

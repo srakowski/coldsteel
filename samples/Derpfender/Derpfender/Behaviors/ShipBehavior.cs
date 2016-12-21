@@ -23,11 +23,21 @@ namespace Derpfender.Behaviors
 
         public override void Update()
         {
+            var body = GameObject.Components.OfType<Body>().First();
+
             if (Input.GetButtonControl("Up").IsDown())
                 this.Transform.Position += new Vector2(0, -1) * _speed * Delta;
 
             if (Input.GetButtonControl("Down").IsDown())
                 this.Transform.Position += new Vector2(0, 1) * _speed * Delta;
+
+            body.AngularAcceleration = 0f;
+
+            if (Input.GetButtonControl("Left").IsDown())
+                body.AngularAcceleration -= 200f;
+
+            if (Input.GetButtonControl("Right").IsDown())
+                body.AngularAcceleration += 200f;
 
             if (Input.GetButtonControl("Select").IsDown() && _allowFire)
                 StartCoroutine(Fire());
