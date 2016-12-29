@@ -1,5 +1,6 @@
 ﻿using Coldsteel;
 using Coldsteel.Audio;
+using Coldsteel.Extensions;
 using Coldsteel.Fluent;
 using Coldsteel.Physics;
 using Coldsteel.Rendering;
@@ -46,17 +47,25 @@ namespace Derpfender.Behaviors
         private IEnumerator Fire()
         {
             _allowFire = false;
-            this.GameObject.Components.OfType<AudioSource>().First().Play();
+
+            //this.GameObject.Components.OfType<AudioSource>().First().Play();
 
             Scene.AddElement(new GameObject()
-                .SetPosition(this.Transform.Position)
+                .SetPosition(this.Transform.Position.ShiftX(20))
                 .AddComponent(new SpriteRenderer("Sprites/flash")
                 {
                     Color = Color.WhiteSmoke
                 })
-                .AddComponent(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f))));
+                .AddComponent(new Body()
+                {
+                    Velocity = new Vector2(2, _rand.Next(-60, 61) / 1000f),
+                    Bounce = Vector2.One / 2f
+                })
+                .AddComponent(new CircleCollider(12))
+                .AddComponent(new BulletBehavior()));
 
             yield return WaitYieldInstruction.Create(_fireRate);
+
              _allowFire = true;
         }
     }

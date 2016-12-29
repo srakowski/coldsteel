@@ -9,9 +9,14 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\Vector2Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\CircleCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\StaticBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SceneActivatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColdsteelGame.cs" />
@@ -27,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseDirectionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneActivatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISceneFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />
@@ -55,6 +61,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneElementEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptingManager.cs" />

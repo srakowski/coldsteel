@@ -10,6 +10,7 @@ namespace Coldsteel
     public abstract class SceneElement
     {
         public virtual bool IsDestroyed { get; }
+
         internal virtual void Activate(Context context) { }
     }
 }

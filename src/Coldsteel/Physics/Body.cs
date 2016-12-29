@@ -6,24 +6,11 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Physics
 {
-    public class Body : Component
+    public class Body : PhysicsComponent
     {
-        /// <summary>
-        /// All Scenes have at least 1 world with this name. If a world is 
-        /// registered to a scene with the same name that world will be used. If
-        /// bodies are added to a Scene without specifying a world name then the
-        /// world with this name is used.
-        /// </summary>
-        public static string DefaultWorldName { get; } = "default";
-
-        /// <summary>
-        /// The name of the world this Body belongs to.
-        /// </summary>
-        public string World { get; set; } = DefaultWorldName;
-
         public bool EnableGravity { get; set; } = true;
 
-        public Vector2 Gravity { get; set; }
+        public Vector2 Gravity { get; set; } = Vector2.Zero;
 
         public Vector2 Position
         {
@@ -31,13 +18,13 @@ namespace Coldsteel.Physics
             set { Transform.Position = value; }
         }
 
-        public Vector2 Acceleration { get; set; }
+        public Vector2 Acceleration { get; set; } = Vector2.Zero;
 
-        public Vector2 Velocity { get; set; }
+        public Vector2 Velocity { get; set; } = Vector2.Zero;
 
-        public Vector2 Drag { get; set; }
+        public Vector2 Drag { get; set; } = Vector2.Zero;
 
-        public Vector2 MaxVelocity { get; set; }
+        public Vector2 MaxVelocity { get; set; } = new Vector2(10000, 10000);
 
         public float Rotation
         {
@@ -45,12 +32,16 @@ namespace Coldsteel.Physics
             set { Transform.Rotation = value; }
         }
 
-        public float AngularVelocity { get; set; }
+        public float AngularVelocity { get; set; } = 0f;
 
-        public float AngularAcceleration { get; set; }
+        public float AngularAcceleration { get; set; } = 0f;
 
-        public float AngularDrag { get; set; }
+        public float AngularDrag { get; set; } = 0f;
 
-        public float MaxAngularVelocity { get; set; }
+        public float MaxAngularVelocity { get; set; } = 1000f;
+
+        public float Mass { get; set; } = 1f;
+
+        public Vector2 Bounce { get; set; } = Vector2.Zero;
     }
 }

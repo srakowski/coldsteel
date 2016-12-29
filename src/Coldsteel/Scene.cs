@@ -21,6 +21,16 @@ namespace Coldsteel
         private bool _activated = false;
 
         /// <summary>
+        /// Fires when an element is added to a scene post-activation.
+        /// </summary>
+        public event EventHandler<SceneElementEventArgs> SceneElementAdded;
+
+        /// <summary>
+        /// Fires when an element is removed from a scene post-activation.
+        /// </summary>
+        public event EventHandler<SceneElementEventArgs> SceneElementRemoved;
+
+        /// <summary>
         /// When the graphics device is at the start of scene rendering, this determines
         /// the background color of the scene.
         /// </summary>
@@ -34,7 +44,7 @@ namespace Coldsteel
         /// <summary>
         /// The GameObjects present in this Scene.
         /// </summary>
-        public IEnumerable<GameObject> GameObjects => _sceneElements.OfType<GameObject>();
+        //public IEnumerable<GameObject> GameObjects => _sceneElements.OfType<GameObject>();
 
         /// <summary>
         /// Constructs an empty scene.
@@ -53,15 +63,31 @@ namespace Coldsteel
         {
             _sceneElements.Add(sceneElement);
             if (_activated)
+            {
                 sceneElement.Activate(_context);
+                SceneElementAdded?.Invoke(this, new SceneElementEventArgs()
+                {
+                    SceneElement = sceneElement
+                });
+            }
         }
 
         /// <summary>
         /// Update the scene, remove any destroyed objects.
         /// </summary>
         /// <param name="gameTime"></param>
-        internal void Update(GameTime gameTime) =>
-            _sceneElements.RemoveAll(go => go.IsDestroyed);
+        internal void Update(GameTime gameTime)
+        {
+            var sceneElements = _sceneElements.Where(se => se.IsDestroyed).ToArray();
+            foreach (var sceneElement in sceneElements)
+            {
+                _sceneElements.Remove(sceneElement);
+                SceneElementRemoved?.Invoke(this, new SceneElementEventArgs()
+                {
+                    SceneElement = sceneElement
+                });
+            }
+        }
 
         /// <summary>
         /// Before this is called the GameObjects are composed but in an inactive
@@ -83,6 +109,7 @@ namespace Coldsteel
         internal void Deactivate()
         {
             _context.Unload();
+            _sceneElements.Clear();
         }
     }
 }

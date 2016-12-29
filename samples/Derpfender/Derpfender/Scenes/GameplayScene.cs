@@ -24,5 +24,8 @@ namespace Derpfender.Scenes
             .AddComponent(new SpriteRenderer("sprites/ship"))
             .AddComponent(new AudioSource("audio/fire"))
             .AddComponent(new ShipBehavior());
+
+        public GameObject EnemySpawner { get; } = new GameObject()
+            .AddComponent(new SpawnEnemyBehavior());
     }
 }

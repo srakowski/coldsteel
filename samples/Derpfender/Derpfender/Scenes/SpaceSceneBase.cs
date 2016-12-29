@@ -18,7 +18,7 @@ namespace Derpfender.Scenes
             .SetBlendState(BlendState.NonPremultiplied)
             .SetSamplerState(SamplerState.PointClamp);
 
-        public IEnumerable<GameObject> Stars { get; } = CreateStars();
+        //public IEnumerable<GameObject> Stars { get; } = CreateStars();
 
         private static IEnumerable<GameObject> CreateStars()
         {

@@ -54,10 +54,12 @@ namespace Coldsteel.Rendering
             var layers = _sceneManager.ActiveScene.Elements.OfType<Layer>();
 
             // TODO: don't look this up every frame mmkay?
-            var camera = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Camera)).Select(c => c as Camera).FirstOrDefault();
+            var camera = _sceneManager.ActiveScene.Elements.OfType<GameObject>()
+                .SelectMany(go => go.Components.Where(c => c is Camera)).Select(c => c as Camera).FirstOrDefault();
 
             // TODO: don't look this up every frame ok?
-            var renderers = _sceneManager.ActiveScene.GameObjects.SelectMany(go => go.Components.Where(c => c is Renderer).Select(c => c as Renderer));
+            var renderers = _sceneManager.ActiveScene.Elements.OfType<GameObject>()
+                .SelectMany(go => go.Components.OfType<Renderer>());
             foreach (var layer in layers.OrderBy(l => l.Order))
             {
                 var renderersThisLayer = renderers.Where(r => r.Layer == layer.Name || (layer.Name == Renderer.DefaultLayerName && string.IsNullOrEmpty(r.Layer)));
