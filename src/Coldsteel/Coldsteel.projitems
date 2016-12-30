@@ -12,10 +12,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\Vector2Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\CircleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Interval.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsComponent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\StaticBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />

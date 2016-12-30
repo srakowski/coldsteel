@@ -58,10 +58,10 @@ namespace Derpfender.Behaviors
                 })
                 .AddComponent(new Body()
                 {
-                    Velocity = new Vector2(2, _rand.Next(-60, 61) / 1000f),
-                    Bounce = Vector2.One / 2f
+                    Velocity = new Vector2(.5f, _rand.Next(-60, 61) / 1000f),
+                    Bounce = 0.5f
                 })
-                .AddComponent(new CircleCollider(12))
+                .AddComponent(new BoxCollider(12))
                 .AddComponent(new BulletBehavior()));
 
             yield return WaitYieldInstruction.Create(_fireRate);

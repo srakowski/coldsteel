@@ -42,6 +42,6 @@ namespace Coldsteel.Physics
 
         public float Mass { get; set; } = 1f;
 
-        public Vector2 Bounce { get; set; } = Vector2.Zero;
+        public float Bounce { get; set; } = 0f;
     }
 }

@@ -11,7 +11,7 @@ namespace Derpfender.Behaviors
 {
     class BulletBehavior : Behavior
     {
-        private float _speed = 2f;
+        //private float _speed = 2f;
 
         private bool _swappedTexture = false;
 

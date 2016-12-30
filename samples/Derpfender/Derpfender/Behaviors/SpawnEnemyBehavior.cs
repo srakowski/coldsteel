@@ -16,7 +16,7 @@ namespace Derpfender.Behaviors
 {
     class SpawnEnemyBehavior : Behavior
     {
-        private bool _allowSpawn = true;
+        //private bool _allowSpawn = true;
 
         private Random _rand = new Random();
 
@@ -41,11 +41,11 @@ namespace Derpfender.Behaviors
                 var go = new GameObject()
                     .SetPosition(900, _rand.Next(20, 700))
                     .SetRotationInDegrees(270)
-                    .AddComponent(new CircleCollider(24))
+                    .AddComponent(new BoxCollider(24))
                     .AddComponent(new Body()
                     {
-                        Bounce = Vector2.One / 2f,
-                        Velocity = new Vector2(-0.2f, 0)
+                        Bounce = 0.2f,
+                        Velocity = new Vector2(-0.05f, 0)
                     })
                     .AddComponent(new SpriteRenderer("Sprites/enemy"));
 
