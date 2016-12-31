@@ -9,11 +9,21 @@
     <Import_RootNamespace>Coldsteel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\Vector2Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collision.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Interval.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\Polygon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ColdsteelGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\SceneFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Composition\StartupSceneAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\GameConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDirectionalControl.cs" />
@@ -23,14 +33,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseDirectionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISceneElement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneActivatedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISceneFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPhysicsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPositionalControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\BoxCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Physics\RigidBody.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\BoxRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedGameComposer.cs" />
@@ -54,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\SpriteRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\TextRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SceneElementEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\Behavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\Coroutine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptingManager.cs" />
@@ -62,7 +71,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\TypeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISceneManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rendering\Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\RenderingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneManager.cs" />

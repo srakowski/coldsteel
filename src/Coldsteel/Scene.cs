@@ -14,30 +14,21 @@ namespace Coldsteel
     /// </summary>
     public class Scene
     {
-        private List<GameObject> _gameObjects;
-
-        private List<Layer> _layers;
-
         private Context _context;
+
+        private List<SceneElement> _sceneElements;
 
         private bool _activated = false;
 
         /// <summary>
-        /// The GameObjects present in this Scene.
+        /// Fires when an element is added to a scene post-activation.
         /// </summary>
-        public IEnumerable<GameObject> GameObjects => _gameObjects;
+        public event EventHandler<SceneElementEventArgs> SceneElementAdded;
 
         /// <summary>
-        /// All Scenes have at least 1 layer with this name set draw at order 0. To
-        /// draw content behind this layer add a layer with an Order less than 0. To
-        /// draw above this layer add a layer with an Order greater than 0.
+        /// Fires when an element is removed from a scene post-activation.
         /// </summary>
-        public static string DefaultLayerName { get; } = "default";
-
-        /// <summary>
-        /// Rendering Layers available to Renderer components in this Scene.
-        /// </summary>
-        public IEnumerable<Layer> Layers => _layers;
+        public event EventHandler<SceneElementEventArgs> SceneElementRemoved;
 
         /// <summary>
         /// When the graphics device is at the start of scene rendering, this determines
@@ -46,64 +37,57 @@ namespace Coldsteel
         public Color BackgroundColor { get; set; } = Color.CornflowerBlue;
 
         /// <summary>
+        /// Gets an enumerable of all SceneElements in this scene.
+        /// </summary>
+        public IEnumerable<SceneElement> Elements => _sceneElements;
+
+        /// <summary>
+        /// The GameObjects present in this Scene.
+        /// </summary>
+        //public IEnumerable<GameObject> GameObjects => _sceneElements.OfType<GameObject>();
+
+        /// <summary>
         /// Constructs an empty scene.
         /// </summary>
-        public Scene() : this(Enumerable.Empty<GameObject>()) { }
-
-        /// <summary>
-        /// Constructs a scene with the provided GameObjects.
-        /// </summary>
-        /// <param name="gameObjects"></param>
-        public Scene(IEnumerable<GameObject> gameObjects) : this(gameObjects, Enumerable.Empty<Layer>()) { }
-
-        /// <summary>
-        /// Constructs a scene initialized with the provided GameObjects and Layers.
-        /// </summary>
-        /// <param name="gameObjects"></param>
-        /// <param name="layers"></param>
-        public Scene(IEnumerable<GameObject> gameObjects, IEnumerable<Layer> layers)
+        public Scene()
         {
-            _gameObjects = new List<GameObject>(gameObjects);
-            _layers = new List<Layer>(layers);
+            _sceneElements = new List<SceneElement>();
             _activated = false;
         }
 
         /// <summary>
-        /// Adds a Layer to this Scene.
-        /// </summary>
-        /// <param name="layer"></param>
-        public void Add(Layer layer)
-        {
-            _layers.Add(layer);
-        }
-
-        /// <summary>
-        /// Adds a GameObject to this Scene.
+        /// Adds a SceneElement to this Scene.
         /// </summary>
         /// <param name="gameObject"></param>
-        public void Add(GameObject gameObject)
+        public void AddElement(SceneElement sceneElement)
         {
-            _gameObjects.Add(gameObject);
+            _sceneElements.Add(sceneElement);
             if (_activated)
-                gameObject.Activate(_context);
-        }
-
-        internal void Add(ISceneElement sceneElement)
-        {
-            if (sceneElement is GameObject)
-                Add(sceneElement as GameObject);
-            else if (sceneElement is Layer)
-                Add(sceneElement as Layer);
-            else
-                throw new Exception($"unrecognized scene element type {sceneElement.GetType().Name}");
+            {
+                sceneElement.Activate(_context);
+                SceneElementAdded?.Invoke(this, new SceneElementEventArgs()
+                {
+                    SceneElement = sceneElement
+                });
+            }
         }
 
         /// <summary>
         /// Update the scene, remove any destroyed objects.
         /// </summary>
         /// <param name="gameTime"></param>
-        internal void Update(GameTime gameTime) =>
-            _gameObjects.RemoveAll(go => go.IsDestroyed);
+        internal void Update(GameTime gameTime)
+        {
+            var sceneElements = _sceneElements.Where(se => se.IsDestroyed).ToArray();
+            foreach (var sceneElement in sceneElements)
+            {
+                _sceneElements.Remove(sceneElement);
+                SceneElementRemoved?.Invoke(this, new SceneElementEventArgs()
+                {
+                    SceneElement = sceneElement
+                });
+            }
+        }
 
         /// <summary>
         /// Before this is called the GameObjects are composed but in an inactive
@@ -113,13 +97,9 @@ namespace Coldsteel
         internal void Activate(Context context)
         {
             _context = context;
-
-            if (!_layers.Any(l => l.Name == Scene.DefaultLayerName))
-                _layers.Add(new Layer(Scene.DefaultLayerName, 0));
-
             _activated = true;
-            var gameObjectsToActivate = _gameObjects.ToList();
-            gameObjectsToActivate.ForEach(go => go.Activate(context));
+            var sceneElementsToActivate = _sceneElements.ToList();
+            sceneElementsToActivate.ForEach(go => go.Activate(context));
         }
 
         /// <summary>
@@ -129,6 +109,7 @@ namespace Coldsteel
         internal void Deactivate()
         {
             _context.Unload();
+            _sceneElements.Clear();
         }
     }
 }

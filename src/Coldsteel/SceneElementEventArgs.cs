@@ -2,13 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System;
+
 namespace Coldsteel
 {
-    /// <summary>
-    /// Internal helper interface used to give GameObject and Layer a common
-    /// type which they can be assigned to.
-    /// </summary>
-    internal interface ISceneElement
+    public class SceneElementEventArgs : EventArgs
     {
+        public SceneElement SceneElement { get; internal set; }
     }
 }

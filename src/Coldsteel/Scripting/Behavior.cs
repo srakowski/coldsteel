@@ -38,16 +38,6 @@ namespace Coldsteel.Scripting
         public new Transform Transform => base.Transform;
 
         /// <summary>
-        /// Gets the RigidBody component of the GameObject, if any.
-        /// </summary>
-        public RigidBody RigidBody => GameObject?.Components.OfType<RigidBody>().FirstOrDefault();
-
-        /// <summary>
-        /// Gets the Collider component of the GameObject, if any.
-        /// </summary>
-        public Collider Collider => GameObject?.Components.OfType<Collider>().FirstOrDefault();
-
-        /// <summary>
         /// The SceneManager object.
         /// </summary>
         public ISceneManager SceneManager { get; internal set; }
@@ -67,8 +57,22 @@ namespace Coldsteel.Scripting
         /// </summary>
         public Scene Scene { get; private set; }
 
+        /// <summary>
+        /// Override to perform any initialization logic before entering
+        /// the normal update cycle.
+        /// </summary>
         public virtual void Activate() { }
 
+        /// <summary>
+        /// Override to respond to Collisions with other GameObjects.
+        /// </summary>
+        /// <param name="collision"></param>
+        public virtual void OnCollision(Collision collision) { }
+
+        /// <summary>
+        /// Override to perform any updates to the GameObject during
+        /// scene execution.
+        /// </summary>
         public virtual void Update() { }
 
         /// <summary>
@@ -95,6 +99,11 @@ namespace Coldsteel.Scripting
             return coroutine;
         }
 
+        /// <summary>
+        /// Destroyes the provided GameObject, marking it for removal from
+        /// the scene after the current frame has rendered.
+        /// </summary>
+        /// <param name="gameObject"></param>
         public void Destroy(GameObject gameObject)
         {
             gameObject.Destroy();
@@ -112,6 +121,12 @@ namespace Coldsteel.Scripting
             this.Input = context.Input;
             this.Content = context.Content;
             Activate();
+        }
+
+        internal override void HandleMessage(object message)
+        {
+            if (message is Collision)
+                OnCollision(message as Collision);
         }
 
         internal void UpdateCoroutines()

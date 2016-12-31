@@ -2,11 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Physics;
+using System;
 
 namespace Coldsteel
 {
-    internal interface IPhysicsManager
+    public class SceneActivatedEventArgs : EventArgs
     {
+        public Scene Scene { get; internal set; }
     }
 }

@@ -2,11 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Physics;
+using System;
 
-namespace Coldsteel
+namespace Coldsteel.Composition
 {
-    internal interface IPhysicsManager
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple =false)]
+    public class StartupSceneAttribute : Attribute
     {
     }
 }

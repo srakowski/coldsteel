@@ -6,38 +6,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Coldsteel.Physics;
 
 namespace Derpfender.Behaviors
 {
     class BulletBehavior : Behavior
     {
-        private Vector2 _direction;
-
-        private float _speed = 2f;
+        //private float _speed = 2f;
 
         private bool _swappedTexture = false;
 
         private Texture2D _bulletTexture;
-
-        public BulletBehavior(Vector2 direction)
-        {
-            direction.Normalize();
-            _direction = direction;
-        }
 
         public override void Activate()
         {
             _bulletTexture = Content.Load<Texture2D>("Sprites/bullet");
         }
 
-        // TODO: collide!
-        //public override void OnCollision(GameObject with)
-        //{
-        //    if (!with.Tags.Contains("enemy"))
-        //        return;
+        public override void OnCollision(Collision collision)
+        {
+            var with = collision.GameObject1 == this.GameObject
+                ? collision.GameObject2
+                : collision.GameObject1;
 
-        //    Kill();
-        //}
+            if (!with.Tags.Contains("enemy"))
+                return;
+
+            Destroy(GameObject);
+        }
 
         public override void Update()
         {
@@ -51,7 +47,6 @@ namespace Derpfender.Behaviors
                 _swappedTexture = true;
             }
 
-            this.Transform.Position += (_direction * _speed * Delta);
             if (this.Transform.Position.X > 1280)
                 Destroy(this.GameObject);
         }

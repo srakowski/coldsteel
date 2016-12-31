@@ -1,5 +1,6 @@
 ﻿using Coldsteel;
 using Coldsteel.Audio;
+using Coldsteel.Extensions;
 using Coldsteel.Fluent;
 using Coldsteel.Physics;
 using Coldsteel.Rendering;
@@ -23,11 +24,21 @@ namespace Derpfender.Behaviors
 
         public override void Update()
         {
+            var body = GameObject.Components.OfType<Body>().First();
+
             if (Input.GetButtonControl("Up").IsDown())
                 this.Transform.Position += new Vector2(0, -1) * _speed * Delta;
 
             if (Input.GetButtonControl("Down").IsDown())
                 this.Transform.Position += new Vector2(0, 1) * _speed * Delta;
+
+            body.AngularAcceleration = 0f;
+
+            if (Input.GetButtonControl("Left").IsDown())
+                body.AngularAcceleration -= 200f;
+
+            if (Input.GetButtonControl("Right").IsDown())
+                body.AngularAcceleration += 200f;
 
             if (Input.GetButtonControl("Select").IsDown() && _allowFire)
                 StartCoroutine(Fire());
@@ -36,21 +47,25 @@ namespace Derpfender.Behaviors
         private IEnumerator Fire()
         {
             _allowFire = false;
+
             this.GameObject.Components.OfType<AudioSource>().First().Play();
-            //TODO: how to add stuff to the scene?
-            SceneManager.ActiveScene.Add(new GameObject()
-                .SetPosition(this.Transform.Position)
-                .Add(new SpriteRenderer("Sprites/flash")
+
+            Scene.AddElement(new GameObject()
+                .AddTag("bullet")
+                .SetPosition(this.Transform.Position.ShiftX(20))
+                .AddComponent(new SpriteRenderer("Sprites/flash")
                 {
                     Color = Color.WhiteSmoke
                 })
-                .Add(new BulletBehavior(new Vector2(1, _rand.Next(-60, 61) / 1000f)))
-                .Add(new BoxCollider(new Rectangle(-10, -10, 20, 20))));
-
-            // TODO: collisions
-            //    .Add.BoxCollider(10, 10);
+                .AddComponent(new Body()
+                {
+                    Velocity = new Vector2(1f, _rand.Next(-60, 61) / 1000f),
+                })
+                .AddComponent(new BoxCollider(18))
+                .AddComponent(new BulletBehavior()));
 
             yield return WaitYieldInstruction.Create(_fireRate);
+
              _allowFire = true;
         }
     }

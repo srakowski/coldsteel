@@ -2,12 +2,11 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace Coldsteel
+namespace Coldsteel.Rendering
 {
     /// <summary>
     /// Represents a slice of a frame of a rendered Scene. When a frame is 
@@ -15,7 +14,7 @@ namespace Coldsteel
     /// the numerically lowest and ending with the numerically highest. The
     /// order of numerically equal Order values is undefined.
     /// </summary>
-    public class Layer : ISceneElement
+    public class Layer : SceneElement
     {
         /// <summary>
         /// The Name of this layer, referenced by Renderers to identify the

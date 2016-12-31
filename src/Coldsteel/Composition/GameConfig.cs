@@ -14,12 +14,6 @@ namespace Coldsteel.Composition
         public string Title { get; set; }
 
         /// <summary>
-        /// Assembly references required for this Game.
-        /// </summary>
-        [ContentSerializer(Optional = true)]
-        public string[] References { get; set; }
-
-        /// <summary>
         /// The method used to compose the game. Coded or ...
         /// </summary>
         public string GameCompositionMethod { get; set; }
@@ -27,6 +21,13 @@ namespace Coldsteel.Composition
         /// <summary>
         /// The name of the Scene that should be loaded when the Game is Loaded.
         /// </summary>
+        [ContentSerializer(Optional = true)]
         public string StartupScene { get; set; }
+
+        /// <summary>
+        /// Assembly references required for this Game.
+        /// </summary>
+        [ContentSerializer(Optional = true)]
+        public string[] References { get; set; }
     }
 }

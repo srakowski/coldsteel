@@ -5,8 +5,6 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Diagnostics;
 
 namespace Coldsteel.Physics
 {
@@ -14,9 +12,7 @@ namespace Coldsteel.Physics
     {
         private ISceneManager _sceneManager;
 
-        private List<RigidBody> _rigidBodies = new List<RigidBody>();
-
-        private List<Collider> _colliders = new List<Collider>();
+        private List<World> _worlds = new List<World>();
 
         public PhysicsManager(Game game) : base(game)
         {
@@ -27,44 +23,47 @@ namespace Coldsteel.Physics
         {
             base.Initialize();
             _sceneManager = Game.Services.GetService<ISceneManager>();
+            _sceneManager.SceneActivated += _sceneManager_SceneActivated;
         }
 
-        public void RegisterRigidBody(RigidBody rigidBody) =>
-            _rigidBodies.Add(rigidBody);
-
-        public void RegisterCollider(Collider collider) =>
-            _colliders.Add(collider);
+        private void _sceneManager_SceneActivated(object sender, SceneActivatedEventArgs e)
+        {
+            var scene = e.Scene;
+            var worlds = scene.Elements.OfType<World>();
+            if (!worlds.Any(w => w.Name == PhysicsComponent.DefaultWorldName))
+            {
+                e.Scene.AddElement(new World(PhysicsComponent.DefaultWorldName));
+            }
+            _worlds.Clear();
+            _worlds.AddRange(scene.Elements.OfType<World>());
+            scene.SceneElementAdded += Scene_SceneElementAdded;
+            scene.SceneElementRemoved += Scene_SceneElementRemoved;
+        }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            if (_sceneManager?.ActiveScene == null)
+                return;
 
-            _rigidBodies.RemoveAll(rb => rb.GameObject.IsDestroyed);
-            _colliders.RemoveAll(cl => cl.GameObject.IsDestroyed);
-
-            foreach (var rigidBody in _rigidBodies)
+            var gameObjects = _sceneManager.ActiveScene.Elements.OfType<GameObject>();
+            var pcs = gameObjects.SelectMany(go => go.Components.OfType<PhysicsComponent>());
+            foreach (var world in _worlds)
             {
-                var move = (rigidBody.Velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
-
-                var origPos = rigidBody.Transform.Position;
-                rigidBody.GameObject.Transform.Position += move;
-
-                var collider = _colliders.FirstOrDefault(c => c.GameObject == rigidBody.GameObject);
-                if (collider == null)
-                    continue;
-
-                var collisions = CheckForCollision(collider as BoxCollider);
-                if (collisions.Any())
-                {
-                    //TODO: inform collisions and figure physics out one day.
-                }
+                var physicsComponentsThisWorld = pcs.Where(b => b.World == world.Name);
+                world.Step(gameTime, physicsComponentsThisWorld);
             }
         }
 
-        private IEnumerable<BoxCollider> CheckForCollision(BoxCollider collider)
+        private void Scene_SceneElementAdded(object sender, SceneElementEventArgs e)
         {
-            return _colliders.OfType<BoxCollider>()
-                .Where(c => c != collider && c.BoundingBox.Intersects(collider.BoundingBox));
+            if (e.SceneElement is World)
+                _worlds.Add(e.SceneElement as World);
+        }
+
+        private void Scene_SceneElementRemoved(object sender, SceneElementEventArgs e)
+        {
+            if (e.SceneElement is World)
+                _worlds.Remove(e.SceneElement as World);
         }
     }
 }
