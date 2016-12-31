@@ -11,8 +11,6 @@ namespace Coldsteel.Physics
 {
     public class World : SceneElement
     {
-        private bool _skipCollision = false;
-
         private List<Collider> _colliders = new List<Collider>();
 
         public string Name { get; set; }
@@ -26,29 +24,23 @@ namespace Coldsteel.Physics
 
         internal void Step(GameTime gameTime, IEnumerable<PhysicsComponent> physicsComponents)
         {
-            _skipCollision = !_skipCollision;
+            _colliders.Clear();
 
-            //if (!_skipCollision)
-                _colliders.Clear();
-
-            foreach (var component in physicsComponents)
+            foreach (var physicsComponent in physicsComponents)
             {
-                if (component is Body)
-                    UpdateMotion(gameTime, component as Body);
+                physicsComponent.BeginPhysicsUpdate();
 
-                //if (!_skipCollision)
-                    if (component is Collider)
-                    {
-                        var collider = component as Collider;
-                        collider.Update();
-                        _colliders.Add(collider);
-                    }
+                if (physicsComponent is Body)
+                    UpdateMotion(gameTime, physicsComponent as Body);
+
+                if (physicsComponent is Collider)
+                    _colliders.Add(physicsComponent as Collider);
             }
 
-            //if (_skipCollision)
-            //    return;
-
             Collide(gameTime, _colliders);
+
+            foreach (var physicsComponent in physicsComponents)
+                physicsComponent.EndPhysicsUpdate();
         }
 
         private enum Axis
@@ -119,9 +111,81 @@ namespace Coldsteel.Physics
             return newVelocity;
         }
 
+        private struct BroadRegion
+        {
+            public Polygon Shape;
+            public List<Collider> IntersectingColliders;
+        }
+
         private void Collide(GameTime gameTime, List<Collider> colliders)
         {
-            // TODO: remember to add broad/narrow phase
+            if (!colliders.Any())
+                return;
+
+            var verts = colliders.SelectMany(c => c.Vertices);
+            var firstVert = verts.First();
+            Vector2 mins = firstVert;
+            Vector2 maxs = firstVert;
+            foreach (var vert in verts)
+            {
+                mins.X = Math.Min(vert.X, mins.X);
+                mins.Y = Math.Min(vert.Y, mins.Y);
+                maxs.X = Math.Max(vert.X, maxs.X);
+                maxs.Y = Math.Max(vert.Y, maxs.Y);
+            }
+
+            var broadRegions = GetBroadColliders(mins, maxs, 2);
+
+            foreach (var collider in colliders)
+                foreach (var broadRegion in broadRegions)
+                    if (broadRegion.Shape.Bounds.Intersects(collider.Shape.Bounds))
+                        broadRegion.IntersectingColliders.Add(collider);
+
+            // TODO: why not just do the collision detection as the colliders are 
+            // added to the broad region? save another loop.
+            foreach (var region in broadRegions)
+                NarrowCollide(gameTime, region.IntersectingColliders);
+        }
+
+        private IEnumerable<BroadRegion> GetBroadColliders(Vector2 ul, Vector2 lr, int levels)
+        {
+            if (levels <= 0)
+            {
+                var ur = new Vector2(lr.X, ul.Y);
+                var ll = new Vector2(ul.X, lr.Y);
+                var pg = new Polygon()
+                {
+                    Vertices = new[]
+                    {
+                        ul,
+                        ur,
+                        lr,
+                        ll
+                    }
+                };
+                return new[] { new BroadRegion() {
+                    Shape = pg,
+                    IntersectingColliders = new List<Collider>()
+                } };
+            }
+
+            var hw = (lr.X - ul.X) / 2f;
+            var hh = (lr.Y - ul.Y) / 2f;
+
+            var broadRegions = Enumerable.Empty<BroadRegion>();
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X, ul.Y), new Vector2(ul.X + hw, ul.Y + hh), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X + hw, ul.Y), new Vector2(lr.X, ul.Y + hh), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X, ul.Y + hh), new Vector2(ul.X + hw, lr.Y), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X + hw, ul.Y + hh), new Vector2(lr.X, lr.Y), levels - 1));
+            return broadRegions;
+        }
+
+        private void NarrowCollide(GameTime gameTime, List<Collider> colliders)
+        {
             for (int i = 0; i < colliders.Count; i++)
             {
                 for (int j = i + 1; j < colliders.Count; j++)
@@ -129,45 +193,30 @@ namespace Coldsteel.Physics
                     var c1 = colliders[i];
                     var c2 = colliders[j];
 
-                    var result = CheckCollision(c1, c2);
+                    var result = CheckCollision(c1.Shape, c2.Shape);
                     if (!result.CollidersIntersect)
                         continue;
 
-                    c1.Transform.Position += result.MinTranslationVector;
+                    var collision = new Collision()
+                    {
+                        World = this,
+                        Collider1 = c1,
+                        Collider2 = c2
+                    };
+                    collision.GameObject1.DispatchMessage(collision);
+                    collision.GameObject2.DispatchMessage(collision);
 
-                    var c1Vel = c1.Body.Velocity;
-                    var c2Vel = c2.Body.Velocity;
+                    // No point in doing any more processing if one or both are
+                    // destroyed post collision.
+                    if (collision.GameObject1.IsDestroyed ||
+                        collision.GameObject2.IsDestroyed)
+                        continue;
 
-                    c1.Body.Velocity = c2Vel;
-                    c2.Body.Velocity = c1Vel;
+                    var d = c1.Transform.Position - c2.Transform.Position;
+                    if (Vector2.Dot(d, result.MinIntervalAxis) < 0)
+                        result.MinIntervalAxis = -result.MinIntervalAxis;
 
-
-                    ///c2.GameObject.Transform.Position += (result.MinSeparateVector / 2f);
-
-                    //var c1Vel = c1.Body.Velocity;
-                    //c1.Body.Velocity = c2.Body.Velocity;
-                    //c2.Body.Velocity = c1Vel;
-
-                    //var norm = c1.Body.Position - c2.Body.Position;
-
-                    //var relVel = c2.Body.Velocity - c1.Body.Velocity;
-
-                    //var velAlongNorm = Vector2.Dot(relVel, norm);
-
-                    //if (velAlongNorm > 0f)
-                    //    return;
-
-                    //var e = Math.Min(c1.Body.Bounce, c2.Body.Bounce);
-                    //var x = -(1f + e) * velAlongNorm;
-                    //x /= 1f / c1.Body.Mass + 1 / c2.Body.Mass;
-
-                    //var imp = x * norm;
-
-                    //c1.Body.Velocity -= 1 / c1.Body.Mass * imp;
-                    //c2.Body.Velocity += 1 / c2.Body.Mass * imp;
-
-
-
+                    c1.Transform.Position += result.MinIntervalAxis * (result.MinIntervalDistance + 1f);
                 }
             }
         }
@@ -175,27 +224,27 @@ namespace Coldsteel.Physics
         private struct CollisionResult
         {
             public bool CollidersIntersect;
-            public Vector2 MinTranslationVector { get; set; }
+            public float MinIntervalDistance;
+            public Vector2 MinIntervalAxis;
         }
 
-        private CollisionResult CheckCollision(Collider c1, Collider c2)
+        private CollisionResult CheckCollision(Polygon p1, Polygon p2)
         {
             var result = new CollisionResult();
             result.CollidersIntersect = true;
-            result.MinTranslationVector = Vector2.Zero;
 
             var minIntervalDistance = float.MaxValue;
             var minIntervalAxis = Vector2.Zero;
 
-            var edges = c1.Edges.Concat(c2.Edges);
+            var edges = p1.Edges.Concat(p2.Edges);
             foreach (var edge in edges)
             {
                 // The line perpendicular to an edge is our axis.
                 var axis = new Vector2(-edge.Y, edge.X);
                 axis.Normalize();
 
-                var i1 = Project(c1, axis);
-                var i2 = Project(c2, axis);
+                var i1 = Project(p1, axis);
+                var i2 = Project(p2, axis);
                 var iDistance = Interval.Distance(i1, i2);
 
                 // If we find a gap between any of the verts then no collision has occured.
@@ -205,30 +254,30 @@ namespace Coldsteel.Physics
                     break;
                 }
 
-                if (Math.Abs(iDistance) < minIntervalDistance)
+                var absIntervalDistance = Math.Abs(iDistance);
+                if (absIntervalDistance < minIntervalDistance)
                 {
-                    minIntervalDistance = Math.Abs(iDistance); // TODO: does this need to be abs?
+                    minIntervalDistance = absIntervalDistance;
                     minIntervalAxis = axis;
-
-                    var d = c1.Transform.Position - c2.Transform.Position;
-                    if (Vector2.Dot(d, axis) < 0)
-                        minIntervalAxis = -axis;
                 }
             }
 
             if (result.CollidersIntersect)
-                result.MinTranslationVector = minIntervalAxis * (minIntervalDistance + 1f);
+            {
+                result.MinIntervalDistance = minIntervalDistance;
+                result.MinIntervalAxis = minIntervalAxis;
+            }
 
             return result;
         }
 
-        private Interval Project(Collider c, Vector2 axis)
+        private Interval Project(Polygon p, Vector2 axis)
         {
-            var dp = Vector2.Dot(axis, c.Vertices[0]);
+            var dp = Vector2.Dot(axis, p.Vertices[0]);
             var interval = new Interval(dp);
-            for (var i = 1; i < c.Vertices.Length; i++)
+            for (var i = 1; i < p.Vertices.Length; i++)
             {
-                dp = Vector2.Dot(axis, c.Vertices[i]);
+                dp = Vector2.Dot(axis, p.Vertices[i]);
                 interval.Min = Math.Min(dp, interval.Min);
                 interval.Max = Math.Max(dp, interval.Max);
             }

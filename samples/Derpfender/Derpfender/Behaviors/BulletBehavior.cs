@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Coldsteel.Physics;
 
 namespace Derpfender.Behaviors
 {
@@ -22,14 +23,17 @@ namespace Derpfender.Behaviors
             _bulletTexture = Content.Load<Texture2D>("Sprites/bullet");
         }
 
-        // TODO: collide!
-        //public override void OnCollision(GameObject with)
-        //{
-        //    if (!with.Tags.Contains("enemy"))
-        //        return;
+        public override void OnCollision(Collision collision)
+        {
+            var with = collision.GameObject1 == this.GameObject
+                ? collision.GameObject2
+                : collision.GameObject1;
 
-        //    Kill();
-        //}
+            if (!with.Tags.Contains("enemy"))
+                return;
+
+            Destroy(GameObject);
+        }
 
         public override void Update()
         {

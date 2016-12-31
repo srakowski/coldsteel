@@ -39,9 +39,5 @@ namespace Coldsteel.Physics
         public float AngularDrag { get; set; } = 0f;
 
         public float MaxAngularVelocity { get; set; } = 1000f;
-
-        public float Mass { get; set; } = 1f;
-
-        public float Bounce { get; set; } = 0f;
     }
 }

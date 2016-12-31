@@ -17,6 +17,19 @@ namespace Coldsteel.Fluent
             return self;
         }
 
+        public static GameObject AddTag(this GameObject self, string tag)
+        {
+            self.Tags.Add(tag);
+            return self;
+        }
+
+        public static GameObject AddTags(this GameObject self, string tag, params string[] tags)
+        {
+            self.Tags.Add(tag);
+            self.Tags.AddRange(tags);
+            return self;
+        }
+
         public static GameObject SetPosition(this GameObject self, float x, float y)
         {
             self.Transform.LocalPosition = new Vector2(x, y);

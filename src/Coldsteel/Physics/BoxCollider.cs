@@ -10,13 +10,9 @@ namespace Coldsteel.Physics
     {
         private Vector2[] _vertices;
 
-        private Vector2[] _translatedVertices;
+        internal override Vector2[] Vertices => Shape.Vertices;
 
-        private Vector2[] _edges;
-
-        internal override Vector2[] Vertices => _translatedVertices;
-
-        internal override Vector2[] Edges => _edges;
+        internal override Vector2[] Edges => Shape.Edges;
 
         public BoxCollider(float dim) : this(dim, dim) { }
 
@@ -33,22 +29,21 @@ namespace Coldsteel.Physics
                 new Vector2(-halfW, halfH)
             };
 
-            _translatedVertices = new Vector2[_vertices.Length];
-            _edges = new Vector2[_vertices.Length];
+            Shape.Vertices = new Vector2[_vertices.Length];
         }
 
-        internal override void Update()
+        internal override void Activate(Context context) =>
+            TransformShape();
+
+        internal override void BeginPhysicsUpdate() =>
+            TransformShape();
+
+        private void TransformShape()
         {
             for (var i = 0; i < _vertices.Length; i++)
-            {
-                _translatedVertices[i] = Vector2.Transform(_vertices[i], Transform.TransformationMatrix);
+                Shape.Vertices[i] = Vector2.Transform(_vertices[i], Transform.TransformationMatrix);
 
-                var next = i + 1;
-                if (next >= _vertices.Length)
-                    next = 0;
-
-                _edges[i] = _translatedVertices[next] - _translatedVertices[i];
-            }
+            Shape.Update();
         }
     }
 }

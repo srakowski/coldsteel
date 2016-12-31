@@ -16,7 +16,7 @@ namespace Coldsteel
     {
         private List<Component> _components;
 
-        private bool _activated = false;
+        private bool _isActivated = false;
 
         private bool _isDestroyed = false;
 
@@ -72,7 +72,7 @@ namespace Coldsteel
         public GameObject AddComponent(Component component)
         {
             _components.Add(component);
-            if (_activated)
+            if (_isActivated)
             {
                 component.GameObject = this;
                 component.Activate(_context);
@@ -94,7 +94,7 @@ namespace Coldsteel
         internal override void Activate(Context context)
         {
             _context = context;
-            _activated = true;
+            _isActivated = true;
             var componentsToActivate = _components.ToList();
             componentsToActivate.ForEach(c =>
             {
@@ -111,6 +111,17 @@ namespace Coldsteel
             this._isDestroyed = true;
             foreach (var child in this.Transform.Children.Select(t => t.GameObject))
                 child.Destroy();
+        }
+
+        /// <summary>
+        /// Broadcasts to this GameObjects components a message.
+        /// </summary>
+        /// <param name="message"></param>
+        internal void DispatchMessage(object message)
+        {
+            var components = _components.ToArray();
+            foreach (var component in _components)
+                component.HandleMessage(message);
         }
     }
 }

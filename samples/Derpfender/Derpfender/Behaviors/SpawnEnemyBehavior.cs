@@ -39,13 +39,13 @@ namespace Derpfender.Behaviors
             while (true)
             {
                 var go = new GameObject()
+                    .AddTag("enemy")
                     .SetPosition(900, _rand.Next(20, 700))
                     .SetRotationInDegrees(270)
                     .AddComponent(new BoxCollider(24))
                     .AddComponent(new Body()
                     {
-                        Bounce = 0.2f,
-                        Velocity = new Vector2(-0.05f, 0)
+                        Velocity = new Vector2(-0.08f, 0)
                     })
                     .AddComponent(new SpriteRenderer("Sprites/enemy"));
 
