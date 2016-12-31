@@ -48,9 +48,10 @@ namespace Derpfender.Behaviors
         {
             _allowFire = false;
 
-            //this.GameObject.Components.OfType<AudioSource>().First().Play();
+            this.GameObject.Components.OfType<AudioSource>().First().Play();
 
             Scene.AddElement(new GameObject()
+                .AddTag("bullet")
                 .SetPosition(this.Transform.Position.ShiftX(20))
                 .AddComponent(new SpriteRenderer("Sprites/flash")
                 {
@@ -58,10 +59,9 @@ namespace Derpfender.Behaviors
                 })
                 .AddComponent(new Body()
                 {
-                    Velocity = new Vector2(2, _rand.Next(-60, 61) / 1000f),
-                    Bounce = Vector2.One / 2f
+                    Velocity = new Vector2(1f, _rand.Next(-60, 61) / 1000f),
                 })
-                .AddComponent(new CircleCollider(12))
+                .AddComponent(new BoxCollider(18))
                 .AddComponent(new BulletBehavior()));
 
             yield return WaitYieldInstruction.Create(_fireRate);

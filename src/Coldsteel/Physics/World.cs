@@ -11,9 +11,7 @@ namespace Coldsteel.Physics
 {
     public class World : SceneElement
     {
-        private bool _skipCollision = false;
-
-        private GameTime _gameTime;
+        private List<Collider> _colliders = new List<Collider>();
 
         public string Name { get; set; }
 
@@ -26,17 +24,23 @@ namespace Coldsteel.Physics
 
         internal void Step(GameTime gameTime, IEnumerable<PhysicsComponent> physicsComponents)
         {
-            _gameTime = gameTime;
+            _colliders.Clear();
 
-            foreach (var body in physicsComponents.OfType<Body>())
-                UpdateMotion(gameTime, body);
+            foreach (var physicsComponent in physicsComponents)
+            {
+                physicsComponent.BeginPhysicsUpdate();
 
-            _skipCollision = !_skipCollision;
-            if (_skipCollision)
-                return;
+                if (physicsComponent is Body)
+                    UpdateMotion(gameTime, physicsComponent as Body);
 
-            var colliders = physicsComponents.OfType<Collider>().ToArray();
-            Collide(gameTime, colliders);
+                if (physicsComponent is Collider)
+                    _colliders.Add(physicsComponent as Collider);
+            }
+
+            Collide(gameTime, _colliders);
+
+            foreach (var physicsComponent in physicsComponents)
+                physicsComponent.EndPhysicsUpdate();
         }
 
         private enum Axis
@@ -107,205 +111,177 @@ namespace Coldsteel.Physics
             return newVelocity;
         }
 
-        private void Collide(GameTime gameTime, Collider[] colliders)
+        private struct BroadRegion
         {
-            for (var i = 0; i < colliders.Length; i++)
+            public Polygon Shape;
+            public List<Collider> IntersectingColliders;
+        }
+
+        private void Collide(GameTime gameTime, List<Collider> colliders)
+        {
+            if (!colliders.Any())
+                return;
+
+            var verts = colliders.SelectMany(c => c.Vertices);
+            var firstVert = verts.First();
+            Vector2 mins = firstVert;
+            Vector2 maxs = firstVert;
+            foreach (var vert in verts)
             {
-                var c1 = colliders[i];
-                for (var j = i + 1; j < colliders.Length; j++)
+                mins.X = Math.Min(vert.X, mins.X);
+                mins.Y = Math.Min(vert.Y, mins.Y);
+                maxs.X = Math.Max(vert.X, maxs.X);
+                maxs.Y = Math.Max(vert.Y, maxs.Y);
+            }
+
+            var broadRegions = GetBroadColliders(mins, maxs, 2);
+
+            foreach (var collider in colliders)
+                foreach (var broadRegion in broadRegions)
+                    if (broadRegion.Shape.Bounds.Intersects(collider.Shape.Bounds))
+                        broadRegion.IntersectingColliders.Add(collider);
+
+            // TODO: why not just do the collision detection as the colliders are 
+            // added to the broad region? save another loop.
+            foreach (var region in broadRegions)
+                NarrowCollide(gameTime, region.IntersectingColliders);
+        }
+
+        private IEnumerable<BroadRegion> GetBroadColliders(Vector2 ul, Vector2 lr, int levels)
+        {
+            if (levels <= 0)
+            {
+                var ur = new Vector2(lr.X, ul.Y);
+                var ll = new Vector2(ul.X, lr.Y);
+                var pg = new Polygon()
                 {
+                    Vertices = new[]
+                    {
+                        ul,
+                        ur,
+                        lr,
+                        ll
+                    }
+                };
+                return new[] { new BroadRegion() {
+                    Shape = pg,
+                    IntersectingColliders = new List<Collider>()
+                } };
+            }
+
+            var hw = (lr.X - ul.X) / 2f;
+            var hh = (lr.Y - ul.Y) / 2f;
+
+            var broadRegions = Enumerable.Empty<BroadRegion>();
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X, ul.Y), new Vector2(ul.X + hw, ul.Y + hh), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X + hw, ul.Y), new Vector2(lr.X, ul.Y + hh), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X, ul.Y + hh), new Vector2(ul.X + hw, lr.Y), levels - 1));
+            broadRegions = broadRegions.Concat(
+                GetBroadColliders(new Vector2(ul.X + hw, ul.Y + hh), new Vector2(lr.X, lr.Y), levels - 1));
+            return broadRegions;
+        }
+
+        private void NarrowCollide(GameTime gameTime, List<Collider> colliders)
+        {
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                for (int j = i + 1; j < colliders.Count; j++)
+                {
+                    var c1 = colliders[i];
                     var c2 = colliders[j];
 
-                    if (!c1.Intersects(c2))
+                    var result = CheckCollision(c1.Shape, c2.Shape);
+                    if (!result.CollidersIntersect)
                         continue;
 
-                    // We know at that point a collision has occurred
-                    // TODO: tell behaviors about it.
+                    var collision = new Collision()
+                    {
+                        World = this,
+                        Collider1 = c1,
+                        Collider2 = c2
+                    };
+                    collision.GameObject1.DispatchMessage(collision);
+                    collision.GameObject2.DispatchMessage(collision);
 
-                    // If one or the other or both are triggers then we don't
-                    // need to do anything other than dispatch a collision event.
-                    if (c1.IsTrigger || c2.IsTrigger)
+                    // No point in doing any more processing if one or both are
+                    // destroyed post collision.
+                    if (collision.GameObject1.IsDestroyed ||
+                        collision.GameObject2.IsDestroyed)
                         continue;
 
-                    // If both are static then there isn't any more to do, because
-                    // collision detection from here on adjusts the position of the
-                    // objects
-                    if (c1.IsStatic && c2.IsStatic)
-                        continue;
+                    var d = c1.Transform.Position - c2.Transform.Position;
+                    if (Vector2.Dot(d, result.MinIntervalAxis) < 0)
+                        result.MinIntervalAxis = -result.MinIntervalAxis;
 
-                    Separate(c1, c2);
+                    c1.Transform.Position += result.MinIntervalAxis * (result.MinIntervalDistance + 1f);
                 }
             }
         }
 
-        private void Separate(Collider c1, Collider c2)
+        private struct CollisionResult
         {
-            if (c1 is CircleCollider && c2 is CircleCollider)
-            {
-                SeparateCircle(c1, c2);
-                return;
-            }
+            public bool CollidersIntersect;
+            public float MinIntervalDistance;
+            public Vector2 MinIntervalAxis;
+        }
 
-            if (c1 is CircleCollider != c2 is CircleCollider)
-            {
-                var box = c1 as BoxCollider ?? c2 as BoxCollider;
-                var circle = c1 as CircleCollider ?? c2 as CircleCollider;
+        private CollisionResult CheckCollision(Polygon p1, Polygon p2)
+        {
+            var result = new CollisionResult();
+            result.CollidersIntersect = true;
 
-                if ((circle.Position.Y < box.Top || circle.Position.Y > box.Bottom) &&
-                    (circle.Position.X < box.Left || circle.Position.X > box.Right))
+            var minIntervalDistance = float.MaxValue;
+            var minIntervalAxis = Vector2.Zero;
+
+            var edges = p1.Edges.Concat(p2.Edges);
+            foreach (var edge in edges)
+            {
+                // The line perpendicular to an edge is our axis.
+                var axis = new Vector2(-edge.Y, edge.X);
+                axis.Normalize();
+
+                var i1 = Project(p1, axis);
+                var i2 = Project(p2, axis);
+                var iDistance = Interval.Distance(i1, i2);
+
+                // If we find a gap between any of the verts then no collision has occured.
+                if (iDistance > 0f)
                 {
-                    SeparateCircle(c1, c2);
-                    return;
+                    result.CollidersIntersect = false;
+                    break;
                 }
-            }
 
-            SeparateX(c1, c2);
-            if (c1.Intersects(c2))
-                SeparateY(c1, c2);
-        }
-
-        private void SeparateCircle(Collider c1, Collider c2)
-        {
-            var dx = c1.Position.X - c2.Position.X;
-            var dy = c1.Position.Y - c2.Position.Y;
-
-            var angleOfCollision = Math.Atan2(dy, dx);
-
-            var overlap = 0f;
-
-            if (c1 is CircleCollider != c2 is CircleCollider)
-            {
-                var boxCollider = c1 as BoxCollider ?? c2 as BoxCollider;
-                var circleCollider = c1 as CircleCollider ?? c2 as CircleCollider;
-                // overlap is relative to a corner of the box.
-                if (circleCollider.Position.Y < boxCollider.Top)
+                var absIntervalDistance = Math.Abs(iDistance);
+                if (absIntervalDistance < minIntervalDistance)
                 {
-                    if (circleCollider.Position.X < boxCollider.Left)
-                    {
-                        overlap = Vector2.Distance(circleCollider.Position,
-                            new Vector2(boxCollider.Left, boxCollider.Top));
-                    }
-                    else if (circleCollider.Position.X > boxCollider.Right)
-                    {
-                        overlap = Vector2.Distance(circleCollider.Position,
-                            new Vector2(boxCollider.Right, boxCollider.Top));
-                    }
+                    minIntervalDistance = absIntervalDistance;
+                    minIntervalAxis = axis;
                 }
-                else if (circleCollider.Position.Y > boxCollider.Bottom)
-                {
-                    if (circleCollider.Position.X < boxCollider.Left)
-                    {
-                        overlap = Vector2.Distance(circleCollider.Position,
-                            new Vector2(boxCollider.Left, boxCollider.Bottom));
-                    }
-                    else if (circleCollider.Position.X > boxCollider.Right)
-                    {
-                        overlap = Vector2.Distance(circleCollider.Position,
-                            new Vector2(boxCollider.Right, boxCollider.Bottom));
-                    }
-                }
-
-                overlap *= -1;
             }
-            else if (c1 is CircleCollider && c2 is CircleCollider)
+
+            if (result.CollidersIntersect)
             {
-                var circleCollider1 = c1 as CircleCollider;
-                var circleCollider2 = c2 as CircleCollider;
-                overlap = (circleCollider1.Radius + circleCollider2.Radius) -
-                    Vector2.Distance(circleCollider1.Position, circleCollider2.Position);
+                result.MinIntervalDistance = minIntervalDistance;
+                result.MinIntervalAxis = minIntervalAxis;
             }
 
-            // Now for a bunch of crap I don't quite understand.
-
-            var body1 = c1.Body;
-            var body2 = c2.Body;
-
-            var v1 = new Vector2(
-                body1.Velocity.X * (float)Math.Cos(angleOfCollision) + body1.Velocity.Y * (float)Math.Sin(angleOfCollision),
-                body1.Velocity.X * (float)Math.Sin(angleOfCollision) - body1.Velocity.Y * (float)Math.Cos(angleOfCollision));
-
-            var v2 = new Vector2(
-                body2.Velocity.X * (float)Math.Cos(angleOfCollision) + body2.Velocity.Y * (float)Math.Sin(angleOfCollision),
-                body2.Velocity.X * (float)Math.Sin(angleOfCollision) - body2.Velocity.Y * (float)Math.Cos(angleOfCollision));
-
-            var tempVel1 = ((body1.Mass - body2.Mass) * v1.X + 2 * body2.Mass * v2.X) / (body1.Mass + body2.Mass);
-            var tempVel2 = (2 * body1.Mass * v1.X + (body2.Mass - body1.Mass) * v2.X) / (body1.Mass + body2.Mass);
-            
-            if (!c1.IsStatic)
-            {
-                body1.Velocity = new Vector2(
-                    (tempVel1 * (float)Math.Cos(angleOfCollision) - v1.Y * (float)Math.Sin(angleOfCollision)) * body1.Bounce.X,
-                    (v1.Y * (float)Math.Cos(angleOfCollision) + tempVel1 * (float)Math.Sin(angleOfCollision)) * body1.Bounce.Y);
-            }
-
-            if (!c2.IsStatic)
-            {
-                body2.Velocity = new Vector2(
-                    (tempVel2 * (float)Math.Cos(angleOfCollision) - v2.Y * (float)Math.Sin(angleOfCollision)) * body2.Bounce.X,
-                    (v2.Y * (float)Math.Cos(angleOfCollision) + tempVel2 * (float)Math.Sin(angleOfCollision)) * body2.Bounce.Y);
-            }
-
-            // TODO: fix problem when almost perpendicular maybe..?
-
-            if (!c1.IsStatic)
-            {
-                body1.Position += new Vector2(
-                    (body1.Velocity.X * (float)_gameTime.ElapsedGameTime.TotalMilliseconds) - overlap * (float)Math.Cos(angleOfCollision),
-                    (body1.Velocity.Y * (float)_gameTime.ElapsedGameTime.TotalMilliseconds) - overlap * (float)Math.Sin(angleOfCollision));
-            }
-
-            if (!c2.IsStatic)
-            {
-                body1.Position += new Vector2(
-                    (body2.Velocity.X * (float)_gameTime.ElapsedGameTime.TotalMilliseconds) + overlap * (float)Math.Cos(angleOfCollision),
-                    (body2.Velocity.Y * (float)_gameTime.ElapsedGameTime.TotalMilliseconds) + overlap * (float)Math.Sin(angleOfCollision));
-            }
+            return result;
         }
 
-        private void SeparateX(Collider collider1, Collider collider2)
+        private Interval Project(Polygon p, Vector2 axis)
         {
-            throw new NotImplementedException();
+            var dp = Vector2.Dot(axis, p.Vertices[0]);
+            var interval = new Interval(dp);
+            for (var i = 1; i < p.Vertices.Length; i++)
+            {
+                dp = Vector2.Dot(axis, p.Vertices[i]);
+                interval.Min = Math.Min(dp, interval.Min);
+                interval.Max = Math.Max(dp, interval.Max);
+            }
+            return interval;
         }
-
-        private void SeparateY(Collider collider1, Collider collider2)
-        {
-            throw new NotImplementedException();
-        }
-
-        //private bool Intersects(Collider c1, Collider c2)
-        //{
-
-
-        //    if (c1 is CircleCollider)
-        //    {
-        //        if (c2 is CircleCollider)
-        //        {
-        //            return Vector2.Distance(c1.Position, c2.Position) <=
-        //                (c1 as CircleCollider).Radius + (c2 as CircleCollider).Radius;
-        //        }
-        //        else
-        //        {
-        //            return CircleBoxIntersects(c1 as CircleCollider, c2 as BoxCollider);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (c2 is CircleCollider)
-        //        {
-        //            return CircleBoxIntersects(c2 as CircleCollider, c1 as BoxCollider);
-        //        }
-        //        else
-        //        {
-        //            return c1.Intersec
-        //        }
-
-        //        return true;
-        //    }
-        //}
-
-        //private bool CircleBoxIntersects(CircleCollider circleCollider, BoxCollider boxCollider)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

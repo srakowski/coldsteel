@@ -18,5 +18,15 @@ namespace Coldsteel.Physics
         /// The name of the world this Body belongs to.
         /// </summary>
         public string World { get; set; } = DefaultWorldName;
+
+        /// <summary>
+        /// Invoked before the world being affecting this component.
+        /// </summary>
+        internal virtual void BeginPhysicsUpdate() { }
+
+        /// <summary>
+        /// Invoked after the world is done affecting this component.
+        /// </summary>
+        internal virtual void EndPhysicsUpdate() { }
     }
 }

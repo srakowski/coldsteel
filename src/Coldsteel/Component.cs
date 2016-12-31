@@ -4,6 +4,7 @@
 
 using Microsoft.Xna.Framework.Content;
 using System.Linq;
+using System;
 
 namespace Coldsteel
 {
@@ -18,5 +19,7 @@ namespace Coldsteel
         internal Transform Transform => GameObject.Transform;
 
         internal virtual void Activate(Context context) { }
+
+        internal virtual void HandleMessage(object message) { }
     }
 }

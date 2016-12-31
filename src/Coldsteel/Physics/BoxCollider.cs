@@ -2,62 +2,48 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Physics
 {
     public class BoxCollider : Collider
     {
-        private Vector2 _dim;
+        private Vector2[] _vertices;
 
-        private Vector2 _toCorner;
+        internal override Vector2[] Vertices => Shape.Vertices;
 
-        public float Width
+        internal override Vector2[] Edges => Shape.Edges;
+
+        public BoxCollider(float dim) : this(dim, dim) { }
+
+        public BoxCollider(float width, float height)
         {
-            get { return _dim.X; }
-            set
+            var halfW = width / 2f;
+            var halfH = height / 2f;
+
+            _vertices = new[]
             {
-                _dim.X = value;
-                _toCorner = _dim / 2f;
-            }
+                new Vector2(-halfW, -halfH),
+                new Vector2(halfW, -halfH),
+                new Vector2(halfW, halfH),
+                new Vector2(-halfW, halfH)
+            };
+
+            Shape.Vertices = new Vector2[_vertices.Length];
         }
 
-        public float Height
+        internal override void Activate(Context context) =>
+            TransformShape();
+
+        internal override void BeginPhysicsUpdate() =>
+            TransformShape();
+
+        private void TransformShape()
         {
-            get { return _dim.Y; }
-            set
-            {
-                _dim.Y = value;
-                _toCorner = _dim / 2f;
-            }
-        }
+            for (var i = 0; i < _vertices.Length; i++)
+                Shape.Vertices[i] = Vector2.Transform(_vertices[i], Transform.TransformationMatrix);
 
-        public Rectangle Bounds =>
-            new Rectangle((int)(Position.X - _toCorner.X),
-                (int)(Position.Y - _toCorner.Y),
-                (int)_dim.X, (int)_dim.Y);
-
-        public float Top => Position.Y - _toCorner.Y;
-
-        public float Left => Position.X - _toCorner.X;
-
-        public float Right => Position.X + _toCorner.X;
-
-        public float Bottom => Position.Y + Height;
-
-        internal override bool Intersects(Collider c)
-        {
-            if (c is BoxCollider)
-            {
-                return this.Bounds.Intersects((c as BoxCollider).Bounds);
-            }
-            else if (c is CircleCollider)
-            {
-                return Collider.Intersects(this, c as CircleCollider);
-            }
-
-            return false;
+            Shape.Update();
         }
     }
 }
