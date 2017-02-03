@@ -111,77 +111,25 @@ namespace Coldsteel.Physics
             return newVelocity;
         }
 
-        private struct BroadRegion
-        {
-            public Polygon Shape;
-            public List<Collider> IntersectingColliders;
-        }
-
         private void Collide(GameTime gameTime, List<Collider> colliders)
         {
             if (!colliders.Any())
                 return;
 
+            // This could be fixed if we fixed the world size?
             var verts = colliders.SelectMany(c => c.Vertices);
-            var firstVert = verts.First();
-            Vector2 mins = firstVert;
-            Vector2 maxs = firstVert;
-            foreach (var vert in verts)
-            {
-                mins.X = Math.Min(vert.X, mins.X);
-                mins.Y = Math.Min(vert.Y, mins.Y);
-                maxs.X = Math.Max(vert.X, maxs.X);
-                maxs.Y = Math.Max(vert.Y, maxs.Y);
-            }
+            var xs = verts.Select(v => v.X);
+            var ys = verts.Select(v => v.Y);
+            Vector2 mins = new Vector2(xs.Min(), ys.Min());
+            Vector2 maxs = new Vector2(xs.Max(), ys.Max());
 
-            var broadRegions = GetBroadColliders(mins, maxs, 2);
-
+            var quadTree = new QuadTree(mins, maxs, 3);
             foreach (var collider in colliders)
-                foreach (var broadRegion in broadRegions)
-                    if (broadRegion.Shape.Bounds.Intersects(collider.Shape.Bounds))
-                        broadRegion.IntersectingColliders.Add(collider);
+                quadTree.Add(collider);
 
-            // TODO: why not just do the collision detection as the colliders are 
-            // added to the broad region? save another loop.
-            foreach (var region in broadRegions)
-                NarrowCollide(gameTime, region.IntersectingColliders);
-        }
-
-        private IEnumerable<BroadRegion> GetBroadColliders(Vector2 ul, Vector2 lr, int levels)
-        {
-            if (levels <= 0)
-            {
-                var ur = new Vector2(lr.X, ul.Y);
-                var ll = new Vector2(ul.X, lr.Y);
-                var pg = new Polygon()
-                {
-                    Vertices = new[]
-                    {
-                        ul,
-                        ur,
-                        lr,
-                        ll
-                    }
-                };
-                return new[] { new BroadRegion() {
-                    Shape = pg,
-                    IntersectingColliders = new List<Collider>()
-                } };
-            }
-
-            var hw = (lr.X - ul.X) / 2f;
-            var hh = (lr.Y - ul.Y) / 2f;
-
-            var broadRegions = Enumerable.Empty<BroadRegion>();
-            broadRegions = broadRegions.Concat(
-                GetBroadColliders(new Vector2(ul.X, ul.Y), new Vector2(ul.X + hw, ul.Y + hh), levels - 1));
-            broadRegions = broadRegions.Concat(
-                GetBroadColliders(new Vector2(ul.X + hw, ul.Y), new Vector2(lr.X, ul.Y + hh), levels - 1));
-            broadRegions = broadRegions.Concat(
-                GetBroadColliders(new Vector2(ul.X, ul.Y + hh), new Vector2(ul.X + hw, lr.Y), levels - 1));
-            broadRegions = broadRegions.Concat(
-                GetBroadColliders(new Vector2(ul.X + hw, ul.Y + hh), new Vector2(lr.X, lr.Y), levels - 1));
-            return broadRegions;
+            var collisionGroups = quadTree.Walk().Where(qt => qt.Colliders.Count > 1).Select(qt => qt.Colliders);
+            foreach (var group in collisionGroups)
+                NarrowCollide(gameTime, group);
         }
 
         private void NarrowCollide(GameTime gameTime, List<Collider> colliders)

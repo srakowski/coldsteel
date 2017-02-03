@@ -47,15 +47,11 @@ namespace Derpfender.Behaviors
                     {
                         Velocity = new Vector2(-0.08f, 0)
                     })
-                    .AddComponent(new SpriteRenderer("Sprites/enemy"));
+                    .AddComponent(new AudioSource("audio/explode"))
+                    .AddComponent(new SpriteRenderer("Sprites/enemy"))
+                    .AddComponent(new EnemyShipBehavior());
 
                 Scene.AddElement(go);
-                    //.AddComponent(new AudioSource("audio/explode"))
-                    //.AddComponent(new CircleCollider(72))
-                    //.AddComponent(new Body()
-                    //{
-                    //    
-                    //}));
 
                 yield return WaitYieldInstruction.Create(_spawnWait);
             }

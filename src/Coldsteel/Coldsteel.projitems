@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Interval.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\Polygon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Physics\QuadTree.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />
