@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Derpfender")]
-[assembly: AssemblyProduct("Derpfender")]
+[assembly: AssemblyTitle("Derpfender.WindowsDX")]
+[assembly: AssemblyProduct("Derpfender.WindowsDX")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("76082a57-8404-449c-b18b-8711eb4c1573")]
+[assembly: Guid("f42529a8-da9d-4b2b-8020-bc54fa85f258")]
 
 // Version information for an assembly consists of the following four values:
 //

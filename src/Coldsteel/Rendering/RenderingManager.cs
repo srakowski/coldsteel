@@ -20,8 +20,6 @@ namespace Coldsteel.Rendering
 
         private SpriteBatch _spriteBatch;
 
-        private Texture2D _logo;
-
         public RenderingManager(Game game) : base(game) { }
 
         public override void Initialize()
