@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -44,10 +43,13 @@ namespace Coldsteel.Rendering
         {
             spriteBatch.Draw(
                 _texture2D,
-                destinationRectangle: DestinationRectangle,
-                color: Color,
-                rotation: Transform.Rotation,
-                scale: Vector2.One * Transform.Scale);
+                DestinationRectangle,
+                null,
+                Color,
+                Transform.Rotation,
+                Vector2.Zero,
+                SpriteEffects.None,
+                1f);
         }
     }
 }

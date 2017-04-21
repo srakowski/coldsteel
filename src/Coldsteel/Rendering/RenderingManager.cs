@@ -32,22 +32,12 @@ namespace Coldsteel.Rendering
             _spriteBatch = new SpriteBatch(Game.GraphicsDevice);
         }
 
-        protected override void LoadContent()
-        {
-            try
-            {
-                _logo = Game.Content.Load<Texture2D>("gameLogo");
-            }
-            catch { }
-        }
-
         public override void Draw(GameTime gameTime)
         {
             Game.GraphicsDevice.Clear(_sceneManager?.ActiveScene?.BackgroundColor ?? new Color(55, 55, 55));
 
             if (_sceneManager.ActiveScene == null)
             {
-                DrawLogo();
                 return;
             }
 
@@ -72,19 +62,6 @@ namespace Coldsteel.Rendering
             var existingLayers = e.Scene.Elements.OfType<Layer>();
             if (!existingLayers.Any(l => l.Name == Renderer.DefaultLayerName))
                 e.Scene.AddElement(new Layer(Renderer.DefaultLayerName, 0));
-        }
-
-        private void DrawLogo()
-        {
-            if (_logo == null)
-                return;
-
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_logo,
-                color: Color.White,
-                position: new Vector2(Game.GraphicsDevice.Viewport.Width * 0.5f, Game.GraphicsDevice.Viewport.Height * 0.5f),
-                origin: new Vector2(_logo.Width * 0.5f, _logo.Height * 0.5f));
-            _spriteBatch.End();
         }
     }
 }
