@@ -21,14 +21,14 @@ namespace Derpfender.Behaviors
 
         public override void OnCollision(Collision collision)
         {
-            var with = collision.GameObject1 == this.GameObject
-                ? collision.GameObject2
-                : collision.GameObject1;
+            var with = collision.Entity1 == this.Entity
+                ? collision.Entity2
+                : collision.Entity1;
 
             if (!with.Tags.Contains("enemy"))
                 return;
 
-            Destroy(GameObject);
+            Destroy(Entity);
         }
 
         public override void Update()
@@ -38,13 +38,13 @@ namespace Derpfender.Behaviors
 
             if (!_swappedTexture)
             {
-                var spriteRenderer = this.GameObject.Components.OfType<SpriteRenderer>().First();
+                var spriteRenderer = this.Entity.Components.OfType<SpriteRenderer>().First();
                 spriteRenderer.Texture2D = _bulletTexture;
                 _swappedTexture = true;
             }
 
             if (this.Transform.Position.X > 1280)
-                Destroy(this.GameObject);
+                Destroy(this.Entity);
         }
     }
 }

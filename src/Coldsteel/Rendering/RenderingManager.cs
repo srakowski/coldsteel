@@ -5,13 +5,12 @@
 using Coldsteel.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 using System.Linq;
 
-namespace Coldsteel.Rendering
+namespace Coldsteel
 {
     /// <summary>
-    /// Is responsible for orchestrating the rendering of GameObjects in a Scene
+    /// Is responsible for orchestrating the rendering of Entities in a Scene
     /// to the Layers that Scene is composed of.
     /// </summary>
     internal class RenderingManager : DrawableGameComponent
@@ -42,11 +41,11 @@ namespace Coldsteel.Rendering
             var layers = _sceneManager.ActiveScene.Elements.OfType<Layer>();
 
             // TODO: don't look this up every frame mmkay?
-            var camera = _sceneManager.ActiveScene.Elements.OfType<GameObject>()
+            var camera = _sceneManager.ActiveScene.Elements.OfType<Entity>()
                 .SelectMany(go => go.Components.Where(c => c is Camera)).Select(c => c as Camera).FirstOrDefault();
 
             // TODO: don't look this up every frame ok?
-            var renderers = _sceneManager.ActiveScene.Elements.OfType<GameObject>()
+            var renderers = _sceneManager.ActiveScene.Elements.OfType<Entity>()
                 .SelectMany(go => go.Components.OfType<Renderer>());
             foreach (var layer in layers.OrderBy(l => l.Order))
             {

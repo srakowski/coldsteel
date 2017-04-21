@@ -13,17 +13,7 @@ namespace Coldsteel
     /// </summary>
     internal class SceneManager : GameComponent, ISceneManager
     {
-        private ISceneFactory _sceneFactory;
-
-        private IPhysicsManager _physicsManager;
-
-        private IInputManager _inputManager;
-
-        private Scene _outgoingScene;
-
-        private string _pendingScene;
-
-        private bool _initialized;
+        private Func<Scene> _pendingScene;
 
         /// <summary>
         /// Is triggered when the ActiveScene is updated.
@@ -35,67 +25,47 @@ namespace Coldsteel
         /// </summary>
         public Scene ActiveScene { get; private set; }
 
-        public SceneManager(Game game) : base(game)
+        public SceneManager(Game game, Func<Scene> openingScene) : base(game)
         {
+            _pendingScene = openingScene;
             game.Services.AddService<ISceneManager>(this);
-            _initialized = false;
         }
 
-        public override void Initialize()
+        public void Start(Func<Scene> scene)
         {
-            base.Initialize();
-            this._sceneFactory = Game.Services.GetService<ISceneFactory>();
-            this._physicsManager = Game.Services.GetService<IPhysicsManager>();
-            this._inputManager = Game.Services.GetService<IInputManager>();
-            _initialized = true;
-
-            if (_pendingScene != null)
-            {
-                var sceneName = _pendingScene;
-                _pendingScene = null;
-                Start(sceneName);
-            }
-        }
-
-        public void Start(string sceneName)
-        {
-            if (!_initialized)
-            {
-                _pendingScene = sceneName;
-                return;
-            }
-
-            if (_sceneFactory == null)
-            {
-                _sceneFactory = Game.Services.GetService<ISceneFactory>();
-                if (_sceneFactory == null)
-                    throw new Exception("an ISceneComposer service provider is required");
-            }
-
-            _outgoingScene = ActiveScene;
-            var scene = _sceneFactory.Create(sceneName);
-            var context = new Context(
-                scene,
-                this, 
-                _physicsManager,
-                _inputManager,
-                new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory),
-                Game.GraphicsDevice);
-
-            scene.Activate(context);
-            ActiveScene = scene;
-            SceneActivated?.Invoke(this, new SceneActivatedEventArgs()
-            {
-                Scene = scene
-            });
+            _pendingScene = scene;
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            _outgoingScene?.Deactivate();
-            _outgoingScene = null;
+            LoadPendingScene();
             ActiveScene?.Update(gameTime);
+        }
+
+        private void LoadPendingScene()
+        {
+            if (_pendingScene == null)
+                return;
+
+            var newScene = _pendingScene();
+            _pendingScene = null;
+
+            ActiveScene?.Deactivate();
+
+            var context = new Context(
+                newScene,
+                this,
+                Game.Services.GetService<IPhysicsManager>(),
+                Game.Services.GetService<IInputManager>(),
+                new ContentManager(Game.Content.ServiceProvider, Game.Content.RootDirectory),
+                Game.GraphicsDevice);
+
+            newScene.Activate(context);
+            ActiveScene = newScene;
+            SceneActivated?.Invoke(this, new SceneActivatedEventArgs()
+            {
+                Scene = newScene
+            });
         }
     }
 }

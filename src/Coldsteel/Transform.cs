@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Coldsteel
 {
     /// <summary>
-    /// This component determines a GameObject position in the world. All game
+    /// This component determines a Entity position in the world. All game
     /// objects will be required to have one, and only one, Transform component.
     /// </summary>
     public class Transform : Component

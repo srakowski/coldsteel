@@ -151,13 +151,13 @@ namespace Coldsteel.Physics
                         Collider1 = c1,
                         Collider2 = c2
                     };
-                    collision.GameObject1.DispatchMessage(collision);
-                    collision.GameObject2.DispatchMessage(collision);
+                    collision.Entity1.DispatchMessage(collision);
+                    collision.Entity2.DispatchMessage(collision);
 
                     // No point in doing any more processing if one or both are
                     // destroyed post collision.
-                    if (collision.GameObject1.IsDestroyed ||
-                        collision.GameObject2.IsDestroyed)
+                    if (collision.Entity1.IsDestroyed ||
+                        collision.Entity2.IsDestroyed)
                         continue;
 
                     var d = c1.Transform.Position - c2.Transform.Position;

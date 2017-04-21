@@ -22,9 +22,9 @@ namespace Coldsteel.Physics
         public Collider Collider1 { get; internal set; }
 
         /// <summary>
-        /// One of the GameObjects involved in the Collision.
+        /// One of the Entities involved in the Collision.
         /// </summary>
-        public GameObject GameObject1 => Collider1.GameObject;
+        public Entity Entity1 => Collider1.Entity;
 
         /// <summary>
         /// The other Collider involved in the Collision.
@@ -32,8 +32,8 @@ namespace Coldsteel.Physics
         public Collider Collider2 { get; set; }
 
         /// <summary>
-        /// The other GameObject involved in the Collision.
+        /// The other Entity involved in the Collision.
         /// </summary>
-        public GameObject GameObject2 => Collider2.GameObject;
+        public Entity Entity2 => Collider2.Entity;
     }
 }

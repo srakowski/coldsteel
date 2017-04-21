@@ -22,9 +22,9 @@ namespace Coldsteel
         Scene ActiveScene { get; }
 
         /// <summary>
-        /// Transitions the game to play the scene with the provided name.
+        /// Transitions the scene returned by the provided function.
         /// </summary>
-        /// <param name="sceneName"></param>
-        void Start(string sceneName);
+        /// <param name="scene"></param>
+        void Start(Func<Scene> scene);
     }
 }

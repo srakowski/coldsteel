@@ -14,7 +14,7 @@ namespace Derpfender.Behaviors
 
         private void Play()
         {
-            SceneManager.Start(nameof(GameplayScene));
+            SceneManager.Start(Gameplay.Scene);
         }
 
         private void Exit()

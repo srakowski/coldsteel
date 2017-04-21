@@ -9,14 +9,14 @@ using System;
 namespace Coldsteel
 {
     /// <summary>
-    /// A building block of a GameObject that defines its state, behavior, 
+    /// A building block of a Entity that defines its state, behavior, 
     /// and visual representation.
     /// </summary>
     public abstract class Component
     {
-        public GameObject GameObject { get; internal set; }
+        public Entity Entity { get; internal set; }
 
-        internal Transform Transform => GameObject.Transform;
+        internal Transform Transform => Entity.Transform;
 
         internal virtual void Activate(Context context) { }
 

@@ -17,9 +17,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\SpawnEnemyBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\StarBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DerpfenderGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MenuOption.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\GameplayScene.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\MainMenuScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Gameplay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\MainMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\SpaceSceneBase.cs" />
   </ItemGroup>
 </Project>

@@ -11,14 +11,14 @@ namespace Derpfender.Behaviors
     {
         public override void OnCollision(Collision collision)
         {
-            var with = collision.GameObject1 == this.GameObject
-                ? collision.GameObject2
-                : collision.GameObject1;
+            var with = collision.Entity1 == this.Entity
+                ? collision.Entity2
+                : collision.Entity1;
 
             if (!with.Tags.Contains("bullet"))
                 return;
 
-            Destroy(GameObject);
+            Destroy(Entity);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Coldsteel;
 using Coldsteel.Audio;
 using Coldsteel.Extensions;
-using Coldsteel.Fluent;
 using Coldsteel.Physics;
 using Coldsteel.Rendering;
 using Coldsteel.Scripting;
@@ -24,7 +23,7 @@ namespace Derpfender.Behaviors
 
         public override void Update()
         {
-            var body = GameObject.Components.OfType<Body>().First();
+            var body = Entity.Components.OfType<Body>().First();
 
             if (Input.GetButtonControl("Up").IsDown())
                 this.Transform.Position += new Vector2(0, -1) * _speed * Delta;
@@ -48,9 +47,9 @@ namespace Derpfender.Behaviors
         {
             _allowFire = false;
 
-            this.GameObject.Components.OfType<AudioSource>().First().Play();
+            this.Entity.Components.OfType<AudioSource>().First().Play();
 
-            Scene.AddElement(new GameObject()
+            Scene.AddElement(new Entity()
                 .AddTag("bullet")
                 .SetPosition(this.Transform.Position.ShiftX(20))
                 .AddComponent(new SpriteRenderer("Sprites/flash")

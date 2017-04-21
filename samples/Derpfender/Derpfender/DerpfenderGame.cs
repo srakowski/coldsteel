@@ -2,19 +2,19 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel;
+using Derpfender.Scenes;
 using Microsoft.Xna.Framework;
 
-namespace Coldsteel
+namespace Derpfender
 {
-    public class ColdsteelGame : Game
+    public class DerpfenderGame : Game
     {
-        private GraphicsDeviceManager _graphics;
-
-        public ColdsteelGame()
+        public DerpfenderGame()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Components.Add(new Composition.Bootstrapper(this));
+            Components.Add(new ColdsteelComponent(this, MainMenu.Scene, Controls.Get));
         }
     }
 }

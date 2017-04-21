@@ -39,7 +39,7 @@ namespace Coldsteel.Rendering
 
         /// <summary>
         /// Constructs a TextRenderer with the assetName of the SpriteFont that will be 
-        /// loaded during the activation of the GameObject, and the initial text.
+        /// loaded during the activation of the Entity, and the initial text.
         /// </summary>
         /// <param name="textureAssetName"></param>
         public TextRenderer(string spriteFontAssetName, string text)

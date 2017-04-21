@@ -1,4 +1,7 @@
-﻿using Coldsteel;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
 using System;
 
 namespace Derpfender.WindowsDX
@@ -14,7 +17,7 @@ namespace Derpfender.WindowsDX
         [STAThread]
         static void Main()
         {
-            using (var game = new ColdsteelGame())
+            using (var game = new DerpfenderGame())
                 game.Run();
         }
     }

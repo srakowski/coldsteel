@@ -5,7 +5,6 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Coldsteel.Input
 {
@@ -26,7 +25,7 @@ namespace Coldsteel.Input
             this.Name = name;
         }
 
-        public void AddBinding(IButtonControl binding)
+        public void BindTo(IButtonControl binding)
         {
             // TODO: figure this out for more than one player
             _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);

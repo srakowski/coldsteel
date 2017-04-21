@@ -6,14 +6,12 @@ using Microsoft.Xna.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Content;
-using System.Diagnostics;
 using Coldsteel.Physics;
-using System.Linq;
 
 namespace Coldsteel.Scripting
 {
     /// <summary>
-    /// Developer defined GameObject behavior. This is the primary
+    /// Developer defined Entity behavior. This is the primary
     /// mechanism for a developer to add functionality to the game.
     /// </summary>
     public abstract class Behavior : Component
@@ -33,7 +31,7 @@ namespace Coldsteel.Scripting
         public float Delta => (float)(GameTime?.ElapsedGameTime.TotalMilliseconds ?? 0f);
 
         /// <summary>
-        /// The Transform of the GameObject.
+        /// The Transform of the Entity.
         /// </summary>
         public new Transform Transform => base.Transform;
 
@@ -53,7 +51,7 @@ namespace Coldsteel.Scripting
         public ContentManager Content { get; private set; }
 
         /// <summary>
-        /// The active scene the GameObject is part of.
+        /// The active scene the Entity is part of.
         /// </summary>
         public Scene Scene { get; private set; }
 
@@ -64,13 +62,13 @@ namespace Coldsteel.Scripting
         public virtual void Activate() { }
 
         /// <summary>
-        /// Override to respond to Collisions with other GameObjects.
+        /// Override to respond to Collisions with other Entities.
         /// </summary>
         /// <param name="collision"></param>
         public virtual void OnCollision(Collision collision) { }
 
         /// <summary>
-        /// Override to perform any updates to the GameObject during
+        /// Override to perform any updates to the Entity during
         /// scene execution.
         /// </summary>
         public virtual void Update() { }
@@ -100,18 +98,18 @@ namespace Coldsteel.Scripting
         }
 
         /// <summary>
-        /// Destroyes the provided GameObject, marking it for removal from
+        /// Destroyes the provided Entity, marking it for removal from
         /// the scene after the current frame has rendered.
         /// </summary>
-        /// <param name="gameObject"></param>
-        public void Destroy(GameObject gameObject)
+        /// <param name="entity"></param>
+        public void Destroy(Entity entity)
         {
-            gameObject.Destroy();
+            entity.Destroy();
         }
 
         public void Destroy(Component component)
         {
-            component.GameObject.RemoveComponent(component);
+            component.Entity.RemoveComponent(component);
         }
 
         internal override void Activate(Context context)

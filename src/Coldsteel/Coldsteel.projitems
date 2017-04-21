@@ -20,13 +20,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\QuadTree.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Physics\World.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Audio\AudioSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\Bootstrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ColdsteelGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ColdsteelComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Component.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\SceneFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\StartupSceneAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\GameConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\DirectionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
@@ -42,22 +38,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Physics\PhysicsManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\BoxRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Camera.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\CodeBasedGameComposer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\IControlsBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\ISceneBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\ReflectiveSceneBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentGameObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Fluent\FluentLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Composition\IGameComposer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IInputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\ButtonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\GamePadInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputStates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButtonControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\KeyboardInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseInputState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Renderer.cs" />
@@ -69,16 +58,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\WaitYieldInstruction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\YieldInstruction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TypeHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rendering\RenderingManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Transform.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
   </ItemGroup>
 </Project>

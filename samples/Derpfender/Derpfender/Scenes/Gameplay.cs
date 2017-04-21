@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Coldsteel;
 using Microsoft.Xna.Framework.Graphics;
-using Coldsteel.Fluent;
 using Derpfender.Behaviors;
 using Coldsteel.Rendering;
 using Coldsteel.Audio;
@@ -9,14 +8,16 @@ using Coldsteel.Physics;
 
 namespace Derpfender.Scenes
 {
-    public class GameplayScene : SpaceSceneBase
+    public class Gameplay : SpaceSceneBase
     {
-        public override Color BackgroundColor { get; } = Color.Black;
+        public static Scene Scene() => new Coldsteel.Scene();
+
+        public Color BackgroundColor { get; } = Color.Black;
 
         public Layer Debris { get; } = new Layer("debris", -1)
             .SetBlendState(BlendState.NonPremultiplied);
 
-        public GameObject Ship { get; } = new GameObject()
+        public Entity Ship { get; } = new Entity()
             .SetName("ship") // TODO: constructor should accept name
             .SetPosition(60, 360)
             .SetRotationInDegrees(90)
@@ -25,7 +26,7 @@ namespace Derpfender.Scenes
             .AddComponent(new AudioSource("audio/fire"))
             .AddComponent(new ShipBehavior());
 
-        public GameObject EnemySpawner { get; } = new GameObject()
+        public Entity EnemySpawner { get; } = new Entity()
             .AddComponent(new SpawnEnemyBehavior());
     }
 }

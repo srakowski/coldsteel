@@ -2,7 +2,6 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Composition;
 using System.Collections.Generic;
 using Coldsteel;
 using Coldsteel.Input;
@@ -10,35 +9,36 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Derpfender
 {
-    public class Controls : IControlsBuilder
+    public class Controls
     {
-        public ButtonControl Up { get; } = new ButtonControl("Up");
+        private ButtonControl Up { get; } = new ButtonControl("Up");
 
-        public ButtonControl Down { get; } = new ButtonControl("Down");
+        private ButtonControl Down { get; } = new ButtonControl("Down");
 
-        public ButtonControl Select { get; } = new ButtonControl("Select");
+        private ButtonControl Select { get; } = new ButtonControl("Select");
 
-        public void ConfigureControls()
+        private Controls()
         {
-            Up.AddBinding(new KeyboardButtonControlBinding(Keys.W));
-            Up.AddBinding(new KeyboardButtonControlBinding(Keys.Up));
+            Up.BindTo(new KeyboardButton(Keys.W));
+            Up.BindTo(new KeyboardButton(Keys.Up));
 
-            Down.AddBinding(new KeyboardButtonControlBinding(Keys.S));
-            Down.AddBinding(new KeyboardButtonControlBinding(Keys.Down));
+            Down.BindTo(new KeyboardButton(Keys.S));
+            Down.BindTo(new KeyboardButton(Keys.Down));
 
-            Select.AddBinding(new KeyboardButtonControlBinding(Keys.Space));
-            Select.AddBinding(new KeyboardButtonControlBinding(Keys.Enter));
+            Select.BindTo(new KeyboardButton(Keys.Space));
+            Select.BindTo(new KeyboardButton(Keys.Enter));
         }
 
-        public IEnumerable<IControl> GetResult()
+        public static IEnumerable<IControl> Get()
         {
+            var controls = new Controls();
             return new IControl[]
             {
-                Up,
-                Down,
-                Select,
-                new KeyboardButtonControlBinding(Keys.Left),
-                new KeyboardButtonControlBinding(Keys.Right)
+                controls.Up,
+                controls.Down,
+                controls.Select,
+                new KeyboardButton(Keys.Left),
+                new KeyboardButton(Keys.Right)
             };
         }
     }

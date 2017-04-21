@@ -10,7 +10,7 @@ using System.Linq;
 namespace Coldsteel
 {
     /// <summary>
-    /// Is a playable game state composed of a set of GameObjects.
+    /// Is a playable game state composed of a set of Entities.
     /// </summary>
     public class Scene
     {
@@ -42,9 +42,9 @@ namespace Coldsteel
         public IEnumerable<SceneElement> Elements => _sceneElements;
 
         /// <summary>
-        /// The GameObjects present in this Scene.
+        /// The Entities present in this Scene.
         /// </summary>
-        //public IEnumerable<GameObject> GameObjects => _sceneElements.OfType<GameObject>();
+        //public IEnumerable<Entity> GameObjects => _sceneElements.OfType<Entity>();
 
         /// <summary>
         /// Constructs an empty scene.
@@ -58,8 +58,8 @@ namespace Coldsteel
         /// <summary>
         /// Adds a SceneElement to this Scene.
         /// </summary>
-        /// <param name="gameObject"></param>
-        public void AddElement(SceneElement sceneElement)
+        /// <param name="sceneElement"></param>
+        public Scene AddElement(SceneElement sceneElement)
         {
             _sceneElements.Add(sceneElement);
             if (_activated)
@@ -70,6 +70,7 @@ namespace Coldsteel
                     SceneElement = sceneElement
                 });
             }
+            return this;
         }
 
         /// <summary>
@@ -90,8 +91,8 @@ namespace Coldsteel
         }
 
         /// <summary>
-        /// Before this is called the GameObjects are composed but in an inactive
-        /// state. This call readies the GameObjects for gameplay. This must be
+        /// Before this is called the Entities are composed but in an inactive
+        /// state. This call readies the Entities for gameplay. This must be
         /// called before the scene becomes the active scene.
         /// </summary>
         internal void Activate(Context context)

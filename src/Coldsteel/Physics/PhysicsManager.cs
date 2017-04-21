@@ -2,11 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Physics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Coldsteel.Physics
+namespace Coldsteel
 {
     internal class PhysicsManager : GameComponent, IPhysicsManager
     {
@@ -45,8 +46,8 @@ namespace Coldsteel.Physics
             if (_sceneManager?.ActiveScene == null)
                 return;
 
-            var gameObjects = _sceneManager.ActiveScene.Elements.OfType<GameObject>();
-            var pcs = gameObjects.SelectMany(go => go.Components.OfType<PhysicsComponent>());
+            var entities = _sceneManager.ActiveScene.Elements.OfType<Entity>();
+            var pcs = entities.SelectMany(go => go.Components.OfType<PhysicsComponent>());
             foreach (var world in _worlds)
             {
                 var physicsComponentsThisWorld = pcs.Where(b => b.World == world.Name);

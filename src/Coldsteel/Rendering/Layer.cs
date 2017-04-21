@@ -5,6 +5,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System;
 
 namespace Coldsteel.Rendering
 {
@@ -96,5 +97,17 @@ namespace Coldsteel.Rendering
 
         private Matrix GetCameraTransformationMatrix(Camera camera) =>
             (IsCameraSticky ? Matrix.Identity : (camera?.TransformationMatrix ?? Matrix.Identity));
+
+        public Layer SetBlendState(BlendState blendState)
+        {
+            BlendState = blendState;
+            return this;
+        }
+
+        public Layer SetSamplerState(SamplerState samplerState)
+        {
+            SamplerState = samplerState;
+            return this;
+        }
     }
 }

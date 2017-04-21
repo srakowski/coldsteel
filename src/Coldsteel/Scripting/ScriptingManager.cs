@@ -2,12 +2,11 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using Coldsteel.Rendering;
-using Coldsteel.Input;
+using Coldsteel.Scripting;
 using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace Coldsteel.Scripting
+namespace Coldsteel
 {
     /// <summary>
     /// Is responsible for updating developer defined scripts (Behaviors), and any
@@ -36,7 +35,7 @@ namespace Coldsteel.Scripting
             if (_sceneManager.ActiveScene == null)
                 return;
 
-            var behaviors = _sceneManager.ActiveScene.Elements.OfType<GameObject>()
+            var behaviors = _sceneManager.ActiveScene.Elements.OfType<Entity>()
                 .SelectMany(go => go.Components.Where(c => c is Behavior).Select(c => c as Behavior)).ToArray();
 
             foreach (var behavior in behaviors)

@@ -56,7 +56,7 @@ namespace Coldsteel.Rendering
 
         /// <summary>
         /// Constructs a SpriteRenderer with the textureAsset that will be loaded
-        /// during the activation of the GameObject.
+        /// during the activation of the Entity.
         /// </summary>
         /// <param name="textureAssetName"></param>
         public SpriteRenderer(string textureAssetName)

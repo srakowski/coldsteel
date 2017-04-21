@@ -2,19 +2,18 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Coldsteel.Input
 {
-    public struct KeyboardButtonControlBinding : IButtonControl
+    public struct KeyboardButton : IButtonControl
     {
         public string Name => Key.ToString();
 
         public Keys Key { get; set; }
 
-        public KeyboardButtonControlBinding(Keys key)
+        public KeyboardButton(Keys key)
         {
             this.Key = key;
         }

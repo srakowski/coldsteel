@@ -5,7 +5,7 @@
 namespace Coldsteel
 {
     /// <summary>
-    /// Base type for all elements that compose a scene, e.g. GameObjects, Layers, etc.
+    /// Base type for all elements that compose a scene, e.g. Entities, Layers, etc.
     /// </summary>
     public abstract class SceneElement
     {

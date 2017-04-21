@@ -4,7 +4,6 @@
 
 using Coldsteel;
 using Coldsteel.Audio;
-using Coldsteel.Fluent;
 using Coldsteel.Physics;
 using Coldsteel.Rendering;
 using Coldsteel.Scripting;
@@ -38,7 +37,7 @@ namespace Derpfender.Behaviors
         {
             while (true)
             {
-                var go = new GameObject()
+                var go = new Entity()
                     .AddTag("enemy")
                     .SetPosition(900, _rand.Next(20, 700))
                     .SetRotationInDegrees(270)

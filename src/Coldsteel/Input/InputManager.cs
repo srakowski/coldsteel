@@ -2,10 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Input;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
-namespace Coldsteel.Input
+namespace Coldsteel
 {
     /// <summary>
     /// This component is responsible for ensuring input states are 
@@ -16,7 +18,7 @@ namespace Coldsteel.Input
         private IInputState[] _inputStates;
         private Dictionary<string, IControl> _controls = new Dictionary<string, IControl>();
 
-        public InputManager(Game game) : base(game)
+        public InputManager(Game game, Func<IEnumerable<IControl>> controls) : base(game)
         {
             game.Services.AddService<IInputManager>(this);
 
@@ -30,6 +32,9 @@ namespace Coldsteel.Input
                 InputStates.GamePads[(int)PlayerIndex.Three],
                 InputStates.GamePads[(int)PlayerIndex.Four]
             };
+
+            foreach (var control in controls())
+                AddControl(control);
         }
 
         public IButtonControl GetButtonControl(string name) =>
