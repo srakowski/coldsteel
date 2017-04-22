@@ -28,7 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButtons.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\MouseDirectionalControlBinding.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Input\MousePositionalControlBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\MousePosition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PositionalControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneActivatedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneElement.cs" />

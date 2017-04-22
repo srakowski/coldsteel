@@ -13,7 +13,7 @@ namespace Coldsteel.Rendering
 
         public Rectangle Shape { get; set; } = Rectangle.Empty;
 
-        public Color Color { get; set; }
+        public Color Color { get; set; } = Color.White;
 
         private Rectangle DestinationRectangle =>
             new Rectangle(Transform.Position.ToPoint() + Shape.Location, Shape.Size);

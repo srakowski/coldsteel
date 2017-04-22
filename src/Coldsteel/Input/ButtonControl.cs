@@ -25,10 +25,11 @@ namespace Coldsteel.Input
             this.Name = name;
         }
 
-        public void BindTo(IButtonControl binding)
+        public ButtonControl BindTo(IButtonControl binding)
         {
             // TODO: figure this out for more than one player
             _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);
+            return this;
         }
 
         public bool IsDown(PlayerIndex playerIndex = PlayerIndex.One) =>

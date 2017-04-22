@@ -16,5 +16,8 @@ namespace Coldsteel.Extensions
 
         public static Vector2 Shift(this Vector2 self, float x, float y) =>
             self + new Vector2(x, y);
+
+        public static Vector2 Clamp(this Vector2 self, float minX, float maxX, float minY, float maxY) =>
+            new Vector2(MathHelper.Clamp(self.X, minX, maxX), MathHelper.Clamp(self.Y, minY, maxY));
     }
 }

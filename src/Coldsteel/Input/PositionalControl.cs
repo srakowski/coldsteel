@@ -26,10 +26,11 @@ namespace Coldsteel.Input
             this.Name = name;
         }
 
-        public void AddBinding(IPositionalControl binding)
+        public PositionalControl BindTo(IPositionalControl binding)
         {
             // TODO: figure this out for more than one player
             _bindingsByPlayer[(int)PlayerIndex.One].Add(binding);
+            return this;
         }
 
         public Vector2 GetPosition(PlayerIndex playerIndex = PlayerIndex.One) =>

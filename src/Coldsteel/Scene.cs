@@ -49,9 +49,14 @@ namespace Coldsteel
         /// <summary>
         /// Constructs an empty scene.
         /// </summary>
-        public Scene()
+        public Scene() : this(Enumerable.Empty<SceneElement>()) { }
+
+        /// <summary>
+        /// Constructs a scene with the provided elemnts.
+        /// </summary>
+        public Scene(IEnumerable<SceneElement> elements)
         {
-            _sceneElements = new List<SceneElement>();
+            _sceneElements = new List<SceneElement>(elements);
             _activated = false;
         }
 

@@ -5,6 +5,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Coldsteel
 {
@@ -178,5 +179,11 @@ namespace Coldsteel
             this.Transform.SetParent(gameObject.Transform);
             return this;
         }
+
+        public T GetComponent<T>() where T : Component =>
+            this.Components?.OfType<T>().FirstOrDefault();
+
+        public void WithComponent<T>(Action<T> action) where T : Component =>
+            action(GetComponent<T>());
     }
 }

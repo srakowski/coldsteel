@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Input
 {
-    public class MousePositionalControlBinding : IPositionalControl
+    public class MousePosition : IPositionalControl
     {
         public string Name => "MousePosition";
 
