@@ -68,6 +68,19 @@ namespace Coldsteel.UnitTests
         }
 
         [TestMethod]
+        public void AddComponent_SetsTheTransformPropertyWhenItReceivesATransform()
+        {
+            var entity = new Entity();
+            Assert.IsFalse(entity.Transform.HasValue);
+            var mockTransform = new Mock<Transform>().Object;
+
+            entity.AddComponent(mockTransform);
+
+            Assert.IsTrue(entity.Transform.HasValue);
+            Assert.AreSame(mockTransform, entity.Transform.Value);
+        }
+
+        [TestMethod]
         public void RemoveComponent()
         {
             _entity.AddComponent(_mockComponent.Object);

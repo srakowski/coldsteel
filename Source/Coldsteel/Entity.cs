@@ -13,6 +13,12 @@ namespace Coldsteel
     public class Entity
     {
         /// <summary>
+        /// Gets the Transform for this Entity, if any.
+        /// </summary>
+        /// <remarks>Many systems rely on Transforms, including transforms. Here for fast lookup.</remarks>
+        public Maybe<Transform> Transform { get; private set; }
+
+        /// <summary>
         /// Gets the components that make up this Entity.
         /// </summary>
         public IEnumerable<Component> Components { get; private set; } = Enumerable.Empty<Component>();
@@ -26,6 +32,7 @@ namespace Coldsteel
         {
             component.Entity = this;
             Components = Components.Append(component).ToArray();
+            Transform = component is Transform t ? t : Transform;
             return this;
         }
 

@@ -5,13 +5,9 @@
 namespace Coldsteel
 {
     /// <summary>
-    /// Data for an Entity tied to a System.
+    /// Base types for all Transform components.
     /// </summary>
-    public abstract class Component
+    public abstract class Transform : Component
     {
-        /// <summary>
-        /// The Entity this Component is bound to, if any.
-        /// </summary>
-        public Maybe<Entity> Entity { get; internal set; }
     }
 }
