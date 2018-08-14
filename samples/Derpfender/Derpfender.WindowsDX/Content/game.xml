@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:ns="Microsoft.Xna.Framework">
-  <Asset Type="Coldsteel.Composition.GameConfig">
-    <Title>Derpfender</Title>
-    <GameCompositionMethod>Code</GameCompositionMethod>
-  </Asset>
-</XnaContent>
