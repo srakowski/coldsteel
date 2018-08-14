@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Coldsteel
 {
+    /// <summary>
+    /// Represents some object in a Game.
+    /// </summary>
     public class Entity
     {
         /// <summary>
@@ -22,7 +25,7 @@ namespace Coldsteel
         public Entity AddComponent(Component component)
         {
             component.Entity = this;
-            Components = Components.Append(component);
+            Components = Components.Append(component).ToArray();
             return this;
         }
 
@@ -33,7 +36,7 @@ namespace Coldsteel
         /// <returns>this Entity</returns>
         public Entity RemoveComponent(Component component)
         {
-            Components = Components.Where(c => c != component);
+            Components = Components.Exclude(component).ToArray();
             return this;
         }
 
@@ -67,7 +70,7 @@ namespace Coldsteel
         public Entity RemoveChild(Entity child)
         {
             child.Parent = Maybe.None<Entity>();
-            Children = Children.Where(c => c != child).ToArray();
+            Children = Children.Exclude(child).ToArray();
             return this;
         }
     }
