@@ -44,16 +44,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component.cs" />
+    <Compile Include="ContentReference.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="MonoGameExtensions.cs" />
+    <Compile Include="Rendering2D\Sprite.cs" />
+    <Compile Include="Rendering2D\SpriteRenderingSystem.cs" />
+    <Compile Include="Rendering2D\TextureSprite.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core2D\Transform2D.cs" />
     <Compile Include="Types.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rendering2D\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
