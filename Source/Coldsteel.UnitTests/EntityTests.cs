@@ -24,11 +24,31 @@ namespace Coldsteel.UnitTests
         }
 
         [TestMethod]
-        public void AddComponent()
+        public void Activation()
+        {
+            var entity = new Entity();
+
+            Assert.IsFalse(entity.IsActive);
+
+            entity.Activate();
+
+            Assert.IsTrue(entity.IsActive);
+
+            entity.Deactivate();
+
+            Assert.IsFalse(entity.IsActive);
+        }
+
+        [TestMethod]
+        public void AddAndRemoveComponent()
         {
             _entity.AddComponent(_mockComponent.Object);
 
             Assert.IsTrue(_entity.Components.Contains(_mockComponent.Object));
+
+            _entity.RemoveComponent(_mockComponent.Object);
+
+            Assert.IsFalse(_entity.Components.Contains(_mockComponent.Object));
         }
 
         [TestMethod]
@@ -81,14 +101,21 @@ namespace Coldsteel.UnitTests
         }
 
         [TestMethod]
-        public void RemoveComponent()
+        public void AddAndRemoveComponent_WhenTheEntityIsActive_ActivatesAndDeactivatesTheComponent()
         {
-            _entity.AddComponent(_mockComponent.Object);
-            Assert.IsTrue(_entity.Components.Contains(_mockComponent.Object));
+            var entity = new Entity();
 
-            _entity.RemoveComponent(_mockComponent.Object);
+            Assert.IsFalse(_mockComponent.Object.IsActive);
 
-            Assert.IsFalse(_entity.Components.Contains(_mockComponent.Object));
+            entity.Activate();
+
+            entity.AddComponent(_mockComponent.Object);
+
+            Assert.IsTrue(_mockComponent.Object.IsActive);
+
+            entity.RemoveComponent(_mockComponent.Object);
+
+            Assert.IsFalse(_mockComponent.Object.IsActive);
         }
 
         [TestMethod]
@@ -119,11 +146,35 @@ namespace Coldsteel.UnitTests
         }
 
         [TestMethod]
-        public void AddChild()
+        public void AddAndRemoveChild()
         {
-            _entity.AddChild(_child);
+            var child = new Entity();
 
-            Assert.IsTrue(_entity.Children.Contains(_child));
+            _entity.AddChild(child);
+
+            Assert.IsTrue(_entity.Children.Contains(child));
+
+            _entity.RemoveChild(child);
+
+            Assert.IsFalse(_entity.Children.Contains(child));
+        }
+
+        [TestMethod]
+        public void AddAndRemoveChild_WhenTheEntityIsActive_ActivatesAndDeactivatesTheChild()
+        {
+            var child = new Entity();
+
+            _entity.Activate();
+
+            Assert.IsFalse(child.IsActive);
+
+            _entity.AddChild(child);
+
+            Assert.IsTrue(child.IsActive);
+
+            _entity.RemoveChild(child);
+
+            Assert.IsFalse(child.IsActive);
         }
 
         [TestMethod]
@@ -158,18 +209,6 @@ namespace Coldsteel.UnitTests
             var entity = _entity.AddChild(new Entity());
 
             Assert.AreSame(_entity, entity);
-        }
-
-        [TestMethod]
-        public void RemoveChild()
-        {
-            var child = new Entity();
-            _entity.AddChild(child);
-            Assert.IsTrue(_entity.Children.Contains(child));
-
-            _entity.RemoveChild(child);
-
-            Assert.IsFalse(_entity.Children.Contains(child));
         }
 
         [TestMethod]

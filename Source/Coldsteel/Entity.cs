@@ -24,6 +24,27 @@ namespace Coldsteel
         public IEnumerable<Component> Components { get; private set; } = Enumerable.Empty<Component>();
 
         /// <summary>
+        /// Is this Entity active?
+        /// </summary>
+        internal bool IsActive { get; private set; }
+
+        /// <summary>
+        /// Activates this Entity.
+        /// </summary>
+        internal void Activate()
+        {
+            IsActive = true;
+        }
+
+        /// <summary>
+        /// Deactivates this Entity;
+        /// </summary>
+        internal void Deactivate()
+        {
+            IsActive = false;
+        }
+
+        /// <summary>
         /// Adds a component (set of properties tied to a system) to this Entity.
         /// </summary>
         /// <param name="component"></param>
@@ -31,6 +52,12 @@ namespace Coldsteel
         public Entity AddComponent(Component component)
         {
             component.Entity = this;
+
+            if (IsActive && !component.IsActive)
+            {
+                component.Activate();
+            }
+
             Components = Components.Append(component).ToArray();
             Transform = component is Transform t ? t : Transform;
             return this;
@@ -44,6 +71,7 @@ namespace Coldsteel
         public Entity RemoveComponent(Component component)
         {
             Components = Components.Exclude(component).ToArray();
+            component.Deactivate();
             return this;
         }
 
@@ -65,6 +93,12 @@ namespace Coldsteel
         public Entity AddChild(Entity child)
         {
             child.Parent = this;
+
+            if (IsActive && !child.IsActive)
+            {
+                child.Activate();
+            }
+
             Children = Children.Append(child).ToArray();
             return this;
         }
@@ -78,6 +112,7 @@ namespace Coldsteel
         {
             child.Parent = Maybe.None<Entity>();
             Children = Children.Exclude(child).ToArray();
+            child.Deactivate();
             return this;
         }
     }

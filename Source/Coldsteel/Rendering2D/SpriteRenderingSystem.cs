@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel.Rendering2D
 {
+    /// <summary>
+    /// Responsible for rendering sprite components to the screen.
+    /// </summary>
     internal class SpriteRenderingSystem : DrawableGameComponent
     {
         public SpriteRenderingSystem(Game game) : base(game)

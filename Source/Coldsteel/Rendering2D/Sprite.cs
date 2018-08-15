@@ -7,7 +7,5 @@ namespace Coldsteel.Rendering2D
     /// <summary>
     /// Abstract base class for Sprite types.
     /// </summary>
-    public abstract class Sprite : Component
-    {
-    }
+    public abstract class Sprite : Component { }
 }
