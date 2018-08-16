@@ -24,19 +24,67 @@ namespace Coldsteel.UnitTests
         }
 
         [TestMethod]
-        public void Activation()
+        public void ActivationLifecycle()
         {
             var entity = new Entity();
 
             Assert.IsFalse(entity.IsActive);
 
-            entity.Activate();
+            entity.Activate(new GameState());
 
             Assert.IsTrue(entity.IsActive);
 
             entity.Deactivate();
 
             Assert.IsFalse(entity.IsActive);
+        }
+
+        [TestMethod]
+        public void ActivationLifecycle_ActivatesAndDeactivatesAllComponents()
+        {
+            var components = new[] {
+                new Mock<Component>().Object,
+                _mockComponent.Object
+            };
+
+            Assert.IsTrue(components.All(c => !c.IsActive));
+
+            foreach (var component in components)
+            {
+                _entity.AddComponent(component);
+            }
+
+            _entity.Activate(new GameState());
+
+            Assert.IsTrue(components.All(c => c.IsActive));
+
+            _entity.Deactivate();
+
+            Assert.IsTrue(components.All(c => !c.IsActive));
+        }
+
+        [TestMethod]
+        public void ActivationLifecycle_ActivatesAndDeactivatesAllChildren()
+        {
+            var children = new[] {
+                new Entity(),
+                new Entity()
+            };
+
+            Assert.IsTrue(children.All(c => !c.IsActive));
+
+            foreach (var entity in children)
+            {
+                _entity.AddChild(entity);
+            }
+
+            _entity.Activate(new GameState());
+
+            Assert.IsTrue(children.All(c => c.IsActive));
+
+            _entity.Deactivate();
+
+            Assert.IsTrue(children.All(c => !c.IsActive));
         }
 
         [TestMethod]
@@ -107,7 +155,7 @@ namespace Coldsteel.UnitTests
 
             Assert.IsFalse(_mockComponent.Object.IsActive);
 
-            entity.Activate();
+            entity.Activate(new GameState());
 
             entity.AddComponent(_mockComponent.Object);
 
@@ -164,7 +212,7 @@ namespace Coldsteel.UnitTests
         {
             var child = new Entity();
 
-            _entity.Activate();
+            _entity.Activate(new GameState());
 
             Assert.IsFalse(child.IsActive);
 

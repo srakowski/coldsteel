@@ -2,6 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE', which is part of this source code package.
 
+using System;
+
 namespace Coldsteel
 {
     /// <summary>
@@ -9,6 +11,8 @@ namespace Coldsteel
     /// </summary>
     public abstract class Component
     {
+        private Maybe<GameState> _gameState = Maybe.None<GameState>();
+
         /// <summary>
         /// The Entity this Component is bound to, if any.
         /// </summary>
@@ -17,22 +21,34 @@ namespace Coldsteel
         /// <summary>
         /// Is this component currently activated?
         /// </summary>
-        internal bool IsActive { get; private set; }
+        internal bool IsActive => _gameState.HasValue;
 
         /// <summary>
         /// Activates this component.
         /// </summary>
-        internal void Activate()
+        internal void Activate(GameState gameState)
         {
-            IsActive = true;
+            _gameState = gameState;
+            OnActivated(gameState);
         }
+
+        /// <summary>
+        /// Optional override for additional work when activated.
+        /// </summary>
+        internal virtual void OnActivated(GameState gameState) { }
 
         /// <summary>
         /// Deactivates this component.
         /// </summary>
         internal void Deactivate()
         {
-            IsActive = false;
+            OnDeactivated(_gameState.Value);
+            _gameState = Maybe.None<GameState>();
         }
+
+        /// <summary>
+        /// Optional override for additional work when deactivated.
+        /// </summary>
+        internal virtual void OnDeactivated(GameState gameState) { }
     }
 }

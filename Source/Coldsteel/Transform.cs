@@ -7,7 +7,5 @@ namespace Coldsteel
     /// <summary>
     /// Base types for all Transform components.
     /// </summary>
-    public abstract class Transform : Component
-    {
-    }
+    public abstract class Transform : Component { }
 }

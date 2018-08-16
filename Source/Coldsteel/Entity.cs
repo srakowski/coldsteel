@@ -13,6 +13,11 @@ namespace Coldsteel
     public class Entity
     {
         /// <summary>
+        /// The GameState this Entity is activated in.
+        /// </summary>
+        private Maybe<GameState> _gameState = Maybe.None<GameState>();
+
+        /// <summary>
         /// Gets the Transform for this Entity, if any.
         /// </summary>
         /// <remarks>Many systems rely on Transforms, including transforms. Here for fast lookup.</remarks>
@@ -26,14 +31,24 @@ namespace Coldsteel
         /// <summary>
         /// Is this Entity active?
         /// </summary>
-        internal bool IsActive { get; private set; }
+        internal bool IsActive => _gameState.HasValue;
 
         /// <summary>
         /// Activates this Entity.
         /// </summary>
-        internal void Activate()
+        internal void Activate(GameState gameState)
         {
-            IsActive = true;
+            _gameState = gameState;
+
+            foreach (var component in Components)
+            {
+                component.Activate(gameState);
+            }
+
+            foreach (var child in Children)
+            {
+                child.Activate(gameState);
+            }
         }
 
         /// <summary>
@@ -41,7 +56,17 @@ namespace Coldsteel
         /// </summary>
         internal void Deactivate()
         {
-            IsActive = false;
+            foreach (var child in Children)
+            {
+                child.Deactivate();
+            }
+
+            foreach (var component in Components)
+            {
+                component.Deactivate();
+            }
+            
+            _gameState = Maybe.None<GameState>();
         }
 
         /// <summary>
@@ -53,9 +78,9 @@ namespace Coldsteel
         {
             component.Entity = this;
 
-            if (IsActive && !component.IsActive)
+            if (IsActive && _gameState.HasValue)
             {
-                component.Activate();
+                component.Activate(_gameState.Value);
             }
 
             Components = Components.Append(component).ToArray();
@@ -94,9 +119,9 @@ namespace Coldsteel
         {
             child.Parent = this;
 
-            if (IsActive && !child.IsActive)
+            if (IsActive && _gameState.HasValue)
             {
-                child.Activate();
+                child.Activate(_gameState.Value);
             }
 
             Children = Children.Append(child).ToArray();

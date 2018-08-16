@@ -7,5 +7,16 @@ namespace Coldsteel.Rendering2D
     /// <summary>
     /// Abstract base class for Sprite types.
     /// </summary>
-    public abstract class Sprite : Component { }
+    public abstract class Sprite : Component
+    {
+        internal override void OnActivated(GameState gameState)
+        {
+            SpriteRenderingSystem.RegisterSprite(gameState, this);
+        }
+
+        internal override void OnDeactivated(GameState gameState)
+        {
+            SpriteRenderingSystem.DeregisterSprite(gameState, this);
+        }
+    }
 }

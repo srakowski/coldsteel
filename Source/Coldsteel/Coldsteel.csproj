@@ -48,6 +48,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="MonoGameExtensions.cs" />
     <Compile Include="Rendering2D\Sprite.cs" />
     <Compile Include="Rendering2D\SpriteRenderingSystem.cs" />
