@@ -2,10 +2,12 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
-namespace Coldsteel
+namespace Coldsteel.Controls
 {
-    public interface ISceneFactory
+    public enum MouseButton
     {
-        Scene Create(string sceneName);
+        Left,
+        Right,
+        Center
     }
 }

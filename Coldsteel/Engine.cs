@@ -1,4 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿// MIT License - Copyright (C) Shawn Rakowski
+// This file is subject to the terms and conditions defined in
+// file 'LICENSE.txt', which is part of this source code package.
+
+using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
@@ -7,10 +11,13 @@ namespace Coldsteel
         public Engine(Game game, ISceneFactory sceneFactory) : base(game)
         {
             SceneManager = new SceneManager(game, this, sceneFactory);
+            InputManager = new InputManager(game, this);
             SpriteSystem = new SpriteSystem(game, this);
         }
 
         internal SceneManager SceneManager;
+
+        internal InputManager InputManager;
 
         internal SpriteSystem SpriteSystem;
 
