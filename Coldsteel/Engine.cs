@@ -12,12 +12,15 @@ namespace Coldsteel
         {
             SceneManager = new SceneManager(game, this, sceneFactory);
             InputManager = new InputManager(game, this);
+            BehaviorSystem = new BehaviorSystem(game, this);
             SpriteSystem = new SpriteSystem(game, this);
         }
 
         internal SceneManager SceneManager;
 
         internal InputManager InputManager;
+
+        internal BehaviorSystem BehaviorSystem;
 
         internal SpriteSystem SpriteSystem;
 
