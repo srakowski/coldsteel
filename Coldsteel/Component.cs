@@ -6,15 +6,15 @@ namespace Coldsteel
 {
     public abstract class Component
     {
-        protected Engine Engine { get; private set; }
+        private protected Engine Engine { get; private set; }
 
         protected Scene Scene { get; private set; }
 
-        protected Entity Entity { get; private set; }
+        internal protected Entity Entity { get; private set; }
 
-        internal protected virtual void Activated() { }
+        private protected virtual void Activated() { }
 
-        internal protected virtual void Deactivated() { }
+        private protected virtual void Deactivated() { }
 
         internal void Activate(Engine engine, Scene scene, Entity entity)
         {

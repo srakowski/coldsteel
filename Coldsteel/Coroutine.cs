@@ -36,7 +36,7 @@ namespace Coldsteel
             if (_finished)
                 return;
 
-            if (!_wait.HasValue)
+            if (_wait.HasValue)
             {
                 _wait = _wait.Value.Increment(gameTime);
             }

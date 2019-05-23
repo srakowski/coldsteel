@@ -30,6 +30,13 @@ namespace Coldsteel
 
         public Matrix? TransformMatrix;
 
+        public SpriteLayer() { }
+
+        public SpriteLayer(string name)
+        {
+            Name = name;
+        }
+
         internal void Draw(SpriteBatch spriteBatch, Camera camera, IEnumerable<Sprite> sprites)
         {
             var cameraMatrix = camera != null && !FixToCamera

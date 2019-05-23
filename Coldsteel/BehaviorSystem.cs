@@ -21,17 +21,17 @@ namespace Coldsteel
 
         internal void AddBehavior(Scene scene, Behavior behavior)
         {
-            var behaviorList = GetBehaviorByScene(scene);
+            var behaviorList = GetBehaviorsForScene(scene);
             behaviorList.Add(behavior);
         }
 
         internal void RemoveBehavior(Scene scene, Behavior behavior)
         {
-            var behaviorList = GetBehaviorByScene(scene);
+            var behaviorList = GetBehaviorsForScene(scene);
             behaviorList.Remove(behavior);
         }
 
-        private List<Behavior> GetBehaviorByScene(Scene scene)
+        private List<Behavior> GetBehaviorsForScene(Scene scene)
         {
             return _behaviorsByScene.ContainsKey(scene)
                 ? _behaviorsByScene[scene]
@@ -43,7 +43,7 @@ namespace Coldsteel
             var scene = _engine.SceneManager.ActiveScene;
             if (scene == null) return;
 
-            var behaviors = GetBehaviorByScene(scene);
+            var behaviors = GetBehaviorsForScene(scene);
             foreach (var behavior in behaviors.ToArray())
             {
                 behavior.Update(gameTime);

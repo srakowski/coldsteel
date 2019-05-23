@@ -23,12 +23,12 @@ namespace Coldsteel
                 (Engine.Game.GraphicsDevice.Viewport.Height * 0.5f),
                 0f);
 
-        protected internal override void Activated()
+        private protected override void Activated()
         {
             Engine.SpriteSystem.AddCamera(Scene, this);
         }
 
-        protected internal override void Deactivated()
+        private protected override void Deactivated()
         {
             Engine.SpriteSystem.RemoveCamera(Scene, this);
         }

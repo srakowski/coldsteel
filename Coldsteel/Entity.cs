@@ -19,7 +19,13 @@ namespace Coldsteel
 
         public float Rotation;
 
-        public float Scale;
+        public float Scale = 1f;
+
+        public Matrix TransformMatrix =>
+            Matrix.Identity *
+            Matrix.CreateRotationZ(this.Rotation) *
+            Matrix.CreateScale(this.Scale) *
+            Matrix.CreateTranslation(this.Position.X, this.Position.Y, 0f);
 
         public IEnumerable<Component> Components => _components;
 

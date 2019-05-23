@@ -29,7 +29,7 @@ namespace Coldsteel
 
         public IEnumerable<Asset> Assets => _assets;
 
-        public Scene AddContentDependency(Asset asset)
+        public Scene AddAsset(Asset asset)
         {
             _assets.Add(asset);
             if (_content != null)

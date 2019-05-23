@@ -2,7 +2,9 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Coldsteel.Controls;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,9 +20,15 @@ namespace Coldsteel
 
         protected float Delta;
 
-        protected internal override void Activated()
+        private protected override void Activated()
         {
+            Engine.BehaviorSystem.AddBehavior(Scene, this);
             Initialize();
+        }
+
+        private protected override void Deactivated()
+        {
+            Engine.BehaviorSystem.RemoveBehavior(Scene, this);
         }
 
         internal void Update(GameTime gameTime)
@@ -32,7 +40,17 @@ namespace Coldsteel
 
         protected virtual void Initialize() { }
 
+        internal protected virtual void HandleCollision(Entity entity) { }
+
         protected virtual void Update() { }
+
+        protected TControl GetControl<TControl>(string name) where TControl : Control
+        {
+            if (!Engine.Config.Controls.ContainsKey(name))
+                throw new System.Exception($"control not defined: {name}");
+
+            return Engine.Config.Controls[name] as TControl;
+        }
 
         protected Coroutine StartCoroutine(IEnumerator routine)
         {

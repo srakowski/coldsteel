@@ -6,7 +6,17 @@ using System.Collections.Generic;
 
 namespace Coldsteel.Controls
 {
-    public abstract class Control<TBinding> where TBinding : ControlBinding
+    public abstract class Control
+    {
+        protected Control(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
+    }
+
+    public abstract class Control<TBinding> : Control where TBinding : ControlBinding
     {
         protected readonly List<TBinding>[] _bindingsByPlayer = new[]
         {
@@ -16,12 +26,9 @@ namespace Coldsteel.Controls
             new List<TBinding>()
         };
 
-        protected Control(string name)
+        protected Control(string name) : base(name)
         {
-            Name = name;
         }
-
-        public string Name { get; }
 
         public void AddBinding(TBinding binding)
         {

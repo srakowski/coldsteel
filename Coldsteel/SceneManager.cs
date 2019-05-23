@@ -34,7 +34,7 @@ namespace Coldsteel
         {
             if (_pendingScene == null) return;
 
-            _activeScene.Deactivate();
+            _activeScene?.Deactivate();
             _pendingScene.Activate(_engine);
             _activeScene = _pendingScene;
             _pendingScene = null;

@@ -16,7 +16,7 @@ namespace Coldsteel
 
         public Rectangle? SourceRectangle;
 
-        public Color Color;
+        public Color Color = Color.White;
 
         public Vector2 Origin;
 
@@ -28,13 +28,21 @@ namespace Coldsteel
 
         public string SpriteLayerName;
 
-        protected internal override void Activated()
+        public Sprite() { }
+
+        public Sprite(string assetName, string spriteLayerName)
+        {
+            AssetName = assetName;
+            SpriteLayerName = spriteLayerName;
+        }
+
+        private protected override void Activated()
         {
             Engine.SpriteSystem.AddSprite(Scene, this);
             _texture = Scene.Assets.FirstOrDefault(a => a.Name == AssetName) as Asset<Texture2D>;
         }
 
-        protected internal override void Deactivated()
+        private protected override void Deactivated()
         {
             _texture = null;
             Engine.SpriteSystem.RemoveSprite(Scene, this);
@@ -42,7 +50,7 @@ namespace Coldsteel
 
         internal void Draw(SpriteBatch spriteBatch)
         {
-            if ((_texture?.IsLoaded ?? false) || !Enabled) return;
+            if (!(_texture?.IsLoaded ?? false) || !Enabled) return;
             spriteBatch.Draw(
                 _texture.GetValue(),
                 Entity.Position,
