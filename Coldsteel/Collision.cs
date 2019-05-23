@@ -10,11 +10,13 @@
             var sourceBounds = sourceCollider.Bounds;
             var targetBounds = targetCollider.Bounds;
 
-            TopOfTarget = sourceBounds.Center.Y < targetBounds.Top && sourceBounds.Bottom >= targetBounds.Top;
-            BottomOfTarget = sourceBounds.Center.Y > targetBounds.Bottom && sourceBounds.Top <= targetBounds.Bottom;
+            TopOfTarget = sourceBounds.Bottom >= targetBounds.Top && sourceBounds.Top <= targetBounds.Top;
 
-            LeftOfTarget = sourceBounds.Center.X < targetBounds.Left && sourceBounds.Right >= targetBounds.Left;
-            RightOfTarget = sourceBounds.Center.X > targetBounds.Right && sourceBounds.Left <= targetBounds.Right;
+            BottomOfTarget = sourceBounds.Top <= targetBounds.Bottom && sourceBounds.Bottom >= targetBounds.Bottom;
+
+            LeftOfTarget = sourceBounds.Right >= targetBounds.Left && sourceBounds.Left <= targetBounds.Left;
+
+            RightOfTarget = sourceBounds.Left <= targetBounds.Right && sourceBounds.Right >= targetBounds.Right;
         }
 
         public Collider SourceCollider { get; }
