@@ -2,6 +2,8 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using Microsoft.Xna.Framework;
+
 namespace Coldsteel
 {
     public abstract class Collider : Component
@@ -15,6 +17,8 @@ namespace Coldsteel
         }
 
         internal Polygon Shape;
+
+        public Rectangle Bounds => Shape.Bounds;
 
         internal void Update()
         {

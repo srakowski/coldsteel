@@ -40,7 +40,7 @@ namespace Coldsteel
 
         protected virtual void Initialize() { }
 
-        internal protected virtual void HandleCollision(Entity entity) { }
+        internal protected virtual void HandleCollision(Collision collision) { }
 
         protected virtual void Update() { }
 

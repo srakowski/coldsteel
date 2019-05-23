@@ -13,21 +13,21 @@ namespace Coldsteel
             Config = config;
             game.Components.Add(this);
             SceneManager = new SceneManager(game, this, config.SceneFactory);
-            CollisionSystem = new CollisionSystem(game, this);
             InputManager = new InputManager(game, this);
             BehaviorSystem = new BehaviorSystem(game, this);
+            CollisionSystem = new CollisionSystem(game, this);
             SpriteSystem = new SpriteSystem(game, this);
         }
 
         internal EngineConfig Config;
 
-        internal SceneManager SceneManager;
-
-        internal CollisionSystem CollisionSystem;
+        internal SceneManager SceneManager;        
 
         internal InputManager InputManager;
 
         internal BehaviorSystem BehaviorSystem;
+
+        internal CollisionSystem CollisionSystem;
 
         internal SpriteSystem SpriteSystem;
 

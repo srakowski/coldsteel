@@ -69,10 +69,10 @@ namespace Coldsteel
                         continue;
 
                     foreach (var behavior in c1.Entity.Components.OfType<Behavior>().ToArray())
-                        behavior.HandleCollision(c2.Entity);
+                        behavior.HandleCollision(new Collision(c1, c2));
 
                     foreach (var behavior in c2.Entity.Components.OfType<Behavior>().ToArray())
-                        behavior.HandleCollision(c1.Entity);
+                        behavior.HandleCollision(new Collision(c2, c1));
                 }
             }
         }
