@@ -19,6 +19,8 @@ namespace Coldsteel
 
         private ContentManager _content;
 
+        public IEnumerable<Entity> Entities => _entities;
+
         public Scene AddEntity(Entity entity)
         {
             _entities.Add(entity);
@@ -48,10 +50,8 @@ namespace Coldsteel
         internal void Activate(Engine engine)
         {
             _engine = engine;
-            _content = new ContentManager(_engine.Game.Services, _engine.Game.Content.RootDirectory);
 
-            foreach (var contentDependency in _assets)
-                contentDependency.Load(_content);
+            LoadContent();
 
             foreach (var entity in _entities.ToArray())
                 entity.Activate(engine, this);
@@ -68,6 +68,24 @@ namespace Coldsteel
             _content.Unload();
             _content = null;
             _engine = null;
+        }
+
+        private void LoadContent()
+        {
+            _content = new ContentManager(_engine.Game.Services, _engine.Game.Content.RootDirectory);
+            foreach (var asset in _assets)
+                asset.Load(_content);
+        }
+
+        /// <summary>
+        /// Used for hot reload of content.
+        /// </summary>
+        internal void ReloadContent()
+        {
+            if (_content == null) return;
+            var oldContent = _content;
+            LoadContent();
+            oldContent.Unload();
         }
     }
 }

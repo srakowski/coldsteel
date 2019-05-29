@@ -3,6 +3,9 @@
 // file 'LICENSE.txt', which is part of this source code package.
 
 using Microsoft.Xna.Framework;
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("Coldsteel.DevTools")]
 
 namespace Coldsteel
 {
