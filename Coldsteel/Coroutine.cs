@@ -15,39 +15,34 @@ namespace Coldsteel
     {
         private IEnumerator _routine;
 
-        private bool _finished;
-
-        private YieldInstruction? _wait;
+        private Wait _wait;
 
         internal Coroutine(IEnumerator routine)
         {
             _routine = routine;
         }
 
-        public bool IsFinished => _finished;
-
-        public void Stop()
-        {
-            _finished = true;
-        }
+        public bool IsFinished { get; set; }
 
         internal void Update(GameTime gameTime)
         {
-            if (_finished)
+            if (IsFinished)
                 return;
 
-            if (_wait.HasValue)
+            if (!_wait.IsOver)
             {
-                _wait = _wait.Value.Increment(gameTime);
+                _wait = _wait.Update(gameTime);
+                if (!_wait.IsOver)
+                    return;
             }
 
             if (!_routine.MoveNext())
             {
-                _finished = true;
+                IsFinished = true;
                 return;
             }
 
-            _wait = _routine.Current is YieldInstruction yi ? yi : (YieldInstruction?)null;
+            _wait = _routine.Current is Wait w ? w : Wait.None();
         }
     }
 }

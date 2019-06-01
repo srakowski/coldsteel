@@ -59,9 +59,6 @@ namespace Coldsteel
             return coroutine;
         }
 
-        protected YieldInstruction Wait(int millesecondsToWait) =>
-            new YieldInstruction(millesecondsToWait);
-
         internal void UpdateCoroutines(GameTime gameTime)
         {
             _coroutines.RemoveAll(c => c.IsFinished);
