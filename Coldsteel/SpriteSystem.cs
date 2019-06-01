@@ -71,8 +71,6 @@ namespace Coldsteel
 
         public override void Draw(GameTime gameTime)
         {
-            Game.GraphicsDevice.Clear(Color.Black);
-
             var scene = _engine.SceneManager.ActiveScene;
             if (scene == null) return;
 

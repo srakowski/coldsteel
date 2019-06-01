@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coldsteel", "Coldsteel\Coldsteel.csproj", "{08EC5858-7DE1-4077-8B27-F2A5D371F748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coldsteel.DevTools", "Coldsteel.DevTools\Coldsteel.DevTools.csproj", "{5F533DC6-4EC8-4829-A975-54DB6C30BF2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coldsteel.DevTools", "Coldsteel.DevTools\Coldsteel.DevTools.csproj", "{5F533DC6-4EC8-4829-A975-54DB6C30BF2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Derpfender", "Derpfender\Derpfender.csproj", "{92AC1929-8A68-46C5-8E59-B4B93025DAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5F533DC6-4EC8-4829-A975-54DB6C30BF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F533DC6-4EC8-4829-A975-54DB6C30BF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F533DC6-4EC8-4829-A975-54DB6C30BF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92AC1929-8A68-46C5-8E59-B4B93025DAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92AC1929-8A68-46C5-8E59-B4B93025DAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92AC1929-8A68-46C5-8E59-B4B93025DAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92AC1929-8A68-46C5-8E59-B4B93025DAE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

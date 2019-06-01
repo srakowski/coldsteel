@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Coldsteel
 {
-    internal class SceneManager : GameComponent
+    internal class SceneManager : DrawableGameComponent
     {
         private Scene _pendingScene;
         private Scene _activeScene;
@@ -38,6 +38,11 @@ namespace Coldsteel
             _pendingScene.Activate(_engine);
             _activeScene = _pendingScene;
             _pendingScene = null;
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            Game.GraphicsDevice.Clear(Color.Black);
         }
     }
 }

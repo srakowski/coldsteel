@@ -4,7 +4,7 @@
 
 using Microsoft.Xna.Framework;
 
-namespace Coldsteel.Controls
+namespace Coldsteel
 {
     public abstract class ControlBinding
     {

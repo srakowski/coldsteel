@@ -20,6 +20,7 @@ namespace Coldsteel
             BehaviorSystem = new BehaviorSystem(game, this);
             CollisionSystem = new CollisionSystem(game, this);
             SpriteSystem = new SpriteSystem(game, this);
+            UISystem = new UISystem(game, this);
         }
 
         internal EngineConfig Config;
@@ -33,6 +34,8 @@ namespace Coldsteel
         internal CollisionSystem CollisionSystem;
 
         internal SpriteSystem SpriteSystem;
+
+        internal UISystem UISystem;
 
         public void LoadScene(string sceneName)
         {

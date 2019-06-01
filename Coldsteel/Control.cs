@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace Coldsteel.Controls
+namespace Coldsteel
 {
     public abstract class Control
     {

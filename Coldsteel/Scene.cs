@@ -87,5 +87,7 @@ namespace Coldsteel
             LoadContent();
             oldContent.Unload();
         }
+
+        public static Scene New() => new Scene();
     }
 }

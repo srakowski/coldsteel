@@ -52,5 +52,7 @@ namespace Coldsteel
             _scene = null;
             _engine = null;
         }
+
+        public static Entity New() => new Entity();
     }
 }
